@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5294CC0B1B3469C10044D56D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0A1B3469C10044D56D /* main.m */; };
+		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
+		5294CC111B3469C10044D56D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC101B3469C10044D56D /* ViewController.m */; };
+		5294CC141B3469C10044D56D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC121B3469C10044D56D /* Main.storyboard */; };
+		5294CC161B3469C10044D56D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC151B3469C10044D56D /* Images.xcassets */; };
+		5294CC191B3469C10044D56D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC171B3469C10044D56D /* LaunchScreen.xib */; };
+		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5294CC1F1B3469C10044D56D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5294CBFD1B3469C10044D56D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5294CC041B3469C10044D56D;
+			remoteInfo = PictRuby;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5294CC051B3469C10044D56D /* PictRuby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictRuby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5294CC091B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5294CC0A1B3469C10044D56D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5294CC0C1B3469C10044D56D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5294CC0D1B3469C10044D56D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5294CC0F1B3469C10044D56D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		5294CC101B3469C10044D56D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5294CC131B3469C10044D56D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5294CC151B3469C10044D56D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5294CC181B3469C10044D56D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictRubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5294CC021B3469C10044D56D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5294CC1B1B3469C10044D56D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5294CBFC1B3469C10044D56D = {
+			isa = PBXGroup;
+			children = (
+				5294CC071B3469C10044D56D /* PictRuby */,
+				5294CC211B3469C10044D56D /* PictRubyTests */,
+				5294CC061B3469C10044D56D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5294CC061B3469C10044D56D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5294CC051B3469C10044D56D /* PictRuby.app */,
+				5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5294CC071B3469C10044D56D /* PictRuby */ = {
+			isa = PBXGroup;
+			children = (
+				5294CC0C1B3469C10044D56D /* AppDelegate.h */,
+				5294CC0D1B3469C10044D56D /* AppDelegate.m */,
+				5294CC0F1B3469C10044D56D /* ViewController.h */,
+				5294CC101B3469C10044D56D /* ViewController.m */,
+				5294CC121B3469C10044D56D /* Main.storyboard */,
+				5294CC151B3469C10044D56D /* Images.xcassets */,
+				5294CC171B3469C10044D56D /* LaunchScreen.xib */,
+				5294CC081B3469C10044D56D /* Supporting Files */,
+			);
+			path = PictRuby;
+			sourceTree = "<group>";
+		};
+		5294CC081B3469C10044D56D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5294CC091B3469C10044D56D /* Info.plist */,
+				5294CC0A1B3469C10044D56D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5294CC211B3469C10044D56D /* PictRubyTests */ = {
+			isa = PBXGroup;
+			children = (
+				5294CC241B3469C10044D56D /* PictRubyTests.m */,
+				5294CC221B3469C10044D56D /* Supporting Files */,
+			);
+			path = PictRubyTests;
+			sourceTree = "<group>";
+		};
+		5294CC221B3469C10044D56D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5294CC231B3469C10044D56D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5294CC041B3469C10044D56D /* PictRuby */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRuby" */;
+			buildPhases = (
+				5294CC011B3469C10044D56D /* Sources */,
+				5294CC021B3469C10044D56D /* Frameworks */,
+				5294CC031B3469C10044D56D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PictRuby;
+			productName = PictRuby;
+			productReference = 5294CC051B3469C10044D56D /* PictRuby.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5294CC1D1B3469C10044D56D /* PictRubyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRubyTests" */;
+			buildPhases = (
+				5294CC1A1B3469C10044D56D /* Sources */,
+				5294CC1B1B3469C10044D56D /* Frameworks */,
+				5294CC1C1B3469C10044D56D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5294CC201B3469C10044D56D /* PBXTargetDependency */,
+			);
+			name = PictRubyTests;
+			productName = PictRubyTests;
+			productReference = 5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5294CBFD1B3469C10044D56D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = ongaeshi;
+				TargetAttributes = {
+					5294CC041B3469C10044D56D = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					5294CC1D1B3469C10044D56D = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 5294CC041B3469C10044D56D;
+					};
+				};
+			};
+			buildConfigurationList = 5294CC001B3469C10044D56D /* Build configuration list for PBXProject "PictRuby" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5294CBFC1B3469C10044D56D;
+			productRefGroup = 5294CC061B3469C10044D56D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5294CC041B3469C10044D56D /* PictRuby */,
+				5294CC1D1B3469C10044D56D /* PictRubyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5294CC031B3469C10044D56D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5294CC141B3469C10044D56D /* Main.storyboard in Resources */,
+				5294CC191B3469C10044D56D /* LaunchScreen.xib in Resources */,
+				5294CC161B3469C10044D56D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5294CC1C1B3469C10044D56D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5294CC011B3469C10044D56D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5294CC111B3469C10044D56D /* ViewController.m in Sources */,
+				5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */,
+				5294CC0B1B3469C10044D56D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5294CC1A1B3469C10044D56D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5294CC201B3469C10044D56D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5294CC041B3469C10044D56D /* PictRuby */;
+			targetProxy = 5294CC1F1B3469C10044D56D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5294CC121B3469C10044D56D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5294CC131B3469C10044D56D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5294CC171B3469C10044D56D /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5294CC181B3469C10044D56D /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5294CC261B3469C10044D56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5294CC271B3469C10044D56D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5294CC291B3469C10044D56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PictRuby/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5294CC2A1B3469C10044D56D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = PictRuby/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5294CC2C1B3469C10044D56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PictRubyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictRuby.app/PictRuby";
+			};
+			name = Debug;
+		};
+		5294CC2D1B3469C10044D56D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = PictRubyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictRuby.app/PictRuby";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5294CC001B3469C10044D56D /* Build configuration list for PBXProject "PictRuby" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5294CC261B3469C10044D56D /* Debug */,
+				5294CC271B3469C10044D56D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRuby" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5294CC291B3469C10044D56D /* Debug */,
+				5294CC2A1B3469C10044D56D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRubyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5294CC2C1B3469C10044D56D /* Debug */,
+				5294CC2D1B3469C10044D56D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5294CBFD1B3469C10044D56D /* Project object */;
+}
