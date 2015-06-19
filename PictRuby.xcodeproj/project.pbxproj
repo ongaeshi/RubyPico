@@ -10,9 +10,7 @@
 		5294CC0B1B3469C10044D56D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0A1B3469C10044D56D /* main.m */; };
 		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
 		5294CC111B3469C10044D56D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC101B3469C10044D56D /* ViewController.m */; };
-		5294CC141B3469C10044D56D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC121B3469C10044D56D /* Main.storyboard */; };
 		5294CC161B3469C10044D56D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC151B3469C10044D56D /* Images.xcassets */; };
-		5294CC191B3469C10044D56D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC171B3469C10044D56D /* LaunchScreen.xib */; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +32,7 @@
 		5294CC0D1B3469C10044D56D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5294CC0F1B3469C10044D56D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		5294CC101B3469C10044D56D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		5294CC131B3469C10044D56D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5294CC151B3469C10044D56D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5294CC181B3469C10044D56D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictRubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
@@ -85,9 +81,7 @@
 				5294CC0D1B3469C10044D56D /* AppDelegate.m */,
 				5294CC0F1B3469C10044D56D /* ViewController.h */,
 				5294CC101B3469C10044D56D /* ViewController.m */,
-				5294CC121B3469C10044D56D /* Main.storyboard */,
 				5294CC151B3469C10044D56D /* Images.xcassets */,
-				5294CC171B3469C10044D56D /* LaunchScreen.xib */,
 				5294CC081B3469C10044D56D /* Supporting Files */,
 			);
 			path = PictRuby;
@@ -199,8 +193,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5294CC141B3469C10044D56D /* Main.storyboard in Resources */,
-				5294CC191B3469C10044D56D /* LaunchScreen.xib in Resources */,
 				5294CC161B3469C10044D56D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,25 +234,6 @@
 			targetProxy = 5294CC1F1B3469C10044D56D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		5294CC121B3469C10044D56D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5294CC131B3469C10044D56D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		5294CC171B3469C10044D56D /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5294CC181B3469C10044D56D /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5294CC261B3469C10044D56D /* Debug */ = {
@@ -346,6 +319,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PictRuby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -356,6 +330,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PictRuby/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
