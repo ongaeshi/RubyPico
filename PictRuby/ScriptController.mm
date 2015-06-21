@@ -95,9 +95,9 @@
 - (void)callScript
 {
     mrb_value ret = mrb_funcall(mMrb, mFiber, "execute", 0, NULL);
-    mrb_p(mMrb, ret);
+    // mrb_p(mMrb, ret);
     mrb_value isAlive = mrb_funcall(mMrb, mFiber, "continue?", 0 , NULL);
-    mrb_p(mMrb, isAlive);
+    // mrb_p(mMrb, isAlive);
 
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
         UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
