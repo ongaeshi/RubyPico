@@ -35,7 +35,7 @@
     // Create ImagePicker
     mImagePicker = [[UIImagePickerController alloc] init];
     [mImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    [mImagePicker setAllowsEditing:YES];
+    // [mImagePicker setAllowsEditing:YES];
     [mImagePicker setDelegate:self];
 
     // Create timer
