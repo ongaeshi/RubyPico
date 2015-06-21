@@ -44,7 +44,7 @@
 		52731C381B371B4700E2CC2A /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731C141B371B4700E2CC2A /* version.c */; };
 		52731C391B371B4700E2CC2A /* vm.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731C151B371B4700E2CC2A /* vm.c */; };
 		52731C511B371D7600E2CC2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3B1B371D7600E2CC2A /* AppDelegate.m */; };
-		52731C521B371D7600E2CC2A /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3D1B371D7600E2CC2A /* BindImage.mm */; };
+		52731C521B371D7600E2CC2A /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3D1B371D7600E2CC2A /* BindImage.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		52731C531B371D7600E2CC2A /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3F1B371D7600E2CC2A /* EditViewController.mm */; };
 		52731C541B371D7600E2CC2A /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C411B371D7600E2CC2A /* FCFileManager.m */; };
 		52731C551B371D7600E2CC2A /* FileViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C431B371D7600E2CC2A /* FileViewController.mm */; };
