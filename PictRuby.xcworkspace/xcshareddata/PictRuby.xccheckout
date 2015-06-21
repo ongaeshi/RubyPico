@@ -12,6 +12,8 @@
 	<dict>
 		<key>2F1E8DF3AE2307525E917E56E703A642184B1DDD</key>
 		<string>github.com:ongaeshi/PictRuby.git</string>
+		<key>BF7543B4696C79732E1A5242B2D733086623307E</key>
+		<string>github.com:ongaeshi/pictruby-proto.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>PictRuby.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>2F1E8DF3AE2307525E917E56E703A642184B1DDD</key>
 		<string>..</string>
+		<key>BF7543B4696C79732E1A5242B2D733086623307E</key>
+		<string>../../pictruby-proto</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:ongaeshi/PictRuby.git</string>
@@ -35,6 +39,14 @@
 			<string>2F1E8DF3AE2307525E917E56E703A642184B1DDD</string>
 			<key>IDESourceControlWCCName</key>
 			<string>PictRuby</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BF7543B4696C79732E1A5242B2D733086623307E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pictruby-proto</string>
 		</dict>
 	</array>
 </dict>

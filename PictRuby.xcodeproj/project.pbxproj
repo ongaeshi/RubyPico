@@ -51,6 +51,11 @@
 		52731C591B371D7600E2CC2A /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4A1B371D7600E2CC2A /* SampleViewController.mm */; };
 		52731C5A1B371D7600E2CC2A /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4C1B371D7600E2CC2A /* ScriptController.mm */; };
 		52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4E1B371D7600E2CC2A /* SelectViewController.mm */; };
+		52731C651B371FC500E2CC2A /* builtin.rb in Resources */ = {isa = PBXBuildFile; fileRef = 52731C5E1B371FC500E2CC2A /* builtin.rb */; };
+		52731C661B371FC500E2CC2A /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52731C601B371FC500E2CC2A /* sample.jpg */; };
+		52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C611B371FC500E2CC2A /* tabbar_files.png */; };
+		52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C621B371FC500E2CC2A /* tabbar_samples.png */; };
+		52731C6B1B371FE200E2CC2A /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 52731C6A1B371FE200E2CC2A /* sample */; };
 		5294CC0B1B3469C10044D56D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0A1B3469C10044D56D /* main.m */; };
 		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
 		5294CC161B3469C10044D56D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC151B3469C10044D56D /* Images.xcassets */; };
@@ -153,6 +158,11 @@
 		52731C4C1B371D7600E2CC2A /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
 		52731C4D1B371D7600E2CC2A /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
 		52731C4E1B371D7600E2CC2A /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
+		52731C5E1B371FC500E2CC2A /* builtin.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = builtin.rb; sourceTree = "<group>"; };
+		52731C601B371FC500E2CC2A /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		52731C611B371FC500E2CC2A /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
+		52731C621B371FC500E2CC2A /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
+		52731C6A1B371FE200E2CC2A /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sample; path = "../../pictruby-proto/resources/sample"; sourceTree = "<group>"; };
 		5294CC051B3469C10044D56D /* PictRuby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictRuby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC091B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC0A1B3469C10044D56D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -324,9 +334,30 @@
 			path = ext;
 			sourceTree = "<group>";
 		};
+		52731C5D1B371FC500E2CC2A /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				52731C6A1B371FE200E2CC2A /* sample */,
+				52731C5E1B371FC500E2CC2A /* builtin.rb */,
+				52731C5F1B371FC500E2CC2A /* images */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		52731C5F1B371FC500E2CC2A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				52731C601B371FC500E2CC2A /* sample.jpg */,
+				52731C611B371FC500E2CC2A /* tabbar_files.png */,
+				52731C621B371FC500E2CC2A /* tabbar_samples.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		5294CBFC1B3469C10044D56D = {
 			isa = PBXGroup;
 			children = (
+				52731C5D1B371FC500E2CC2A /* resources */,
 				52731BCB1B371B4700E2CC2A /* mruby */,
 				5294CC071B3469C10044D56D /* PictRuby */,
 				5294CC211B3469C10044D56D /* PictRubyTests */,
@@ -489,10 +520,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52731C6B1B371FE200E2CC2A /* sample in Resources */,
+				52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */,
 				52731C2B1B371B4700E2CC2A /* keywords in Resources */,
+				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
+				52731C651B371FC500E2CC2A /* builtin.rb in Resources */,
 				52731C261B371B4700E2CC2A /* .gitkeep in Resources */,
 				5294CC161B3469C10044D56D /* Images.xcassets in Resources */,
 				52731C1A1B371B4700E2CC2A /* lex.def in Resources */,
+				52731C661B371FC500E2CC2A /* sample.jpg in Resources */,
 				52731C2D1B371B4700E2CC2A /* mruby_core.rake in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
