@@ -43,6 +43,18 @@
 		52731C371B371B4700E2CC2A /* variable.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731C131B371B4700E2CC2A /* variable.c */; };
 		52731C381B371B4700E2CC2A /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731C141B371B4700E2CC2A /* version.c */; };
 		52731C391B371B4700E2CC2A /* vm.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731C151B371B4700E2CC2A /* vm.c */; };
+		52731C511B371D7600E2CC2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3B1B371D7600E2CC2A /* AppDelegate.m */; };
+		52731C521B371D7600E2CC2A /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3D1B371D7600E2CC2A /* BindImage.mm */; };
+		52731C531B371D7600E2CC2A /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3F1B371D7600E2CC2A /* EditViewController.mm */; };
+		52731C541B371D7600E2CC2A /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C411B371D7600E2CC2A /* FCFileManager.m */; };
+		52731C551B371D7600E2CC2A /* FileViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C431B371D7600E2CC2A /* FileViewController.mm */; };
+		52731C561B371D7600E2CC2A /* HelpViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C451B371D7600E2CC2A /* HelpViewController.mm */; };
+		52731C571B371D7600E2CC2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C461B371D7600E2CC2A /* main.m */; };
+		52731C581B371D7600E2CC2A /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C481B371D7600E2CC2A /* RubyHighlightingTextStorage.m */; };
+		52731C591B371D7600E2CC2A /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4A1B371D7600E2CC2A /* SampleViewController.mm */; };
+		52731C5A1B371D7600E2CC2A /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4C1B371D7600E2CC2A /* ScriptController.mm */; };
+		52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4E1B371D7600E2CC2A /* SelectViewController.mm */; };
+		52731C5C1B371D7600E2CC2A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C501B371D7600E2CC2A /* ViewController.m */; };
 		5294CC0B1B3469C10044D56D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0A1B3469C10044D56D /* main.m */; };
 		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
 		5294CC111B3469C10044D56D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC101B3469C10044D56D /* ViewController.m */; };
@@ -130,6 +142,29 @@
 		52731C131B371B4700E2CC2A /* variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = variable.c; sourceTree = "<group>"; };
 		52731C141B371B4700E2CC2A /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
 		52731C151B371B4700E2CC2A /* vm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vm.c; sourceTree = "<group>"; };
+		52731C3A1B371D7600E2CC2A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		52731C3B1B371D7600E2CC2A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		52731C3C1B371D7600E2CC2A /* BindImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindImage.hpp; sourceTree = "<group>"; };
+		52731C3D1B371D7600E2CC2A /* BindImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindImage.mm; sourceTree = "<group>"; };
+		52731C3E1B371D7600E2CC2A /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		52731C3F1B371D7600E2CC2A /* EditViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
+		52731C401B371D7600E2CC2A /* FCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCFileManager.h; sourceTree = "<group>"; };
+		52731C411B371D7600E2CC2A /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
+		52731C421B371D7600E2CC2A /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		52731C431B371D7600E2CC2A /* FileViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileViewController.mm; sourceTree = "<group>"; };
+		52731C441B371D7600E2CC2A /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		52731C451B371D7600E2CC2A /* HelpViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HelpViewController.mm; sourceTree = "<group>"; };
+		52731C461B371D7600E2CC2A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		52731C471B371D7600E2CC2A /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
+		52731C481B371D7600E2CC2A /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
+		52731C491B371D7600E2CC2A /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		52731C4A1B371D7600E2CC2A /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
+		52731C4B1B371D7600E2CC2A /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
+		52731C4C1B371D7600E2CC2A /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
+		52731C4D1B371D7600E2CC2A /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
+		52731C4E1B371D7600E2CC2A /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
+		52731C4F1B371D7600E2CC2A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		52731C501B371D7600E2CC2A /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5294CC051B3469C10044D56D /* PictRuby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictRuby.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC091B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC0A1B3469C10044D56D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -327,6 +362,29 @@
 		5294CC071B3469C10044D56D /* PictRuby */ = {
 			isa = PBXGroup;
 			children = (
+				52731C3A1B371D7600E2CC2A /* AppDelegate.h */,
+				52731C3B1B371D7600E2CC2A /* AppDelegate.m */,
+				52731C3C1B371D7600E2CC2A /* BindImage.hpp */,
+				52731C3D1B371D7600E2CC2A /* BindImage.mm */,
+				52731C3E1B371D7600E2CC2A /* EditViewController.h */,
+				52731C3F1B371D7600E2CC2A /* EditViewController.mm */,
+				52731C401B371D7600E2CC2A /* FCFileManager.h */,
+				52731C411B371D7600E2CC2A /* FCFileManager.m */,
+				52731C421B371D7600E2CC2A /* FileViewController.h */,
+				52731C431B371D7600E2CC2A /* FileViewController.mm */,
+				52731C441B371D7600E2CC2A /* HelpViewController.h */,
+				52731C451B371D7600E2CC2A /* HelpViewController.mm */,
+				52731C461B371D7600E2CC2A /* main.m */,
+				52731C471B371D7600E2CC2A /* RubyHighlightingTextStorage.h */,
+				52731C481B371D7600E2CC2A /* RubyHighlightingTextStorage.m */,
+				52731C491B371D7600E2CC2A /* SampleViewController.h */,
+				52731C4A1B371D7600E2CC2A /* SampleViewController.mm */,
+				52731C4B1B371D7600E2CC2A /* ScriptController.h */,
+				52731C4C1B371D7600E2CC2A /* ScriptController.mm */,
+				52731C4D1B371D7600E2CC2A /* SelectViewController.h */,
+				52731C4E1B371D7600E2CC2A /* SelectViewController.mm */,
+				52731C4F1B371D7600E2CC2A /* ViewController.h */,
+				52731C501B371D7600E2CC2A /* ViewController.m */,
 				5294CC0C1B3469C10044D56D /* AppDelegate.h */,
 				5294CC0D1B3469C10044D56D /* AppDelegate.m */,
 				5294CC0F1B3469C10044D56D /* ViewController.h */,
@@ -513,6 +571,8 @@
 				52731C1D1B371B4700E2CC2A /* class.c in Sources */,
 				52731C211B371B4700E2CC2A /* debug.c in Sources */,
 				52731C341B371B4700E2CC2A /* state.c in Sources */,
+				52731C591B371D7600E2CC2A /* SampleViewController.mm in Sources */,
+				52731C551B371D7600E2CC2A /* FileViewController.mm in Sources */,
 				52731C2A1B371B4700E2CC2A /* kernel.c in Sources */,
 				52731C1C1B371B4700E2CC2A /* backtrace.c in Sources */,
 				52731C381B371B4700E2CC2A /* version.c in Sources */,
@@ -522,27 +582,37 @@
 				52731C2F1B371B4700E2CC2A /* object.c in Sources */,
 				52731C351B371B4700E2CC2A /* string.c in Sources */,
 				52731C221B371B4700E2CC2A /* dump.c in Sources */,
+				52731C521B371D7600E2CC2A /* BindImage.mm in Sources */,
+				52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */,
 				52731C161B371B4700E2CC2A /* fiber.c in Sources */,
 				5294CC111B3469C10044D56D /* ViewController.m in Sources */,
+				52731C541B371D7600E2CC2A /* FCFileManager.m in Sources */,
 				52731C181B371B4700E2CC2A /* mrblib.c in Sources */,
+				52731C5A1B371D7600E2CC2A /* ScriptController.mm in Sources */,
 				52731C361B371B4700E2CC2A /* symbol.c in Sources */,
 				5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */,
 				52731C331B371B4700E2CC2A /* range.c in Sources */,
 				52731C301B371B4700E2CC2A /* pool.c in Sources */,
+				52731C511B371D7600E2CC2A /* AppDelegate.m in Sources */,
 				5294CC0B1B3469C10044D56D /* main.m in Sources */,
 				52731C291B371B4700E2CC2A /* init.c in Sources */,
+				52731C581B371D7600E2CC2A /* RubyHighlightingTextStorage.m in Sources */,
+				52731C561B371D7600E2CC2A /* HelpViewController.mm in Sources */,
 				52731C251B371B4700E2CC2A /* etc.c in Sources */,
 				52731C191B371B4700E2CC2A /* y.tab.c in Sources */,
 				52731C231B371B4700E2CC2A /* enum.c in Sources */,
 				52731C281B371B4700E2CC2A /* hash.c in Sources */,
+				52731C5C1B371D7600E2CC2A /* ViewController.m in Sources */,
 				52731C201B371B4700E2CC2A /* crc.c in Sources */,
 				52731C391B371B4700E2CC2A /* vm.c in Sources */,
 				52731C2C1B371B4700E2CC2A /* load.c in Sources */,
 				52731C1B1B371B4700E2CC2A /* array.c in Sources */,
+				52731C531B371D7600E2CC2A /* EditViewController.mm in Sources */,
 				52731C2E1B371B4700E2CC2A /* numeric.c in Sources */,
 				52731C1E1B371B4700E2CC2A /* codegen.c in Sources */,
 				52731C371B371B4700E2CC2A /* variable.c in Sources */,
 				52731C271B371B4700E2CC2A /* gc.c in Sources */,
+				52731C571B371D7600E2CC2A /* main.m in Sources */,
 				52731C321B371B4700E2CC2A /* proc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

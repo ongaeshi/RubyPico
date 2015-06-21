@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9F448385-5159-4FA8-8CC4-09E6F8126BFF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PictRuby</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2F1E8DF3AE2307525E917E56E703A642184B1DDD</key>
+		<string>github.com:ongaeshi/PictRuby.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PictRuby.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2F1E8DF3AE2307525E917E56E703A642184B1DDD</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:ongaeshi/PictRuby.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2F1E8DF3AE2307525E917E56E703A642184B1DDD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2F1E8DF3AE2307525E917E56E703A642184B1DDD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PictRuby</string>
+		</dict>
+	</array>
+</dict>
+</plist>

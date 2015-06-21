@@ -1,8 +1,8 @@
 //
 //  main.m
-//  PictRuby
+//  pictruby
 //
-//  Created by ongaeshi on 2015/06/20.
+//  Created by ongaeshi on 2015/06/10.
 //  Copyright (c) 2015年 ongaeshi. All rights reserved.
 //
 
