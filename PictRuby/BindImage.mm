@@ -56,7 +56,7 @@ mrb_value crop(mrb_state *mrb, mrb_value self)
     mrb_get_args(mrb, "iiii", &x, &y, &w, &h);
 
     CGImageRef ref = CGImageCreateWithImageInRect(obj.CGImage, CGRectMake(x, y, w, h));
-    obj = [UIImage imageWithCGImage:ref];
+    obj = [[UIImage imageWithCGImage:ref] retain];
     
     return BindImage::ToMrb(mrb, obj);
 }
