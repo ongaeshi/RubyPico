@@ -31,9 +31,9 @@ mrb_value load(mrb_state *mrb, mrb_value self)
     const char* path = mrb_string_value_ptr(mrb, str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
-    UIImage* obj = [[UIImage imageNamed:npath] retain];
-    
-    return BindImage::ToMrb(mrb, obj);
+    UIImage* image = [[UIImage imageNamed:npath] retain];
+
+    return BindImage::ToMrb(mrb, image);
 }
 
 mrb_value start_pick_from_library(mrb_state *mrb, mrb_value self)
