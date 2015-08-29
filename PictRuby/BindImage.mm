@@ -71,6 +71,14 @@ mrb_value width(mrb_state *mrb, mrb_value self)
     return mrb_float_value(mrb, toObj(self).size.width);
 }
 
+mrb_value edge(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+    UIImage* new_image = [[image edgeDetectionWithBias:0] retain]; // Unused bias parameter
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
 }
 
 //----------------------------------------------------------
@@ -111,9 +119,10 @@ void BindImage::Bind(mrb_state* mrb)
     // mrb_define_class_method(mrb , cc, "sample",             sample,             MRB_ARGS_REQ(1));
     // mrb_define_class_method(mrb , cc, "grab_screen",        grab_screen,        MRB_ARGS_OPT(4));
                                                              
-    mrb_define_method(mrb, cc,        "crop",              crop,              MRB_ARGS_REQ(4));
+    mrb_define_method(mrb, cc,        "crop",               crop,              MRB_ARGS_REQ(4));
     mrb_define_method(mrb, cc,        "height",             height,             MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,        "width",              width,              MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,        "edge",               edge,              MRB_ARGS_NONE());
     
     // mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
     // // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
