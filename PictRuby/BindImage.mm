@@ -5,6 +5,7 @@
 #import "mruby/data.h"
 #import "mruby/string.h"
 #import "ScriptController.h"
+#import "NYXImagesKit.h"
 
 namespace pictruby {
 
@@ -71,6 +72,18 @@ mrb_value width(mrb_state *mrb, mrb_value self)
     return mrb_float_value(mrb, toObj(self).size.width);
 }
 
+mrb_value bright(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_int bias;
+    mrb_get_args(mrb, "i", &bias);
+    
+    UIImage* new_image = [[image brightenWithValue:bias] retain]; // -255 ~ 255
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
 mrb_value edge(mrb_state *mrb, mrb_value self)
 {
     UIImage* image = toObj(self);
@@ -116,12 +129,13 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_NONE());
     mrb_define_class_method(mrb , cc, "receive_picked",  receive_picked,          MRB_ARGS_NONE());
-    // mrb_define_class_method(mrb , cc, "sample",             sample,             MRB_ARGS_REQ(1));
-    // mrb_define_class_method(mrb , cc, "grab_screen",        grab_screen,        MRB_ARGS_OPT(4));
+
+    mrb_define_method(mrb, cc,        "width",              width,              MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,        "height",             height,             MRB_ARGS_NONE());
                                                              
     mrb_define_method(mrb, cc,        "crop",               crop,              MRB_ARGS_REQ(4));
-    mrb_define_method(mrb, cc,        "height",             height,             MRB_ARGS_NONE());
-    mrb_define_method(mrb, cc,        "width",              width,              MRB_ARGS_NONE());
+    
+    mrb_define_method(mrb, cc,        "bright",            bright,             MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cc,        "edge",               edge,              MRB_ARGS_NONE());
     
     // mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
