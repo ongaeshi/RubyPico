@@ -84,10 +84,121 @@ mrb_value bright(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, new_image);
 }
 
+mrb_value contrast(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_int bias;
+    mrb_get_args(mrb, "i", &bias);
+    
+    UIImage* new_image = [[image contrastAdjustmentWithValue:bias] retain]; // -255 ~ 255
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
 mrb_value edge(mrb_state *mrb, mrb_value self)
 {
     UIImage* image = toObj(self);
     UIImage* new_image = [[image edgeDetectionWithBias:0] retain]; // Unused bias parameter
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value emboss(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_int bias;
+    mrb_get_args(mrb, "i", &bias);
+    
+    UIImage* new_image = [[image embossWithBias:bias] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value gamma(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_float value;
+    mrb_get_args(mrb, "f", &value);
+    
+    UIImage* new_image = [[image gammaCorrectionWithValue:value] retain]; // 0.01 ~ 8
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value gray(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    UIImage* new_image = [[image grayscale] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value sepia(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    UIImage* new_image = [[image sepia] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value invert(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    UIImage* new_image = [[image invert] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value opacity(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_float value;
+    mrb_get_args(mrb, "f", &value);
+    
+    UIImage* new_image = [[image opacity:value] retain]; // 0.0 ~ 1.0
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value sharp(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_int bias;
+    mrb_get_args(mrb, "i", &bias);
+    
+    UIImage* new_image = [[image sharpenWithBias:bias] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value unsharp(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_int bias;
+    mrb_get_args(mrb, "i", &bias);
+    
+    UIImage* new_image = [[image unsharpenWithBias:bias] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value blur(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_int bias;
+    mrb_get_args(mrb, "i", &bias);
+    
+    UIImage* new_image = [[image gaussianBlurWithBias:bias] retain];
 
     return BindImage::ToMrb(mrb, new_image);
 }
@@ -136,8 +247,18 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "crop",               crop,              MRB_ARGS_REQ(4));
     
     mrb_define_method(mrb, cc,        "bright",            bright,             MRB_ARGS_REQ(1));
-    mrb_define_method(mrb, cc,        "edge",               edge,              MRB_ARGS_NONE());
-    
+    mrb_define_method(mrb, cc,        "contrast",          contrast,           MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "edge",              edge,               MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,        "emboss",            emboss,             MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "gamma",             gamma,              MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "gray",              gray,               MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,        "sepia",             sepia,              MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,        "invert",            invert,             MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,        "opacity",           opacity,            MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "sharp",             sharp,              MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "unsharp",           unsharp,            MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "blur",              blur,               MRB_ARGS_REQ(1));
+        
     // mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
     // // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
     // mrb_define_method(mrb, cc,        "color",              color,              MRB_ARGS_REQ(2));
