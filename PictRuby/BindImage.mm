@@ -49,6 +49,20 @@ mrb_value receive_picked(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, image);
 }
 
+mrb_value render(mrb_state *mrb, mrb_value self)
+{
+    mrb_int x, y;
+    mrb_value block;
+    mrb_get_args(mrb, "ii&", &x, &y, &block);
+
+    UIGraphicsBeginImageContext(CGSizeMake(x, y));
+    mrb_yield_argv(mrb, block, 0, NULL);
+    UIImage* new_image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
 mrb_value resize(mrb_state *mrb, mrb_value self)
 {
     UIImage* image = toObj(self);
@@ -237,6 +251,17 @@ mrb_value save(mrb_state *mrb, mrb_value self)
     return self;
 }
 
+mrb_value draw(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+        
+    mrb_int x, y, w, h;
+    mrb_get_args(mrb, "iiii", &x, &y, &w, &h);
+
+    [image drawInRect:CGRectMake(x, y, w, h)];
+    
+    return self;
+}
 }
 
 //----------------------------------------------------------
@@ -273,11 +298,12 @@ void BindImage::Bind(mrb_state* mrb)
 
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_NONE());
-    mrb_define_class_method(mrb , cc, "receive_picked",  receive_picked,          MRB_ARGS_NONE());
+    mrb_define_class_method(mrb , cc, "receive_picked",  receive_picked,        MRB_ARGS_NONE());
+    mrb_define_class_method(mrb , cc, "render",          render,                MRB_ARGS_REQ(2));
 
     mrb_define_method(mrb, cc,        "width",              width,              MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,        "height",             height,             MRB_ARGS_NONE());
-                                                             
+
     mrb_define_method(mrb, cc,        "resize",             resize,            MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc,        "resize_force",       resize_force,      MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc,        "crop",               crop,              MRB_ARGS_REQ(4));
@@ -297,6 +323,8 @@ void BindImage::Bind(mrb_state* mrb)
 
     mrb_define_method(mrb, cc,        "save",              save,               MRB_ARGS_NONE());
         
+    mrb_define_method(mrb, cc,        "draw",               draw,               MRB_ARGS_REQ(4));
+
     // mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
     // // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
     // mrb_define_method(mrb, cc,        "color",              color,              MRB_ARGS_REQ(2));
