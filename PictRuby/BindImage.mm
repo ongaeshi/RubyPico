@@ -49,6 +49,31 @@ mrb_value receive_picked(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, image);
 }
 
+mrb_value resize(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+        
+    mrb_int x, y;
+    mrb_get_args(mrb, "ii", &x, &y);
+
+    // UIImage* new_image = [[image scaleToCoverSize:CGSizeMake(x, y)] retain];
+    UIImage* new_image = [[image scaleToFitSize:CGSizeMake(x, y)] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
+mrb_value resize_force(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+        
+    mrb_int x, y;
+    mrb_get_args(mrb, "ii", &x, &y);
+
+    UIImage* new_image = [[image scaleToSize:CGSizeMake(x, y)] retain];
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
 mrb_value crop(mrb_state *mrb, mrb_value self)
 {
     UIImage* obj = toObj(self);
@@ -253,6 +278,8 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "width",              width,              MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,        "height",             height,             MRB_ARGS_NONE());
                                                              
+    mrb_define_method(mrb, cc,        "resize",             resize,            MRB_ARGS_REQ(2));
+    mrb_define_method(mrb, cc,        "resize_force",       resize_force,      MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc,        "crop",               crop,              MRB_ARGS_REQ(4));
     
     mrb_define_method(mrb, cc,        "bright",            bright,             MRB_ARGS_REQ(1));
