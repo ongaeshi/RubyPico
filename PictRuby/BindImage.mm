@@ -203,6 +203,15 @@ mrb_value blur(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, new_image);
 }
 
+mrb_value save(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    [image saveToPhotosAlbum];
+
+    return self;
+}
+
 }
 
 //----------------------------------------------------------
@@ -258,6 +267,8 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "sharp",             sharp,              MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cc,        "unsharp",           unsharp,            MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cc,        "blur",              blur,               MRB_ARGS_REQ(1));
+
+    mrb_define_method(mrb, cc,        "save",              save,               MRB_ARGS_NONE());
         
     // mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
     // // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
