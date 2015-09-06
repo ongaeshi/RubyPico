@@ -115,15 +115,13 @@
 
         // Create a new file
         [FCFileManager createFileAtPath:path
-                            withContent:@"def setup\n"
-                                         "end\n"
+                            withContent:@"# Please return the Image object in the \"def convert\"\n"
                                          "\n"
-                                         "def update\n"
-                                         "end\n"
+                                         "def convert\n"
+                                         "  #img = Image.load(\"sample.jpg\")  \n"
+                                         "  img = Image.pick_from_library\n"
                                          "\n"
-                                         "def draw\n"
-                                         "  # set_color 204, 52, 45\n"
-                                         "  rect 120, 220, 80, 40\n"
+                                         "  img\n"
                                          "end\n"
             ];
 
