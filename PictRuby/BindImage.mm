@@ -57,7 +57,7 @@ mrb_value render(mrb_state *mrb, mrb_value self)
 
     UIGraphicsBeginImageContext(CGSizeMake(x, y));
     mrb_yield_argv(mrb, block, 0, NULL);
-    UIImage* new_image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage* new_image = [UIGraphicsGetImageFromCurrentImageContext() retain];
     UIGraphicsEndImageContext();
 
     return BindImage::ToMrb(mrb, new_image);
