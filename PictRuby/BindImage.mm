@@ -254,6 +254,19 @@ mrb_value blur(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, new_image);
 }
 
+mrb_value reflection(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = toObj(self);
+
+    mrb_float from_alpha, to_alpha;
+    mrb_get_args(mrb, "ff", &from_alpha, &to_alpha);
+    
+    UIImage* new_image = [[image reflectedImageWithHeight:image.size.height fromAlpha:from_alpha toAlpha:to_alpha] retain];
+    NSLog(@"%f, %f", from_alpha, to_alpha);
+
+    return BindImage::ToMrb(mrb, new_image);
+}
+
 mrb_value save(mrb_state *mrb, mrb_value self)
 {
     UIImage* image = toObj(self);
@@ -333,6 +346,7 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "sharp",             sharp,              MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cc,        "unsharp",           unsharp,            MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cc,        "blur",              blur,               MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,        "reflection",        reflection,         MRB_ARGS_REQ(2));
 
     mrb_define_method(mrb, cc,        "save",              save,               MRB_ARGS_NONE());
         

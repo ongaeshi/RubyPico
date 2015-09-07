@@ -37,6 +37,7 @@
         "  sharpe(bias)\n"
         "  unsharp(bias)\n"
         "  blur(bias)\n"
+        "  reflection(from_alpha, to_alpha)\n"
         "\n"
         "  width\n"
         "  height\n"
