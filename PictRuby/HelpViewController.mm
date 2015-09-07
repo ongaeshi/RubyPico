@@ -45,8 +45,6 @@
         "  resize_force(x, y)\n"
         "  crop(x, y, width, height)\n"
         "  rotate(degree)\n"
-        "  xflip\n"
-        "  yflip\n"
         "\n"
         "  save\n"
         "\n"

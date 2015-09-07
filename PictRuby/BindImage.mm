@@ -113,24 +113,6 @@ mrb_value rotate(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, new_image);
 }
 
-mrb_value xflip(mrb_state *mrb, mrb_value self)
-{
-    UIImage* image = toObj(self);
-        
-    UIImage* new_image = [[image horizontalFlip] retain];
-    
-    return BindImage::ToMrb(mrb, new_image);
-}
-
-mrb_value yflip(mrb_state *mrb, mrb_value self)
-{
-    UIImage* image = toObj(self);
-        
-    UIImage* new_image = [[image verticalFlip] retain];
-    
-    return BindImage::ToMrb(mrb, new_image);
-}
-
 mrb_value height(mrb_state *mrb, mrb_value self)
 {
     return mrb_float_value(mrb, toObj(self).size.height);
@@ -338,8 +320,6 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "resize_force",       resize_force,      MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc,        "crop",               crop,              MRB_ARGS_REQ(4));
     mrb_define_method(mrb, cc,        "rotate",             rotate,            MRB_ARGS_REQ(1));
-    mrb_define_method(mrb, cc,        "xflip",              xflip,             MRB_ARGS_NONE());
-    mrb_define_method(mrb, cc,        "yflip",              yflip,             MRB_ARGS_NONE());
     
     mrb_define_method(mrb, cc,        "bright",            bright,             MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cc,        "contrast",          contrast,           MRB_ARGS_REQ(1));
