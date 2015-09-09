@@ -262,7 +262,6 @@ mrb_value reflection(mrb_state *mrb, mrb_value self)
     mrb_get_args(mrb, "ff", &from_alpha, &to_alpha);
     
     UIImage* new_image = [[image reflectedImageWithHeight:image.size.height fromAlpha:from_alpha toAlpha:to_alpha] retain];
-    NSLog(@"%f, %f", from_alpha, to_alpha);
 
     return BindImage::ToMrb(mrb, new_image);
 }
