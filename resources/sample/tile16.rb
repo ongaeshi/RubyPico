@@ -24,8 +24,11 @@ def convert
      img.sharp(32).d(2, 2)
      img.unsharp(32).d(3, 2)
 
-     img.opacity(0.4).d(0, 3)
+     img.rotate(30).d(0, 3)
+     img.rotate(180).d(1, 3)
+     img.opacity(0.5).d(1, 3)
      img.center_crop.d(2, 3)
+     img.reflection(1.0, 0.5).d(3, 3)
   end
 end
 
