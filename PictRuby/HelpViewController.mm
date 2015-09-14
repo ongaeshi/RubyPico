@@ -23,7 +23,7 @@
         "Image\n"
         "  Iamge.pick_from_library\n"
         "  Image.load(path)\n"
-        "  Image.render\n"
+        "  Image.render(x, y)\n"
         "\n"
         "  bright(bias)    # -255~255\n"
         "  contrast(bias)  # -255~255\n"
@@ -49,7 +49,7 @@
         "\n"
         "  save\n"
         "\n"
-        "  draw\n"
+        "  draw(x, y, w, h)\n"
         ;
 
     [self.view addSubview:textView];
