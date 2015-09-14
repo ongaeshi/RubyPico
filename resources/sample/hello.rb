@@ -4,5 +4,5 @@ def convert
   #img = Image.load("sample.jpg")  
   img = Image.pick_from_library
   
-  img
+  img.gray
 end
