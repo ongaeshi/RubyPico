@@ -42,6 +42,13 @@
     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(timerProcess) userInfo:nil repeats:YES];
     mValue = 0;
 
+    // NavButton
+    UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(tapSaveButton)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, nil];
+
     // Init mruby
     [self initScript];
 }
@@ -126,6 +133,28 @@
     UIImage* img = mReceivePicked;
     mReceivePicked = NULL;
     return img;
+}
+
+- (void) tapSaveButton
+{
+    UIImageWriteToSavedPhotosAlbum(
+        mImageView.image, 
+        self, 
+        @selector(onSaved:didFinishSavingWithError:contextInfo:),
+        NULL
+        );
+}
+
+- (void) onSaved:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
+{
+    NSString* message = !error ? @"Save Complete" : @"Save Failed";
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
