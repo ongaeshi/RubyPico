@@ -7,7 +7,6 @@
 #import "mruby/irep.h"
 #import "mruby/string.h"
 #import "mruby/error.h"
-#import <QBImagePickerController/QBImagePickerController.h>
 
 @implementation ScriptController
 {
@@ -16,7 +15,7 @@
     mrb_value mFiber;
     NSTimer* mTimer;
     int mValue;
-    UIImagePickerController* mImagePicker;
+    QBImagePickerController* mImagePicker;
     UIImageView* mImageView;
     UIImage* mReceivePicked;
 }
@@ -35,11 +34,10 @@
     self.view.backgroundColor = [UIColor blackColor];
 
     // Create ImagePicker
-    mImagePicker = [[UIImagePickerController alloc] init];
-    [mImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    // [mImagePicker setAllowsEditing:YES];
+    mImagePicker = [QBImagePickerController new];
     [mImagePicker setDelegate:self];
-
+    mImagePicker.showsNumberOfSelectedAssets = YES;
+    
     // Create timer
     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(timerProcess) userInfo:nil repeats:YES];
     mValue = 0;
@@ -99,9 +97,21 @@
     [self callScript];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAsset:(ALAsset*)asset
 {
-    UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+    
+    if (image) {
+        mReceivePicked = image;
+    }
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAssets:(NSArray*)assets
+{
+    UIImage *image = NULL;
+    
     if (image) {
         mReceivePicked = image;
     }
@@ -175,6 +185,10 @@
 - (void) startPickFromLibrary
 {
     mReceivePicked = NULL;
+    // mImagePicker.allowsMultipleSelection = YES;
+    // mImagePicker.maximumNumberOfSelection = 4;
+    mImagePicker.allowsMultipleSelection = NO;
+    mImagePicker.maximumNumberOfSelection = 1;
     [self presentViewController:mImagePicker animated:YES completion:nil];
 }
 
