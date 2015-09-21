@@ -7,6 +7,7 @@
 #import "mruby/irep.h"
 #import "mruby/string.h"
 #import "mruby/error.h"
+#import <QBImagePickerController/QBImagePickerController.h>
 
 @implementation ScriptController
 {
