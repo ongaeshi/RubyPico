@@ -6,6 +6,7 @@
 #import "mruby/compile.h"
 #import "mruby/irep.h"
 #import "mruby/string.h"
+#import "mruby/error.h"
 
 @implementation ScriptController
 {
@@ -71,6 +72,31 @@
         return;
     }
 
+    if (mMrb->exc) {
+        // Display to console
+        mrb_p(mMrb, mrb_obj_value(mMrb->exc));
+        // mrb_p(mMrb, mrb_get_backtrace(mMrb));
+
+        // Display to view
+        // TODO
+        // // Save error message & Draw to display
+        // mrb_value str = mrb_funcall(mMrb, mrb_obj_value(mMrb->exc), "inspect", 0);
+        // mErrorMsg = mrb_string_value_cstr(mMrb, &str);
+
+        // // Insert a line break at the 40 digits each
+        // static const int COLUMN = 40;
+        // int insertPos = COLUMN;
+        // while  (mErrorMsg.length() > insertPos) {
+        //     mErrorMsg.insert(insertPos, "\n");
+        //     insertPos += COLUMN + 1;
+        // }
+
+        mrb_close(mMrb);
+        mMrb = NULL;
+
+        return;
+    }
+
     [self callScript];
 }
 
@@ -103,9 +129,20 @@
     }
 
     // Load user script
-    FILE *fd = fopen(mScriptPath, "r");
-    mrb_load_file(mMrb, fd);
-    fclose(fd);
+    int arena = mrb_gc_arena_save(mMrb);
+    {
+        FILE *fd = fopen(mScriptPath, "r");
+
+        mrbc_context *cxt = mrbc_context_new(mMrb);
+        mrbc_filename(mMrb, cxt, mScriptPath);
+
+        mrb_load_file_cxt(mMrb, fd, cxt);
+
+        mrbc_context_free(mMrb, cxt);
+
+        fclose(fd);
+    }
+    mrb_gc_arena_restore(mMrb, arena);
 
     // Create fiber
     mFiber = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "make_convert_to_fiber", 0);
