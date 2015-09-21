@@ -78,18 +78,16 @@
         // mrb_p(mMrb, mrb_get_backtrace(mMrb));
 
         // Display to view
-        // TODO
-        // // Save error message & Draw to display
-        // mrb_value str = mrb_funcall(mMrb, mrb_obj_value(mMrb->exc), "inspect", 0);
-        // mErrorMsg = mrb_string_value_cstr(mMrb, &str);
-
-        // // Insert a line break at the 40 digits each
-        // static const int COLUMN = 40;
-        // int insertPos = COLUMN;
-        // while  (mErrorMsg.length() > insertPos) {
-        //     mErrorMsg.insert(insertPos, "\n");
-        //     insertPos += COLUMN + 1;
-        // }
+        mrb_value str = mrb_funcall(mMrb, mrb_obj_value(mMrb->exc), "inspect", 0);
+        const char* errorMsg = mrb_string_value_cstr(mMrb, &str);
+        
+        UILabel* label = [[UILabel alloc] init];
+        label.frame = self.view.bounds;
+        label.backgroundColor = [UIColor whiteColor];
+        label.text = [[NSString alloc] initWithUTF8String:errorMsg];
+        [label setLineBreakMode:NSLineBreakByWordWrapping];
+        [label setNumberOfLines:0];
+        [self.view addSubview:label];
 
         mrb_close(mMrb);
         mMrb = NULL;
@@ -134,7 +132,9 @@
         FILE *fd = fopen(mScriptPath, "r");
 
         mrbc_context *cxt = mrbc_context_new(mMrb);
-        mrbc_filename(mMrb, cxt, mScriptPath);
+
+        const char* fileName = [[[[NSString alloc] initWithUTF8String:mScriptPath] lastPathComponent] UTF8String];
+        mrbc_filename(mMrb, cxt, fileName);
 
         mrb_load_file_cxt(mMrb, fd, cxt);
 
