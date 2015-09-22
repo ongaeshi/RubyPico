@@ -27,7 +27,7 @@ class Image
       imgs = receive_picked
 
       if imgs
-        return imgs.length == 1 ? imgs[0] : imgs
+        return num == 1 ? imgs[0] : imgs
       end
       
       Fiber.yield
