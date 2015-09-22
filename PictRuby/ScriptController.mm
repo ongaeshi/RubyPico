@@ -17,7 +17,7 @@
     int mValue;
     QBImagePickerController* mImagePicker;
     UIImageView* mImageView;
-    UIImage* mReceivePicked;
+    NSMutableArray* mReceivePicked;
 }
 
 - (id) initWithScriptName:(char*)scriptPath
@@ -102,7 +102,7 @@
     UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
     
     if (image) {
-        mReceivePicked = image;
+        mReceivePicked = [[NSMutableArray alloc] initWithObjects:image, nil];
     }
 
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -110,11 +110,7 @@
 
 - (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAssets:(NSArray*)assets
 {
-    UIImage *image = NULL;
-    
-    if (image) {
-        mReceivePicked = image;
-    }
+    mReceivePicked = NULL;
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -190,11 +186,11 @@
     [self presentViewController:mImagePicker animated:YES completion:nil];
 }
 
-- (UIImage*) receivePicked
+- (NSMutableArray*) receivePicked
 {
-    UIImage* img = mReceivePicked;
+    NSMutableArray* array = mReceivePicked;
     mReceivePicked = NULL;
-    return img;
+    return array;
 }
 
 - (void) tapSaveButton

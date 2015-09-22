@@ -48,8 +48,16 @@ mrb_value start_pick_from_library(mrb_state *mrb, mrb_value self)
 
 mrb_value receive_picked(mrb_state *mrb, mrb_value self)
 {
-    UIImage* image = [[fScriptController receivePicked] retain];
-    return BindImage::ToMrb(mrb, image);
+    @autoreleasepool {
+        NSMutableArray* array = [fScriptController receivePicked];
+
+        if (array) {
+            UIImage* image = [array[0] retain];
+            return BindImage::ToMrb(mrb, image);
+        } else {
+            return BindImage::ToMrb(mrb, NULL);
+        }
+    }
 }
 
 mrb_value render(mrb_state *mrb, mrb_value self)
