@@ -50,6 +50,12 @@
         "  save\n"
         "\n"
         "  draw(x, y, w, h)\n"
+        "\n"
+        "\n"
+        "\n"
+        "--- \n"
+        "WPZOOM Developer Icon Set\n"
+        "CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0/)\n"
         ;
 
     [self.view addSubview:textView];
