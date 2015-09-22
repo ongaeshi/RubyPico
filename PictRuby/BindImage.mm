@@ -39,7 +39,10 @@ mrb_value load(mrb_state *mrb, mrb_value self)
 
 mrb_value start_pick_from_library(mrb_state *mrb, mrb_value self)
 {
-    [fScriptController startPickFromLibrary];
+    mrb_int num;
+    mrb_get_args(mrb, "i", &num);
+
+    [fScriptController startPickFromLibrary:num];
     return mrb_nil_value();
 }
 
@@ -321,7 +324,7 @@ void BindImage::Bind(mrb_state* mrb)
     struct RClass *cc = mrb_define_class(mrb, "Image", mrb->object_class);
 
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
-    mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_NONE());
+    mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "receive_picked",  receive_picked,        MRB_ARGS_NONE());
     mrb_define_class_method(mrb , cc, "render",          render,                MRB_ARGS_REQ(2));
 

@@ -182,13 +182,11 @@
     }
 }
 
-- (void) startPickFromLibrary
+- (void) startPickFromLibrary:(int)num
 {
     mReceivePicked = NULL;
-    // mImagePicker.allowsMultipleSelection = YES;
-    // mImagePicker.maximumNumberOfSelection = 4;
-    mImagePicker.allowsMultipleSelection = NO;
-    mImagePicker.maximumNumberOfSelection = 1;
+    mImagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
+    mImagePicker.maximumNumberOfSelection = num;
     [self presentViewController:mImagePicker animated:YES completion:nil];
 }
 

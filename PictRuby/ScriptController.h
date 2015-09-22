@@ -3,6 +3,6 @@
 
 @interface ScriptController : UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
 - (id) initWithScriptName:(char*)scriptPath;
-- (void) startPickFromLibrary;
+- (void) startPickFromLibrary:(int)num;
 - (UIImage*) receivePicked;
 @end
