@@ -53,16 +53,14 @@
     [self initScript];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)didMoveToParentViewController:(UIViewController *)parent
 {
-    // if (self.isMovingFromParentViewController) {
-    //     if (mMrb) {
-    //         mrb_close(mMrb);
-    //         mMrb = NULL;
-    //     }
-    // }
-
-    [super viewDidDisappear:animated];
+    if (![parent isEqual:self.parentViewController]) {
+        if (mMrb) {
+            mrb_close(mMrb);
+            mMrb = NULL;
+        }
+    }
 }
 
 - (void)timerProcess
