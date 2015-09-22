@@ -123,6 +123,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)picker 
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 - (void)initScript
 {
     mMrb = mrb_open();
