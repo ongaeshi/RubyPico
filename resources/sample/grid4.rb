@@ -9,13 +9,17 @@ def convert
   BX = imgs[0].width
   BY = imgs[0].height
   
-   Image.render(BX*2, BY*2) do 
-     imgs[0].draw(0, 0, BX, BY)
-     imgs[1].draw(BX, 0, BX, BY)
-     imgs[2].draw(0, BY, BX, BY)
-     imgs[3].draw(BX, BY, BX, BY)
+  POS = [
+    [ 0,  0],
+    [BX,  0],
+    [ 0, BY],
+    [BX, BY],
+  ]
+
+  Image.render(BX*2, BY*2) do 
+    imgs.each_with_index do |img, i| 
+      img.draw(POS[i][0], POS[i][1], BX, BY)
+    end
   end
-  
-  #img.save  
 end
 
