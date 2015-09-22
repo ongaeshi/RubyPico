@@ -55,12 +55,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    if (self.isMovingFromParentViewController) {
-        if (mMrb) {
-            mrb_close(mMrb);
-            mMrb = NULL;
-        }
-    }
+    // if (self.isMovingFromParentViewController) {
+    //     if (mMrb) {
+    //         mrb_close(mMrb);
+    //         mMrb = NULL;
+    //     }
+    // }
 
     [super viewDidDisappear:animated];
 }
