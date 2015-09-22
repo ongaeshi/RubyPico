@@ -21,7 +21,7 @@
 
     textView.text = @
         "Image\n"
-        "  Iamge.pick_from_library\n"
+        "  Iamge.pick_from_library(num = 1)\n"
         "  Image.load(path)\n"
         "  Image.render(x, y)\n"
         "\n"
