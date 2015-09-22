@@ -24,10 +24,10 @@ class Image
     start_pick_from_library(num)
 
     loop do
-      img = receive_picked
+      imgs = receive_picked
 
-      if img
-        return img 
+      if imgs
+        return imgs.length == 1 ? imgs[0] : imgs
       end
       
       Fiber.yield

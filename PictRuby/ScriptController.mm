@@ -110,7 +110,15 @@
 
 - (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAssets:(NSArray*)assets
 {
-    mReceivePicked = NULL;
+    mReceivePicked = [[NSMutableArray alloc] initWithCapacity:0]; //TODO: assets.num
+    
+    for (ALAsset* asset in assets) {
+        UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+        
+        if (image) {
+            [mReceivePicked addObject:image];
+        }
+    }
 
     [self dismissViewControllerAnimated:YES completion:nil];
 }

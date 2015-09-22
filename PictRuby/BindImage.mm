@@ -1,6 +1,7 @@
 #import "BindImage.hpp"
 
 #import "mruby.h"
+#import "mruby/array.h"
 #import "mruby/class.h"
 #import "mruby/data.h"
 #import "mruby/string.h"
@@ -49,14 +50,19 @@ mrb_value start_pick_from_library(mrb_state *mrb, mrb_value self)
 mrb_value receive_picked(mrb_state *mrb, mrb_value self)
 {
     @autoreleasepool {
-        NSMutableArray* array = [fScriptController receivePicked];
+        NSMutableArray* nsarray = [fScriptController receivePicked];
 
-        if (array) {
-            UIImage* image = [array[0] retain];
-            return BindImage::ToMrb(mrb, image);
-        } else {
+        if (nsarray == NULL) {
             return BindImage::ToMrb(mrb, NULL);
         }
+        
+        mrb_value array = mrb_ary_new(mrb);
+            
+        for (UIImage* image in nsarray) {
+            mrb_ary_push(mrb, array, BindImage::ToMrb(mrb, [image retain]));
+        }
+
+        return array;
     }
 }
 

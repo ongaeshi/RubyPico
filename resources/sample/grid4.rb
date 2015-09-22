@@ -4,11 +4,7 @@ Y = 2
 NUM = X * Y
 
 def convert
-  imgs =  []
-  imgs.push Image.pick_from_library
-  imgs.push Image.pick_from_library
-  imgs.push Image.pick_from_library
-  imgs.push Image.pick_from_library
+  imgs = Image.pick_from_library(4)
 
   BX = imgs[0].width
   BY = imgs[0].height
