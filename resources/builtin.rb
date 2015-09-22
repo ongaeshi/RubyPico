@@ -20,14 +20,14 @@ class MainLoop
 end
 
 class Image
-  def self.pick_from_library
-    start_pick_from_library
+  def self.pick_from_library(num = 1)
+    start_pick_from_library(num)
 
     loop do
-      img = receive_picked
+      imgs = receive_picked
 
-      if img
-        return img 
+      if imgs
+        return imgs.length == 1 ? imgs[0] : imgs
       end
       
       Fiber.yield

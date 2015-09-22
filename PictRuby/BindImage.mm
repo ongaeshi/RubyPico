@@ -1,6 +1,7 @@
 #import "BindImage.hpp"
 
 #import "mruby.h"
+#import "mruby/array.h"
 #import "mruby/class.h"
 #import "mruby/data.h"
 #import "mruby/string.h"
@@ -39,14 +40,30 @@ mrb_value load(mrb_state *mrb, mrb_value self)
 
 mrb_value start_pick_from_library(mrb_state *mrb, mrb_value self)
 {
-    [fScriptController startPickFromLibrary];
+    mrb_int num;
+    mrb_get_args(mrb, "i", &num);
+
+    [fScriptController startPickFromLibrary:num];
     return mrb_nil_value();
 }
 
 mrb_value receive_picked(mrb_state *mrb, mrb_value self)
 {
-    UIImage* image = [[fScriptController receivePicked] retain];
-    return BindImage::ToMrb(mrb, image);
+    @autoreleasepool {
+        NSMutableArray* nsarray = [fScriptController receivePicked];
+
+        if (nsarray == NULL) {
+            return BindImage::ToMrb(mrb, NULL);
+        }
+        
+        mrb_value array = mrb_ary_new(mrb);
+            
+        for (UIImage* image in nsarray) {
+            mrb_ary_push(mrb, array, BindImage::ToMrb(mrb, [image retain]));
+        }
+
+        return array;
+    }
 }
 
 mrb_value render(mrb_state *mrb, mrb_value self)
@@ -321,7 +338,7 @@ void BindImage::Bind(mrb_state* mrb)
     struct RClass *cc = mrb_define_class(mrb, "Image", mrb->object_class);
 
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
-    mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_NONE());
+    mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "receive_picked",  receive_picked,        MRB_ARGS_NONE());
     mrb_define_class_method(mrb , cc, "render",          render,                MRB_ARGS_REQ(2));
 

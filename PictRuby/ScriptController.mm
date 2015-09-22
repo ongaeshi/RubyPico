@@ -15,9 +15,9 @@
     mrb_value mFiber;
     NSTimer* mTimer;
     int mValue;
-    UIImagePickerController* mImagePicker;
+    QBImagePickerController* mImagePicker;
     UIImageView* mImageView;
-    UIImage* mReceivePicked;
+    NSMutableArray* mReceivePicked;
 }
 
 - (id) initWithScriptName:(char*)scriptPath
@@ -34,11 +34,10 @@
     self.view.backgroundColor = [UIColor blackColor];
 
     // Create ImagePicker
-    mImagePicker = [[UIImagePickerController alloc] init];
-    [mImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-    // [mImagePicker setAllowsEditing:YES];
+    mImagePicker = [QBImagePickerController new];
     [mImagePicker setDelegate:self];
-
+    mImagePicker.showsNumberOfSelectedAssets = YES;
+    
     // Create timer
     mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(timerProcess) userInfo:nil repeats:YES];
     mValue = 0;
@@ -54,16 +53,14 @@
     [self initScript];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)didMoveToParentViewController:(UIViewController *)parent
 {
-    if (self.isMovingFromParentViewController) {
+    if (![parent isEqual:self.parentViewController]) {
         if (mMrb) {
             mrb_close(mMrb);
             mMrb = NULL;
         }
     }
-
-    [super viewDidDisappear:animated];
 }
 
 - (void)timerProcess
@@ -98,14 +95,35 @@
     [self callScript];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAsset:(ALAsset*)asset
 {
-    UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+    
     if (image) {
-        mReceivePicked = image;
+        mReceivePicked = [[NSMutableArray alloc] initWithObjects:image, nil];
     }
 
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAssets:(NSArray*)assets
+{
+    mReceivePicked = [[NSMutableArray alloc] initWithCapacity:[assets count]];
+    
+    for (ALAsset* asset in assets) {
+        UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+        
+        if (image) {
+            [mReceivePicked addObject:image];
+        }
+    }
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)picker 
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)initScript
@@ -171,17 +189,19 @@
     }
 }
 
-- (void) startPickFromLibrary
+- (void) startPickFromLibrary:(int)num
 {
     mReceivePicked = NULL;
+    mImagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
+    mImagePicker.maximumNumberOfSelection = num;
     [self presentViewController:mImagePicker animated:YES completion:nil];
 }
 
-- (UIImage*) receivePicked
+- (NSMutableArray*) receivePicked
 {
-    UIImage* img = mReceivePicked;
+    NSMutableArray* array = mReceivePicked;
     mReceivePicked = NULL;
-    return img;
+    return array;
 }
 
 - (void) tapSaveButton
