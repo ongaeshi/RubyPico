@@ -3,6 +3,7 @@ layout: layout
 title: Photo editor that can write a filter in Ruby
 ---
 # PictRuby
+
 ![pictruby-icon](images/pictruby-icon.png)
 
 Photo editor that can write a filter in Ruby.
