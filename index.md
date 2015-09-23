@@ -1,18 +1,74 @@
 ---
 layout: layout
-title: Pdf search engine written by Ruby
+title: Photo editor that can write a filter in Ruby
 ---
-# <img width="100" height="100" src="https://raw.githubusercontent.com/ongaeshi/honyomi/master/images/honyomi-icon.png"> Honyomi
+# PictRuby
+![pictruby-icon](images/pictruby-icon.png)
 
-Honyomi is pdf search engine written by Ruby. It have command line interface and web application. It will accelerate the ebook of your life.
+Photo editor that can write a filter in Ruby.
 
-You can [search](http://library.honyomi.nagoya/?query=global-set-key) and [browse](http://library.honyomi.nagoya/v/2) the pdf document only in the browser without the use of software such as the pdf reader and pdf viewer. Search results will open immediately the desired page because you can get on a page-by-page basis.
+You can make your special filter using Ruby. Many sample filters are also available.
 
-For your collection books, in-house document database, reference manual.
+Let's create your favorite picture by combining a filter.
 
 ## Installation
-- [English](https://github.com/ongaeshi/honyomi)
-- [日本語](/ja/)
 
-<img alt='honyomi' src='https://raw.githubusercontent.com/ongaeshi/honyomi/master/images/honyomi-03.gif' style="max-width:100%;" />
+AppStore (in review)
 
+## Editor
+
+![pictruby-editor-01](images/pictruby-editor-01.jpg)
+
+![pictruby-editor-02](images/pictruby-editor-02.jpg)
+
+## Sample Filters
+
+![sample](images/sample.jpg)
+
+### all_filter.rb
+
+[all_filter.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/all_filter.rb)
+
+![all_filter](images/all_filter.jpg)
+
+### edge.rb
+
+![edge](images/edge.jpg)
+
+### emboss.rb
+
+![emboss](images/emboss.jpg)
+
+### gray.rb
+
+![gray](images/gray.jpg)
+
+### grid.rb
+
+![grid](images/grid.jpg)
+
+### half_gray.rb
+
+![half_gray](images/half_gray.jpg)
+
+### horizontal.rb
+
+![horizontal](images/horizontal.jpg)
+
+### invert.rb
+
+![invert](images/invert.jpg)
+
+### none.rb
+
+### resize_half.rb
+
+### rich_gray.rb
+
+### sepia.rb
+
+### vertical.rb
+
+## Link
+
+- [GitHub](https://github.com/ongaeshi/PictRuby)
