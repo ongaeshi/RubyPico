@@ -38,9 +38,7 @@ AppStore (in review)
 
 ## Editor
 
-![pictruby-editor-01](images/pictruby-editor-01.jpg)
-
-![pictruby-editor-02](images/pictruby-editor-02.jpg)
+![pictruby-editor](images/pictruby-screen-all.jpg)
 
 ## Sample Filters
 
