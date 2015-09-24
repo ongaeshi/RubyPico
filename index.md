@@ -12,6 +12,26 @@ You can make your special filter using Ruby. Many sample filters are also availa
 
 Let's create your favorite picture by combining a filter.
 
+## Contents
+
+- [Installation](#installation)
+- [Editor](#editor)
+- [Sample Filters](#sample-filters)
+  - [All Filter](#all-filter)
+  - [Edge](#edge)
+  - [Emboss](#emboss)
+  - [Gray](#gray)
+  - [Grid](#grid)
+  - [Half Gray](#half-gray)
+  - [Horizontal](#horizontal)
+  - [Invert](#invert)
+  - [None](#none)
+  - [Resize Half](#resize-half)
+  - [Rich Gray](#rich-gray)
+  - [Sepia](#sepia)
+  - [Vertical](#vertical)
+- [Link](#link)
+
 ## Installation
 
 AppStore (in review)
