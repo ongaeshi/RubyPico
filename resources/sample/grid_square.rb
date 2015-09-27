@@ -2,5 +2,5 @@
 
 def convert
   imgs = Image.pick_from_library(81)
-  ImageUtil.grid(imgs)
+  ImageUtil.grid(imgs.map { |e| e.square })
 end
