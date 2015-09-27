@@ -33,6 +33,13 @@ class Image
       Fiber.yield
     end
   end    
+
+  def square(x_offset = 0, y_offset = 0)
+    l = width > height ? height : width
+    cx = width / 2
+    cy = height / 2
+    crop(cx - l/2 + x_offset, cy - l/2 + y_offset, l, l)
+  end
 end
 
 module ImageUtil
