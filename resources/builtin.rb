@@ -43,9 +43,9 @@ class Image
 end
 
 module ImageUtil
-  def self.vertical(imgs)
-    width = imgs[0].width
-    height = imgs.reduce(0) { |a, e| a += fith(e, width) }
+  def self.vertical(imgs, base_index = 0)
+    width = imgs[base_index].width
+    height = imgs.reduce(base_index) { |a, e| a += fith(e, width) }
 
     Image.render(width, height) do
       y = 0
@@ -57,9 +57,9 @@ module ImageUtil
     end
   end
 
-  def self.horizontal(imgs)
-    height = imgs[0].height
-    width  = imgs.reduce(0) { |a, e| a += fitw(e, height) }
+  def self.horizontal(imgs, base_index = 0)
+    height = imgs[base_index].height
+    width  = imgs.reduce(base_index) { |a, e| a += fitw(e, height) }
 
     Image.render(width, height) do
       x = 0

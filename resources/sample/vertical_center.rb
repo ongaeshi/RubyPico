@@ -10,5 +10,5 @@ def convert
     ImageUtil.horizontal(imgs[imgs.length/2+1..-1]),
   ]
   
-  ImageUtil.vertical(array)    
+  ImageUtil.vertical(array, 1)
 end
