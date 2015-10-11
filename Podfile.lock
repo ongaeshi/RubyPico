@@ -2,18 +2,18 @@ PODS:
   - FCFileManager (1.0.8)
   - ICTextView (2.0.0)
   - NYXImagesKit (2.3)
-  - QBImagePickerController (2.5.2)
+  - QBImagePickerController (3.2.0)
 
 DEPENDENCIES:
   - FCFileManager
   - ICTextView
   - NYXImagesKit
-  - QBImagePickerController (< 3.0.0)
+  - QBImagePickerController (>= 3.0.0)
 
 SPEC CHECKSUMS:
   FCFileManager: 83afe49677b8a5f353f52b5476baa2e21043db4a
   ICTextView: b443c45851659bccad8ee81da279028673091321
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
-  QBImagePickerController: 96c2e340edb7fcac5acf21b72314fac9201ffb8e
+  QBImagePickerController: 75b3857b1307a3c01ce486559bc294f802ddec6c
 
 COCOAPODS: 0.39.0
