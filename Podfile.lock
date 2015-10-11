@@ -16,4 +16,4 @@ SPEC CHECKSUMS:
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
   QBImagePickerController: 96c2e340edb7fcac5acf21b72314fac9201ffb8e
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0
