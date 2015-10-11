@@ -99,11 +99,16 @@
 {
     mReceivePicked = [[NSMutableArray alloc] initWithCapacity:[assets count]];
     
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.resizeMode = PHImageRequestOptionsResizeModeExact;
+    
     for (PHAsset* asset in assets) {
         [[PHImageManager defaultManager] requestImageForAsset:asset
-                                                   targetSize:CGSizeMake(300,300) // TODO: full size
+                                                   targetSize:PHImageManagerMaximumSize
                                                   contentMode:PHImageContentModeAspectFit
-                                                      options:nil
+                                                      options:options
                                                 resultHandler:^(UIImage *result, NSDictionary *info) {
                 if (result) {
                     [mReceivePicked addObject:result];
