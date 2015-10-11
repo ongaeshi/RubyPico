@@ -10,7 +10,7 @@
 
 @implementation ScriptController
 {
-    const char* mScriptPath;
+    NSString* mScriptPath;
     mrb_state* mMrb;
     mrb_value mFiber;
     NSTimer* mTimer;
@@ -20,7 +20,7 @@
     NSMutableArray* mReceivePicked;
 }
 
-- (id) initWithScriptName:(char*)scriptPath
+- (id) initWithScriptName:(NSString*)scriptPath
 {
     self = [super init];
     mScriptPath = scriptPath;
@@ -95,30 +95,28 @@
     [self callScript];
 }
 
-- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAsset:(ALAsset*)asset
-{
-    UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
-    
-    if (image) {
-        mReceivePicked = [[NSMutableArray alloc] initWithObjects:image, nil];
-    }
-
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAssets:(NSArray*)assets
+- (void)qb_imagePickerController:(QBImagePickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
     mReceivePicked = [[NSMutableArray alloc] initWithCapacity:[assets count]];
     
-    for (ALAsset* asset in assets) {
-        UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
-        
-        if (image) {
-            [mReceivePicked addObject:image];
-        }
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.resizeMode = PHImageRequestOptionsResizeModeExact;
+    
+    for (PHAsset* asset in assets) {
+        [[PHImageManager defaultManager] requestImageForAsset:asset
+                                                   targetSize:PHImageManagerMaximumSize
+                                                  contentMode:PHImageContentModeAspectFit
+                                                      options:options
+                                                resultHandler:^(UIImage *result, NSDictionary *info) {
+                if (result) {
+                    [mReceivePicked addObject:result];
+                }
+            }];
     }
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)picker 
@@ -147,11 +145,12 @@
     // Load user script
     int arena = mrb_gc_arena_save(mMrb);
     {
-        FILE *fd = fopen(mScriptPath, "r");
+        char* scriptPath = (char *)[mScriptPath UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
 
         mrbc_context *cxt = mrbc_context_new(mMrb);
 
-        const char* fileName = [[[[NSString alloc] initWithUTF8String:mScriptPath] lastPathComponent] UTF8String];
+        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
         mrbc_filename(mMrb, cxt, fileName);
 
         mrb_load_file_cxt(mMrb, fd, cxt);
@@ -175,6 +174,8 @@
 
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
         UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
+
+        // NSLog(@"image w:%f, h:%f", image.size.width, image.size.height);
 
         // TODO: Adjust navbar
         mImageView = [[UIImageView alloc] initWithImage:image];
