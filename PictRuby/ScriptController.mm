@@ -173,15 +173,30 @@
     // mrb_p(mMrb, isAlive);
 
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
-        UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
+        if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "Image"))) {
+            mrb_value str = mrb_funcall(mMrb, ret, "inspect", 0);
+            const char* errorMsg = mrb_string_value_cstr(mMrb, &str);
 
-        // NSLog(@"image w:%f, h:%f", image.size.width, image.size.height);
+            UILabel* label = [[UILabel alloc] init];
+            label.frame = self.view.bounds;
+            label.backgroundColor = [UIColor whiteColor];
+            label.text = [NSString stringWithFormat:@"Invalid return value: %s", errorMsg];
+            [label setLineBreakMode:NSLineBreakByWordWrapping];
+            [label setNumberOfLines:0];
+            [self.view addSubview:label];
 
-        // TODO: Adjust navbar
-        mImageView = [[UIImageView alloc] initWithImage:image];
-        mImageView.frame = self.view.frame;
-        mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
-        [self.view addSubview:mImageView];
+        } else {
+            UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
+
+            // NSLog(@"image w:%f, h:%f", image.size.width, image.size.height);
+
+            // TODO: Adjust navbar
+            mImageView = [[UIImageView alloc] initWithImage:image];
+            mImageView.frame = self.view.frame;
+            mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
+            [self.view addSubview:mImageView];
+        }
+
 
         // End script
         // TODO: Stop timer
