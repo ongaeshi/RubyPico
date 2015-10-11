@@ -95,30 +95,23 @@
     [self callScript];
 }
 
-- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAsset:(ALAsset*)asset
-{
-    UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
-    
-    if (image) {
-        mReceivePicked = [[NSMutableArray alloc] initWithObjects:image, nil];
-    }
-
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)qb_imagePickerController:(QBImagePickerController*)picker didSelectAssets:(NSArray*)assets
+- (void)qb_imagePickerController:(QBImagePickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
     mReceivePicked = [[NSMutableArray alloc] initWithCapacity:[assets count]];
     
-    for (ALAsset* asset in assets) {
-        UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
-        
-        if (image) {
-            [mReceivePicked addObject:image];
-        }
+    for (PHAsset* asset in assets) {
+        [[PHImageManager defaultManager] requestImageForAsset:asset
+                                                   targetSize:CGSizeMake(300,300) // TODO: full size
+                                                  contentMode:PHImageContentModeAspectFit
+                                                      options:nil
+                                                resultHandler:^(UIImage *result, NSDictionary *info) {
+                if (result) {
+                    [mReceivePicked addObject:result];
+                }
+            }];
     }
 
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)picker 
