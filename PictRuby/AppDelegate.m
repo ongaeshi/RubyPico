@@ -27,6 +27,7 @@
     [tabBarController setViewControllers:tabs animated:NO];
 
     [self.window addSubview:tabBarController.view];
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
 }
 
