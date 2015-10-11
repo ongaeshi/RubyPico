@@ -175,6 +175,8 @@
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
         UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
 
+        // NSLog(@"image w:%f, h:%f", image.size.width, image.size.height);
+
         // TODO: Adjust navbar
         mImageView = [[UIImageView alloc] initWithImage:image];
         mImageView.frame = self.view.frame;
