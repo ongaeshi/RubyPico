@@ -10,7 +10,7 @@
 
 @implementation ScriptController
 {
-    const char* mScriptPath;
+    NSString* mScriptPath;
     mrb_state* mMrb;
     mrb_value mFiber;
     NSTimer* mTimer;
@@ -20,7 +20,7 @@
     NSMutableArray* mReceivePicked;
 }
 
-- (id) initWithScriptName:(char*)scriptPath
+- (id) initWithScriptName:(NSString*)scriptPath
 {
     self = [super init];
     mScriptPath = scriptPath;
@@ -140,11 +140,12 @@
     // Load user script
     int arena = mrb_gc_arena_save(mMrb);
     {
-        FILE *fd = fopen(mScriptPath, "r");
+        char* scriptPath = (char *)[mScriptPath UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
 
         mrbc_context *cxt = mrbc_context_new(mMrb);
 
-        const char* fileName = [[[[NSString alloc] initWithUTF8String:mScriptPath] lastPathComponent] UTF8String];
+        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
         mrbc_filename(mMrb, cxt, fileName);
 
         mrb_load_file_cxt(mMrb, fd, cxt);

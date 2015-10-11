@@ -2,7 +2,7 @@
 #import <QBImagePickerController/QBImagePickerController.h>
 
 @interface ScriptController : UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
-- (id) initWithScriptName:(char*)scriptPath;
+- (id) initWithScriptName:(NSString*)scriptPath;
 - (void) startPickFromLibrary:(int)num;
 - (NSMutableArray*) receivePicked;
 @end

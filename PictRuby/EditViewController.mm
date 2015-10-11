@@ -128,8 +128,7 @@ const int PREV_LINE_MAX = 240;
     // Save file (For iOS <= 6.1)
     [self saveFileIfTouched];
 
-    char* scriptPath = (char *)[mFileName UTF8String];
-    ScriptController* viewController = [[ScriptController alloc] initWithScriptName:scriptPath];
+    ScriptController* viewController = [[ScriptController alloc] initWithScriptName:mFileName];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
