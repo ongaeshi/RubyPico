@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; settings = {ASSET_TAGS = (); }; };
 		52731C161B371B4700E2CC2A /* fiber.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BCD1B371B4700E2CC2A /* fiber.c */; };
 		52731C171B371B4700E2CC2A /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BCE1B371B4700E2CC2A /* math.c */; };
 		52731C181B371B4700E2CC2A /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BD11B371B4700E2CC2A /* mrblib.c */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		47448831D6B97BD52CBE4C5E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
 		52731BCD1B371B4700E2CC2A /* fiber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fiber.c; sourceTree = "<group>"; };
 		52731BCE1B371B4700E2CC2A /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = math.c; sourceTree = "<group>"; };
 		52731BD11B371B4700E2CC2A /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 		52731C5D1B371FC500E2CC2A /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */,
 				52731C6C1B37224300E2CC2A /* sample */,
 				52731C5E1B371FC500E2CC2A /* builtin.rb */,
 				52731C5F1B371FC500E2CC2A /* images */,
@@ -524,6 +527,7 @@
 			files = (
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
 				52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */,
+				52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */,
 				52731C2B1B371B4700E2CC2A /* keywords in Resources */,
 				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
 				52731C651B371FC500E2CC2A /* builtin.rb in Resources */,
