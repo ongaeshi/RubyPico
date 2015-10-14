@@ -180,7 +180,7 @@
             UILabel* label = [[UILabel alloc] init];
             label.frame = self.view.bounds;
             label.backgroundColor = [UIColor whiteColor];
-            label.text = [NSString stringWithFormat:@"Invalid return value: %s", errorMsg];
+            label.text = [NSString stringWithFormat:@"%s", errorMsg];
             [label setLineBreakMode:NSLineBreakByWordWrapping];
             [label setNumberOfLines:0];
             [self.view addSubview:label];
