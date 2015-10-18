@@ -33,14 +33,19 @@ AppStore (in review)
 - [Emboss](#emboss)
 - [Gray](#gray)
 - [Grid](#grid)
+- [Grid Square](#grid-square)
 - [Half Gray](#half-gray)
 - [Horizontal](#horizontal)
+- [Horizontal Center](#horizontal-center)
 - [Invert](#invert)
 - [None](#none)
 - [Resize Half](#resize-half)
+- [Resize Quarter](#resize-quarter)
 - [Rich Gray](#rich-gray)
 - [Sepia](#sepia)
+- [Size](#size)
 - [Vertical](#vertical)
+- [Vertical Center](#vertical-center)
 
 ### All Filter
 
@@ -72,17 +77,23 @@ AppStore (in review)
 
 ![grid](images/grid.jpg)
 
+### Grid Square
+
+[grid_square.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/grid_square.rb)
+
+![grid_square](images/grid_square.jpg)
+
 ### Half Gray
 
 [half_gray.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/half_gray.rb)
 
 ![half_gray](images/half_gray.jpg)
 
-### Horizontal
+### Horizontal Center
 
-[horizontal.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/horizontal.rb)
+[horizontal_center.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/horizontal_center.rb)
 
-![horizontal](images/horizontal.jpg)
+![horizontal_center](images/horizontal_center.jpg)
 
 ### Invert
 
@@ -102,6 +113,12 @@ AppStore (in review)
 
 ![resize_half](images/resize_half.jpg)
 
+### Resize Quarter
+
+[resize_quarter.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/resize_quarter.rb)
+
+![resize_quarter](images/resize_quarter.jpg)
+
 ### Rich Gray
 
 [rich_gray.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/rich_gray.rb)
@@ -114,9 +131,21 @@ AppStore (in review)
 
 ![sepia](images/sepia.jpg)
 
+### Size
+
+[size.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/size.rb)
+
+![size](images/size.jpg)
+
 ### Vertical
 
 [vertical.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/vertical.rb)
 
 ![vertical](images/vertical.jpg)
+
+### Vertical Center
+
+[vertical_center.rb](https://github.com/ongaeshi/PictRuby/blob/master/resources/sample/vertical_center.rb)
+
+![vertical_center](images/vertical_center.jpg)
 
