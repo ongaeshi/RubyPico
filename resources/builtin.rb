@@ -40,6 +40,10 @@ class Image
     cy = height / 2
     crop(cx - l/2 + x_offset, cy - l/2 + y_offset, l, l)
   end
+
+  def aspect_ratio
+    width / height
+  end
 end
 
 module ImageUtil

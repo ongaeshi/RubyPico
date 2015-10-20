@@ -7,6 +7,6 @@ end
 
 class Image
   def to_s
-    "w:#{width.to_i}, h:#{height.to_i}"
+    "width:#{width.to_i}, height:#{height.to_i}, aspect_ratio: #{aspect_ratio}"
   end
 end
