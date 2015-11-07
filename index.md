@@ -14,7 +14,7 @@ Let's create your favorite picture by combining a filter.
 
 ## Installation
 
-AppStore (in review)
+<a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1042498865&mt=8" target="itunes_store" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png) no-repeat;width:135px;height:40px;@media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.svg);}"></a>
 
 ## Editor
 
