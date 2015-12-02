@@ -16,6 +16,7 @@
     NSTimer* mTimer;
     int mValue;
     QBImagePickerController* mImagePicker;
+    UILabel* mTextView;
     UIImageView* mImageView;
     NSMutableArray* mReceivePicked;
 }
@@ -24,6 +25,8 @@
 {
     self = [super init];
     mScriptPath = scriptPath;
+    mTextView = NULL;
+    mImageView = NULL;
     return self;
 }
 
@@ -177,13 +180,13 @@
             mrb_value str = mrb_funcall(mMrb, ret, "inspect", 0);
             const char* errorMsg = mrb_string_value_cstr(mMrb, &str);
 
-            UILabel* label = [[UILabel alloc] init];
-            label.frame = self.view.bounds;
-            label.backgroundColor = [UIColor whiteColor];
-            label.text = [NSString stringWithFormat:@"%s", errorMsg];
-            [label setLineBreakMode:NSLineBreakByWordWrapping];
-            [label setNumberOfLines:0];
-            [self.view addSubview:label];
+            mTextView = [[UILabel alloc] init];
+            mTextView.frame = self.view.bounds;
+            mTextView.backgroundColor = [UIColor whiteColor];
+            mTextView.text = [NSString stringWithFormat:@"%s", errorMsg];
+            [mTextView setLineBreakMode:NSLineBreakByWordWrapping];
+            [mTextView setNumberOfLines:0];
+            [self.view addSubview:mTextView];
 
         } else {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
@@ -222,12 +225,24 @@
 
 - (void) tapSaveButton
 {
-    UIImageWriteToSavedPhotosAlbum(
-        mImageView.image, 
-        self, 
-        @selector(onSaved:didFinishSavingWithError:contextInfo:),
-        NULL
-        );
+    if (mImageView) {
+        UIImageWriteToSavedPhotosAlbum(
+            mImageView.image, 
+            self, 
+            @selector(onSaved:didFinishSavingWithError:contextInfo:),
+            NULL
+            );
+    } else {
+        UIPasteboard *pastebd = [UIPasteboard generalPasteboard];
+        [pastebd setValue:mTextView.text forPasteboardType: @"public.utf8-plain-text"];
+
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:mTextView.text
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void) onSaved:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
