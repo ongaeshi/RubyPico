@@ -184,10 +184,15 @@
 
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
         if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "Image"))) {
-            mrb_value str = mrb_funcall(mMrb, ret, "inspect", 0);
-            const char* errorMsg = mrb_string_value_cstr(mMrb, &str);
 
-            mTextView.text = [NSString stringWithFormat:@"%s", errorMsg];
+            mrb_value str = ret;
+            if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
+                str = mrb_funcall(mMrb, ret, "inspect", 0);
+            }
+
+            const char* retString = mrb_string_value_cstr(mMrb, &str);
+
+            mTextView.text = [NSString stringWithFormat:@"%s", retString];
 
         } else {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
