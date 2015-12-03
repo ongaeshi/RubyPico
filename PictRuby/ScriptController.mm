@@ -52,6 +52,15 @@
                                                                   action:@selector(tapSaveButton)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, nil];
 
+    // mTextView
+    mTextView = [[UILabel alloc] init];
+    mTextView.frame = self.view.bounds;
+    mTextView.backgroundColor = [UIColor whiteColor];
+    mTextView.text = @"";
+    [mTextView setLineBreakMode:NSLineBreakByWordWrapping];
+    [mTextView setNumberOfLines:0];
+    [self.view addSubview:mTextView];
+
     // Init mruby
     [self initScript];
 }
@@ -180,13 +189,7 @@
             mrb_value str = mrb_funcall(mMrb, ret, "inspect", 0);
             const char* errorMsg = mrb_string_value_cstr(mMrb, &str);
 
-            mTextView = [[UILabel alloc] init];
-            mTextView.frame = self.view.bounds;
-            mTextView.backgroundColor = [UIColor whiteColor];
             mTextView.text = [NSString stringWithFormat:@"%s", errorMsg];
-            [mTextView setLineBreakMode:NSLineBreakByWordWrapping];
-            [mTextView setNumberOfLines:0];
-            [self.view addSubview:mTextView];
 
         } else {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
