@@ -16,7 +16,7 @@
     NSTimer* mTimer;
     int mValue;
     QBImagePickerController* mImagePicker;
-    UILabel* mTextView;
+    UITextView* mTextView;
     UIImageView* mImageView;
     NSMutableArray* mReceivePicked;
 }
@@ -53,12 +53,10 @@
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, nil];
 
     // mTextView
-    mTextView = [[UILabel alloc] init];
-    mTextView.frame = self.view.bounds;
-    mTextView.backgroundColor = [UIColor whiteColor];
+    mTextView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    mTextView.editable = NO;
+    mTextView.dataDetectorTypes = UIDataDetectorTypeLink;
     mTextView.text = @"";
-    [mTextView setLineBreakMode:NSLineBreakByWordWrapping];
-    [mTextView setNumberOfLines:0];
     [self.view addSubview:mTextView];
 
     // Init mruby
