@@ -59,6 +59,13 @@
     mTextView.text = @"";
     [self.view addSubview:mTextView];
 
+    // mImageView
+    mImageView = [[UIImageView alloc] init];
+    mImageView.image = NULL;
+    mImageView.frame = self.view.frame;
+    mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
+    [self.view addSubview:mImageView];
+
     // Init mruby
     [self initScript];
 }
@@ -191,21 +198,13 @@
             }
 
             const char* retString = mrb_string_value_cstr(mMrb, &str);
-
             mTextView.text = [NSString stringWithFormat:@"%s", retString];
 
         } else {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
-
             // NSLog(@"image w:%f, h:%f", image.size.width, image.size.height);
-
-            // TODO: Adjust navbar
-            mImageView = [[UIImageView alloc] initWithImage:image];
-            mImageView.frame = self.view.frame;
-            mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
-            [self.view addSubview:mImageView];
+            mImageView.image = image;
         }
-
 
         // End script
         // TODO: Stop timer
@@ -231,7 +230,7 @@
 
 - (void) tapSaveButton
 {
-    if (mImageView) {
+    if (mImageView.image) {
         UIImageWriteToSavedPhotosAlbum(
             mImageView.image, 
             self, 
