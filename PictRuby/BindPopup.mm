@@ -15,6 +15,15 @@ mrb_value input(mrb_state *mrb, mrb_value self)
     const char* path = mrb_string_value_ptr(mrb, str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = npath;
+
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.cancelButtonIndex = 0;
+    [alert show];
+    
     return mrb_nil_value();
 }
 
