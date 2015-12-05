@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
 		527240FC1C12CB7000B074DB /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 527240FB1C12CB7000B074DB /* time.c */; };
+		527240FE1C12CF9800B074DB /* sprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = 527240FD1C12CF9800B074DB /* sprintf.c */; };
 		52731C161B371B4700E2CC2A /* fiber.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BCD1B371B4700E2CC2A /* fiber.c */; };
 		52731C171B371B4700E2CC2A /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BCE1B371B4700E2CC2A /* math.c */; };
 		52731C181B371B4700E2CC2A /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BD11B371B4700E2CC2A /* mrblib.c */; };
@@ -79,6 +80,7 @@
 		47448831D6B97BD52CBE4C5E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
 		527240FB1C12CB7000B074DB /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
+		527240FD1C12CF9800B074DB /* sprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sprintf.c; sourceTree = "<group>"; };
 		52731BCD1B371B4700E2CC2A /* fiber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fiber.c; sourceTree = "<group>"; };
 		52731BCE1B371B4700E2CC2A /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = math.c; sourceTree = "<group>"; };
 		52731BD11B371B4700E2CC2A /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		52731BCC1B371B4700E2CC2A /* gem */ = {
 			isa = PBXGroup;
 			children = (
+				527240FD1C12CF9800B074DB /* sprintf.c */,
 				527240FB1C12CB7000B074DB /* time.c */,
 				52731BCD1B371B4700E2CC2A /* fiber.c */,
 				52731BCE1B371B4700E2CC2A /* math.c */,
@@ -628,6 +631,7 @@
 				52731C361B371B4700E2CC2A /* symbol.c in Sources */,
 				5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */,
 				52731C331B371B4700E2CC2A /* range.c in Sources */,
+				527240FE1C12CF9800B074DB /* sprintf.c in Sources */,
 				52731C301B371B4700E2CC2A /* pool.c in Sources */,
 				5294CC0B1B3469C10044D56D /* main.m in Sources */,
 				52731C291B371B4700E2CC2A /* init.c in Sources */,

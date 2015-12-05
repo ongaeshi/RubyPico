@@ -124,3 +124,14 @@ class Time
   def friday?;  wday == 5 end
   def saturday?;  wday == 6 end
 end
+
+class String
+  def %(args)
+    if args.is_a? Array
+      sprintf(self, *args)
+    else
+      sprintf(self, args)
+    end
+  end
+end
+
