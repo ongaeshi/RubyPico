@@ -145,14 +145,14 @@ class Popup
     end
   end
   
-  # def self.message(msg)
-  #   start_popup_message(msg)
+  def self.msg(msg)
+    start_popup_msg(msg)
 
-  #   loop do
-  #     result = receive_picked
-  #     return if result
-  #     Fiber.yield
-  #   end
-  # end
+    loop do
+      result = receive_picked
+      return if result
+      Fiber.yield
+    end
+  end
   
 end

@@ -237,6 +237,18 @@
     [alert show];
 }
 
+- (void) startPopupMsg:(NSString*)path;
+{
+    mReceivePicked = NULL;
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:path
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     mReceivePicked = [[NSMutableArray alloc] initWithCapacity:1];
