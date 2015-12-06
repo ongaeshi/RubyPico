@@ -1,10 +1,13 @@
 #pragma once
 
+#import "ScriptController.h"
 #import "mruby.h"
 #import <UIKit/UIKit.h>
 
 //----------------------------------------------------------
 namespace pictruby {
+
+extern ScriptController *globalScriptController;
 
 class BindImage {
 public:
