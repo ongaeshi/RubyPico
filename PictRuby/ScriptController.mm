@@ -200,7 +200,7 @@
             }
 
             const char* retString = mrb_string_value_cstr(mMrb, &str);
-            mTextView.text = [NSString stringWithFormat:@"%s", retString];
+            mTextView.text = [[NSString alloc] initWithUTF8String:retString];
 
         } else {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
