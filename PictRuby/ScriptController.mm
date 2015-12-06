@@ -237,6 +237,18 @@
     [alert show];
 }
 
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    mReceivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        return;
+    }
+
+    NSString* text = [[alertView textFieldAtIndex:0] text];
+    [mReceivePicked addObject:text];
+}
+
 - (NSMutableArray*) receivePicked
 {
     NSMutableArray* array = mReceivePicked;

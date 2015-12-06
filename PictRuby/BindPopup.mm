@@ -23,7 +23,15 @@ mrb_value start_popup_input(mrb_state *mrb, mrb_value self)
 
 mrb_value receive_picked(mrb_state *mrb, mrb_value self)
 {
-    return mrb_nil_value();
+    NSMutableArray* nsarray = [globalScriptController receivePicked];
+
+    if (nsarray == NULL) {
+        return mrb_nil_value();
+    }
+
+    mrb_value str = mrb_str_new_cstr(mrb, [nsarray[0] UTF8String]);
+    
+    return str;
 }
 
 }

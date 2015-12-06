@@ -140,7 +140,7 @@ class Popup
 
     loop do
       result = receive_picked
-      return receive_picked if result
+      return result if result
       Fiber.yield
     end
   end
