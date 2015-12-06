@@ -223,6 +223,20 @@
     [self presentViewController:mImagePicker animated:YES completion:nil];
 }
 
+- (void) startPopupInput:(NSString*)path;
+{
+    mReceivePicked = NULL;
+
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = path;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.delegate = self;
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
 - (NSMutableArray*) receivePicked
 {
     NSMutableArray* array = mReceivePicked;

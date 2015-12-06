@@ -1,4 +1,5 @@
 #import "BindPopup.hpp"
+#import "BindImage.hpp"
 
 #import "mruby.h"
 #import "mruby/string.h"
@@ -7,7 +8,7 @@
 namespace pictruby {
 
 namespace {
-mrb_value input(mrb_state *mrb, mrb_value self)
+mrb_value start_popup_input(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
@@ -15,15 +16,13 @@ mrb_value input(mrb_state *mrb, mrb_value self)
     const char* path = mrb_string_value_ptr(mrb, str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
-    UIAlertView* alert = [[UIAlertView alloc] init];
-    alert.title = npath;
+    [globalScriptController startPopupInput:npath];
 
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert addButtonWithTitle:@"OK"];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    alert.cancelButtonIndex = 0;
-    [alert show];
-    
+    return mrb_nil_value();
+}
+
+mrb_value receive_picked(mrb_state *mrb, mrb_value self)
+{
     return mrb_nil_value();
 }
 
@@ -34,7 +33,8 @@ void BindPopup::Bind(mrb_state* mrb)
 {
     struct RClass *cc = mrb_define_class(mrb, "Popup", mrb->object_class);
 
-    mrb_define_class_method(mrb , cc, "input",               input,               MRB_ARGS_REQ(1));
+    mrb_define_class_method(mrb , cc, "start_popup_input", start_popup_input, MRB_ARGS_REQ(1));
+    mrb_define_class_method(mrb , cc, "receive_picked"   , receive_picked   , MRB_ARGS_NONE());
 }
 
 }
