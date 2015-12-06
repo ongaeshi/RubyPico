@@ -5,14 +5,13 @@
 #import "mruby/class.h"
 #import "mruby/data.h"
 #import "mruby/string.h"
-#import "ScriptController.h"
 #import "NYXImagesKit.h"
 
 namespace pictruby {
 
-namespace {
-ScriptController *fScriptController;
+ScriptController *globalScriptController;
 
+namespace {
 UIImage* toObj(mrb_value self)
 {
     return (__bridge UIImage*)DATA_PTR(self);
@@ -43,14 +42,14 @@ mrb_value start_pick_from_library(mrb_state *mrb, mrb_value self)
     mrb_int num;
     mrb_get_args(mrb, "i", &num);
 
-    [fScriptController startPickFromLibrary:num];
+    [globalScriptController startPickFromLibrary:num];
     return mrb_nil_value();
 }
 
 mrb_value receive_picked(mrb_state *mrb, mrb_value self)
 {
     @autoreleasepool {
-        NSMutableArray* nsarray = [fScriptController receivePicked];
+        NSMutableArray* nsarray = [globalScriptController receivePicked];
 
         if (nsarray == NULL) {
             return BindImage::ToMrb(mrb, NULL);
@@ -329,7 +328,7 @@ UIImage* BindImage::ToPtr(mrb_state* mrb, mrb_value aValue)
 //----------------------------------------------------------
 void BindImage::SetScriptController(void* aScriptController)
 {
-    fScriptController = (__bridge ScriptController*)aScriptController;
+    globalScriptController = (__bridge ScriptController*)aScriptController;
 }
 
 //----------------------------------------------------------

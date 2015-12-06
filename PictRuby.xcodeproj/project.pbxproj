@@ -10,6 +10,7 @@
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
 		527240FC1C12CB7000B074DB /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 527240FB1C12CB7000B074DB /* time.c */; };
 		527240FE1C12CF9800B074DB /* sprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = 527240FD1C12CF9800B074DB /* sprintf.c */; };
+		527241011C12D73C00B074DB /* BindPopup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 527241001C12D73C00B074DB /* BindPopup.mm */; };
 		52731C161B371B4700E2CC2A /* fiber.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BCD1B371B4700E2CC2A /* fiber.c */; };
 		52731C171B371B4700E2CC2A /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BCE1B371B4700E2CC2A /* math.c */; };
 		52731C181B371B4700E2CC2A /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52731BD11B371B4700E2CC2A /* mrblib.c */; };
@@ -81,6 +82,8 @@
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
 		527240FB1C12CB7000B074DB /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = time.c; sourceTree = "<group>"; };
 		527240FD1C12CF9800B074DB /* sprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sprintf.c; sourceTree = "<group>"; };
+		527240FF1C12D73C00B074DB /* BindPopup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindPopup.hpp; sourceTree = "<group>"; };
+		527241001C12D73C00B074DB /* BindPopup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindPopup.mm; sourceTree = "<group>"; };
 		52731BCD1B371B4700E2CC2A /* fiber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fiber.c; sourceTree = "<group>"; };
 		52731BCE1B371B4700E2CC2A /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = math.c; sourceTree = "<group>"; };
 		52731BD11B371B4700E2CC2A /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
@@ -390,6 +393,8 @@
 			children = (
 				52731C3C1B371D7600E2CC2A /* BindImage.hpp */,
 				52731C3D1B371D7600E2CC2A /* BindImage.mm */,
+				527240FF1C12D73C00B074DB /* BindPopup.hpp */,
+				527241001C12D73C00B074DB /* BindPopup.mm */,
 				52731C3E1B371D7600E2CC2A /* EditViewController.h */,
 				52731C3F1B371D7600E2CC2A /* EditViewController.mm */,
 				52731C421B371D7600E2CC2A /* FileViewController.h */,
@@ -625,6 +630,7 @@
 				527240FC1C12CB7000B074DB /* time.c in Sources */,
 				52731C521B371D7600E2CC2A /* BindImage.mm in Sources */,
 				52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */,
+				527241011C12D73C00B074DB /* BindPopup.mm in Sources */,
 				52731C161B371B4700E2CC2A /* fiber.c in Sources */,
 				52731C181B371B4700E2CC2A /* mrblib.c in Sources */,
 				52731C5A1B371D7600E2CC2A /* ScriptController.mm in Sources */,

@@ -1,6 +1,7 @@
 #import "ScriptController.h"
 
 #import "BindImage.hpp"
+#import "BindPopup.hpp"
 #import "mruby.h"
 #import "mruby/class.h"
 #import "mruby/compile.h"
@@ -146,8 +147,9 @@
     mMrb = mrb_open();
 
     // Bind
-    pictruby::BindImage::Bind(mMrb);
     pictruby::BindImage::SetScriptController((__bridge void*)self);
+    pictruby::BindImage::Bind(mMrb);
+    pictruby::BindPopup::Bind(mMrb);
 
     // Load builtin library
     // mrb_load_irep(mMrb, BuiltIn);
@@ -219,6 +221,44 @@
     mImagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
     mImagePicker.maximumNumberOfSelection = num;
     [self presentViewController:mImagePicker animated:YES completion:nil];
+}
+
+- (void) startPopupInput:(NSString*)path;
+{
+    mReceivePicked = NULL;
+
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = path;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.delegate = self;
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+- (void) startPopupMsg:(NSString*)path;
+{
+    mReceivePicked = NULL;
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:path
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    mReceivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        return;
+    }
+
+    NSString* text = [[alertView textFieldAtIndex:0] text];
+    [mReceivePicked addObject:text];
 }
 
 - (NSMutableArray*) receivePicked

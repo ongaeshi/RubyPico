@@ -1,4 +1,3 @@
-# coding: utf-8
 def make_convert_to_fiber
   MainLoop.new
 end
@@ -135,3 +134,25 @@ class String
   end
 end
 
+class Popup
+  def self.input(msg)
+    start_popup_input(msg)
+
+    loop do
+      result = receive_picked
+      return result if result
+      Fiber.yield
+    end
+  end
+  
+  def self.msg(msg)
+    start_popup_msg(msg)
+
+    loop do
+      result = receive_picked
+      return if result
+      Fiber.yield
+    end
+  end
+  
+end
