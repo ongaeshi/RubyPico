@@ -29,9 +29,13 @@ mrb_value receive_picked(mrb_state *mrb, mrb_value self)
         return mrb_nil_value();
     }
 
-    mrb_value str = mrb_str_new_cstr(mrb, [nsarray[0] UTF8String]);
-    
-    return str;
+    if (nsarray.count > 0) {
+        mrb_value str = mrb_str_new_cstr(mrb, [nsarray[0] UTF8String]);
+        return str;
+    } else {
+        mrb_value str = mrb_str_new_cstr(mrb, "");
+        return str;
+    }
 }
 
 }
