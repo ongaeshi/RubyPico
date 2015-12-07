@@ -59,6 +59,20 @@ mrb_value get(mrb_state *mrb, mrb_value self)
     return mrb_str_new_cstr(mrb, [string UTF8String]);
 }
 
+mrb_value set(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* path = mrb_string_value_ptr(mrb, str);
+    NSString *npath = [[NSString alloc] initWithUTF8String:path];
+
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setValue:npath forPasteboardType:@"public.text"];
+
+    return str;
+}
+
 }
 
 //----------------------------------------------------------
@@ -76,6 +90,7 @@ void BindPopup::Bind(mrb_state* mrb)
         struct RClass *cc = mrb_define_class(mrb, "Clipboard", mrb->object_class);
 
         mrb_define_class_method(mrb , cc, "get", get, MRB_ARGS_NONE());
+        mrb_define_class_method(mrb , cc, "set", set, MRB_ARGS_REQ(1));
     }
 }
 
