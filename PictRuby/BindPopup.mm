@@ -51,16 +51,32 @@ mrb_value receive_picked(mrb_state *mrb, mrb_value self)
     }
 }
 
+mrb_value get(mrb_state *mrb, mrb_value self)
+{
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    NSString *string = [pasteboard valueForPasteboardType:@"public.text"];
+
+    return mrb_str_new_cstr(mrb, [string UTF8String]);
+}
+
 }
 
 //----------------------------------------------------------
 void BindPopup::Bind(mrb_state* mrb)
 {
-    struct RClass *cc = mrb_define_class(mrb, "Popup", mrb->object_class);
+    {
+        struct RClass *cc = mrb_define_class(mrb, "Popup", mrb->object_class);
 
-    mrb_define_class_method(mrb , cc, "start_popup_input", start_popup_input, MRB_ARGS_REQ(1));
-    mrb_define_class_method(mrb , cc, "start_popup_msg"  , start_popup_msg  , MRB_ARGS_REQ(1));
-    mrb_define_class_method(mrb , cc, "receive_picked"   , receive_picked   , MRB_ARGS_NONE());
+        mrb_define_class_method(mrb , cc, "start_popup_input", start_popup_input, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "start_popup_msg"  , start_popup_msg  , MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "receive_picked"   , receive_picked   , MRB_ARGS_NONE());
+    }
+
+    {
+        struct RClass *cc = mrb_define_class(mrb, "Clipboard", mrb->object_class);
+
+        mrb_define_class_method(mrb , cc, "get", get, MRB_ARGS_NONE());
+    }
 }
 
 }
