@@ -88,6 +88,34 @@ mrb_value encode_www_form_component(mrb_state *mrb, mrb_value self)
     return dst;
 }
 
+mrb_value open(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    [[UIApplication sharedApplication] openURL:url];
+    
+    return str;
+}
+
+mrb_value open_q(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+    
+    return mrb_bool_value(canOpen);
+}
+
 }
 
 //----------------------------------------------------------
@@ -112,6 +140,13 @@ void BindPopup::Bind(mrb_state* mrb)
         struct RClass *cc = mrb_define_module(mrb, "URI");
 
         mrb_define_class_method(mrb , cc, "encode_www_form_component", encode_www_form_component, MRB_ARGS_REQ(1));
+    }
+
+    {
+        struct RClass *cc = mrb_define_module(mrb, "Browser");
+
+        mrb_define_class_method(mrb , cc, "open", open, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "open?", open_q, MRB_ARGS_REQ(1));
     }
 }
 
