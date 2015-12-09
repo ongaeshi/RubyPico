@@ -2,6 +2,7 @@
 #import "BindImage.hpp"
 
 #import "mruby.h"
+#import "mruby/array.h"
 #import "mruby/string.h"
 #import <UIKit/UIKit.h>
 
@@ -42,13 +43,13 @@ mrb_value receive_picked(mrb_state *mrb, mrb_value self)
         return mrb_nil_value();
     }
 
-    if (nsarray.count > 0) {
-        mrb_value str = mrb_str_new_cstr(mrb, [nsarray[0] UTF8String]);
-        return str;
-    } else {
-        mrb_value str = mrb_str_new_cstr(mrb, "");
-        return str;
+    mrb_value array = mrb_ary_new(mrb);
+
+    for (NSString* e in nsarray) {
+        mrb_ary_push(mrb, array, mrb_str_new_cstr(mrb, [e UTF8String]));
     }
+
+    return array;
 }
 
 mrb_value get(mrb_state *mrb, mrb_value self)
