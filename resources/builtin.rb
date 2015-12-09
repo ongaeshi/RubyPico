@@ -171,7 +171,7 @@ module URI
           end
         end.join('&')
       else
-        str = encode_www_form_component(k)
+        str = encode_www_form_component(k.to_s)
         str += '='
         str += encode_www_form_component(v)
       end
