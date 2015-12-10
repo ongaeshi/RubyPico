@@ -117,6 +117,23 @@ mrb_value open_q(mrb_state *mrb, mrb_value self)
     return mrb_bool_value(canOpen);
 }
 
+mrb_value browser_get(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL* url = [NSURL URLWithString:nstr];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    return mrb_str_new_cstr(mrb, [result UTF8String]);
+}
+
 }
 
 //----------------------------------------------------------
@@ -148,6 +165,7 @@ void BindPopup::Bind(mrb_state* mrb)
 
         mrb_define_class_method(mrb , cc, "open", open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", open_q, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "get", browser_get, MRB_ARGS_REQ(1));
     }
 }
 
