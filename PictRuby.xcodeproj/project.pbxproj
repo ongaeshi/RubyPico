@@ -64,6 +64,8 @@
 		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
 		5294CC161B3469C10044D56D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC151B3469C10044D56D /* Images.xcassets */; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
+		52ED98261C19C196000E7965 /* mrb_json.c in Sources */ = {isa = PBXBuildFile; fileRef = 52ED98231C19C196000E7965 /* mrb_json.c */; };
+		52ED98271C19C196000E7965 /* parson.c in Sources */ = {isa = PBXBuildFile; fileRef = 52ED98241C19C196000E7965 /* parson.c */; };
 		B765EA97EC2CE00FC1CAECBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA91EBF38EC18AFCCBAA49A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +183,9 @@
 		5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictRubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
+		52ED98231C19C196000E7965 /* mrb_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrb_json.c; sourceTree = "<group>"; };
+		52ED98241C19C196000E7965 /* parson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parson.c; sourceTree = "<group>"; };
+		52ED98251C19C196000E7965 /* parson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parson.h; sourceTree = "<group>"; };
 		E278C1DC926282A94614C355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EBA91EBF38EC18AFCCBAA49A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -227,6 +232,9 @@
 		52731BCC1B371B4700E2CC2A /* gem */ = {
 			isa = PBXGroup;
 			children = (
+				52ED98231C19C196000E7965 /* mrb_json.c */,
+				52ED98241C19C196000E7965 /* parson.c */,
+				52ED98251C19C196000E7965 /* parson.h */,
 				527240FD1C12CF9800B074DB /* sprintf.c */,
 				527240FB1C12CB7000B074DB /* time.c */,
 				52731BCD1B371B4700E2CC2A /* fiber.c */,
@@ -622,6 +630,7 @@
 				52731C1C1B371B4700E2CC2A /* backtrace.c in Sources */,
 				52731C381B371B4700E2CC2A /* version.c in Sources */,
 				52731C171B371B4700E2CC2A /* math.c in Sources */,
+				52ED98271C19C196000E7965 /* parson.c in Sources */,
 				52731C241B371B4700E2CC2A /* error.c in Sources */,
 				52731C1F1B371B4700E2CC2A /* compar.c in Sources */,
 				52731C2F1B371B4700E2CC2A /* object.c in Sources */,
@@ -647,6 +656,7 @@
 				52731C191B371B4700E2CC2A /* y.tab.c in Sources */,
 				52731C231B371B4700E2CC2A /* enum.c in Sources */,
 				52731C281B371B4700E2CC2A /* hash.c in Sources */,
+				52ED98261C19C196000E7965 /* mrb_json.c in Sources */,
 				52731C201B371B4700E2CC2A /* crc.c in Sources */,
 				52731C391B371B4700E2CC2A /* vm.c in Sources */,
 				52731C2C1B371B4700E2CC2A /* load.c in Sources */,

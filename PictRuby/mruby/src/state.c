@@ -106,8 +106,9 @@ mrb_open(void)
 }
 
 extern void mrb_mruby_fiber_gem_init(mrb_state* mrb);
-extern void mrb_mruby_time_gem_init(mrb_state* mrb);
+extern void mrb_mruby_json_gem_init(mrb_state* mrb);
 extern void mrb_mruby_sprintf_gem_init(mrb_state* mrb);
+extern void mrb_mruby_time_gem_init(mrb_state* mrb);
 
 MRB_API mrb_state*
 mrb_open_allocf(mrb_allocf f, void *ud)
@@ -119,8 +120,9 @@ mrb_open_allocf(mrb_allocf f, void *ud)
   }
 
   mrb_mruby_fiber_gem_init(mrb);
-  mrb_mruby_time_gem_init(mrb);
+  mrb_mruby_json_gem_init(mrb);
   mrb_mruby_sprintf_gem_init(mrb);
+  mrb_mruby_time_gem_init(mrb);
 
 /* #ifndef DISABLE_GEMS */
 /*   mrb_init_mrbgems(mrb); */
