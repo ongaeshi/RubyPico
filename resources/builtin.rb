@@ -178,3 +178,9 @@ module URI
     end.join('&')
   end
 end
+
+module Browser
+  def self.json(url)
+    JSON::parse(get(url))
+  end
+end
