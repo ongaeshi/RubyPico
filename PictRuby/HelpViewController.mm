@@ -20,6 +20,12 @@
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
     textView.text = @
+        "Browser\n"
+        "  Browser.get(url)\n"
+        "  Browser.json(url)\n"
+        "  Browser.open(url)\n"
+        "  Browser.open?(url)\n"
+        "\n"
         "Image\n"
         "  Iamge.pick_from_library(num = 1)\n"
         "  Image.load(path)\n"
@@ -55,6 +61,14 @@
         "  IamgeUtil.grid(imgs)\n"
         "  ImageUtil.vertical(imgs)\n"
         "  ImageUtil.horizontal(imgs)\n"
+        "\n"
+        "Popup\n"
+        "  Popup.input(msg)\n"
+        "  Popup.msg(msg)\n"
+        "\n"
+        "URI\n"
+        "  URI.encode_www_form(enum)\n"
+        "  URI.encode_www_form_component(str)\n"
         "\n"
         "\n"
         "\n"
