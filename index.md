@@ -1,4 +1,4 @@
---
+---
 layout: layout
 title: Photo editor that can write a filter in Ruby
 ---
