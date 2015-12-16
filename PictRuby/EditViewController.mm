@@ -138,7 +138,7 @@ const int PREV_LINE_MAX = 240;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
+- (void)textViewDidChange:(UITextView *)textView
 {
     mTouched = YES;
 }
