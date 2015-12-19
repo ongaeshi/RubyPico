@@ -40,7 +40,7 @@
         "  sepia\n"
         "  invert\n"
         "  opacity(value)  # 0.0~1.0\n"
-        "  sharpe(bias)\n"
+        "  sharp(bias)\n"
         "  unsharp(bias)\n"
         "  blur(bias)\n"
         "  reflection(from_alpha, to_alpha)\n"
