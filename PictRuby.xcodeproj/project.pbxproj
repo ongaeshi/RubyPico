@@ -500,7 +500,7 @@
 					"\"${PODS_ROOT}/Headers/Public/FCFileManager\"",
 					"\"${PODS_ROOT}/Headers/Public/ICTextView\"",
 					"\"${PODS_ROOT}/Headers/Public/NYXImagesKit\"",
-					PictRuby/mruby/include,
+					"$(SRCROOT)/Vendor/MRuby.framework/Headers",
 				);
 				INFOPLIST_FILE = PictRuby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -528,7 +528,7 @@
 					"\"${PODS_ROOT}/Headers/Public/FCFileManager\"",
 					"\"${PODS_ROOT}/Headers/Public/ICTextView\"",
 					"\"${PODS_ROOT}/Headers/Public/NYXImagesKit\"",
-					PictRuby/mruby/include,
+					"$(SRCROOT)/Vendor/MRuby.framework/Headers",
 				);
 				INFOPLIST_FILE = PictRuby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
