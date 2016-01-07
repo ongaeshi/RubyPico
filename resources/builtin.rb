@@ -4,8 +4,10 @@ end
 
 class MainLoop
   def initialize
+    f = find_entrypoint
+    
     @fiber = Fiber.new do
-      Kernel.convert
+      find_entrypoint
     end
   end
 
@@ -15,6 +17,18 @@ class MainLoop
 
   def continue?
     @fiber.alive?
+  end
+
+  def find_entrypoint
+    m = methods
+
+    if m.include? :__main__
+      __main__
+    elsif m.include? :convert
+      convert
+    else
+      __main__
+    end
   end
 end
 
