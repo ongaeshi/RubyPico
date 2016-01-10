@@ -22,12 +22,12 @@ class MainLoop
   def find_entrypoint
     m = methods
 
-    if m.include? :__main__
-      __main__
+    if m.include? :main
+      main
     elsif m.include? :convert
       convert
     else
-      __main__
+      main
     end
   end
 end
