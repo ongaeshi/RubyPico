@@ -115,7 +115,7 @@
 
         // Create a new file
         [FCFileManager createFileAtPath:path
-                            withContent:@"# Please return the text or image in the \"def main\"\n"
+                            withContent:@"# Return the text or image in the \"main\"\n"
                                          "\n"
                                          "def main\n"
                                          "  \"Hello, PictRuby\\nhttp://pictruby.ongaeshi.me\"\n"
