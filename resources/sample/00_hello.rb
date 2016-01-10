@@ -1,6 +1,6 @@
-# Please return the text or image in the "def convert"
+# Please return the text or image in the "def main"
 
-def convert
+def main
   Popup.msg("Hi!")
   "Hello, PictRuby\nhttp://pictruby.ongaeshi.me"
 end
