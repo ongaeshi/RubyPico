@@ -115,9 +115,9 @@
 
         // Create a new file
         [FCFileManager createFileAtPath:path
-                            withContent:@"# Please return the text or image in the \"def convert\"\n"
+                            withContent:@"# Please return the text or image in the \"def main\"\n"
                                          "\n"
-                                         "def convert\n"
+                                         "def main\n"
                                          "  \"Hello, PictRuby\\nhttp://pictruby.ongaeshi.me\"\n"
                                          "  # name = Popup.input(\"name?\")\n"
                                          "  # img = Image.pick_from_library\n"

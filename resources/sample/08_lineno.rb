@@ -1,6 +1,6 @@
-# Please return the text or image in the "def convert"
+# Please return the text or image in the "def main"
 
-def convert
+def main
   src = Clipboard.get.split("\n")
   column = src.length.to_s.length
   

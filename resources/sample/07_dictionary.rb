@@ -1,6 +1,6 @@
-# Please return the text or image in the "def convert"
+# Please return the text or image in the "def main"
 
-def convert
+def main
   word = Popup.input("Word?")
   word = URI.encode_www_form_component(word)
   

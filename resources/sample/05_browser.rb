@@ -1,6 +1,6 @@
-# Please return the text or image in the "def convert"
+# Please return the text or image in the "def main"
 
-def convert
+def main
   url = Popup.input "Url?"
   command = Popup.input "1 .. open\n2 .. get\n3 .. json"
   
