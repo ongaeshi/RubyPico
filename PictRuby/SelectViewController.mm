@@ -2,6 +2,7 @@
 
 #include "EditViewController.h"
 #include "FCFileManager.h"
+#include "ScriptController.h"
 
 @interface SelectViewController ()
 
@@ -164,6 +165,22 @@
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)directRun:(NSString*)name
+{
+    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
+
+    // {
+    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+    //     viewController.hidesBottomBarWhenPushed = YES;
+    //     [self.navigationController pushViewController:viewController animated:YES];
+    // }
+
+    {
+        ScriptController* viewController = [[ScriptController alloc] initWithScriptName:path];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

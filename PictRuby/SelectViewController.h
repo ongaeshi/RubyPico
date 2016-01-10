@@ -9,5 +9,6 @@
 }
 
 - (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable;
+- (void)directRun:(NSString*)name;
 
 @end
