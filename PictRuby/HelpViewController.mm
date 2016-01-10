@@ -15,7 +15,7 @@
     UITextView* textView = [[UITextView alloc]initWithFrame:rect];
     textView.editable = NO;
     //DIFF textView.textAlignment = UITextAlignmentLeft;
-    //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
+    textView.font = [UIFont fontWithName:@"Courier" size:12];
     //textView.backgroundColor = [UIColor whiteColor];
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
