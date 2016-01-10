@@ -4,10 +4,14 @@ end
 
 class MainLoop
   def initialize
-    f = find_entrypoint
+    sym = find_entrypoint
     
     @fiber = Fiber.new do
-      find_entrypoint
+      if sym == :convert
+        convert
+      else
+        main
+      end
     end
   end
 
@@ -23,11 +27,11 @@ class MainLoop
     m = methods
 
     if m.include? :main
-      main
+      :main
     elsif m.include? :convert
-      convert
+      :convert
     else
-      main
+      :main
     end
   end
 end
