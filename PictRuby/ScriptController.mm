@@ -57,6 +57,7 @@
     mTextView = [[UITextView alloc] initWithFrame:self.view.bounds];
     mTextView.editable = NO;
     mTextView.dataDetectorTypes = UIDataDetectorTypeLink;
+    mTextView.font = [UIFont fontWithName:@"Courier" size:12];
     mTextView.text = @"";
     [self.view addSubview:mTextView];
 
