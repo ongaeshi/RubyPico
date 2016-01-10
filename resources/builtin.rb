@@ -7,11 +7,7 @@ class MainLoop
     sym = find_entrypoint
     
     @fiber = Fiber.new do
-      if sym == :convert
-        convert
-      else
-        main
-      end
+      send(sym)
     end
   end
 
