@@ -13,10 +13,10 @@
     tabBarController = [[UITabBarController alloc] init];
     tabBarController.title = @" ";
 
-    UIViewController* view1 = [[FileViewController alloc]init];
+    mFileViewController = [[FileViewController alloc] init];
     UIImage* icon1 = [UIImage imageNamed:@"tabbar_files.png"];
-    view1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
-    UINavigationController *tab1 = [[UINavigationController alloc] initWithRootViewController:view1];
+    mFileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
+    UINavigationController *tab1 = [[UINavigationController alloc] initWithRootViewController:mFileViewController];
 
     UIViewController* view2 = [[SampleViewController alloc]init];
     UIImage* icon2 = [UIImage imageNamed:@"tabbar_samples.png"];
@@ -35,6 +35,12 @@
 {
     NSNotification* n = [NSNotification notificationWithName:@"applicationDidEnterBackground" object:self];
     [[NSNotificationCenter defaultCenter] postNotification:n];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    [mFileViewController runWithScriptName:[url host]];
+    return YES;
 }
 
 @end
