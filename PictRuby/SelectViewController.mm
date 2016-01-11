@@ -93,11 +93,11 @@
 
 - (void)runWithScriptName:(NSString*)name
 {
-    // TODO: back to SelectView
+    [self.navigationController popToRootViewControllerAnimated:NO];
     
+    // File exist?
     NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
 
-    // File exist?
     if (![FCFileManager existsItemAtPath:path]) {
         // Retry adding ".rb" extention
         path = [mFileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
