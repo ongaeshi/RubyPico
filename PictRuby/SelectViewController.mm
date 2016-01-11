@@ -85,9 +85,15 @@
     }
 }
 
+- (NSString*)normalizeScriptName:(NSString*)name
+{
+    // Remove a extension and Add the ".rb" extension.
+    return [[name stringByDeletingPathExtension] stringByAppendingString:@".rb"];
+}
+
 - (void)runWithScriptName:(NSString*)name
 {
-    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
+    NSString* path = [mFileDirectory stringByAppendingPathComponent:[self normalizeScriptName:name]];
 
     // TODO: If file does not exist
 
@@ -109,7 +115,7 @@
         NSString* text = [[alertView textFieldAtIndex:0] text];
 
         // Remove a directory path and Add the ".rb" extension.
-        text = [[[text lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@".rb"];
+        text = [self normalizeScriptName:[text lastPathComponent]];
 
         //  File name is illegal
         if ([text isEqualToString:@".rb"]) {
