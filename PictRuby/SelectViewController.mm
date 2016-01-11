@@ -2,6 +2,7 @@
 
 #include "EditViewController.h"
 #include "FCFileManager.h"
+#include "ScriptController.h"
 
 @interface SelectViewController ()
 
@@ -81,6 +82,24 @@
         [self.tableView setEditing:YES animated:YES];
     } else {
         [self.tableView setEditing:NO animated:YES];
+    }
+}
+
+- (void)runWithScriptName:(NSString*)name
+{
+    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
+
+    // TODO: If file does not exist
+
+    // {
+    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+    //     viewController.hidesBottomBarWhenPushed = YES;
+    //     [self.navigationController pushViewController:viewController animated:YES];
+    // }
+
+    {
+        ScriptController* viewController = [[ScriptController alloc] initWithScriptName:path];
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 
