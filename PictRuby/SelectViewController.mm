@@ -88,14 +88,24 @@
 - (NSString*)normalizeScriptName:(NSString*)name
 {
     // Remove a extension and Add the ".rb" extension.
-    return [[name stringByDeletingPathExtension] stringByAppendingString:@".rb"];
+    return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
 }
 
 - (void)runWithScriptName:(NSString*)name
 {
-    NSString* path = [mFileDirectory stringByAppendingPathComponent:[self normalizeScriptName:name]];
+    // TODO: back to SelectView
+    
+    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
 
-    // TODO: If file does not exist
+    // File exist?
+    if (![FCFileManager existsItemAtPath:path]) {
+        // Retry adding ".rb" extention
+        path = [mFileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
+        
+        if (![FCFileManager existsItemAtPath:path]) {
+            return;
+        }
+    }
 
     // {
     //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
