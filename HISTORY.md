@@ -1,5 +1,41 @@
 # HISTORY - PictRuby
 
+## 0.3 - 2015-01-15
+
+- Script
+  - Use MRuby.framework
+     - mruby-sprintf
+     - mruby-print
+     - mruby-math
+     - mruby-time
+     - mruby-struct
+     - mruby-enum-ext
+     - mruby-string-ext
+     - mruby-numeric-ext
+     - mruby-array-ext
+     - mruby-hash-ext
+     - mruby-range-ext
+     - mruby-proc-ext
+     - mruby-symbol-ext
+     - mruby-random
+     - mruby-object-ext
+     - mruby-objectspace
+     - mruby-fiber
+     - mruby-enumerator
+     - mruby-enum-lazy
+     - mruby-toplevel-ext
+     - mruby-kernel-ext
+     - mattn/mruby-json
+     - mruby-string-utf8
+  - Change entrypoint name from 'convert' to 'main'
+- Editor
+  - Use monospaced font
+  - Don't update timestamp if there is no change in the file contents
+  - Improve help text
+- Etc
+  - Support URL Scheme
+    - pictruby://a_script
+    
 ## 0.2 - 2015-12-13
 
 New function
