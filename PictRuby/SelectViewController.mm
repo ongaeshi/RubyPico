@@ -1,7 +1,8 @@
-#include "SelectViewController.h"
+#import "SelectViewController.h"
 
-#include "EditViewController.h"
-#include "FCFileManager.h"
+#import "EditViewController.h"
+#import "FCFileManager.h"
+#import "ScriptController.h"
 
 @interface SelectViewController ()
 
@@ -84,13 +85,47 @@
     }
 }
 
+- (NSString*)normalizeScriptName:(NSString*)name
+{
+    // Remove a extension and Add the ".rb" extension.
+    return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
+}
+
+- (void)runWithScriptName:(NSString*)name
+{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    
+    // File exist?
+    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
+
+    if (![FCFileManager existsItemAtPath:path]) {
+        // Retry adding ".rb" extention
+        path = [mFileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
+        
+        if (![FCFileManager existsItemAtPath:path]) {
+            return;
+        }
+    }
+
+    // {
+    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+    //     viewController.hidesBottomBarWhenPushed = YES;
+    //     [self.navigationController pushViewController:viewController animated:YES];
+    // }
+
+    {
+        ScriptController* viewController = [[ScriptController alloc] initWithScriptName:path];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+}
+
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
 
         // Remove a directory path and Add the ".rb" extension.
-        text = [[[text lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@".rb"];
+        text = [self normalizeScriptName:[text lastPathComponent]];
 
         //  File name is illegal
         if ([text isEqualToString:@".rb"]) {
