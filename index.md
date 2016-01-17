@@ -17,7 +17,7 @@ Ruby Programming Environment in iOS. File Viewer, Editor and Execution Environme
 
 ## Installation
 
-<a href="https://itunes.apple.com/app/apple-store/id1042498865&mt=8" target="itunes_store" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png) no-repeat;width:135px;height:40px;@media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.svg);}"></a>
+<a href="https://itunes.apple.com/app/apple-store/id1042498865" target="itunes_store" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png) no-repeat;width:135px;height:40px;@media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.svg);}"></a>
 
 Sample code is [here](https://github.com/ongaeshi/PictRubyGems).
 
