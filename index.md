@@ -23,6 +23,12 @@ Sample code is [here](https://github.com/ongaeshi/PictRubyGems).
 
 ## Editor
 
+![pictruby-01](images/pictruby-ss-01.jpg)
+![pictruby-02](images/pictruby-ss-02.jpg)
+![pictruby-03](images/pictruby-ss-03.jpg)
+![pictruby-04](images/pictruby-ss-04.jpg)
+![pictruby-05](images/pictruby-ss-05.jpg)
+
 ![pictruby-editor](images/pictruby-screen-all.jpg)
 
 ## Link
