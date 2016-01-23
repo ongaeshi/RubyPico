@@ -252,7 +252,7 @@
                                 if (comp == NSOrderedDescending) {
                                     comp = NSOrderedAscending;
                                 }
-                                else if(comp == NSOrderedAscending){
+                                else if(comp == NSOrderedAscending) {
                                     comp = NSOrderedDescending;
                                 }
 
@@ -265,7 +265,6 @@
     for (NSDictionary* dict in sortedFiles) {
         [array addObject:[[dict objectForKey:@"Path"] lastPathComponent]];
     }
-
 
     return array;
 }
