@@ -61,6 +61,14 @@
     mTextView.text = @"";
     [self.view addSubview:mTextView];
 
+    // Tap title
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor clearColor];
+    [button setTitle:[mScriptPath lastPathComponent] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
+    self.navigationItem.titleView = button;
+
     // mImageView
     mImageView = [[UIImageView alloc] init];
     mImageView.image = NULL;
