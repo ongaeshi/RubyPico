@@ -202,14 +202,15 @@
 
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
         if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "Image"))) {
+            if (!mrb_nil_p(ret)) {
+                mrb_value str = ret;
+                if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
+                    str = mrb_funcall(mMrb, ret, "inspect", 0);
+                }
 
-            mrb_value str = ret;
-            if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
-                str = mrb_funcall(mMrb, ret, "inspect", 0);
+                const char* retString = mrb_string_value_cstr(mMrb, &str);
+                [self printstr:[[NSString alloc] initWithUTF8String:retString]];
             }
-
-            const char* retString = mrb_string_value_cstr(mMrb, &str);
-            mTextView.text = [[NSString alloc] initWithUTF8String:retString];
 
         } else {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
@@ -279,7 +280,7 @@
 
 - (void) printstr:(NSString*)str
 {
-    NSLog(@"%@", str);
+    [mTextView setText:[mTextView.text stringByAppendingString:str]];
 }
 
 - (void) tapSaveButton
