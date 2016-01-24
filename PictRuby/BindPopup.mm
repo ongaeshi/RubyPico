@@ -134,6 +134,24 @@ mrb_value browser_get(mrb_state *mrb, mrb_value self)
     return mrb_str_new_cstr(mrb, [result UTF8String]);
 }
 
+static void printstr(mrb_state *mrb, mrb_value obj)
+{
+  if (mrb_string_p(obj)) {
+    const char* cstr = mrb_string_value_ptr(mrb, obj);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+    [globalScriptController printstr:nstr];
+  }
+}
+
+mrb_value mrb_printstr(mrb_state *mrb, mrb_value self)
+{
+  mrb_value argv;
+
+  mrb_get_args(mrb, "o", &argv);
+  printstr(mrb, argv);
+
+  return argv;
+}
 }
 
 //----------------------------------------------------------
@@ -166,6 +184,13 @@ void BindPopup::Bind(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "open", open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", open_q, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "get", browser_get, MRB_ARGS_REQ(1));
+    }
+
+    
+    {
+        struct RClass *krn = mrb->kernel_module;
+
+        mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
     }
 }
 

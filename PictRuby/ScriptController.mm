@@ -201,23 +201,12 @@
     // mrb_p(mMrb, isAlive);
 
     if (mrb_obj_eq(mMrb, isAlive, mrb_false_value())) {
-        if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "Image"))) {
-
-            mrb_value str = ret;
-            if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
-                str = mrb_funcall(mMrb, ret, "inspect", 0);
-            }
-
-            const char* retString = mrb_string_value_cstr(mMrb, &str);
-            mTextView.text = [[NSString alloc] initWithUTF8String:retString];
-
-        } else {
+        if (mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "Image"))) {
             UIImage* image = pictruby::BindImage::ToPtr(mMrb, ret);
             // NSLog(@"image w:%f, h:%f", image.size.width, image.size.height);
             mImageView.image = image;
         }
 
-        // End script
         // TODO: Stop timer
         mrb_close(mMrb);
         mMrb = NULL;
@@ -275,6 +264,11 @@
     NSMutableArray* array = mReceivePicked;
     mReceivePicked = NULL;
     return array;
+}
+
+- (void) printstr:(NSString*)str
+{
+    [mTextView setText:[mTextView.text stringByAppendingString:str]];
 }
 
 - (void) tapSaveButton
