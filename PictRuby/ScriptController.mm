@@ -277,6 +277,11 @@
     return array;
 }
 
+- (void) printstr:(NSString*)str
+{
+    NSLog(@"%@", str);
+}
+
 - (void) tapSaveButton
 {
     if (mImageView.image) {

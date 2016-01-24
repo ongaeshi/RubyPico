@@ -139,8 +139,7 @@ static void printstr(mrb_state *mrb, mrb_value obj)
   if (mrb_string_p(obj)) {
     const char* cstr = mrb_string_value_ptr(mrb, obj);
     NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
-
-    NSLog(@"%@", nstr);
+    [globalScriptController printstr:nstr];
   }
 }
 

@@ -7,4 +7,5 @@
 - (void) startPopupInput:(NSString*)path;
 - (void) startPopupMsg:(NSString*)path;
 - (NSMutableArray*) receivePicked;
+- (void) printstr:(NSString*)str;
 @end
