@@ -143,7 +143,42 @@ const int PREV_LINE_MAX = 240;
 
 - (void)tapRenameButton
 {
-    NSLog(@"tap rename button");
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = @"Rename File";
+    //alert.message = @"Enter file name.";
+    alert.delegate = self;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+
+        // Remove a directory path and Add the ".rb" extension.
+        text = [self normalizeScriptName:[text lastPathComponent]];
+
+        //  File name is illegal
+        if ([text isEqualToString:@".rb"]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Invalid file name";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        NSLog(@"Rename to %@", text);
+    }
+}
+
+- (NSString*)normalizeScriptName:(NSString*)name
+{
+    // Remove a extension and Add the ".rb" extension.
+    return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
 }
 
 - (void)textViewDidChange:(UITextView *)textView
