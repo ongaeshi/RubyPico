@@ -47,13 +47,10 @@ const int PREV_LINE_MAX = 240;
                                                                   style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapHelpButton)];
-    UIBarButtonItem* gap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                         target:nil
-                                                                         action:nil];
     UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                    target:self
                                                                                   action:@selector(tapRenameButton)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, gap, helpButton, gap, renameButton, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, renameButton, nil];
 
     if ([self isSyntaxHighlight]) {
         // TextStorage
