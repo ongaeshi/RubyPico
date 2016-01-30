@@ -47,7 +47,13 @@ const int PREV_LINE_MAX = 240;
                                                                   style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapHelpButton)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
+    UIBarButtonItem* gap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                         target:nil
+                                                                         action:nil];
+    UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                   target:self
+                                                                                  action:@selector(tapRenameButton)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, gap, helpButton, gap, renameButton, nil];
 
     if ([self isSyntaxHighlight]) {
         // TextStorage
@@ -136,6 +142,11 @@ const int PREV_LINE_MAX = 240;
 {
     HelpViewController* viewController = [[HelpViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)tapRenameButton
+{
+    NSLog(@"tap rename button");
 }
 
 - (void)textViewDidChange:(UITextView *)textView
