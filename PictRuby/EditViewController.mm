@@ -165,6 +165,9 @@ const int PREV_LINE_MAX = 240;
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
+        if (!text) {
+            return;
+        }
 
         // Remove a directory path and Add the ".rb" extension.
         text = [self normalizeScriptName:[text lastPathComponent]];
