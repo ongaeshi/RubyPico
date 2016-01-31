@@ -171,7 +171,14 @@ const int PREV_LINE_MAX = 240;
             return;
         }
 
-        NSLog(@"Rename to %@", text);
+        // Create path
+        NSString* oldPath = mFileName;
+        NSString* dir = [mFileName stringByDeletingLastPathComponent];
+        mFileName = [dir stringByAppendingPathComponent:text];
+        // NSLog(@"old: %@", oldPath);
+        // NSLog(@"new: %@", mFileName);
+        BOOL ret = [FCFileManager moveItemAtPath:oldPath toPath:mFileName];
+        // NSLog(@"ret: %d", ret);
     }
 }
 
