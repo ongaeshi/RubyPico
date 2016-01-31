@@ -175,10 +175,18 @@ const int PREV_LINE_MAX = 240;
         NSString* oldPath = mFileName;
         NSString* dir = [mFileName stringByDeletingLastPathComponent];
         mFileName = [dir stringByAppendingPathComponent:text];
-        // NSLog(@"old: %@", oldPath);
-        // NSLog(@"new: %@", mFileName);
+
+        // Rename
         BOOL ret = [FCFileManager moveItemAtPath:oldPath toPath:mFileName];
-        // NSLog(@"ret: %d", ret);
+
+        // Alert if file already exists
+        if (!ret) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Already exists";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
     }
 }
 
