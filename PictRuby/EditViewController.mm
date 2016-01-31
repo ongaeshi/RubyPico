@@ -165,7 +165,7 @@ const int PREV_LINE_MAX = 240;
 {
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
-        if (!text) {
+        if ([text isEqualToString:@""]) {
             return;
         }
 
