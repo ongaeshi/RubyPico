@@ -47,7 +47,17 @@ const int PREV_LINE_MAX = 240;
                                                                   style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapHelpButton)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
+
+    // Need rename button?
+    NSString* fileDir = [mFileName stringByDeletingLastPathComponent];
+    if ([fileDir isEqualToString:[FCFileManager pathForDocumentsDirectory]]) {
+        UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                      target:self
+                                                                                      action:@selector(tapRenameButton)];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, renameButton, nil];
+    } else {
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
+    }
 
     if ([self isSyntaxHighlight]) {
         // TextStorage
@@ -136,6 +146,67 @@ const int PREV_LINE_MAX = 240;
 {
     HelpViewController* viewController = [[HelpViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)tapRenameButton
+{
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = @"Rename File";
+    //alert.message = @"Enter file name.";
+    alert.delegate = self;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+        if (!text) {
+            return;
+        }
+
+        // Remove a directory path and Add the ".rb" extension.
+        text = [self normalizeScriptName:[text lastPathComponent]];
+
+        //  File name is illegal
+        if ([text isEqualToString:@".rb"]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Invalid file name";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Create path
+        NSString* dir = [mFileName stringByDeletingLastPathComponent];
+        NSString* dstPath = [dir stringByAppendingPathComponent:text];
+
+        // Rename
+        BOOL ret = [FCFileManager moveItemAtPath:mFileName toPath:dstPath];
+
+        // Alert if file already exists
+        if (!ret) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = [NSString stringWithFormat:@"%@ already exists", text];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Change title
+        mFileName = dstPath;
+        [(UIButton*)self.navigationItem.titleView setTitle:[mFileName lastPathComponent] forState:UIControlStateNormal];
+    }
+}
+
+- (NSString*)normalizeScriptName:(NSString*)name
+{
+    // Remove a extension and Add the ".rb" extension.
+    return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
 }
 
 - (void)textViewDidChange:(UITextView *)textView
