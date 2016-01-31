@@ -47,10 +47,17 @@ const int PREV_LINE_MAX = 240;
                                                                   style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapHelpButton)];
-    UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                                                   target:self
-                                                                                  action:@selector(tapRenameButton)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, renameButton, nil];
+
+    // Need rename button?
+    NSString* fileDir = [mFileName stringByDeletingLastPathComponent];
+    if ([fileDir isEqualToString:[FCFileManager pathForDocumentsDirectory]]) {
+        UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                      target:self
+                                                                                      action:@selector(tapRenameButton)];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, renameButton, nil];
+    } else {
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
+    }
 
     if ([self isSyntaxHighlight]) {
         // TextStorage
