@@ -187,6 +187,9 @@ const int PREV_LINE_MAX = 240;
             [alert show];
             return;
         }
+
+        // Change title
+        [(UIButton*)self.navigationItem.titleView setTitle:[mFileName lastPathComponent] forState:UIControlStateNormal];
     }
 }
 
