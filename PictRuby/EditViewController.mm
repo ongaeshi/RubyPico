@@ -179,12 +179,11 @@ const int PREV_LINE_MAX = 240;
         }
 
         // Create path
-        NSString* oldPath = mFileName;
         NSString* dir = [mFileName stringByDeletingLastPathComponent];
-        mFileName = [dir stringByAppendingPathComponent:text];
+        NSString* dstPath = [dir stringByAppendingPathComponent:text];
 
         // Rename
-        BOOL ret = [FCFileManager moveItemAtPath:oldPath toPath:mFileName];
+        BOOL ret = [FCFileManager moveItemAtPath:mFileName toPath:dstPath];
 
         // Alert if file already exists
         if (!ret) {
@@ -196,6 +195,7 @@ const int PREV_LINE_MAX = 240;
         }
 
         // Change title
+        mFileName = dstPath;
         [(UIButton*)self.navigationItem.titleView setTitle:[mFileName lastPathComponent] forState:UIControlStateNormal];
     }
 }
