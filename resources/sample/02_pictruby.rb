@@ -1,7 +1,7 @@
 # Please return the text or image in the "def main"
 
 def main
-  <<EOF
+  puts <<EOF
 PictRuby
 http://pictruby.ongaeshi.me/
 

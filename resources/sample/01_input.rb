@@ -2,5 +2,5 @@
 
 def main
   name = Popup.input "What your name?"
-  "Hello! #{name}."
+  puts "Hello! #{name}."
 end

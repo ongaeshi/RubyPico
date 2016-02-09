@@ -4,7 +4,7 @@ def main
   word = Popup.input("Word?")
   word = URI.encode_www_form_component(word)
   
-  <<EOS
+  puts <<EOS
 Longman
 http://www.ldoceonline.com/search/?q=#{word}
 

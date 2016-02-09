@@ -8,10 +8,10 @@ def main
   when "1"
     Browser.open url
   when "2"
-    Browser.get url
+    puts Browser.get url
   when "3"
-    Browser.json url
+    puts Browser.json url
   else
-    Browser.get url
+    puts Browser.get url
   end
 end
