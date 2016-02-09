@@ -5,6 +5,6 @@ def main
   column = src.length.to_s.length
   
   (1..src.length).map do |e|
-    sprintf("%#{column}d: %s", e, src[e - 1])
-  end.join("\n")
+    puts sprintf("%#{column}d: %s", e, src[e - 1])
+  end
 end

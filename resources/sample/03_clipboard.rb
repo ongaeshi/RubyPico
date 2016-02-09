@@ -3,5 +3,5 @@
 def main
   src = Clipboard.get
   header = Popup.input "Header?"
-  src.split("\n").map { |e| header + e }.join("\n")
+  puts src.split("\n").map { |e| header + e }.join("\n")
 end

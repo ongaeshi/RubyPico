@@ -2,5 +2,6 @@
 
 def main
   Popup.msg("Hi!")
-  "Hello, PictRuby\nhttp://pictruby.ongaeshi.me"
+  puts "Hello, PictRuby"
+  puts "http://pictruby.ongaeshi.me"
 end
