@@ -1,5 +1,28 @@
 # HISTORY - PictRuby
 
+### 0.4 - 2015-02-14
+
+- Script
+  - Enable p, puts
+  - You must call with 'puts' when script returns text
+
+```ruby
+# Before 0.3
+def main
+  "Hello, PictRuby"
+end
+```
+
+```ruby
+# After 0.4
+def main
+  puts "Hello, PictRuby"
+end
+```
+
+- Editor
+  - Change the script name
+
 ## 0.3 - 2015-01-15
 
 - Script
