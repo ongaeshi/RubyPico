@@ -153,7 +153,7 @@
                             withContent:@"# Return the text or image in the \"main\"\n"
                                          "\n"
                                          "def main\n"
-                                         "  \"Hello, PictRuby\\nhttp://pictruby.ongaeshi.me\"\n"
+                                         "  puts \"Hello, PictRuby\\nhttp://pictruby.ongaeshi.me\"\n"
                                          "  # name = Popup.input(\"name?\")\n"
                                          "  # img = Image.pick_from_library\n"
                                          "end\n"
