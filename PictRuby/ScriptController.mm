@@ -35,49 +35,98 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 
-    // Create ImagePicker
-    mImagePicker = [QBImagePickerController new];
-    [mImagePicker setDelegate:self];
-    mImagePicker.showsNumberOfSelectedAssets = YES;
+    // // Create ImagePicker
+    // mImagePicker = [QBImagePickerController new];
+    // [mImagePicker setDelegate:self];
+    // mImagePicker.showsNumberOfSelectedAssets = YES;
     
-    // Create timer
-    mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(timerProcess) userInfo:nil repeats:YES];
-    mValue = 0;
+    // // Create timer
+    // mTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self selector:@selector(timerProcess) userInfo:nil repeats:YES];
+    // mValue = 0;
 
-    // NavButton
-    UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save"
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(tapSaveButton)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, nil];
+    // // NavButton
+    // UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+    //                                                                style:UIBarButtonItemStyleBordered
+    //                                                               target:self
+    //                                                               action:@selector(tapSaveButton)];
+    // self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:saveButton, nil];
 
-    // mTextView
-    mTextView = [[UITextView alloc] initWithFrame:self.view.bounds];
-    mTextView.editable = NO;
-    mTextView.dataDetectorTypes = UIDataDetectorTypeLink;
-    mTextView.font = [UIFont fontWithName:@"Courier" size:12];
-    mTextView.text = @"";
-    [self.view addSubview:mTextView];
+    // // mTextView
+    // mTextView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    // mTextView.editable = NO;
+    // mTextView.dataDetectorTypes = UIDataDetectorTypeLink;
+    // mTextView.font = [UIFont fontWithName:@"Courier" size:12];
+    // mTextView.text = @"";
+    // [self.view addSubview:mTextView];
 
-    // Tap title
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor clearColor];
-    [button setTitle:[mScriptPath lastPathComponent] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
-    self.navigationItem.titleView = button;
+    // // Tap title
+    // UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    // button.backgroundColor = [UIColor clearColor];
+    // [button setTitle:[mScriptPath lastPathComponent] forState:UIControlStateNormal];
+    // [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    // button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
+    // self.navigationItem.titleView = button;
 
-    // mImageView
-    mImageView = [[UIImageView alloc] init];
-    mImageView.image = NULL;
-    mImageView.frame = self.view.frame;
-    mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
-    [self.view addSubview:mImageView];
+    // // mImageView
+    // mImageView = [[UIImageView alloc] init];
+    // mImageView.image = NULL;
+    // mImageView.frame = self.view.frame;
+    // mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
+    // [self.view addSubview:mImageView];
+
+    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button1.translatesAutoresizingMaskIntoConstraints = NO;
+    [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
+    [self.view addSubview:button1];
+
+    UILabel* label = [[UILabel alloc] init];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.text = @"HELLO hogehoh aoaaa 今日には";
+    [self.view addSubview:label];
+
+    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button2.translatesAutoresizingMaskIntoConstraints = NO;
+    [button2 setTitle:@"Button2" forState:UIControlStateNormal];
+    [self.view addSubview:button2];
+
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(button1, label, button2);
+
+    NSArray* constraints;
+    
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-[button1]-|"
+                                                          options:0
+                                                          metrics:nil
+                                                            views:viewsDictionary];
+    [self.view addConstraints:constraints];
+
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[button1]"
+                                                          options:0
+                                                          metrics:nil
+                                                            views:viewsDictionary];
+    [self.view addConstraints:constraints];
+
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[label]"
+                                                          options:0
+                                                          metrics:nil
+                                                            views:viewsDictionary];
+    [self.view addConstraints:constraints];
+
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button2]-|"
+                                                          options:0
+                                                          metrics:nil
+                                                            views:viewsDictionary];
+    [self.view addConstraints:constraints];
+
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[button1]-[button2]"
+                                                          options:0
+                                                          metrics:nil
+                                                            views:viewsDictionary];
+    [self.view addConstraints:constraints];
 
     // Init mruby
-    [self initScript];
+    // [self initScript];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
