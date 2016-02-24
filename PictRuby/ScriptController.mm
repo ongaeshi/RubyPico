@@ -95,31 +95,25 @@
 
     NSArray* constraints;
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-[button1]-|"
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]"
                                                           options:0
                                                           metrics:nil
                                                             views:viewsDictionary];
     [self.view addConstraints:constraints];
 
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[button1]"
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button1]"
                                                           options:0
                                                           metrics:nil
                                                             views:viewsDictionary];
     [self.view addConstraints:constraints];
 
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[label]"
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button2]"
                                                           options:0
                                                           metrics:nil
                                                             views:viewsDictionary];
     [self.view addConstraints:constraints];
 
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button2]-|"
-                                                          options:0
-                                                          metrics:nil
-                                                            views:viewsDictionary];
-    [self.view addConstraints:constraints];
-
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[button1]-[button2]"
+    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[button1]-[label]-[button2]"
                                                           options:0
                                                           metrics:nil
                                                             views:viewsDictionary];
