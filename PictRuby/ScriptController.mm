@@ -75,49 +75,68 @@
     // mImageView.frame = self.view.frame;
     // mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
     // [self.view addSubview:mImageView];
-
-    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button1.translatesAutoresizingMaskIntoConstraints = NO;
-    [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
-    [self.view addSubview:button1];
-
-    UILabel* label = [[UILabel alloc] init];
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.text = @"HELLO hogehoh aoaaa 今日には";
-    [self.view addSubview:label];
-
-    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button2.translatesAutoresizingMaskIntoConstraints = NO;
-    [button2 setTitle:@"Button2" forState:UIControlStateNormal];
-    [self.view addSubview:button2];
-
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(button1, label, button2);
-
-    NSArray* constraints;
     
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]"
-                                                          options:0
-                                                          metrics:nil
-                                                            views:viewsDictionary];
-    [self.view addConstraints:constraints];
+    UIStackView* stackView = [[UIStackView alloc] initWithFrame:self.view.bounds];
+    stackView.axis = UILayoutConstraintAxisVertical;
+    //[stackView setDistribution:UIStackViewDistributionFill];
+    [stackView setDistribution:UIStackViewDistributionFillEqually];
+    //[stackView setDistribution:UIStackViewDistributionFillProportionally];
+    //[stackView setDistribution:UIStackViewDistributionEqualSpacing];
+    //[stackView setDistribution:UIStackViewDistributionEqualCentering];
+    [self.view addSubview:stackView];
 
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button1]"
-                                                          options:0
-                                                          metrics:nil
-                                                            views:viewsDictionary];
-    [self.view addConstraints:constraints];
+    {
+        UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button1.translatesAutoresizingMaskIntoConstraints = NO;
+        [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
+        [stackView addArrangedSubview:button1];
+    }
+    
+    {
+        UILabel* label = [[UILabel alloc] init];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
+        label.text = @"HELLO hogehoh aoaaa 今日には\naaaaa\nbbbbb\nccccc\nああああ\nいいいい";
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        label.numberOfLines = 0;
+        [stackView addArrangedSubview:label];
+    }
+    
+    UIStackView* p = stackView;
+    
+    {
+        UIStackView* stackView = [[UIStackView alloc] init];
+        stackView.axis = UILayoutConstraintAxisHorizontal;
+        [stackView setDistribution:UIStackViewDistributionFillEqually];
+        [p addArrangedSubview:stackView];
 
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-[button2]"
-                                                          options:0
-                                                          metrics:nil
-                                                            views:viewsDictionary];
-    [self.view addConstraints:constraints];
+        UILabel* label = [[UILabel alloc] init];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
+        label.text = @"HELLO hogehoh aoaaa 今日には\naaaaa\nbbbbb\nccccc\nああああ\nいいいい";
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        label.numberOfLines = 0;
+        [stackView addArrangedSubview:label];
+        
+        UIButton *button2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button2.translatesAutoresizingMaskIntoConstraints = NO;
+        [button2 setTitle:@"Button2" forState:UIControlStateNormal];
+        [stackView addArrangedSubview:button2];
+    }
 
-    constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-200-[button1]-[label]-[button2]"
-                                                          options:0
-                                                          metrics:nil
-                                                            views:viewsDictionary];
-    [self.view addConstraints:constraints];
+    {
+        UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button1.translatesAutoresizingMaskIntoConstraints = NO;
+        [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
+        [stackView addArrangedSubview:button1];
+    }
+
+    {
+        UILabel* label = [[UILabel alloc] init];
+        label.translatesAutoresizingMaskIntoConstraints = NO;
+        label.text = @"HELLO hogehoh aoaaa 今日には\naaaaa\nbbbbb\nccccc\nああああ\nいいいい";
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        label.numberOfLines = 0;
+        [stackView addArrangedSubview:label];
+    }
 
     // Init mruby
     // [self initScript];
