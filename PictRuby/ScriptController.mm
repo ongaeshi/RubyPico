@@ -76,10 +76,19 @@
     // mImageView.contentMode = UIViewContentModeScaleAspectFit; //UIViewContentModeCenter?
     // [self.view addSubview:mImageView];
     
-    UIStackView* stackView = [[UIStackView alloc] initWithFrame:self.view.bounds];
+    CGRect bounds = self.view.bounds;
+    float statusHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    float navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
+    float height = statusHeight + navigationBarHeight;
+    //NSLog(@"height: %f", height);
+    bounds.origin.y += height;
+    bounds.size.height -= height;
+
+    UIStackView* stackView = [[UIStackView alloc] initWithFrame:bounds];
+    stackView.autoresizesSubviews = TRUE;
     stackView.axis = UILayoutConstraintAxisVertical;
-    //[stackView setDistribution:UIStackViewDistributionFill];
-    [stackView setDistribution:UIStackViewDistributionFillEqually];
+    [stackView setDistribution:UIStackViewDistributionFill];
+    //[stackView setDistribution:UIStackViewDistributionFillEqually];
     //[stackView setDistribution:UIStackViewDistributionFillProportionally];
     //[stackView setDistribution:UIStackViewDistributionEqualSpacing];
     //[stackView setDistribution:UIStackViewDistributionEqualCentering];
@@ -136,6 +145,27 @@
         label.lineBreakMode = NSLineBreakByWordWrapping;
         label.numberOfLines = 0;
         [stackView addArrangedSubview:label];
+    }
+    
+    {
+        UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button1.translatesAutoresizingMaskIntoConstraints = NO;
+        [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
+        [stackView addArrangedSubview:button1];
+    }
+    
+    {
+        UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button1.translatesAutoresizingMaskIntoConstraints = NO;
+        [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
+        [stackView addArrangedSubview:button1];
+    }
+
+    {
+        UIButton *button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        button1.translatesAutoresizingMaskIntoConstraints = NO;
+        [button1 setTitle:@"Button1dfaffsaffafa" forState:UIControlStateNormal];
+        [stackView addArrangedSubview:button1];
     }
 
     // Init mruby
