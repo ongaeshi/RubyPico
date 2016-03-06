@@ -1,5 +1,6 @@
 #import "ScriptController.h"
 
+#import "BindButton.h"
 #import "BindImage.hpp"
 #import "BindPopup.hpp"
 #import "mruby.h"
@@ -159,6 +160,7 @@
     pictruby::BindImage::SetScriptController((__bridge void*)self);
     pictruby::BindImage::Bind(mMrb);
     pictruby::BindPopup::Bind(mMrb);
+    mrb_pictruby_button_init(mMrb);
 
     // Load builtin library
     // mrb_load_irep(mMrb, BuiltIn);
