@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
-		526D73DB1C8C6A3A005CC208 /* mruby_button.m in Sources */ = {isa = PBXBuildFile; fileRef = 526D73DA1C8C6A3A005CC208 /* mruby_button.m */; };
+		526D73DB1C8C6A3A005CC208 /* mruby_button.m in Sources */ = {isa = PBXBuildFile; fileRef = 526D73DA1C8C6A3A005CC208 /* mruby_button.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		527241011C12D73C00B074DB /* BindPopup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 527241001C12D73C00B074DB /* BindPopup.mm */; };
 		52731C521B371D7600E2CC2A /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3D1B371D7600E2CC2A /* BindImage.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		52731C531B371D7600E2CC2A /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3F1B371D7600E2CC2A /* EditViewController.mm */; };
