@@ -2,7 +2,7 @@
 ** button.c - UIButton wrapper
 */
 
-#import "BindButton.h"
+#import "mruby_button.h"
 
 void mrb_pictruby_button_init(mrb_state* mrb)
 {
