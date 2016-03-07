@@ -1,8 +1,8 @@
 /*
-** mruby_button.m - UIButton wrapper
+** mrb_button.m - UIButton wrapper
 */
 
-#import "mruby_button.h"
+#import "mrb_button.h"
 
 #import <UIKit/UIKit.h>
 #import "ScriptController.h"

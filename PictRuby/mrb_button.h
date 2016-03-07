@@ -1,5 +1,5 @@
 /*
-** mruby_button.h - UIButton wrapper
+** mrb_button.h - UIButton wrapper
 */
 
 #import "mruby.h"
