@@ -10,10 +10,6 @@
 #import "mruby/class.h"
 #import "mruby/data.h"
 
-namespace pictruby {
-extern ScriptController *globalScriptController;
-}
-
 /* Setup data_type */
 static void
 free_func(mrb_state *mrb, void *p)
@@ -41,7 +37,7 @@ initialize(mrb_state *mrb, mrb_value self)
     button.backgroundColor = [UIColor clearColor];
     [button setTitle:@"TEST" forState:UIControlStateNormal];
     button.frame = CGRectMake(100.0, 200.0, 100.0, 50.0);
-    [pictruby::globalScriptController.view addSubview:button];
+    [globalScriptController.view addSubview:button];
 
     return to_value(mrb, mrb_class_ptr(self), button);
 }

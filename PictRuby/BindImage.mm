@@ -9,8 +9,6 @@
 
 namespace pictruby {
 
-ScriptController *globalScriptController;
-
 namespace {
 UIImage* toObj(mrb_value self)
 {
@@ -323,12 +321,6 @@ UIImage* BindImage::ToPtr(mrb_state* mrb, mrb_value aValue)
     }
 
     return (__bridge UIImage*)(DATA_PTR(aValue));
-}
-
-//----------------------------------------------------------
-void BindImage::SetScriptController(void* aScriptController)
-{
-    globalScriptController = (__bridge ScriptController*)aScriptController;
 }
 
 //----------------------------------------------------------

@@ -10,6 +10,8 @@
 #import "mruby/string.h"
 #import "mruby_button.h"
 
+ScriptController *globalScriptController;
+
 @implementation ScriptController
 {
     NSString* mScriptPath;
@@ -157,7 +159,7 @@
     mMrb = mrb_open();
 
     // Bind
-    pictruby::BindImage::SetScriptController((__bridge void*)self);
+    globalScriptController = self;
     pictruby::BindImage::Bind(mMrb);
     pictruby::BindPopup::Bind(mMrb);
     mrb_pictruby_button_init(mMrb);

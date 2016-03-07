@@ -9,3 +9,13 @@
 - (NSMutableArray*) receivePicked;
 - (void) printstr:(NSString*)str;
 @end
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern ScriptController *globalScriptController;
+
+#ifdef __cplusplus
+}
+#endif
