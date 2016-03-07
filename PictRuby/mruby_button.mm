@@ -5,9 +5,14 @@
 #import "mruby_button.h"
 
 #import <UIKit/UIKit.h>
-#include "mruby.h"
-#include "mruby/class.h"
-#include "mruby/data.h"
+#import "ScriptController.h"
+#import "mruby.h"
+#import "mruby/class.h"
+#import "mruby/data.h"
+
+namespace pictruby {
+extern ScriptController *globalScriptController;
+}
 
 /* Setup data_type */
 static void
@@ -32,7 +37,12 @@ to_value(mrb_state *mrb, struct RClass *cc, UIButton *ptr)
 static mrb_value
 initialize(mrb_state *mrb, mrb_value self)
 {
-    UIButton *button = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    UIButton *button = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+    button.backgroundColor = [UIColor clearColor];
+    [button setTitle:@"TEST" forState:UIControlStateNormal];
+    button.frame = CGRectMake(100.0, 200.0, 100.0, 50.0);
+    [pictruby::globalScriptController.view addSubview:button];
+
     return to_value(mrb, mrb_class_ptr(self), button);
 }
 
