@@ -141,7 +141,7 @@ const int PREV_LINE_MAX = 240;
 
     UIViewController* viewController;
     // viewController = [[ScriptController alloc] initWithScriptName:mFileName];
-    viewController = [[ChatViewController alloc] init];
+    viewController = [[ChatViewController alloc] initWithScriptName:mFileName];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

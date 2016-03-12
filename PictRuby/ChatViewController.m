@@ -1,5 +1,12 @@
 #import "ChatViewController.h"
 
+#import "mruby.h"
+#import "mruby/class.h"
+#import "mruby/compile.h"
+#import "mruby/irep.h"
+#import "mruby/string.h"
+#import "mruby/error.h"
+
 @interface ChatViewController ()
 
 @property (strong, nonatomic) NSMutableArray *messages;
@@ -11,11 +18,23 @@
 @end
 
 @implementation ChatViewController
+{
+    NSString* mScriptPath;
+    mrb_state* mMrb;
+}
+
+- (id) initWithScriptName:(NSString*)scriptPath
+{
+    self = [super init];
+    mScriptPath = scriptPath;
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    // Init ChatViewController
     self.senderId = @"you";
     self.senderDisplayName = @"You";
 
@@ -27,6 +46,59 @@
     // self.outgoingAvatar = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"User1"] diameter:64];
 
     self.messages = [NSMutableArray array];
+
+    // Init mruby
+    [self initScript];
+}
+
+- (void)initScript
+{
+    mMrb = mrb_open();
+
+    // TODO: bind
+    // Bind
+    // pictruby::BindImage::SetScriptController((__bridge void*)self);
+    // pictruby::BindImage::Bind(mMrb);
+    // pictruby::BindPopup::Bind(mMrb);
+
+    // Load builtin library
+    // mrb_load_irep(mMrb, BuiltIn);
+    {
+        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
+        char* scriptPath = (char *)[path UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
+        mrb_load_file(mMrb, fd);
+        fclose(fd);
+    }
+
+    // Load user script
+    int arena = mrb_gc_arena_save(mMrb);
+    {
+        char* scriptPath = (char *)[mScriptPath UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
+
+        mrbc_context *cxt = mrbc_context_new(mMrb);
+
+        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
+        mrbc_filename(mMrb, cxt, fileName);
+
+        mrb_load_file_cxt(mMrb, fd, cxt);
+
+        mrbc_context_free(mMrb, cxt);
+
+        fclose(fd);
+    }
+    mrb_gc_arena_restore(mMrb, arena);
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    if (![parent isEqual:self.parentViewController]) {
+        if (mMrb) {
+            mrb_close(mMrb);
+            mMrb = NULL;
+        }
+    }
 }
 
 - (void)didPressSendButton:(UIButton *)button
@@ -61,12 +133,23 @@
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
 
-    JSQMessage *message = [JSQMessage messageWithSenderId:@"ruby"
-                                              displayName:@"Ruby"
-                                                     text:@"こんにちは"];
-    [self.messages addObject:message];
+    [self.messages addObject:[self createMessage]];
 
     [self finishReceivingMessageAnimated:YES];
+}
+
+- (JSQMessage*)createMessage
+{
+    mrb_value ret = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "chat", 1, mrb_nil_value()); // TODO: send input
+
+    // TODO: if not str
+    const char* str = mrb_string_value_cstr(mMrb, &ret);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:str];
+
+    return [JSQMessage messageWithSenderId:@"ruby"
+                               displayName:@"Ruby" // TODO: customize
+                                      text:nstr];
+    
 }
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
