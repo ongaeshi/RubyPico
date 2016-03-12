@@ -50,7 +50,7 @@
 
 - (void)receiveAutoMessage
 {
-    [NSTimer scheduledTimerWithTimeInterval:1
+    [NSTimer scheduledTimerWithTimeInterval:0.5
                                      target:self
                                    selector:@selector(didFinishMessageTimer:)
                                    userInfo:nil
