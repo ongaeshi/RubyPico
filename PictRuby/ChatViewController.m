@@ -107,6 +107,7 @@
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date
 {
+    // Send message
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
 
     JSQMessage *message = [JSQMessage messageWithSenderId:senderId
@@ -116,31 +117,23 @@
 
     [self finishSendingMessageAnimated:YES];
 
-    // Receive message automatically
-    [self receiveAutoMessage];
+    // Receive message
+    [self receiveAutoMessage:text];
 }
 
-- (void)receiveAutoMessage
+- (void)receiveAutoMessage:(NSString*)input
 {
-    [NSTimer scheduledTimerWithTimeInterval:0.5
-                                     target:self
-                                   selector:@selector(didFinishMessageTimer:)
-                                   userInfo:nil
-                                    repeats:NO];
-}
+    // [JSQSystemSoundPlayer jsq_playMessageSentSound];
 
-- (void)didFinishMessageTimer:(NSTimer*)timer
-{
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
-
-    [self.messages addObject:[self createMessage]];
+    [self.messages addObject:[self createMessage:input]];
 
     [self finishReceivingMessageAnimated:YES];
 }
 
-- (JSQMessage*)createMessage
+- (JSQMessage*)createMessage:(NSString*)input
 {
-    mrb_value ret = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "chat", 1, mrb_nil_value()); // TODO: send input
+    mrb_value rinput = mrb_str_new_cstr(mMrb, [input UTF8String]);
+    mrb_value ret = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "chat", 1, rinput);
 
     // TODO: if not str
     const char* str = mrb_string_value_cstr(mMrb, &ret);
@@ -149,7 +142,6 @@
     return [JSQMessage messageWithSenderId:@"ruby"
                                displayName:@"Ruby" // TODO: customize
                                       text:nstr];
-    
 }
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
