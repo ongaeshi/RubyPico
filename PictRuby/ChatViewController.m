@@ -45,6 +45,9 @@
     self.incomingAvatar = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_ruby.png"] diameter:64];
     self.outgoingAvatar = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_you.png"] diameter:64];
 
+    // Hide AccessoryButton
+    self.inputToolbar.contentView.leftBarButtonItem = nil;
+
     self.messages = [NSMutableArray array];
 
     // Init mruby
