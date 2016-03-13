@@ -134,8 +134,11 @@
 {
     mrb_value rinput = mrb_str_new_cstr(mMrb, [input UTF8String]);
     mrb_value ret = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "chat", 1, rinput);
+    
+    if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
+        ret = mrb_funcall(mMrb, ret, "inspect", 0);
+    }
 
-    // TODO: if not str
     const char* str = mrb_string_value_cstr(mMrb, &ret);
     NSString* nstr = [[NSString alloc] initWithUTF8String:str];
 
