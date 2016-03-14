@@ -3,7 +3,6 @@
 
 @interface ScriptController : UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
 + (id) NewWithScriptName:(NSString*)scriptPath;
-- (id) initWithScriptName:(NSString*)scriptPath;
 - (void) startPickFromLibrary:(int)num;
 - (void) startPopupInput:(NSString*)path;
 - (void) startPopupMsg:(NSString*)path;
