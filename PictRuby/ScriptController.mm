@@ -22,6 +22,13 @@
     NSMutableArray* mReceivePicked;
 }
 
++ (id) NewWithScriptName:(NSString*)scriptPath
+{
+    // ScriptController or ChatViewController
+    // return [[ChatViewController alloc] initWithScriptName:mFileName];
+    return [[ScriptController alloc] initWithScriptName:scriptPath];
+}
+
 - (id) initWithScriptName:(NSString*)scriptPath
 {
     self = [super init];

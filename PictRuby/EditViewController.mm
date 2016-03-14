@@ -139,9 +139,7 @@ const int PREV_LINE_MAX = 240;
     // Save file (For iOS <= 6.1)
     [self saveFileIfTouched];
 
-    UIViewController* viewController;
-    // viewController = [[ScriptController alloc] initWithScriptName:mFileName];
-    viewController = [[ChatViewController alloc] initWithScriptName:mFileName];
+    UIViewController* viewController = [ScriptController NewWithScriptName:mFileName];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
