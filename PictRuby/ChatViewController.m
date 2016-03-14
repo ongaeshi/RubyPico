@@ -23,10 +23,11 @@
     mrb_state* mMrb;
 }
 
-- (id) initWithScriptName:(NSString*)scriptPath
+- (id) init:(NSString*)scriptPath mrb:(mrb_state*)mrb
 {
     self = [super init];
     mScriptPath = scriptPath;
+    mMrb = mrb;
     return self;
 }
 
@@ -56,42 +57,6 @@
 
 - (void)initScript
 {
-    mMrb = mrb_open();
-
-    // TODO: bind
-    // Bind
-    // pictruby::BindImage::SetScriptController((__bridge void*)self);
-    // pictruby::BindImage::Bind(mMrb);
-    // pictruby::BindPopup::Bind(mMrb);
-
-    // Load builtin library
-    // mrb_load_irep(mMrb, BuiltIn);
-    {
-        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
-        char* scriptPath = (char *)[path UTF8String];
-        FILE *fd = fopen(scriptPath, "r");
-        mrb_load_file(mMrb, fd);
-        fclose(fd);
-    }
-
-    // Load user script
-    int arena = mrb_gc_arena_save(mMrb);
-    {
-        char* scriptPath = (char *)[mScriptPath UTF8String];
-        FILE *fd = fopen(scriptPath, "r");
-
-        mrbc_context *cxt = mrbc_context_new(mMrb);
-
-        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
-        mrbc_filename(mMrb, cxt, fileName);
-
-        mrb_load_file_cxt(mMrb, fd, cxt);
-
-        mrbc_context_free(mMrb, cxt);
-
-        fclose(fd);
-    }
-    mrb_gc_arena_restore(mMrb, arena);
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent

@@ -2,6 +2,7 @@
 
 #import "BindImage.hpp"
 #import "BindPopup.hpp"
+#import "ChatViewController.h"
 #import "mruby.h"
 #import "mruby/class.h"
 #import "mruby/compile.h"
@@ -24,15 +25,64 @@
 
 + (id) NewWithScriptName:(NSString*)scriptPath
 {
+    mrb_state* mrb = [self InitMrb:scriptPath];
+
     // ScriptController or ChatViewController
-    // return [[ChatViewController alloc] initWithScriptName:mFileName];
-    return [[ScriptController alloc] initWithScriptName:scriptPath];
+    mrb_sym mid = mrb_intern_cstr(mrb, "chat");
+    struct RProc* m = mrb_method_search_vm(mrb, &mrb->object_class, mid);
+
+    if (m) {
+        return [[ChatViewController alloc] init:scriptPath mrb:mrb];
+    } else {
+        return [[ScriptController alloc] init:scriptPath mrb:mrb];
+    }
 }
 
-- (id) initWithScriptName:(NSString*)scriptPath
++ (mrb_state*)InitMrb:(NSString*)nscriptPath
+{
+    mrb_state* mrb = mrb_open();
+
+    // Bind
+    pictruby::BindImage::Bind(mrb);
+    pictruby::BindPopup::Bind(mrb);
+
+    // Load builtin library
+    // mrb_load_irep(mrb, BuiltIn);
+    {
+        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
+        char* scriptPath = (char *)[path UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
+        mrb_load_file(mrb, fd);
+        fclose(fd);
+    }
+
+    // Load user script
+    int arena = mrb_gc_arena_save(mrb);
+    {
+        char* scriptPath = (char *)[nscriptPath UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
+
+        mrbc_context *cxt = mrbc_context_new(mrb);
+
+        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
+        mrbc_filename(mrb, cxt, fileName);
+
+        mrb_load_file_cxt(mrb, fd, cxt);
+
+        mrbc_context_free(mrb, cxt);
+
+        fclose(fd);
+    }
+    mrb_gc_arena_restore(mrb, arena);
+
+    return mrb;
+}
+
+- (id) init:(NSString*)scriptPath mrb:(mrb_state*)mrb
 {
     self = [super init];
     mScriptPath = scriptPath;
+    mMrb = mrb;
     mTextView = NULL;
     mImageView = NULL;
     return self;
@@ -160,41 +210,7 @@
 
 - (void)initScript
 {
-    mMrb = mrb_open();
-
-    // Bind
     pictruby::BindImage::SetScriptController((__bridge void*)self);
-    pictruby::BindImage::Bind(mMrb);
-    pictruby::BindPopup::Bind(mMrb);
-
-    // Load builtin library
-    // mrb_load_irep(mMrb, BuiltIn);
-    {
-        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
-        char* scriptPath = (char *)[path UTF8String];
-        FILE *fd = fopen(scriptPath, "r");
-        mrb_load_file(mMrb, fd);
-        fclose(fd);
-    }
-
-    // Load user script
-    int arena = mrb_gc_arena_save(mMrb);
-    {
-        char* scriptPath = (char *)[mScriptPath UTF8String];
-        FILE *fd = fopen(scriptPath, "r");
-
-        mrbc_context *cxt = mrbc_context_new(mMrb);
-
-        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
-        mrbc_filename(mMrb, cxt, fileName);
-
-        mrb_load_file_cxt(mMrb, fd, cxt);
-
-        mrbc_context_free(mMrb, cxt);
-
-        fclose(fd);
-    }
-    mrb_gc_arena_restore(mMrb, arena);
 
     // Create fiber
     mFiber = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "make_convert_to_fiber", 0);

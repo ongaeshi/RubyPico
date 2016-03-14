@@ -1,7 +1,8 @@
 #import <JSQMessagesViewController/JSQMessages.h>
+#import "mruby.h"
 
 @interface ChatViewController : JSQMessagesViewController
 
-- (id) initWithScriptName:(NSString*)scriptPath;
+- (id) init:(NSString*)scriptPath mrb:(mrb_state*)mrb;
 
 @end
