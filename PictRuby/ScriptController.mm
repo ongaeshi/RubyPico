@@ -43,6 +43,7 @@
     mrb_state* mrb = mrb_open();
 
     // Bind
+    pictruby::BindImage::SetScriptController(NULL);
     pictruby::BindImage::Bind(mrb);
     pictruby::BindPopup::Bind(mrb);
 
