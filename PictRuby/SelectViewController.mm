@@ -115,6 +115,7 @@
 
     {
         UIViewController* viewController = [ScriptController NewWithScriptName:path];
+        viewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
