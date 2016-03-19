@@ -111,6 +111,9 @@
         ret = mrb_funcall(mMrb, ret, "inspect", 0);
     }
 
+    // String#chomp!
+    mrb_funcall(mMrb, ret, "chomp!", 0);
+
     const char* str = mrb_string_value_cstr(mMrb, &ret);
     NSString* nstr = [[NSString alloc] initWithUTF8String:str];
 
