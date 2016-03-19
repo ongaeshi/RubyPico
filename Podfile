@@ -3,3 +3,4 @@ pod 'NYXImagesKit'
 pod 'ICTextView'
 pod 'FCFileManager'
 pod "QBImagePickerController", ">= 3.0.0"
+pod 'JSQMessagesViewController'

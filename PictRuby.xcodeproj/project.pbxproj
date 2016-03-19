@@ -27,6 +27,9 @@
 		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
 		5294CC161B3469C10044D56D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC151B3469C10044D56D /* Images.xcassets */; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
+		52C018561C93D7EE0046CCF8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C018551C93D7EE0046CCF8 /* ChatViewController.m */; };
+		52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018571C94075E0046CCF8 /* chat_ruby.png */; };
+		52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018581C94075E0046CCF8 /* chat_you.png */; };
 		B765EA97EC2CE00FC1CAECBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA91EBF38EC18AFCCBAA49A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +79,10 @@
 		5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictRubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
+		52C018541C93D7EE0046CCF8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		52C018551C93D7EE0046CCF8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		52C018571C94075E0046CCF8 /* chat_ruby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ruby.png; sourceTree = "<group>"; };
+		52C018581C94075E0046CCF8 /* chat_you.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_you.png; sourceTree = "<group>"; };
 		E278C1DC926282A94614C355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EBA91EBF38EC18AFCCBAA49A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -123,6 +130,8 @@
 		52731C5F1B371FC500E2CC2A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				52C018571C94075E0046CCF8 /* chat_ruby.png */,
+				52C018581C94075E0046CCF8 /* chat_you.png */,
 				52731C601B371FC500E2CC2A /* sample.jpg */,
 				52731C611B371FC500E2CC2A /* tabbar_files.png */,
 				52731C621B371FC500E2CC2A /* tabbar_samples.png */,
@@ -170,6 +179,8 @@
 				52731C4A1B371D7600E2CC2A /* SampleViewController.mm */,
 				52731C4B1B371D7600E2CC2A /* ScriptController.h */,
 				52731C4C1B371D7600E2CC2A /* ScriptController.mm */,
+				52C018541C93D7EE0046CCF8 /* ChatViewController.h */,
+				52C018551C93D7EE0046CCF8 /* ChatViewController.m */,
 				52731C4D1B371D7600E2CC2A /* SelectViewController.h */,
 				52731C4E1B371D7600E2CC2A /* SelectViewController.mm */,
 				5294CC0C1B3469C10044D56D /* AppDelegate.h */,
@@ -299,7 +310,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */,
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
+				52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */,
 				52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */,
 				52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */,
 				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
@@ -373,6 +386,7 @@
 			files = (
 				52731C591B371D7600E2CC2A /* SampleViewController.mm in Sources */,
 				52731C551B371D7600E2CC2A /* FileViewController.mm in Sources */,
+				52C018561C93D7EE0046CCF8 /* ChatViewController.m in Sources */,
 				52731C521B371D7600E2CC2A /* BindImage.mm in Sources */,
 				52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */,
 				527241011C12D73C00B074DB /* BindPopup.mm in Sources */,
