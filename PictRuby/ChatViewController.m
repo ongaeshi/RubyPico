@@ -54,7 +54,7 @@
     self.inputToolbar.contentView.leftBarButtonItem = nil;
 
     // Chage text and font to JSQMessagesBubbleImageFactory
-    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"Courier" size:12];
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"Courier" size:14];
 
     self.messages = [NSMutableArray array];
 
