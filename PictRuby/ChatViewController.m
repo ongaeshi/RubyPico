@@ -150,4 +150,16 @@
     return self.messages.count;
 }
 
+- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+
+    // Customize text font
+    if (cell.textView) {
+        cell.textView.font = [UIFont fontWithName:@"Courier" size:14];
+    }
+
+    return cell;
+}
+
 @end
