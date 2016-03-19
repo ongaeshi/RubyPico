@@ -40,7 +40,11 @@
     self.senderDisplayName = @"You";
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [JSQMessagesBubbleImageFactory new];
-    self.incomingBubble = [bubbleFactory  incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    UIColor* c = [UIColor colorWithRed:0.21f
+                                 green:0.23f
+                                  blue:0.31f
+                                 alpha:1.0f];
+    self.incomingBubble = [bubbleFactory  incomingMessagesBubbleImageWithColor:c];
     self.outgoingBubble = [bubbleFactory  outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
 
     self.incomingAvatar = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"chat_ruby.png"] diameter:64];
