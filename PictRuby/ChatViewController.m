@@ -53,6 +53,9 @@
     // Hide AccessoryButton
     self.inputToolbar.contentView.leftBarButtonItem = nil;
 
+    // Chage text and font to JSQMessagesBubbleImageFactory
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"Courier" size:12];
+
     self.messages = [NSMutableArray array];
 
     // Init mruby
@@ -148,18 +151,6 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.messages.count;
-}
-
-- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-
-    // Customize text font
-    if (cell.textView) {
-        cell.textView.font = [UIFont fontWithName:@"Courier" size:14];
-    }
-
-    return cell;
 }
 
 @end
