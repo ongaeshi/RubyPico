@@ -3,9 +3,10 @@
 #import "mruby.h"
 #import "mruby/class.h"
 #import "mruby/compile.h"
+#import "mruby/error.h"
 #import "mruby/irep.h"
 #import "mruby/string.h"
-#import "mruby/error.h"
+#import "mruby/variable.h"
 
 @interface ChatViewController ()
 
@@ -114,7 +115,9 @@
 - (JSQMessage*)createMessage:(NSString*)input
 {
     mrb_value rinput = mrb_str_new_cstr(mMrb, [input UTF8String]);
-    mrb_value ret = mrb_funcall(mMrb, mrb_obj_value(mMrb->kernel_module), "chat", 1, rinput);
+    struct RClass* cc = mrb_class_get(mMrb, "Chat");
+    mrb_value obj = mrb_const_get(mMrb, mrb_obj_value(cc), mrb_intern_cstr(mMrb, "OBJ"));
+    mrb_value ret = mrb_funcall(mMrb, obj, "call", 1, rinput);
     
     if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
         ret = mrb_funcall(mMrb, ret, "inspect", 0);
