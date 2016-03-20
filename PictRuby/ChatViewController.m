@@ -71,6 +71,15 @@
 
     // Set to Chat::OBJ
     mrb_define_const(mMrb, cc, "OBJ", obj);
+
+    // Call Chat#welcome if exists
+    mrb_sym mid = mrb_intern_cstr(mMrb, "welcome");
+    struct RProc* m = mrb_method_search_vm(mMrb, &cc, mid);
+    if (m) {
+        mrb_value ret = mrb_funcall(mMrb, obj, "welcome", 0);
+        [self.messages addObject:[self createMessageIN:ret]];
+        [self finishReceivingMessageAnimated:YES];
+    } 
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
