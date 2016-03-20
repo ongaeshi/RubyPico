@@ -114,11 +114,20 @@
 
 - (JSQMessage*)createMessage:(NSString*)input
 {
+    mrb_value ret = [self callMethod:"call" input:input];
+    return [self createMessageIN:ret];
+}
+
+- (mrb_value)callMethod:(const char*)name input:(NSString*)input 
+{
     mrb_value rinput = mrb_str_new_cstr(mMrb, [input UTF8String]);
     struct RClass* cc = mrb_class_get(mMrb, "Chat");
     mrb_value obj = mrb_const_get(mMrb, mrb_obj_value(cc), mrb_intern_cstr(mMrb, "OBJ"));
-    mrb_value ret = mrb_funcall(mMrb, obj, "call", 1, rinput);
-    
+    return mrb_funcall(mMrb, obj, name, 1, rinput);
+}
+
+- (JSQMessage*)createMessageIN:(mrb_value)ret
+{
     if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
         ret = mrb_funcall(mMrb, ret, "inspect", 0);
     }
