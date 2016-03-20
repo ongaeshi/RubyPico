@@ -28,10 +28,7 @@
     mrb_state* mrb = [self InitMrb:scriptPath];
 
     // ScriptController or ChatViewController
-    mrb_sym mid = mrb_intern_cstr(mrb, "chat");
-    struct RProc* m = mrb_method_search_vm(mrb, &mrb->object_class, mid);
-
-    if (m) {
+    if (mrb_class_defined(mrb, "Chat")) {
         return [[ChatViewController alloc] init:scriptPath mrb:mrb];
     } else {
         return [[ScriptController alloc] init:scriptPath mrb:mrb];
