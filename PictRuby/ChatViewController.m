@@ -64,6 +64,12 @@
 
 - (void)initScript
 {
+    // Create instance
+    struct RClass* cc = mrb_class_get(mMrb, "Chat");
+    mrb_value obj = mrb_obj_new(mMrb, cc, 0, NULL);
+
+    // Set to Chat::OBJ
+    mrb_define_const(mMrb, cc, "OBJ", obj);
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
