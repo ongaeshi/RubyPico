@@ -151,13 +151,28 @@
 
         // Create a new file
         [FCFileManager createFileAtPath:path
-                            withContent:@"# Return the text or image in the \"main\"\n"
-                                         "\n"
-                                         "def main\n"
-                                         "  puts \"Hello, PictRuby\\nhttp://pictruby.ongaeshi.me\"\n"
-                                         "  # name = Popup.input(\"name?\")\n"
-                                         "  # img = Image.pick_from_library\n"
-                                         "end\n"
+                            withContent:@"# Define \"main\" function or \"Chat\" class\n"
+                                        "\n"
+                                        "class Chat\n"
+                                        "  def initialize\n"
+                                        "    @num = 0\n"
+                                        "  end\n"
+                                        "  \n"
+                                        "  def welcome\n"
+                                        "    \"Hello, world!\"\n"
+                                        "  end\n"
+                                        "  \n"
+                                        "  def call(input)\n"
+                                        "    @num += 1\n"
+                                        "    \"#{@num}: #{input}\"\n"
+                                        "  end\n"
+                                        "end\n"
+                                        "\n"
+                                        "# def main\n"
+                                        "#   puts \"Hello, PictRuby\\nhttp://pictruby.ongaeshi.me\"\n"
+                                        "#   # name = Popup.input(\"name?\")\n"
+                                        "#   # img = Image.pick_from_library\n"
+                                        "# end\n"
             ];
 
         // Update data source
