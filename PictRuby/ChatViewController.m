@@ -77,8 +77,8 @@
     struct RProc* m = mrb_method_search_vm(mMrb, &cc, mid);
     if (m) {
         mrb_value ret = mrb_funcall(mMrb, obj, "welcome", 0);
-        [self.messages addObject:[self createMessageIN:ret]];
-        [self finishReceivingMessageAnimated:YES];
+        JSQMessage* msg = [self createMessage:ret];
+        [self receiveAutoMessage:msg];
     } 
 }
 
@@ -105,37 +105,27 @@
                                               displayName:senderDisplayName
                                                      text:text];
     [self.messages addObject:message];
-
     [self finishSendingMessageAnimated:YES];
 
-    // Receive message
-    [self receiveAutoMessage:text];
+    // Call Chat#call(input)
+    mrb_value rinput = mrb_str_new_cstr(mMrb, [text UTF8String]);
+    struct RClass* cc = mrb_class_get(mMrb, "Chat");
+    mrb_value obj = mrb_const_get(mMrb, mrb_obj_value(cc), mrb_intern_cstr(mMrb, "OBJ"));
+    mrb_value ret = mrb_funcall(mMrb, obj, "call", 1, rinput);
+    JSQMessage* msg = [self createMessage:ret];
+    [self receiveAutoMessage:msg];
 }
 
-- (void)receiveAutoMessage:(NSString*)input
+- (void)receiveAutoMessage:(JSQMessage*)msg
 {
     // [JSQSystemSoundPlayer jsq_playMessageSentSound];
 
-    [self.messages addObject:[self createMessage:input]];
+    [self.messages addObject:msg];
 
     [self finishReceivingMessageAnimated:YES];
 }
 
-- (JSQMessage*)createMessage:(NSString*)input
-{
-    mrb_value ret = [self callMethod:"call" input:input];
-    return [self createMessageIN:ret];
-}
-
-- (mrb_value)callMethod:(const char*)name input:(NSString*)input 
-{
-    mrb_value rinput = mrb_str_new_cstr(mMrb, [input UTF8String]);
-    struct RClass* cc = mrb_class_get(mMrb, "Chat");
-    mrb_value obj = mrb_const_get(mMrb, mrb_obj_value(cc), mrb_intern_cstr(mMrb, "OBJ"));
-    return mrb_funcall(mMrb, obj, name, 1, rinput);
-}
-
-- (JSQMessage*)createMessageIN:(mrb_value)ret
+- (JSQMessage*)createMessage:(mrb_value)ret
 {
     if (!mrb_obj_is_instance_of(mMrb, ret, mrb_class_get(mMrb, "String"))) {
         ret = mrb_funcall(mMrb, ret, "inspect", 0);
