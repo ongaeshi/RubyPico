@@ -73,8 +73,8 @@
         "\n"
         "\n"
         "--- \n"
-        "WPZOOM Developer Icon Set\n"
-        "CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0/)\n"
+        "mruby-logo\n"
+        "https://github.com/h2so5/mruby-logo\n"
         ;
 
     [self.view addSubview:textView];
