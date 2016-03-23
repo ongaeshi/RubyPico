@@ -1,0 +1,11 @@
+file "icons/Icon-40@2x.png" => ["icon.png"] do |t| 
+  sh "ruby s9icongen.rb #{t.source}"
+end
+
+file "screens/Default@2x~iphone.png" => ["splash.png"] do |t| 
+  sh "ruby s9splashgen.rb #{t.source} universal"
+end
+
+task :all => ["icons/Icon-40@2x.png", "screens/Default@2x~iphone.png"]
+task :default => :all
+
