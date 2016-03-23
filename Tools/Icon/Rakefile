@@ -1,4 +1,4 @@
-file "icons/Icon-40@2x.png" => ["pictruby-icon.png"] do |t| 
+file "icons/Icon-40@2x.png" => ["icon.png"] do |t| 
   sh "ruby s9icongen.rb #{t.source}"
 end
 
