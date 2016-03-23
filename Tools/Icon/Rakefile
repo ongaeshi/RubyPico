@@ -3,7 +3,7 @@ file "icons/Icon-40@2x.png" => ["icon.png"] do |t|
 end
 
 file "screens/Default@2x~iphone.png" => ["splash.png"] do |t| 
-  sh "ruby s9splashgen.rb #{t.source}"
+  sh "ruby s9splashgen.rb #{t.source} universal"
 end
 
 task :all => ["icons/Icon-40@2x.png", "screens/Default@2x~iphone.png"]
