@@ -36,7 +36,7 @@ sizes = [{
       {
       idiom: 'iphone spotlight',
       size: 40,
-      scale: 1}
+      scale: 1},
       {
       idiom: 'iphone spotlight',
       size: 40,
