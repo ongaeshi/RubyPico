@@ -1,0 +1,7 @@
+file "icons/Icon-40@2x.png" => ["pictruby-icon.png"] do |t| 
+  sh "ruby s9icongen.rb #{t.source}"
+end
+
+task :all => ["icons/Icon-40@2x.png"]
+task :default => :all
+
