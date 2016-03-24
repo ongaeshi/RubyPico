@@ -1,5 +1,17 @@
 # HISTORY - PictRuby
 
+### 0.5 - 2015-03-24
+
+- Script
+  - Create chat bot
+    - Define Chat class
+  - Add mruby-eval
+  - Add sample/10_irb.rb
+- etc
+  - Enable "Application supports iTunes file sharing
+  - New Icon, LaunchImage
+  - Automate the icon update
+
 ### 0.4 - 2015-02-14
 
 - Script
