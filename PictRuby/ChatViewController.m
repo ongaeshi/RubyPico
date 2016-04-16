@@ -61,6 +61,13 @@
 
     // Init mruby
     [self initScript];
+
+    // Start timer
+    [NSTimer scheduledTimerWithTimeInterval:4 //TODO: Customize
+                                     target:self
+                                   selector:@selector(timerProcess)
+                                   userInfo:nil
+                                    repeats:YES];
 }
 
 - (void)initScript
@@ -168,6 +175,30 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.messages.count;
+}
+
+- (void)timerProcess
+{
+    if (!mMrb ||
+        mMrb->exc) {
+        return;
+    }
+
+    // NSLog(@"timer");
+
+    struct RClass* cc = mrb_class_get(mMrb, "Chat");
+    mrb_value obj = mrb_const_get(mMrb, mrb_obj_value(cc), mrb_intern_cstr(mMrb, "OBJ"));
+
+    // Call Chat#timer if exists
+    mrb_sym mid = mrb_intern_cstr(mMrb, "timer");
+    struct RProc* m = mrb_method_search_vm(mMrb, &cc, mid);
+    if (m) {
+        mrb_value ret = mrb_funcall(mMrb, obj, "timer", 0);
+        if (!mrb_nil_p(ret)) {
+            JSQMessage* msg = [self createMessage:ret];
+            [self receiveAutoMessage:msg];
+        }
+    } 
 }
 
 @end
