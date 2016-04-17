@@ -41,13 +41,9 @@
     self.senderDisplayName = @"You";
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [JSQMessagesBubbleImageFactory new];
-    // UIColor* c = [UIColor colorWithRed:0.21f
-    //                              green:0.23f
-    //                               blue:0.31f
-    //                              alpha:1.0f];
-    UIColor* c = [UIColor colorWithHue:240.0f / 360.0f
-                            saturation:0.02f
-                            brightness:0.5f
+    UIColor* c = [UIColor colorWithRed:0.21f
+                                 green:0.23f
+                                  blue:0.31f
                                  alpha:1.0f];
     self.incomingBubble = [bubbleFactory  incomingMessagesBubbleImageWithColor:c];
     self.outgoingBubble = [bubbleFactory  outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
@@ -205,4 +201,10 @@
     } 
 }
 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    cell.textView.textColor = [UIColor whiteColor];
+    return cell;
+}
 @end
