@@ -63,7 +63,7 @@
     [self initScript];
 
     // Start timer
-    [NSTimer scheduledTimerWithTimeInterval:4 //TODO: Customize
+    [NSTimer scheduledTimerWithTimeInterval:1.0/60
                                      target:self
                                    selector:@selector(timerProcess)
                                    userInfo:nil
