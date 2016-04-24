@@ -1,4 +1,4 @@
-# # 10_irb
+# # irb
 #
 # ## Description
 # Interactive Ruby Shell (REPL).
