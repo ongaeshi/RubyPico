@@ -1,5 +1,13 @@
 # HISTORY - PictRuby
 
+### 0.6 - 2015-04-30
+
+- Support Regexp
+- Add Chat#timer event
+- Fix bug a chat font is blinking
+- Add sample/hatena_bookmark_bot
+- Remove sample number prefix
+
 ### 0.5 - 2015-03-24
 
 - Script
