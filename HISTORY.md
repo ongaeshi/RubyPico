@@ -1,4 +1,4 @@
-# HISTORY - PictRuby
+# HISTORY - RubyPico
 
 ### 0.6 - 2015-04-30
 

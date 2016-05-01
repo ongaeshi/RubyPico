@@ -8,26 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
-		527241011C12D73C00B074DB /* BindPopup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 527241001C12D73C00B074DB /* BindPopup.mm */; };
-		52731C521B371D7600E2CC2A /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3D1B371D7600E2CC2A /* BindImage.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		52731C531B371D7600E2CC2A /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C3F1B371D7600E2CC2A /* EditViewController.mm */; };
-		52731C551B371D7600E2CC2A /* FileViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C431B371D7600E2CC2A /* FileViewController.mm */; };
-		52731C561B371D7600E2CC2A /* HelpViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C451B371D7600E2CC2A /* HelpViewController.mm */; };
-		52731C581B371D7600E2CC2A /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52731C481B371D7600E2CC2A /* RubyHighlightingTextStorage.m */; };
-		52731C591B371D7600E2CC2A /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4A1B371D7600E2CC2A /* SampleViewController.mm */; };
-		52731C5A1B371D7600E2CC2A /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4C1B371D7600E2CC2A /* ScriptController.mm */; };
-		52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52731C4E1B371D7600E2CC2A /* SelectViewController.mm */; };
 		52731C651B371FC500E2CC2A /* builtin.rb in Resources */ = {isa = PBXBuildFile; fileRef = 52731C5E1B371FC500E2CC2A /* builtin.rb */; };
 		52731C661B371FC500E2CC2A /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52731C601B371FC500E2CC2A /* sample.jpg */; };
 		52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C611B371FC500E2CC2A /* tabbar_files.png */; };
 		52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C621B371FC500E2CC2A /* tabbar_samples.png */; };
 		52731C6D1B37224300E2CC2A /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 52731C6C1B37224300E2CC2A /* sample */; };
 		5285E9641C3B61A70090C383 /* MRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5285E9631C3B61A70090C383 /* MRuby.framework */; };
-		5294CC0B1B3469C10044D56D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0A1B3469C10044D56D /* main.m */; };
-		5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC0D1B3469C10044D56D /* AppDelegate.m */; };
-		5294CC161B3469C10044D56D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294CC151B3469C10044D56D /* Images.xcassets */; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
-		52C018561C93D7EE0046CCF8 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C018551C93D7EE0046CCF8 /* ChatViewController.m */; };
+		52BF5C511CD641B60035968E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C391CD641B50035968E /* AppDelegate.m */; };
+		52BF5C521CD641B60035968E /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C3B1CD641B50035968E /* BindImage.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		52BF5C531CD641B60035968E /* BindPopup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C3D1CD641B50035968E /* BindPopup.mm */; };
+		52BF5C541CD641B60035968E /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C3F1CD641B50035968E /* ChatViewController.m */; };
+		52BF5C551CD641B60035968E /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C411CD641B50035968E /* EditViewController.mm */; };
+		52BF5C561CD641B60035968E /* FileViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C431CD641B50035968E /* FileViewController.mm */; };
+		52BF5C571CD641B60035968E /* HelpViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C451CD641B50035968E /* HelpViewController.mm */; };
+		52BF5C581CD641B60035968E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52BF5C461CD641B50035968E /* Images.xcassets */; };
+		52BF5C591CD641B60035968E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52BF5C471CD641B60035968E /* Info.plist */; };
+		52BF5C5A1CD641B60035968E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C481CD641B60035968E /* main.m */; };
+		52BF5C5B1CD641B60035968E /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4A1CD641B60035968E /* RubyHighlightingTextStorage.m */; };
+		52BF5C5C1CD641B60035968E /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4C1CD641B60035968E /* SampleViewController.mm */; };
+		52BF5C5D1CD641B60035968E /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4E1CD641B60035968E /* ScriptController.mm */; };
+		52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C501CD641B60035968E /* SelectViewController.mm */; };
 		52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018571C94075E0046CCF8 /* chat_ruby.png */; };
 		52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018581C94075E0046CCF8 /* chat_you.png */; };
 		B765EA97EC2CE00FC1CAECBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA91EBF38EC18AFCCBAA49A /* libPods.a */; };
@@ -46,41 +47,41 @@
 /* Begin PBXFileReference section */
 		47448831D6B97BD52CBE4C5E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
-		527240FF1C12D73C00B074DB /* BindPopup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindPopup.hpp; sourceTree = "<group>"; };
-		527241001C12D73C00B074DB /* BindPopup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindPopup.mm; sourceTree = "<group>"; };
-		52731C3C1B371D7600E2CC2A /* BindImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindImage.hpp; sourceTree = "<group>"; };
-		52731C3D1B371D7600E2CC2A /* BindImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindImage.mm; sourceTree = "<group>"; };
-		52731C3E1B371D7600E2CC2A /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
-		52731C3F1B371D7600E2CC2A /* EditViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
-		52731C421B371D7600E2CC2A /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
-		52731C431B371D7600E2CC2A /* FileViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileViewController.mm; sourceTree = "<group>"; };
-		52731C441B371D7600E2CC2A /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
-		52731C451B371D7600E2CC2A /* HelpViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HelpViewController.mm; sourceTree = "<group>"; };
-		52731C471B371D7600E2CC2A /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
-		52731C481B371D7600E2CC2A /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
-		52731C491B371D7600E2CC2A /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
-		52731C4A1B371D7600E2CC2A /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
-		52731C4B1B371D7600E2CC2A /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
-		52731C4C1B371D7600E2CC2A /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
-		52731C4D1B371D7600E2CC2A /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
-		52731C4E1B371D7600E2CC2A /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
 		52731C5E1B371FC500E2CC2A /* builtin.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = builtin.rb; sourceTree = "<group>"; };
 		52731C601B371FC500E2CC2A /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		52731C611B371FC500E2CC2A /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		52731C621B371FC500E2CC2A /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		52731C6C1B37224300E2CC2A /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
 		5285E9631C3B61A70090C383 /* MRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MRuby.framework; path = Vendor/MRuby.framework; sourceTree = "<group>"; };
-		5294CC051B3469C10044D56D /* PictRuby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictRuby.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5294CC091B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5294CC0A1B3469C10044D56D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5294CC0C1B3469C10044D56D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5294CC0D1B3469C10044D56D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5294CC151B3469C10044D56D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictRubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5294CC051B3469C10044D56D /* RubyPico.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyPico.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5294CC1E1B3469C10044D56D /* RubyPico.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyPico.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
-		52C018541C93D7EE0046CCF8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		52C018551C93D7EE0046CCF8 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		52BF5C381CD641B50035968E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		52BF5C391CD641B50035968E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		52BF5C3A1CD641B50035968E /* BindImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindImage.hpp; sourceTree = "<group>"; };
+		52BF5C3B1CD641B50035968E /* BindImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindImage.mm; sourceTree = "<group>"; };
+		52BF5C3C1CD641B50035968E /* BindPopup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindPopup.hpp; sourceTree = "<group>"; };
+		52BF5C3D1CD641B50035968E /* BindPopup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindPopup.mm; sourceTree = "<group>"; };
+		52BF5C3E1CD641B50035968E /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		52BF5C3F1CD641B50035968E /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		52BF5C401CD641B50035968E /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		52BF5C411CD641B50035968E /* EditViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
+		52BF5C421CD641B50035968E /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		52BF5C431CD641B50035968E /* FileViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileViewController.mm; sourceTree = "<group>"; };
+		52BF5C441CD641B50035968E /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		52BF5C451CD641B50035968E /* HelpViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HelpViewController.mm; sourceTree = "<group>"; };
+		52BF5C461CD641B50035968E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		52BF5C471CD641B60035968E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52BF5C481CD641B60035968E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		52BF5C491CD641B60035968E /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
+		52BF5C4A1CD641B60035968E /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
+		52BF5C4B1CD641B60035968E /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		52BF5C4C1CD641B60035968E /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
+		52BF5C4D1CD641B60035968E /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
+		52BF5C4E1CD641B60035968E /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
+		52BF5C4F1CD641B60035968E /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
+		52BF5C501CD641B60035968E /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
 		52C018571C94075E0046CCF8 /* chat_ruby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ruby.png; sourceTree = "<group>"; };
 		52C018581C94075E0046CCF8 /* chat_you.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_you.png; sourceTree = "<group>"; };
 		E278C1DC926282A94614C355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,9 +143,9 @@
 		5294CBFC1B3469C10044D56D = {
 			isa = PBXGroup;
 			children = (
+				52BF5C371CD641B50035968E /* App */,
 				52731C5D1B371FC500E2CC2A /* resources */,
-				5294CC071B3469C10044D56D /* PictRuby */,
-				5294CC211B3469C10044D56D /* PictRubyTests */,
+				5294CC211B3469C10044D56D /* AppTests */,
 				5294CC061B3469C10044D56D /* Products */,
 				6948890A8D3F6C0749FB03A3 /* Pods */,
 				1F005DFDA27FCFE852E63B85 /* Frameworks */,
@@ -154,58 +155,19 @@
 		5294CC061B3469C10044D56D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5294CC051B3469C10044D56D /* PictRuby.app */,
-				5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */,
+				5294CC051B3469C10044D56D /* RubyPico.app */,
+				5294CC1E1B3469C10044D56D /* RubyPico.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5294CC071B3469C10044D56D /* PictRuby */ = {
-			isa = PBXGroup;
-			children = (
-				52731C3C1B371D7600E2CC2A /* BindImage.hpp */,
-				52731C3D1B371D7600E2CC2A /* BindImage.mm */,
-				527240FF1C12D73C00B074DB /* BindPopup.hpp */,
-				527241001C12D73C00B074DB /* BindPopup.mm */,
-				52731C3E1B371D7600E2CC2A /* EditViewController.h */,
-				52731C3F1B371D7600E2CC2A /* EditViewController.mm */,
-				52731C421B371D7600E2CC2A /* FileViewController.h */,
-				52731C431B371D7600E2CC2A /* FileViewController.mm */,
-				52731C441B371D7600E2CC2A /* HelpViewController.h */,
-				52731C451B371D7600E2CC2A /* HelpViewController.mm */,
-				52731C471B371D7600E2CC2A /* RubyHighlightingTextStorage.h */,
-				52731C481B371D7600E2CC2A /* RubyHighlightingTextStorage.m */,
-				52731C491B371D7600E2CC2A /* SampleViewController.h */,
-				52731C4A1B371D7600E2CC2A /* SampleViewController.mm */,
-				52731C4B1B371D7600E2CC2A /* ScriptController.h */,
-				52731C4C1B371D7600E2CC2A /* ScriptController.mm */,
-				52C018541C93D7EE0046CCF8 /* ChatViewController.h */,
-				52C018551C93D7EE0046CCF8 /* ChatViewController.m */,
-				52731C4D1B371D7600E2CC2A /* SelectViewController.h */,
-				52731C4E1B371D7600E2CC2A /* SelectViewController.mm */,
-				5294CC0C1B3469C10044D56D /* AppDelegate.h */,
-				5294CC0D1B3469C10044D56D /* AppDelegate.m */,
-				5294CC151B3469C10044D56D /* Images.xcassets */,
-				5294CC081B3469C10044D56D /* Supporting Files */,
-			);
-			path = PictRuby;
-			sourceTree = "<group>";
-		};
-		5294CC081B3469C10044D56D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5294CC091B3469C10044D56D /* Info.plist */,
-				5294CC0A1B3469C10044D56D /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5294CC211B3469C10044D56D /* PictRubyTests */ = {
+		5294CC211B3469C10044D56D /* AppTests */ = {
 			isa = PBXGroup;
 			children = (
 				5294CC241B3469C10044D56D /* PictRubyTests.m */,
 				5294CC221B3469C10044D56D /* Supporting Files */,
 			);
+			name = AppTests;
 			path = PictRubyTests;
 			sourceTree = "<group>";
 		};
@@ -215,6 +177,38 @@
 				5294CC231B3469C10044D56D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52BF5C371CD641B50035968E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				52BF5C381CD641B50035968E /* AppDelegate.h */,
+				52BF5C391CD641B50035968E /* AppDelegate.m */,
+				52BF5C3A1CD641B50035968E /* BindImage.hpp */,
+				52BF5C3B1CD641B50035968E /* BindImage.mm */,
+				52BF5C3C1CD641B50035968E /* BindPopup.hpp */,
+				52BF5C3D1CD641B50035968E /* BindPopup.mm */,
+				52BF5C3E1CD641B50035968E /* ChatViewController.h */,
+				52BF5C3F1CD641B50035968E /* ChatViewController.m */,
+				52BF5C401CD641B50035968E /* EditViewController.h */,
+				52BF5C411CD641B50035968E /* EditViewController.mm */,
+				52BF5C421CD641B50035968E /* FileViewController.h */,
+				52BF5C431CD641B50035968E /* FileViewController.mm */,
+				52BF5C441CD641B50035968E /* HelpViewController.h */,
+				52BF5C451CD641B50035968E /* HelpViewController.mm */,
+				52BF5C461CD641B50035968E /* Images.xcassets */,
+				52BF5C471CD641B60035968E /* Info.plist */,
+				52BF5C481CD641B60035968E /* main.m */,
+				52BF5C491CD641B60035968E /* RubyHighlightingTextStorage.h */,
+				52BF5C4A1CD641B60035968E /* RubyHighlightingTextStorage.m */,
+				52BF5C4B1CD641B60035968E /* SampleViewController.h */,
+				52BF5C4C1CD641B60035968E /* SampleViewController.mm */,
+				52BF5C4D1CD641B60035968E /* ScriptController.h */,
+				52BF5C4E1CD641B60035968E /* ScriptController.mm */,
+				52BF5C4F1CD641B60035968E /* SelectViewController.h */,
+				52BF5C501CD641B60035968E /* SelectViewController.mm */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		6948890A8D3F6C0749FB03A3 /* Pods */ = {
@@ -229,9 +223,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5294CC041B3469C10044D56D /* PictRuby */ = {
+		5294CC041B3469C10044D56D /* RubyPico */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRuby" */;
+			buildConfigurationList = 5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPico" */;
 			buildPhases = (
 				36A0237E71A9528A738A1674 /* Check Pods Manifest.lock */,
 				5294CC011B3469C10044D56D /* Sources */,
@@ -244,14 +238,14 @@
 			);
 			dependencies = (
 			);
-			name = PictRuby;
+			name = RubyPico;
 			productName = PictRuby;
-			productReference = 5294CC051B3469C10044D56D /* PictRuby.app */;
+			productReference = 5294CC051B3469C10044D56D /* RubyPico.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5294CC1D1B3469C10044D56D /* PictRubyTests */ = {
+		5294CC1D1B3469C10044D56D /* RubyPicoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRubyTests" */;
+			buildConfigurationList = 5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPicoTests" */;
 			buildPhases = (
 				5294CC1A1B3469C10044D56D /* Sources */,
 				5294CC1B1B3469C10044D56D /* Frameworks */,
@@ -262,9 +256,9 @@
 			dependencies = (
 				5294CC201B3469C10044D56D /* PBXTargetDependency */,
 			);
-			name = PictRubyTests;
+			name = RubyPicoTests;
 			productName = PictRubyTests;
-			productReference = 5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */;
+			productReference = 5294CC1E1B3469C10044D56D /* RubyPico.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -286,7 +280,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5294CC001B3469C10044D56D /* Build configuration list for PBXProject "PictRuby" */;
+			buildConfigurationList = 5294CC001B3469C10044D56D /* Build configuration list for PBXProject "RubyPico" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -299,8 +293,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5294CC041B3469C10044D56D /* PictRuby */,
-				5294CC1D1B3469C10044D56D /* PictRubyTests */,
+				5294CC041B3469C10044D56D /* RubyPico */,
+				5294CC1D1B3469C10044D56D /* RubyPicoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -313,11 +307,12 @@
 				52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */,
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
 				52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */,
+				52BF5C581CD641B60035968E /* Images.xcassets in Resources */,
 				52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */,
 				52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */,
 				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
+				52BF5C591CD641B60035968E /* Info.plist in Resources */,
 				52731C651B371FC500E2CC2A /* builtin.rb in Resources */,
-				5294CC161B3469C10044D56D /* Images.xcassets in Resources */,
 				52731C661B371FC500E2CC2A /* sample.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,18 +379,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52731C591B371D7600E2CC2A /* SampleViewController.mm in Sources */,
-				52731C551B371D7600E2CC2A /* FileViewController.mm in Sources */,
-				52C018561C93D7EE0046CCF8 /* ChatViewController.m in Sources */,
-				52731C521B371D7600E2CC2A /* BindImage.mm in Sources */,
-				52731C5B1B371D7600E2CC2A /* SelectViewController.mm in Sources */,
-				527241011C12D73C00B074DB /* BindPopup.mm in Sources */,
-				52731C5A1B371D7600E2CC2A /* ScriptController.mm in Sources */,
-				5294CC0E1B3469C10044D56D /* AppDelegate.m in Sources */,
-				5294CC0B1B3469C10044D56D /* main.m in Sources */,
-				52731C581B371D7600E2CC2A /* RubyHighlightingTextStorage.m in Sources */,
-				52731C561B371D7600E2CC2A /* HelpViewController.mm in Sources */,
-				52731C531B371D7600E2CC2A /* EditViewController.mm in Sources */,
+				52BF5C571CD641B60035968E /* HelpViewController.mm in Sources */,
+				52BF5C5C1CD641B60035968E /* SampleViewController.mm in Sources */,
+				52BF5C531CD641B60035968E /* BindPopup.mm in Sources */,
+				52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */,
+				52BF5C5D1CD641B60035968E /* ScriptController.mm in Sources */,
+				52BF5C561CD641B60035968E /* FileViewController.mm in Sources */,
+				52BF5C5A1CD641B60035968E /* main.m in Sources */,
+				52BF5C5B1CD641B60035968E /* RubyHighlightingTextStorage.m in Sources */,
+				52BF5C511CD641B60035968E /* AppDelegate.m in Sources */,
+				52BF5C551CD641B60035968E /* EditViewController.mm in Sources */,
+				52BF5C521CD641B60035968E /* BindImage.mm in Sources */,
+				52BF5C541CD641B60035968E /* ChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +407,7 @@
 /* Begin PBXTargetDependency section */
 		5294CC201B3469C10044D56D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5294CC041B3469C10044D56D /* PictRuby */;
+			target = 5294CC041B3469C10044D56D /* RubyPico */;
 			targetProxy = 5294CC1F1B3469C10044D56D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -517,10 +512,11 @@
 					"\"${PODS_ROOT}/Headers/Public/NYXImagesKit\"",
 					"$(SRCROOT)/Vendor/MRuby.framework/Headers",
 				);
-				INFOPLIST_FILE = PictRuby/Info.plist;
+				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = me.ongaeshi.PictRuby;
+				PRODUCT_NAME = RubyPico;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -546,10 +542,11 @@
 					"\"${PODS_ROOT}/Headers/Public/NYXImagesKit\"",
 					"$(SRCROOT)/Vendor/MRuby.framework/Headers",
 				);
-				INFOPLIST_FILE = PictRuby/Info.plist;
+				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = me.ongaeshi.PictRuby;
+				PRODUCT_NAME = RubyPico;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -568,8 +565,8 @@
 				);
 				INFOPLIST_FILE = PictRubyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictRuby.app/PictRuby";
+				PRODUCT_NAME = RubyPico;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RubyPico.app/RubyPico";
 			};
 			name = Debug;
 		};
@@ -583,15 +580,15 @@
 				);
 				INFOPLIST_FILE = PictRubyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictRuby.app/PictRuby";
+				PRODUCT_NAME = RubyPico;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RubyPico.app/RubyPico";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5294CC001B3469C10044D56D /* Build configuration list for PBXProject "PictRuby" */ = {
+		5294CC001B3469C10044D56D /* Build configuration list for PBXProject "RubyPico" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5294CC261B3469C10044D56D /* Debug */,
@@ -600,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRuby" */ = {
+		5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPico" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5294CC291B3469C10044D56D /* Debug */,
@@ -609,7 +606,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRubyTests" */ = {
+		5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPicoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5294CC2C1B3469C10044D56D /* Debug */,

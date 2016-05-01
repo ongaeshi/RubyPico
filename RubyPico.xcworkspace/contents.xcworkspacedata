@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/ongaeshi/Documents/PictRuby/RubyPico.xcodeproj">
+      location = "group:RubyPico.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
