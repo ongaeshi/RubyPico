@@ -70,13 +70,13 @@
 		52731C621B371FC500E2CC2A /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		52731C6C1B37224300E2CC2A /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
 		5285E9631C3B61A70090C383 /* MRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MRuby.framework; path = Vendor/MRuby.framework; sourceTree = "<group>"; };
-		5294CC051B3469C10044D56D /* PictRuby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PictRuby.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5294CC051B3469C10044D56D /* RubyPico.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyPico.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC091B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC0A1B3469C10044D56D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5294CC0C1B3469C10044D56D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5294CC0D1B3469C10044D56D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5294CC151B3469C10044D56D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PictRubyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5294CC1E1B3469C10044D56D /* RubyPico.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyPico.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
 		52C018541C93D7EE0046CCF8 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -154,8 +154,8 @@
 		5294CC061B3469C10044D56D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5294CC051B3469C10044D56D /* PictRuby.app */,
-				5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */,
+				5294CC051B3469C10044D56D /* RubyPico.app */,
+				5294CC1E1B3469C10044D56D /* RubyPico.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,9 +229,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5294CC041B3469C10044D56D /* PictRuby */ = {
+		5294CC041B3469C10044D56D /* RubyPico */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRuby" */;
+			buildConfigurationList = 5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPico" */;
 			buildPhases = (
 				36A0237E71A9528A738A1674 /* Check Pods Manifest.lock */,
 				5294CC011B3469C10044D56D /* Sources */,
@@ -244,14 +244,14 @@
 			);
 			dependencies = (
 			);
-			name = PictRuby;
+			name = RubyPico;
 			productName = PictRuby;
-			productReference = 5294CC051B3469C10044D56D /* PictRuby.app */;
+			productReference = 5294CC051B3469C10044D56D /* RubyPico.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5294CC1D1B3469C10044D56D /* PictRubyTests */ = {
+		5294CC1D1B3469C10044D56D /* RubyPicoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRubyTests" */;
+			buildConfigurationList = 5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPicoTests" */;
 			buildPhases = (
 				5294CC1A1B3469C10044D56D /* Sources */,
 				5294CC1B1B3469C10044D56D /* Frameworks */,
@@ -262,9 +262,9 @@
 			dependencies = (
 				5294CC201B3469C10044D56D /* PBXTargetDependency */,
 			);
-			name = PictRubyTests;
+			name = RubyPicoTests;
 			productName = PictRubyTests;
-			productReference = 5294CC1E1B3469C10044D56D /* PictRubyTests.xctest */;
+			productReference = 5294CC1E1B3469C10044D56D /* RubyPico.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -286,7 +286,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5294CC001B3469C10044D56D /* Build configuration list for PBXProject "PictRuby" */;
+			buildConfigurationList = 5294CC001B3469C10044D56D /* Build configuration list for PBXProject "RubyPico" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -299,8 +299,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5294CC041B3469C10044D56D /* PictRuby */,
-				5294CC1D1B3469C10044D56D /* PictRubyTests */,
+				5294CC041B3469C10044D56D /* RubyPico */,
+				5294CC1D1B3469C10044D56D /* RubyPicoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -412,7 +412,7 @@
 /* Begin PBXTargetDependency section */
 		5294CC201B3469C10044D56D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5294CC041B3469C10044D56D /* PictRuby */;
+			target = 5294CC041B3469C10044D56D /* RubyPico */;
 			targetProxy = 5294CC1F1B3469C10044D56D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -520,7 +520,8 @@
 				INFOPLIST_FILE = PictRuby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = me.ongaeshi.RubyPico;
+				PRODUCT_NAME = RubyPico;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -549,7 +550,8 @@
 				INFOPLIST_FILE = PictRuby/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = me.ongaeshi.RubyPico;
+				PRODUCT_NAME = RubyPico;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -568,8 +570,8 @@
 				);
 				INFOPLIST_FILE = PictRubyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictRuby.app/PictRuby";
+				PRODUCT_NAME = RubyPico;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RubyPico.app/RubyPico";
 			};
 			name = Debug;
 		};
@@ -583,15 +585,15 @@
 				);
 				INFOPLIST_FILE = PictRubyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PictRuby.app/PictRuby";
+				PRODUCT_NAME = RubyPico;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RubyPico.app/RubyPico";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5294CC001B3469C10044D56D /* Build configuration list for PBXProject "PictRuby" */ = {
+		5294CC001B3469C10044D56D /* Build configuration list for PBXProject "RubyPico" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5294CC261B3469C10044D56D /* Debug */,
@@ -600,7 +602,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRuby" */ = {
+		5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPico" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5294CC291B3469C10044D56D /* Debug */,
@@ -609,7 +611,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "PictRubyTests" */ = {
+		5294CC2B1B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPicoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5294CC2C1B3469C10044D56D /* Debug */,
