@@ -143,8 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				52731C5D1B371FC500E2CC2A /* resources */,
-				5294CC071B3469C10044D56D /* PictRuby */,
-				5294CC211B3469C10044D56D /* PictRubyTests */,
+				5294CC071B3469C10044D56D /* App */,
+				5294CC211B3469C10044D56D /* AppTests */,
 				5294CC061B3469C10044D56D /* Products */,
 				6948890A8D3F6C0749FB03A3 /* Pods */,
 				1F005DFDA27FCFE852E63B85 /* Frameworks */,
@@ -160,7 +160,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5294CC071B3469C10044D56D /* PictRuby */ = {
+		5294CC071B3469C10044D56D /* App */ = {
 			isa = PBXGroup;
 			children = (
 				52731C3C1B371D7600E2CC2A /* BindImage.hpp */,
@@ -188,6 +188,7 @@
 				5294CC151B3469C10044D56D /* Images.xcassets */,
 				5294CC081B3469C10044D56D /* Supporting Files */,
 			);
+			name = App;
 			path = PictRuby;
 			sourceTree = "<group>";
 		};
@@ -200,12 +201,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5294CC211B3469C10044D56D /* PictRubyTests */ = {
+		5294CC211B3469C10044D56D /* AppTests */ = {
 			isa = PBXGroup;
 			children = (
 				5294CC241B3469C10044D56D /* PictRubyTests.m */,
 				5294CC221B3469C10044D56D /* Supporting Files */,
 			);
+			name = AppTests;
 			path = PictRubyTests;
 			sourceTree = "<group>";
 		};
