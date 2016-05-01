@@ -1,5 +1,5 @@
 =================
-PictRuby
+RubyPico
 =================
 
 Copyright (c) 2015 ongaeshi

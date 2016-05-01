@@ -1,4 +1,4 @@
-# PictRuby
+# RubyPico
 
 ![pictruby-icon](http://pictruby.ongaeshi.me/images/pictruby-icon.png)
 
