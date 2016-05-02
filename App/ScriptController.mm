@@ -3,12 +3,15 @@
 #import "BindImage.hpp"
 #import "BindPopup.hpp"
 #import "ChatViewController.h"
+#import "FCFileManager.h"
 #import "mruby.h"
 #import "mruby/class.h"
 #import "mruby/compile.h"
+#import "mruby/error.h"
 #import "mruby/irep.h"
 #import "mruby/string.h"
-#import "mruby/error.h"
+#import "mruby/array.h"
+#import "mruby/variable.h"
 
 @implementation ScriptController
 {
@@ -52,6 +55,14 @@
         FILE *fd = fopen(scriptPath, "r");
         mrb_load_file(mrb, fd);
         fclose(fd);
+    }
+ 
+    // Set LOAD_PATH($:)
+    {
+        mrb_value load_path = mrb_gv_get(mrb, mrb_intern_cstr(mrb, "$:"));
+        mrb_ary_push(mrb, load_path, mrb_str_new_cstr(mrb, [[FCFileManager pathForDocumentsDirectory] UTF8String]));
+        mrb_ary_push(mrb, load_path, mrb_str_new_cstr(mrb, [[FCFileManager pathForMainBundleDirectory] UTF8String]));
+        mrb_p(mrb, load_path);
     }
 
     // Load user script
