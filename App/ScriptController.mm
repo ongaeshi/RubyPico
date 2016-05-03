@@ -75,6 +75,7 @@
 
         const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
         mrbc_filename(mrb, cxt, fileName);
+        mrb_gv_set(mrb, mrb_intern(mrb, "$0", 2), mrb_str_new_cstr(mrb, fileName));
 
         mrb_load_file_cxt(mrb, fd, cxt);
 
