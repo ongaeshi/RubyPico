@@ -4,11 +4,6 @@
  * https://github.com/Exile90/ICTextView.git
  *
  *
- * Version:
- * --------
- * 2.0.0
- *
- *
  * Authors:
  * --------
  * Ivano Bilenchi (@SoftHardW)
@@ -57,9 +52,11 @@
 
 @property (nonatomic, readonly) NSUInteger indexOfCurrentMatch;
 @property (nonatomic, readonly) NSUInteger numberOfMatches;
-@property (nonatomic, readonly) NSRegularExpressionOptions options;
-@property (nonatomic, readonly) NSString *pattern;
+@property (nonatomic, readonly) NSRange matchLocationsRange;
+
 @property (nonatomic, readonly) NSString *string;
+@property (nonatomic, readonly) NSString *pattern;
+@property (nonatomic, readonly) NSRegularExpressionOptions options;
 
 #pragma mark - Methods
 
@@ -73,6 +70,7 @@
 - (NSRange)rangeOfMatchAtIndex:(NSUInteger)index;
 - (NSRange)rangeOfNextMatch;
 - (NSRange)rangeOfPreviousMatch;
+
 - (NSArray *)rangesOfMatchesInRange:(NSRange)range;
 
 @end

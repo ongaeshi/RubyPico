@@ -20,7 +20,7 @@ const int PREV_LINE_MAX = 240;
 
 @implementation EditViewController
 {
-    UITextView* mTextView;
+    ICTextView* mTextView;
 	RubyHighlightingTextStorage* mTextStorage;
 }
 
@@ -74,7 +74,8 @@ const int PREV_LINE_MAX = 240;
         [textLayout addTextContainer:textContainer];
 
         // TextView
-        mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds textContainer:textContainer];
+        mTextView = [[ICTextView alloc] initWithFrame:CGRectZero textContainer:textContainer];
+
     } else {
         // TextView
         mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds];
@@ -101,6 +102,11 @@ const int PREV_LINE_MAX = 240;
     button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
     [button addTarget:self action:@selector(tapTitleButton) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = button;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    mTextView.frame = self.view.bounds;
 }
 
 - (void)viewWillAppear:(BOOL)animated
