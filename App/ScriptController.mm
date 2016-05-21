@@ -62,7 +62,7 @@
         mrb_value load_path = mrb_gv_get(mrb, mrb_intern_cstr(mrb, "$:"));
         mrb_ary_push(mrb, load_path, mrb_str_new_cstr(mrb, [[FCFileManager pathForDocumentsDirectory] UTF8String]));
         mrb_ary_push(mrb, load_path, mrb_str_new_cstr(mrb, [[FCFileManager pathForMainBundleDirectory] UTF8String]));
-        mrb_p(mrb, load_path);
+        // mrb_p(mrb, load_path);
     }
 
     // Load user script
