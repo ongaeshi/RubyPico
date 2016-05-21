@@ -1,6 +1,6 @@
 PODS:
   - FCFileManager (1.0.8)
-  - ICTextView (2.0.0)
+  - ICTextView (2.0.1)
   - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -9,14 +9,14 @@ PODS:
 
 DEPENDENCIES:
   - FCFileManager
-  - ICTextView
+  - ICTextView (>= 2.0.1)
   - JSQMessagesViewController
   - NYXImagesKit
   - QBImagePickerController (>= 3.0.0)
 
 SPEC CHECKSUMS:
   FCFileManager: 83afe49677b8a5f353f52b5476baa2e21043db4a
-  ICTextView: b443c45851659bccad8ee81da279028673091321
+  ICTextView: 937aca5dd49e39e9cca41ababe8c55bf99c634fc
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   NYXImagesKit: 8163e3335a40eaa173ca5bbbf81fafb57d3947eb
