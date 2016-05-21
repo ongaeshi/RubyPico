@@ -78,7 +78,7 @@ const int PREV_LINE_MAX = 240;
 
     } else {
         // TextView
-        mTextView = [[ICTextView alloc] initWithFrame:CGRectZero];
+        mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds];
         mTextView.text = [FCFileManager readFileAtPath:mFileName];
     }
 
