@@ -1,10 +1,10 @@
-# # chat/map
+# # chat/google
 # 
 # ## Description
 # Search page
 # 
 # ## Usage
-# # Search by keyword
+# Search by keyword
 # $ keyword1 keyword2 ...
 
 class Google
@@ -18,7 +18,7 @@ class Google
   def call(input)
     return help if input =~ /^help$/
 
-    url = "https://www.google.com/search?" + #{URI.encode_www_form(q: input)}"
+    url = "https://www.google.com/search?" + URI.encode_www_form(q: input)
     Browser.open url
   end
 
@@ -30,7 +30,7 @@ class Google
 Search page
 
 ## Usage
-# Search by keyword
+Search by keyword
 $ keyword1 keyword2 ...
 EOS
   end
