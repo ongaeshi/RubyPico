@@ -1,17 +1,17 @@
 # # chat/map
 #
 # ## Description
-# Search route using app
+# Search route
 #
 # ## Usage
-# # Search by setting the from and to
+# Search by setting the from and to
 # % From?
 # $ Tokyo
 # % To?
 # $ Osaka
 # --> Launch the app
 #
-# # Change app to use
+# Change app to use
 # $ app apple  (default)
 # $ app google
 
@@ -36,14 +36,14 @@ class Map
 Search route using app
 
 ## Usage
-# Search by setting the from and to
+Search by setting the from and to
 % From?
 $ Tokyo
 % To?
 $ Osaka
 --> Launch the app
 
-# Change app to use
+Change app to use
 $ app apple  (default)
 $ app google
 EOF
