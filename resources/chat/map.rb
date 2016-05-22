@@ -28,6 +28,27 @@ class Map
   end
   
   def call(input)
+    if input =~/^help$/
+      return <<EOF
+# chat/map
+
+## Description
+Search route using app
+
+## Usage
+# Search by setting the from and to
+% From?
+$ Tokyo
+% To?
+$ Osaka
+--> Launch the app
+
+# Change app to use
+$ app apple  (default)
+$ app google
+EOF
+    end
+
     if input =~/^app (.+)/
       @app_kind = $1.to_sym
       return app_kind
