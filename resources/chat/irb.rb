@@ -1,14 +1,18 @@
-# Define "main" function or "Chat" class
-LIMIT = 1000
+# # chat/irb
+# 
+# ## Description
+# irb - Interactive Ruby Shell
 
 class Irb
+  LIMIT = 1000
+  
   def welcome
-    <<EOS
-irb - Interactive Ruby Shell
-EOS
+    help
   end
-
+  
   def call(input)
+    return help if input =~ /^help$/
+
     begin
       r = eval(input)
       r = r.inspect unless r.is_a? String
@@ -22,11 +26,11 @@ EOS
       e.message
     end
   end
-end
-
-class Object
-  def m(keyword)
-    self.class.instance_methods().find_all { |e| e .to_s.include?(keyword) }.join("\n")
+  
+  def help
+    <<EOS
+irb - Interactive Ruby Shell
+EOS
   end
 end
 
