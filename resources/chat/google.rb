@@ -1,4 +1,11 @@
-# Define "main" function or "Chat" class
+# # chat/map
+# 
+# ## Description
+# Search page
+# 
+# ## Usage
+# # Search by keyword
+# $ keyword1 keyword2 ...
 
 class Google
   def initialize
@@ -9,8 +16,23 @@ class Google
   end
   
   def call(input)
-    url = "http://www.google.com/search?q=#{URI.encode_www_form_component(input)}"
+    return help if input =~ /^help$/
+
+    url = "https://www.google.com/search?" + #{URI.encode_www_form(q: input)}"
     Browser.open url
+  end
+
+  def help
+    <<EOS
+# chat/map
+
+## Description
+Search page
+
+## Usage
+# Search by keyword
+$ keyword1 keyword2 ...
+EOS
   end
 end
 
