@@ -16,6 +16,7 @@ class ChatSample
     @chat.add :wiki, Wiki
     # @chat[:wiki].lang = "ja"
     @chat.add :map, Map
+    # @chat[:map].app_kind = :google
     @chat.add :irb, Irb
     @chat.add :open, Openlink
 
