@@ -1,6 +1,6 @@
 # Define "main" function or "Chat" class
 
-class Chat
+class HatenaBookmark
   def initialize
   end
   
