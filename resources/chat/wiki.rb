@@ -1,4 +1,16 @@
-# Define "main" function or "Chat" class
+# # chat/wiki
+# 
+# ## Description
+# Search wikipedia page
+# 
+# ## Usage
+# Search by page name
+# $ name
+#
+# Change page language
+# $ lang en (default)
+# $ lang ja
+# $ lang ..
 
 class Wiki
   attr_accessor :lang
@@ -12,6 +24,8 @@ class Wiki
   end
   
   def call(input)
+    return help if input =~ /^help$/
+
     if input =~/^lang (.+)/
       @lang = $1
       return lang
@@ -23,6 +37,24 @@ class Wiki
   
   def wikipedia(text)
     "http://#{lang}.wikipedia.org/wiki/#{URI.encode_www_form_component(text)}"
+  end
+
+  def help
+    <<EOS
+# chat/wiki
+
+## Description
+Search wikipedia page
+
+## Usage
+Search by page name
+$ name
+
+Change page language
+$ lang en (default)
+$ lang ja
+$ lang ..
+EOS
   end
 end
 
