@@ -28,6 +28,18 @@ EOS
     end
     
     # game main
+    hit, blow = @game.check(input)
+    
+    # clear
+    if hit == 4
+      msg = <<EOF
+You win!! 😄😄😄💃
+#{@game.correct_answer.join("")}
+#{@game.history.join("\n")}
+EOF
+      @game = nil
+      return msg
+    end
   end
   
   def help
@@ -72,6 +84,8 @@ EOS
     def generate_number
       list = (0..9).to_a
       (0..3).map { list.delete_at(rand(list.size-1)) }
+      # Fix answer
+      # [1, 2, 3, 4]
     end
   end
 end
