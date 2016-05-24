@@ -40,6 +40,15 @@ EOF
       @game = nil
       return msg
     end
+
+    # hint
+    msg = []
+    msg.push "Stage #{@game.stage}"
+    # msg.push @game.correct_answer.join("") # cheat..
+    msg.push "Please enter 4-digit number."
+    msg.push @game.history.join("\n") if @game.history.length > 0 
+
+    msg.join("\n")
   end
   
   def help
