@@ -3,6 +3,7 @@
 require 'chat_maker'
 
 require 'chat/google'
+require 'chat/hit_and_blow'
 require 'chat/irb'
 require 'chat/map'
 require 'chat/openlink'
@@ -19,6 +20,7 @@ class ChatSample
     # @chat[:map].app_kind = :google
     @chat.add :irb, Irb
     @chat.add :open, Openlink
+    @chat.add :hit_and_blow, HitAndBlow
 
     @chat.alias :g, :google
     @chat.alias :m, :map
