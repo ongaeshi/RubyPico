@@ -43,7 +43,7 @@ EOF
 
     # hint
     msg = []
-    msg.push "Stage #{@game.stage}"
+    msg.push "Stage #{@game.stage} 🔫"
     # msg.push @game.correct_answer.join("") # cheat..
     msg.push "Please enter 4-digit number."
     msg.push @game.history.join("\n") if @game.history.length > 0 
@@ -97,41 +97,4 @@ EOS
       # [1, 2, 3, 4]
     end
   end
-end
-
-def main__
-  Popup.msg "Hit & Blow 🔫"
-
-  game = HitAndBlow.new
-
-  loop do
-    msg = []
-    msg.push "Stage #{game.stage}"
-    msg.push "❓❓❓❓🔫"
-    # msg.push game.correct_answer.join("") # cheat..
-    msg.push "Please enter 4-digit number."
-    msg.push game.history.join("\n") if game.history.length > 0 
-
-    input = Popup.input(msg.join("\n"))
-
-    if input.nil?
-      puts <<EOF
-You lose.. 😩😩😩
-#{game.correct_answer.join("")}
-#{game.history.join("\n")}
-EOF
-      break
-    end
-
-    hit, blow = game.check(input)
-    
-    if hit == 4
-      puts <<EOF
-You win!! 😄😄😄💃
-#{game.correct_answer.join("")}
-#{game.history.join("\n")}
-EOF
-      break
-    end
-  end 
 end
