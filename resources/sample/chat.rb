@@ -3,6 +3,7 @@
 require 'chat_maker'
 
 require 'chat/google'
+require 'chat/hit_and_blow'
 require 'chat/irb'
 require 'chat/map'
 require 'chat/openlink'
@@ -13,12 +14,13 @@ class ChatSample
     @chat = ChatMaker.new
     
     @chat.add :google, Google
-    @chat.add :wiki, Wiki
-    # @chat[:wiki].lang = "ja"
+    @chat.add :hit_and_blow, HitAndBlow
+    @chat.add :irb, Irb
     @chat.add :map, Map
     # @chat[:map].app_kind = :google
-    @chat.add :irb, Irb
     @chat.add :open, Openlink
+    @chat.add :wiki, Wiki
+    # @chat[:wiki].lang = "ja"
 
     @chat.alias :g, :google
     @chat.alias :m, :map
