@@ -1,5 +1,12 @@
 # HISTORY - RubyPico
 
+### 0.7 - 2015-05-27
+
+- require
+- $:(LOAD_PATH), $0(PROGRAM_NAME)
+- Add sample/chat
+- Fix scroll bug of editor
+
 ### 0.6 - 2015-04-30
 
 - Support Regexp
