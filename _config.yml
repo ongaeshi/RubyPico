@@ -12,3 +12,20 @@ kramdown:
 author:
   name: ongaeshi
   email: ongaeshi0621@gmail.com
+
+locales:
+  sitelinks:
+    en:
+      - text: Home
+        url:  /en
+      # - text: Downloads
+      #   url:  /en/downloads
+      # - text: Documentation
+      #   url:  /en/documentation
+    ja:
+      - text: ホーム
+        url:  /ja
+      - text: ダウンロード
+        url:  /ja/downloads
+      - text: ドキュメント
+        url:  /ja/documentation
