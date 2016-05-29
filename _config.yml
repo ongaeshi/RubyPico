@@ -29,3 +29,9 @@ locales:
         url:  /ja/downloads
       - text: ドキュメント
         url:  /ja/documentation
+
+  footerlinks:
+    - text: English
+      url:  /en
+    - text: 日本語
+      url:  /ja
