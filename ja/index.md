@@ -17,9 +17,21 @@ lang: ja
 - 画像フィルタ
 
 ```ruby
-def hello
-  puts "foo"
-end
+class Chat
+  def initialize
+    @num = 0
+  end
 
-hello
+  def welcome
+    "Hello, world!"
+  end
+
+  def call(input)
+    @num += 1
+    "#{@num}: #{input}"
+  end
+end
 ```
+
+さっそく[ダウンロード](./download.html)してみましょう！または[ドキュメント](./doc)をどうぞ。
+

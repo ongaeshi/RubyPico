@@ -19,16 +19,18 @@ locales:
       - text: Home
         url:  /en
       # - text: Downloads
-      #   url:  /en/downloads
+      #   url:  /en
       # - text: Documentation
-      #   url:  /en/documentation
+      #   url:  /en
     ja:
       - text: ホーム
         url:  /ja
       - text: ダウンロード
-        url:  /ja/downloads
+        url:  /ja/download.html
       - text: ドキュメント
-        url:  /ja/documentation
+        url:  /ja/doc
+      - text: ライブラリ
+        url:  /ja/lib.html
 
   footerlinks:
     - text: English
