@@ -1,6 +1,6 @@
 ---
 layout: layout
-title: 
+title: 20分ではじめるRubyPico
 lang: ja
 ---
 # 20分ではじめるRubyPico
