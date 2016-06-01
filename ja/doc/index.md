@@ -9,8 +9,7 @@ lang: ja
 
 ## 入門
 
-<!-- - [20分ではじめるRubyPico](quickstart) -->
-<!--   - Rubyの基本をカバーしている便利なチュートリアルです。始めから終わりまで読んでも20分かからないでしょう。 -->
+- [20分ではじめるRubyPico](./quickstart.html)
 <!-- - [はじめてのRubyPico](first-time-rubypico) (Comming Soon) -->
 <!-- - [スマホでRubyプログラミング](ruby-programming-in-smartphone) (Comming Soome) -->
 
