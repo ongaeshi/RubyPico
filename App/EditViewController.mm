@@ -39,6 +39,7 @@ const int PREV_LINE_MAX = 240;
 {
     [super viewDidLoad];
 
+    // Notification
     [self updateTextViewInsetsWithKeyboardNotification:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateTextViewInsetsWithKeyboardNotification:)
@@ -122,8 +123,6 @@ const int PREV_LINE_MAX = 240;
     [mTextView scrollRectToVisible:CGRectZero animated:YES consideringInsets:YES];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    // [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    // [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 }
  
@@ -132,8 +131,6 @@ const int PREV_LINE_MAX = 240;
     [super viewDidDisappear:animated];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    // [notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    // [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [notificationCenter removeObserver:self name:@"applicationDidEnterBackground" object:nil];
 }
 
@@ -237,22 +234,6 @@ const int PREV_LINE_MAX = 240;
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [self saveFileIfTouched];
-}
-
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
-    // Shrink TextView size because appear the software keyboard
-    NSDictionary *info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    CGRect frame = mTextView.frame;
-    frame.size.height = self.view.bounds.size.height - kbSize.height;
-    mTextView.frame = frame;
-}
-
-- (void)keyboardWillHide:(NSNotification*)aNotification
-{
-    // Restore TextView size
-    mTextView.frame = self.view.bounds;
 }
 
 - (void)didReceiveMemoryWarning
