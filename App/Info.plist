@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>pictruby</string>
+				<string>rubypico</string>
 			</array>
 		</dict>
 	</array>
