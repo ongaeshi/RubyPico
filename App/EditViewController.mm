@@ -39,6 +39,12 @@ const int PREV_LINE_MAX = 240;
 {
     [super viewDidLoad];
 
+    [self updateTextViewInsetsWithKeyboardNotification:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateTextViewInsetsWithKeyboardNotification:)
+                                                 name:UIKeyboardWillChangeFrameNotification
+                                               object:nil];
+
     // NavButton
     UIBarButtonItem* runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run"
                                                                   style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
@@ -75,6 +81,7 @@ const int PREV_LINE_MAX = 240;
 
         // TextView
         mTextView = [[ICTextView alloc] initWithFrame:CGRectZero textContainer:textContainer];
+        mTextView.scrollPosition = ICTextViewScrollPositionMiddle;
 
     } else {
         // TextView
@@ -112,10 +119,11 @@ const int PREV_LINE_MAX = 240;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [mTextView scrollRectToVisible:CGRectZero animated:YES consideringInsets:YES];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    // [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    // [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 }
  
@@ -124,8 +132,8 @@ const int PREV_LINE_MAX = 240;
     [super viewDidDisappear:animated];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    // [notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    // [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [notificationCenter removeObserver:self name:@"applicationDidEnterBackground" object:nil];
 }
 
@@ -138,6 +146,11 @@ const int PREV_LINE_MAX = 240;
 {
     [super viewDidAppear:animated];
     // [mTextView becomeFirstResponder];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)tapRunButton
@@ -354,6 +367,28 @@ const int PREV_LINE_MAX = 240;
 
     NSRange cursor = NSMakeRange(range.location + text.length, 0);
     textView.selectedRange = cursor;
+}
+
+- (void)updateTextViewInsetsWithKeyboardNotification:(NSNotification *)notification
+{
+    UIEdgeInsets newInsets = UIEdgeInsetsZero;
+    newInsets.top += [[UIApplication sharedApplication] statusBarFrame].size.height;
+    newInsets.top += self.navigationController.navigationBar.frame.size.height;
+    // newInsets.top = self.searchBar.frame.size.height;
+
+    if (notification)
+    {
+        CGRect keyboardFrame;
+
+        [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+        keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
+
+        newInsets.bottom = self.view.frame.size.height - keyboardFrame.origin.y;
+    }
+
+    ICTextView *textView = mTextView;
+    textView.contentInset = newInsets;
+    textView.scrollIndicatorInsets = newInsets;
 }
 
 @end
