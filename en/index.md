@@ -14,7 +14,7 @@ Ruby Programming Environment in iOS. File Viewer, Editor and Execution Environme
 - Web API
 - Calculation
 - Image filter
-- URL Scheme (pictruby://a_script_name)
+- URL Scheme (rubypico://a_script_name)
 
 ## Installation
 

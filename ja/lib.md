@@ -7,7 +7,7 @@ lang: ja
 
 ## ライブラリを探す
 
-- [PictRubyGems](https://github.com/ongaeshi/PictRubyGems)
+- [RubyPicoGems](https://github.com/ongaeshi/RubyPicoGems)
 
 ## ソースコード
 
