@@ -5,7 +5,7 @@ lang: en
 ---
 # RubyPico
 
-![rubypico-icon](/images/rubypico-icon.png)
+![rubypico_icon](/images/rubypico_icon.png)
 
 Ruby Programming Environment in iOS. File Viewer, Editor and Execution Environment included.
 
@@ -25,19 +25,19 @@ Sample code is [here](https://github.com/ongaeshi/RubyPicoGems).
 ## Screenshot
 
 ### File Select
-![rubypico-01](/images/rubypico-ss-01.jpg)
+![rubypico_01](/images/rubypico_ss_01.jpg)
 
 ### Editor
-![rubypico-02](/images/rubypico-ss-02.jpg)
+![rubypico_02](/images/rubypico_ss_02.jpg)
 
 ### Popup
-![rubypico-03](/images/rubypico-ss-03.jpg)
+![rubypico_03](/images/rubypico_ss_03.jpg)
 
 ### Output text
-![rubypico-04](/images/rubypico-ss-04.jpg)
+![rubypico_04](/images/rubypico_ss_04.jpg)
 
 ### Output image
-![rubypico-05](/images/rubypico-ss-05.jpg)
+![rubypico_05](/images/rubypico_ss_05.jpg)
 
 ## Link
 

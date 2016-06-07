@@ -5,7 +5,7 @@ lang: ja
 ---
 # RubyPico
 
-![rubypico-icon](/images/rubypico-icon.png)
+![rubypico_icon](/images/rubypico_icon.png)
 
 小さな端末でも楽しくプログラミングできるRuby開発環境です。ファイルビューワ、エディタ、実行環境を含みます。
 
