@@ -1,5 +1,11 @@
 # HISTORY - RubyPico
 
+### 0.7.1 - 2015-06-07
+
+- Fix scroll bug of termination
+- Add "rubypico://a_script" to URL Scheme
+- Add chat/tenki
+
 ### 0.7 - 2015-05-27
 
 - require
