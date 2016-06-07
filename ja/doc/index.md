@@ -10,7 +10,7 @@ lang: ja
 ## 入門
 
 - [20分ではじめるRubyPico](./quickstart.html)
-- [チャットボットを作る](./sample_chat.html)
+- [スマホではじめるRubyプログラミング](./sumaho_de_ruby)
 
 ## リファレンス
 
