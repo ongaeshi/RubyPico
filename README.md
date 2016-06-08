@@ -18,11 +18,11 @@ Let's create a favorite program with Ruby!
 
 ## Editor
 
-![rubypico_01](/images/rubypico_ss_01.jpg)
-![rubypico_02](/images/rubypico_ss_02.jpg)
-![rubypico_03](/images/rubypico_ss_03.jpg)
-![rubypico_04](/images/rubypico_ss_04.jpg)
-![rubypico_05](/images/rubypico_ss_05.jpg)
+![rubypico_01](http://rubypico.ongaeshi.me/images/rubypico_ss_01.jpg)
+![rubypico_02](http://rubypico.ongaeshi.me/images/rubypico_ss_02.jpg)
+![rubypico_03](http://rubypico.ongaeshi.me/images/rubypico_ss_03.jpg)
+![rubypico_04](http://rubypico.ongaeshi.me/images/rubypico_ss_04.jpg)
+![rubypico_05](http://rubypico.ongaeshi.me/images/rubypico_ss_05.jpg)
 
 ## Link
 
