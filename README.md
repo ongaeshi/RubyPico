@@ -1,6 +1,6 @@
 # RubyPico
 
-![rubypico-icon](http://rubypico.ongaeshi.me/images/rubypico-icon.png)
+![rubypico_icon](http://rubypico.ongaeshi.me/images/rubypico_icon.png)
 
 Ruby Programming Environment in iOS. File Viewer, Editor and Execution Environment included.
 
@@ -18,7 +18,11 @@ Let's create a favorite program with Ruby!
 
 ## Editor
 
-![rubypico-editor](http://rubypico.ongaeshi.me/images/rubypico-screen-all.jpg)
+![rubypico_01](/images/rubypico_ss_01.jpg)
+![rubypico_02](/images/rubypico_ss_02.jpg)
+![rubypico_03](/images/rubypico_ss_03.jpg)
+![rubypico_04](/images/rubypico_ss_04.jpg)
+![rubypico_05](/images/rubypico_ss_05.jpg)
 
 ## Link
 
