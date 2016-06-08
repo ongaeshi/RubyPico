@@ -33,7 +33,7 @@
 		52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C501CD641B60035968E /* SelectViewController.mm */; };
 		52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018571C94075E0046CCF8 /* chat_ruby.png */; };
 		52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018581C94075E0046CCF8 /* chat_you.png */; };
-		B765EA97EC2CE00FC1CAECBD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA91EBF38EC18AFCCBAA49A /* libPods.a */; };
+		8919A8302FC702BD37866240 /* libPods-RubyPico.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F736BA58599CC3FAD7521A5F /* libPods-RubyPico.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		47448831D6B97BD52CBE4C5E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		522216E31CF19FF800E22B05 /* chat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chat; sourceTree = "<group>"; };
 		522216E51CF1A00D00E22B05 /* chat_maker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = chat_maker.rb; sourceTree = "<group>"; };
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
@@ -88,8 +87,9 @@
 		52BF5C501CD641B60035968E /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
 		52C018571C94075E0046CCF8 /* chat_ruby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ruby.png; sourceTree = "<group>"; };
 		52C018581C94075E0046CCF8 /* chat_you.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_you.png; sourceTree = "<group>"; };
-		E278C1DC926282A94614C355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		EBA91EBF38EC18AFCCBAA49A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C0B70C7A1A1A4BBCCB6DA13 /* Pods-RubyPico.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RubyPico.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RubyPico/Pods-RubyPico.debug.xcconfig"; sourceTree = "<group>"; };
+		F3CEFFF5B3E8D06B7206BD59 /* Pods-RubyPico.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RubyPico.release.xcconfig"; path = "Pods/Target Support Files/Pods-RubyPico/Pods-RubyPico.release.xcconfig"; sourceTree = "<group>"; };
+		F736BA58599CC3FAD7521A5F /* libPods-RubyPico.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RubyPico.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5285E9641C3B61A70090C383 /* MRuby.framework in Frameworks */,
-				B765EA97EC2CE00FC1CAECBD /* libPods.a in Frameworks */,
+				8919A8302FC702BD37866240 /* libPods-RubyPico.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				5285E9631C3B61A70090C383 /* MRuby.framework */,
-				EBA91EBF38EC18AFCCBAA49A /* libPods.a */,
+				F736BA58599CC3FAD7521A5F /* libPods-RubyPico.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -153,8 +153,8 @@
 				52731C5D1B371FC500E2CC2A /* resources */,
 				5294CC211B3469C10044D56D /* AppTests */,
 				5294CC061B3469C10044D56D /* Products */,
-				6948890A8D3F6C0749FB03A3 /* Pods */,
 				1F005DFDA27FCFE852E63B85 /* Frameworks */,
+				565481F5187135151BC3B544 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -217,11 +217,11 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		6948890A8D3F6C0749FB03A3 /* Pods */ = {
+		565481F5187135151BC3B544 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				47448831D6B97BD52CBE4C5E /* Pods.debug.xcconfig */,
-				E278C1DC926282A94614C355 /* Pods.release.xcconfig */,
+				5C0B70C7A1A1A4BBCCB6DA13 /* Pods-RubyPico.debug.xcconfig */,
+				F3CEFFF5B3E8D06B7206BD59 /* Pods-RubyPico.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -233,12 +233,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5294CC281B3469C10044D56D /* Build configuration list for PBXNativeTarget "RubyPico" */;
 			buildPhases = (
-				36A0237E71A9528A738A1674 /* Check Pods Manifest.lock */,
+				BB2D08DF57025FC3592B3576 /* [CP] Check Pods Manifest.lock */,
 				5294CC011B3469C10044D56D /* Sources */,
 				5294CC021B3469C10044D56D /* Frameworks */,
 				5294CC031B3469C10044D56D /* Resources */,
-				9FAEE257BD0EF6E1A632B5B5 /* Copy Pods Resources */,
-				ADBB69C6EBD4CB602B43712D /* Embed Pods Frameworks */,
+				5F67702BEF92DDA4786F7105 /* [CP] Embed Pods Frameworks */,
+				7A77B1E5CA158C09794C798B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -335,49 +335,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36A0237E71A9528A738A1674 /* Check Pods Manifest.lock */ = {
+		5F67702BEF92DDA4786F7105 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RubyPico/Pods-RubyPico-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A77B1E5CA158C09794C798B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RubyPico/Pods-RubyPico-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB2D08DF57025FC3592B3576 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9FAEE257BD0EF6E1A632B5B5 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ADBB69C6EBD4CB602B43712D /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -501,7 +501,7 @@
 		};
 		5294CC291B3469C10044D56D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47448831D6B97BD52CBE4C5E /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 5C0B70C7A1A1A4BBCCB6DA13 /* Pods-RubyPico.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -531,7 +531,7 @@
 		};
 		5294CC2A1B3469C10044D56D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E278C1DC926282A94614C355 /* Pods.release.xcconfig */;
+			baseConfigurationReference = F3CEFFF5B3E8D06B7206BD59 /* Pods-RubyPico.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
