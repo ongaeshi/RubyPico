@@ -62,26 +62,28 @@
 }
 
 - (void)runMrb {
-    int arena = mrb_gc_arena_save(_mrb);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        int arena = mrb_gc_arena_save(_mrb);
 
-    {
-        char* scriptPath = (char *)[_scriptPath UTF8String];
-        FILE *fd = fopen(scriptPath, "r");
+        {
+            char* scriptPath = (char *)[_scriptPath UTF8String];
+            FILE *fd = fopen(scriptPath, "r");
 
-        mrbc_context *cxt = mrbc_context_new(_mrb);
+            mrbc_context *cxt = mrbc_context_new(_mrb);
 
-        const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
-        mrbc_filename(_mrb, cxt, fileName);
-        mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
+            const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
+            mrbc_filename(_mrb, cxt, fileName);
+            mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
 
-        mrb_load_file_cxt(_mrb, fd, cxt);
+            mrb_load_file_cxt(_mrb, fd, cxt);
 
-        mrbc_context_free(_mrb, cxt);
+            mrbc_context_free(_mrb, cxt);
 
-        fclose(fd);
-    }
+            fclose(fd);
+        }
 
-    mrb_gc_arena_restore(_mrb, arena);
+        mrb_gc_arena_restore(_mrb, arena);
+    });
 }
 
 @end
