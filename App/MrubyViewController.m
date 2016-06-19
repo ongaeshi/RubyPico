@@ -28,6 +28,11 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self runMrb];
+}
+
 - (mrb_state*)initMrb {
     mrb_state* mrb = mrb_open();
 
@@ -37,14 +42,13 @@
     // pictruby::BindPopup::Bind(mrb);
 
     // Load builtin library
-    // mrb_load_irep(mrb, BuiltIn);
-    {
-        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
-        char* scriptPath = (char *)[path UTF8String];
-        FILE *fd = fopen(scriptPath, "r");
-        mrb_load_file(mrb, fd);
-        fclose(fd);
-    }
+    // {
+    //     NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
+    //     char* scriptPath = (char *)[path UTF8String];
+    //     FILE *fd = fopen(scriptPath, "r");
+    //     mrb_load_file(mrb, fd);
+    //     fclose(fd);
+    // }
  
     // Set LOAD_PATH($:)
     {
@@ -54,27 +58,30 @@
         // mrb_p(mrb, load_path);
     }
 
-    // Load user script
-    int arena = mrb_gc_arena_save(mrb);
+    return mrb;
+}
+
+- (void)runMrb {
+    int arena = mrb_gc_arena_save(_mrb);
+
     {
         char* scriptPath = (char *)[_scriptPath UTF8String];
         FILE *fd = fopen(scriptPath, "r");
 
-        mrbc_context *cxt = mrbc_context_new(mrb);
+        mrbc_context *cxt = mrbc_context_new(_mrb);
 
         const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
-        mrbc_filename(mrb, cxt, fileName);
-        mrb_gv_set(mrb, mrb_intern(mrb, "$0", 2), mrb_str_new_cstr(mrb, fileName));
+        mrbc_filename(_mrb, cxt, fileName);
+        mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
 
-        mrb_load_file_cxt(mrb, fd, cxt);
+        mrb_load_file_cxt(_mrb, fd, cxt);
 
-        mrbc_context_free(mrb, cxt);
+        mrbc_context_free(_mrb, cxt);
 
         fclose(fd);
     }
-    mrb_gc_arena_restore(mrb, arena);
 
-    return mrb;
+    mrb_gc_arena_restore(_mrb, arena);
 }
 
 @end
