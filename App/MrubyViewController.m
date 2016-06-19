@@ -5,13 +5,14 @@
 #import "MrubyViewController.h"
 
 #import "FCFileManager.h"
+#import "mrb_misc.h"
 #import "mruby.h"
+#import "mruby/array.h"
 #import "mruby/class.h"
 #import "mruby/compile.h"
 #import "mruby/error.h"
 #import "mruby/irep.h"
 #import "mruby/string.h"
-#import "mruby/array.h"
 #import "mruby/variable.h"
 
 @implementation MrubyViewController {
@@ -37,9 +38,7 @@
     mrb_state* mrb = mrb_open();
 
     // Bind
-    // pictruby::BindImage::SetScriptController(NULL);
-    // pictruby::BindImage::Bind(mrb);
-    // pictruby::BindPopup::Bind(mrb);
+    mrb_rubypico_misc_init(mrb);
 
     // Load builtin library
     // {

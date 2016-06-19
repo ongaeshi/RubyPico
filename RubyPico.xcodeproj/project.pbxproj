@@ -16,6 +16,7 @@
 		52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C621B371FC500E2CC2A /* tabbar_samples.png */; };
 		52731C6D1B37224300E2CC2A /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 52731C6C1B37224300E2CC2A /* sample */; };
 		5280A9F61D1691D0008D638A /* MrubyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5280A9F51D1691D0008D638A /* MrubyViewController.m */; };
+		5280A9F91D16C66A008D638A /* mrb_misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5280A9F81D16C66A008D638A /* mrb_misc.m */; };
 		5285E9641C3B61A70090C383 /* MRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5285E9631C3B61A70090C383 /* MRuby.framework */; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
 		52BF5C511CD641B60035968E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C391CD641B50035968E /* AppDelegate.m */; };
@@ -58,6 +59,8 @@
 		52731C6C1B37224300E2CC2A /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
 		5280A9F41D1691D0008D638A /* MrubyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MrubyViewController.h; sourceTree = "<group>"; };
 		5280A9F51D1691D0008D638A /* MrubyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MrubyViewController.m; sourceTree = "<group>"; };
+		5280A9F71D16C66A008D638A /* mrb_misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mrb_misc.h; sourceTree = "<group>"; };
+		5280A9F81D16C66A008D638A /* mrb_misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mrb_misc.m; sourceTree = "<group>"; };
 		5285E9631C3B61A70090C383 /* MRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MRuby.framework; path = Vendor/MRuby.framework; sourceTree = "<group>"; };
 		5294CC051B3469C10044D56D /* RubyPico.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RubyPico.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC1E1B3469C10044D56D /* RubyPico.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyPico.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +194,8 @@
 		52BF5C371CD641B50035968E /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5280A9F71D16C66A008D638A /* mrb_misc.h */,
+				5280A9F81D16C66A008D638A /* mrb_misc.m */,
 				5280A9F41D1691D0008D638A /* MrubyViewController.h */,
 				5280A9F51D1691D0008D638A /* MrubyViewController.m */,
 				52BF5C381CD641B50035968E /* AppDelegate.h */,
@@ -405,6 +410,7 @@
 				52BF5C551CD641B60035968E /* EditViewController.mm in Sources */,
 				52BF5C521CD641B60035968E /* BindImage.mm in Sources */,
 				52BF5C541CD641B60035968E /* ChatViewController.m in Sources */,
+				5280A9F91D16C66A008D638A /* mrb_misc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
