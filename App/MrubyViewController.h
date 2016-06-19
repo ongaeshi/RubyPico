@@ -8,6 +8,9 @@
     // UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
     UIViewController<UINavigationControllerDelegate>
 
-- (id) initWithScriptPath:(NSString*)scriptPath;
+- (id)initWithScriptPath:(NSString*)scriptPath;
+- (void)printstr:(NSString*)str;
 
 @end
+
+extern MrubyViewController *globalMrubyViewController;

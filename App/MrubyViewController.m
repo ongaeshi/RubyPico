@@ -15,9 +15,12 @@
 #import "mruby/string.h"
 #import "mruby/variable.h"
 
+MrubyViewController *globalMrubyViewController;
+
 @implementation MrubyViewController {
     NSString* _scriptPath;
     mrb_state* _mrb;
+    UITextView* _textView;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -25,12 +28,23 @@
 
     _scriptPath = scriptPath;
     _mrb = [self initMrb];
+    globalMrubyViewController = self;
 
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    // TextView
+    _textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    _textView.editable = NO;
+    _textView.dataDetectorTypes = UIDataDetectorTypeLink;
+    _textView.font = [UIFont fontWithName:@"Courier" size:12];
+    _textView.text = @"";
+    [self.view addSubview:_textView];
+
+    // Run script
     [self runMrb];
 }
 
@@ -83,6 +97,10 @@
 
         mrb_gc_arena_restore(_mrb, arena);
     });
+}
+
+- (void)printstr:(NSString*)str {
+    [_textView setText:[_textView.text stringByAppendingString:str]];
 }
 
 @end

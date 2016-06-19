@@ -4,6 +4,7 @@
 
 #import "mrb_misc.h"
 
+#import "MrubyViewController.h"
 #import "mruby/string.h"
 #import <Foundation/Foundation.h>
 
@@ -13,8 +14,10 @@ printstr(mrb_state *mrb, mrb_value obj)
   if (mrb_string_p(obj)) {
     const char* cstr = mrb_string_value_ptr(mrb, obj);
     NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
-    NSLog(@"foo: %@", nstr);
-    // [globalScriptController printstr:nstr];
+    // NSLog(@"%@", nstr);
+    dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
+        [globalMrubyViewController printstr:nstr];
+    });
   }
 }
 
