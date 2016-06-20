@@ -10,6 +10,7 @@
 
 - (id)initWithScriptPath:(NSString*)scriptPath;
 - (void)printstr:(NSString*)str;
+- (BOOL)isCanceled;
 
 @end
 

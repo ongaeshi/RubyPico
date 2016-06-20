@@ -21,14 +21,17 @@ MrubyViewController *globalMrubyViewController;
     NSString* _scriptPath;
     mrb_state* _mrb;
     UITextView* _textView;
+    BOOL _isCanceled;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
     self = [super init];
 
+    globalMrubyViewController = self;
+
     _scriptPath = scriptPath;
     _mrb = [self initMrb];
-    globalMrubyViewController = self;
+    _isCanceled = NO;
 
     return self;
 }
@@ -48,8 +51,28 @@ MrubyViewController *globalMrubyViewController;
     [self runMrb];
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    if (![parent isEqual:self.parentViewController]) {
+        if (_mrb) {
+            // NSLog(@"Start cancel");
+            _isCanceled = YES;
+        }
+    }
+}
+
+static void
+mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *regs)
+{
+    if ([globalMrubyViewController isCanceled]) {
+        mrb_raise(mrb, E_RUNTIME_ERROR, "Cancel from MrubyViewController");
+    }
+}
+
 - (mrb_state*)initMrb {
     mrb_state* mrb = mrb_open();
+
+    // Set hook
+    mrb->code_fetch_hook = mrb_hook;
 
     // Bind
     mrb_rubypico_misc_init(mrb);
@@ -96,11 +119,18 @@ MrubyViewController *globalMrubyViewController;
         }
 
         mrb_gc_arena_restore(_mrb, arena);
+
+        _mrb = NULL;
+        // NSLog(@"Finish mruby");
     });
 }
 
 - (void)printstr:(NSString*)str {
     [_textView setText:[_textView.text stringByAppendingString:str]];
+}
+
+- (BOOL)isCanceled {
+    return _isCanceled;
 }
 
 @end
