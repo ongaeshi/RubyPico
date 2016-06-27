@@ -111,16 +111,12 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
             mrbc_filename(_mrb, cxt, fileName);
             mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
 
+            // Run Top Level
             mrb_load_file_cxt(_mrb, fd, cxt);
 
             // Error handling
             if (_mrb->exc) {
-                // Console
-                mrb_p(_mrb, mrb_obj_value(_mrb->exc));
-
-                // View
-                mrb_value str = mrb_funcall(_mrb, mrb_obj_value(_mrb->exc), "inspect", 0);
-                rubypico_misc_printstr(_mrb, str);
+                rubypico_misc_p(_mrb, mrb_obj_value(_mrb->exc));
             }
 
             mrbc_context_free(_mrb, cxt);

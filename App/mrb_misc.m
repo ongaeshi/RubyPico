@@ -8,8 +8,8 @@
 #import "mruby/string.h"
 #import <Foundation/Foundation.h>
 
-void
-rubypico_misc_printstr(mrb_state *mrb, mrb_value obj)
+static void
+printstr(mrb_state *mrb, mrb_value obj)
 {
   if (mrb_string_p(obj)) {
     const char* cstr = mrb_string_value_ptr(mrb, obj);
@@ -21,13 +21,19 @@ rubypico_misc_printstr(mrb_state *mrb, mrb_value obj)
   }
 }
 
+void rubypico_misc_p(mrb_state *mrb, mrb_value obj)
+{
+    mrb_p(mrb, obj);
+    printstr(mrb, mrb_funcall(mrb, obj, "inspect", 0));
+}
+
 static mrb_value
 mrb_printstr(mrb_state *mrb, mrb_value self)
 {
   mrb_value argv;
 
   mrb_get_args(mrb, "o", &argv);
-  rubypico_misc_printstr(mrb, argv);
+  printstr(mrb, argv);
 
   return argv;
 }
