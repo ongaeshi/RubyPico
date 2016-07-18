@@ -165,20 +165,26 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+    @synchronized (self)
+    {
+        _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
 
-    if (buttonIndex == alertView.cancelButtonIndex) {
-        return;
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            return;
+        }
+
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+        [_receivePicked addObject:text];
     }
-
-    NSString* text = [[alertView textFieldAtIndex:0] text];
-    [_receivePicked addObject:text];
 }
 
 - (NSMutableArray*) receivePicked {
-    NSMutableArray* array = _receivePicked;
-    _receivePicked = NULL;
-    return array;
+    @synchronized (self)
+    {
+        NSMutableArray* array = _receivePicked;
+        _receivePicked = NULL;
+        return array;
+    }
 }
 
 @end
