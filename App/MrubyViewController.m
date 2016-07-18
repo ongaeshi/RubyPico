@@ -22,6 +22,7 @@ MrubyViewController *globalMrubyViewController;
     mrb_state* _mrb;
     UITextView* _textView;
     BOOL _isCanceled;
+    NSMutableArray* _receivePicked;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -137,6 +138,53 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
 - (BOOL)isCanceled {
     return _isCanceled;
+}
+
+- (void) startPopupInput:(NSString*)path {
+    _receivePicked = NULL;
+
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = path;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.delegate = self;
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+- (void) startPopupMsg:(NSString*)path {
+    _receivePicked = NULL;
+
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:path
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    @synchronized (self)
+    {
+        _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            return;
+        }
+
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+        [_receivePicked addObject:text];
+    }
+}
+
+- (NSMutableArray*) receivePicked {
+    @synchronized (self)
+    {
+        NSMutableArray* array = _receivePicked;
+        _receivePicked = NULL;
+        return array;
+    }
 }
 
 @end
