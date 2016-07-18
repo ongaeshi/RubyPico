@@ -38,8 +38,8 @@ mrb_printstr(mrb_state *mrb, mrb_value self)
   return argv;
 }
 
-static
-mrb_value mrb_clipboard_get(mrb_state *mrb, mrb_value self)
+static mrb_value
+mrb_clipboard_get(mrb_state *mrb, mrb_value self)
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     NSString *string = [pasteboard valueForPasteboardType:@"public.text"];
@@ -47,8 +47,8 @@ mrb_value mrb_clipboard_get(mrb_state *mrb, mrb_value self)
     return mrb_str_new_cstr(mrb, [string UTF8String]);
 }
 
-static
-mrb_value mrb_clipboard_set(mrb_state *mrb, mrb_value self)
+static mrb_value
+mrb_clipboard_set(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
@@ -62,18 +62,98 @@ mrb_value mrb_clipboard_set(mrb_state *mrb, mrb_value self)
     return str;
 }
 
+static mrb_value
+mrb_uri_encode_www_form_component(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSString* encodeString = [nstr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
+
+    mrb_value dst = mrb_str_new_cstr(mrb, [encodeString UTF8String]);
+    
+    return dst;
+}
+
+static mrb_value
+mrb_browser_open(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    [[UIApplication sharedApplication] openURL:url];
+    
+    return str;
+}
+
+static mrb_value
+mrb_browser_open_q(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+    
+    return mrb_bool_value(canOpen);
+}
+
+static mrb_value
+mrb_browser_get(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL* url = [NSURL URLWithString:nstr];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    return mrb_str_new_cstr(mrb, [result UTF8String]);
+}
+
 void
 mrb_rubypico_misc_init(mrb_state* mrb)
 {
-    struct RClass *krn = mrb->kernel_module;
+    {
+        struct RClass *krn = mrb->kernel_module;
 
-    mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
+        mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
+    }
 
     {
         struct RClass *cc = mrb_define_class(mrb, "Clipboard", mrb->object_class);
 
         mrb_define_class_method(mrb , cc, "get", mrb_clipboard_get, MRB_ARGS_NONE());
         mrb_define_class_method(mrb , cc, "set", mrb_clipboard_set, MRB_ARGS_REQ(1));
+    }
+
+    {
+        struct RClass *cc = mrb_define_module(mrb, "URI");
+
+        mrb_define_class_method(mrb , cc, "encode_www_form_component", mrb_uri_encode_www_form_component, MRB_ARGS_REQ(1));
+    }
+
+    {
+        struct RClass *cc = mrb_define_module(mrb, "Browser");
+
+        mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
     }
 }
 
