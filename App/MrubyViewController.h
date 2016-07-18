@@ -11,6 +11,9 @@
 - (id)initWithScriptPath:(NSString*)scriptPath;
 - (void)printstr:(NSString*)str;
 - (BOOL)isCanceled;
+- (void) startPopupInput:(NSString*)path;
+- (void) startPopupMsg:(NSString*)path;
+- (NSMutableArray*) receivePicked;
 
 @end
 

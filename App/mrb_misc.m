@@ -5,6 +5,7 @@
 #import "mrb_misc.h"
 
 #import "MrubyViewController.h"
+#import "mruby/array.h"
 #import "mruby/string.h"
 #import <Foundation/Foundation.h>
 
@@ -126,6 +127,58 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
     return mrb_str_new_cstr(mrb, [result UTF8String]);
 }
 
+static mrb_value
+mrb_popup_receive_picked(mrb_state *mrb)
+{
+    while (YES) {
+        NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
+            
+        if (nsarray) {
+            mrb_value array = mrb_ary_new(mrb);
+
+            for (NSString* e in nsarray) {
+                mrb_ary_push(mrb, array, mrb_str_new_cstr(mrb, [e UTF8String]));
+            }
+
+            return mrb_ary_ref(mrb, array, 0);
+        }
+    }
+
+    return mrb_nil_value();
+}
+
+static mrb_value
+mrb_popup_input(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* path = mrb_string_value_ptr(mrb, str);
+    NSString *npath = [[NSString alloc] initWithUTF8String:path];
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController startPopupInput:npath];
+    });
+    
+    return mrb_popup_receive_picked(mrb);
+}
+
+static mrb_value
+mrb_popup_msg(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* path = mrb_string_value_ptr(mrb, str);
+    NSString *npath = [[NSString alloc] initWithUTF8String:path];
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController startPopupMsg:npath];
+    });
+
+    return mrb_popup_receive_picked(mrb);
+}
+
 void
 mrb_rubypico_misc_init(mrb_state* mrb)
 {
@@ -155,6 +208,14 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
     }
+
+    {
+        struct RClass *cc = mrb_define_class(mrb, "Popup", mrb->object_class);
+
+        mrb_define_class_method(mrb , cc, "input", mrb_popup_input, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "msg"  , mrb_popup_msg  , MRB_ARGS_REQ(1));
+    }
+
 }
 
 void
