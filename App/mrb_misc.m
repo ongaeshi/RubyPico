@@ -132,7 +132,7 @@ mrb_popup_receive_picked(mrb_state *mrb)
 {
     while (YES) {
         NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
-            
+
         if (nsarray) {
             mrb_value array = mrb_ary_new(mrb);
 
@@ -142,6 +142,8 @@ mrb_popup_receive_picked(mrb_state *mrb)
 
             return mrb_ary_ref(mrb, array, 0);
         }
+
+        [NSThread sleepForTimeInterval:0.1];
     }
 
     return mrb_nil_value();
