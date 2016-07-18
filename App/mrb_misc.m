@@ -78,6 +78,54 @@ mrb_uri_encode_www_form_component(mrb_state *mrb, mrb_value self)
     return dst;
 }
 
+static mrb_value
+mrb_browser_open(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    [[UIApplication sharedApplication] openURL:url];
+    
+    return str;
+}
+
+static mrb_value
+mrb_browser_open_q(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    BOOL canOpen = [[UIApplication sharedApplication] canOpenURL:url];
+    
+    return mrb_bool_value(canOpen);
+}
+
+static mrb_value
+mrb_browser_get(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* cstr = mrb_string_value_ptr(mrb, str);
+    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL* url = [NSURL URLWithString:nstr];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    return mrb_str_new_cstr(mrb, [result UTF8String]);
+}
+
 void
 mrb_rubypico_misc_init(mrb_state* mrb)
 {
@@ -98,6 +146,14 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         struct RClass *cc = mrb_define_module(mrb, "URI");
 
         mrb_define_class_method(mrb , cc, "encode_www_form_component", mrb_uri_encode_www_form_component, MRB_ARGS_REQ(1));
+    }
+
+    {
+        struct RClass *cc = mrb_define_module(mrb, "Browser");
+
+        mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
     }
 }
 
