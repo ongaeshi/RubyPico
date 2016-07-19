@@ -35,7 +35,7 @@
 		52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C501CD641B60035968E /* SelectViewController.mm */; };
 		52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018571C94075E0046CCF8 /* chat_ruby.png */; };
 		52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018581C94075E0046CCF8 /* chat_you.png */; };
-		52FD35381D3E918C009C8E5B /* mrb_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FD35371D3E918C009C8E5B /* mrb_image.m */; };
+		52FD35381D3E918C009C8E5B /* mrb_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FD35371D3E918C009C8E5B /* mrb_image.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8919A8302FC702BD37866240 /* libPods-RubyPico.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F736BA58599CC3FAD7521A5F /* libPods-RubyPico.a */; };
 /* End PBXBuildFile section */
 
