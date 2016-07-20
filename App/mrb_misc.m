@@ -5,6 +5,7 @@
 #import "mrb_misc.h"
 
 #import "MrubyViewController.h"
+#import "mrb_image.h"
 #import "mruby/array.h"
 #import "mruby/string.h"
 #import <Foundation/Foundation.h>
@@ -18,6 +19,10 @@ printstr(mrb_state *mrb, mrb_value obj)
     // NSLog(@"%@", nstr);
     dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
         [globalMrubyViewController printstr:nstr];
+    });
+  } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "Image"))) {
+    dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
+        [globalMrubyViewController printimage:mrb_rubypico_image_to_ptr(mrb, obj)];
     });
   }
 }

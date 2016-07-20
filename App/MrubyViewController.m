@@ -134,8 +134,23 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     });
 }
 
+- (void)appendAttributedString:(NSAttributedString*)attrStr {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+    [attributedString appendAttributedString: _textView.attributedText];
+    [attributedString appendAttributedString: attrStr];
+    _textView.attributedText = attributedString;
+}
+
 - (void)printstr:(NSString*)str {
-    [_textView setText:[_textView.text stringByAppendingString:str]];
+    [self appendAttributedString:[[NSAttributedString alloc] initWithString:str]];
+}
+
+- (void)printimage:(UIImage*)image {
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    // TODO: margin
+    attachment.image = image;
+
+    [self appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
 }
 
 - (BOOL)isCanceled {
