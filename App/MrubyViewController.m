@@ -82,7 +82,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
     // Load builtin library
     {
-        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"__builtin__.rb"];
+        NSString* path = [FCFileManager pathForMainBundleDirectoryWithPath:@"__builtin__.rb"];
         char* scriptPath = (char *)[path UTF8String];
         FILE *fd = fopen(scriptPath, "r");
         mrb_load_file(mrb, fd);
