@@ -147,7 +147,6 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
 - (void)printimage:(UIImage*)image {
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-    // TODO: margin
     attachment.image = image;
 
     [self appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
