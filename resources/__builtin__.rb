@@ -26,4 +26,45 @@ module Browser
   end
 end
 
+module Kernel
+  ##
+  # Invoke method +print+ on STDOUT and passing +*args+
+  # Customize for Image
+  #
+  # ISO 15.3.1.2.10
+  def print(*args)
+    i = 0
+    len = args.size
+    while i < len
+      if args[i].is_a?(Image)
+        __printstr__ args[i]
+      else
+        __printstr__ args[i].to_s
+      end
+      i += 1
+    end
+  end
 
+  ##
+  # Invoke method +puts+ on STDOUT and passing +*args*+
+  # Customize for Image
+  #
+  # ISO 15.3.1.2.11
+  def puts(*args)
+    i = 0
+    len = args.size
+    while i < len
+      if args[i].is_a?(Image)
+        __printstr__ args[i] 
+        __printstr__ "\n"
+      else
+        s = args[i].to_s
+        __printstr__ s
+        __printstr__ "\n" if (s[-1] != "\n")
+      end
+      i += 1
+    end
+    __printstr__ "\n" if len == 0
+    nil
+  end
+end
