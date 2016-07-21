@@ -81,13 +81,13 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     mrb_rubypico_misc_init(mrb);
 
     // Load builtin library
-    // {
-    //     NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
-    //     char* scriptPath = (char *)[path UTF8String];
-    //     FILE *fd = fopen(scriptPath, "r");
-    //     mrb_load_file(mrb, fd);
-    //     fclose(fd);
-    // }
+    {
+        NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"__builtin__.rb"];
+        char* scriptPath = (char *)[path UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
+        mrb_load_file(mrb, fd);
+        fclose(fd);
+    }
  
     // Set LOAD_PATH($:)
     {
