@@ -35,6 +35,8 @@
 		52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C501CD641B60035968E /* SelectViewController.mm */; };
 		52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018571C94075E0046CCF8 /* chat_ruby.png */; };
 		52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018581C94075E0046CCF8 /* chat_you.png */; };
+		52FD35381D3E918C009C8E5B /* mrb_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FD35371D3E918C009C8E5B /* mrb_image.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		52FD353C1D41262C009C8E5B /* __builtin__.rb in Resources */ = {isa = PBXBuildFile; fileRef = 52FD353B1D41262C009C8E5B /* __builtin__.rb */; };
 		8919A8302FC702BD37866240 /* libPods-RubyPico.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F736BA58599CC3FAD7521A5F /* libPods-RubyPico.a */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +95,9 @@
 		52BF5C501CD641B60035968E /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
 		52C018571C94075E0046CCF8 /* chat_ruby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ruby.png; sourceTree = "<group>"; };
 		52C018581C94075E0046CCF8 /* chat_you.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_you.png; sourceTree = "<group>"; };
+		52FD35361D3E918C009C8E5B /* mrb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mrb_image.h; sourceTree = "<group>"; };
+		52FD35371D3E918C009C8E5B /* mrb_image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mrb_image.m; sourceTree = "<group>"; };
+		52FD353B1D41262C009C8E5B /* __builtin__.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = __builtin__.rb; sourceTree = "<group>"; };
 		5C0B70C7A1A1A4BBCCB6DA13 /* Pods-RubyPico.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RubyPico.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RubyPico/Pods-RubyPico.debug.xcconfig"; sourceTree = "<group>"; };
 		F3CEFFF5B3E8D06B7206BD59 /* Pods-RubyPico.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RubyPico.release.xcconfig"; path = "Pods/Target Support Files/Pods-RubyPico/Pods-RubyPico.release.xcconfig"; sourceTree = "<group>"; };
 		F736BA58599CC3FAD7521A5F /* libPods-RubyPico.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RubyPico.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +135,7 @@
 		52731C5D1B371FC500E2CC2A /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				52FD353B1D41262C009C8E5B /* __builtin__.rb */,
 				52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */,
 				522216E31CF19FF800E22B05 /* chat */,
 				52731C6C1B37224300E2CC2A /* sample */,
@@ -194,6 +200,8 @@
 		52BF5C371CD641B50035968E /* App */ = {
 			isa = PBXGroup;
 			children = (
+				52FD35361D3E918C009C8E5B /* mrb_image.h */,
+				52FD35371D3E918C009C8E5B /* mrb_image.m */,
 				5280A9F71D16C66A008D638A /* mrb_misc.h */,
 				5280A9F81D16C66A008D638A /* mrb_misc.m */,
 				5280A9F41D1691D0008D638A /* MrubyViewController.h */,
@@ -330,6 +338,7 @@
 				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
 				52BF5C591CD641B60035968E /* Info.plist in Resources */,
 				52731C651B371FC500E2CC2A /* builtin.rb in Resources */,
+				52FD353C1D41262C009C8E5B /* __builtin__.rb in Resources */,
 				522216E61CF1A00D00E22B05 /* chat_maker.rb in Resources */,
 				52731C661B371FC500E2CC2A /* sample.jpg in Resources */,
 			);
@@ -406,6 +415,7 @@
 				52BF5C561CD641B60035968E /* FileViewController.mm in Sources */,
 				52BF5C5A1CD641B60035968E /* main.m in Sources */,
 				52BF5C5B1CD641B60035968E /* RubyHighlightingTextStorage.m in Sources */,
+				52FD35381D3E918C009C8E5B /* mrb_image.m in Sources */,
 				52BF5C511CD641B60035968E /* AppDelegate.m in Sources */,
 				52BF5C551CD641B60035968E /* EditViewController.mm in Sources */,
 				52BF5C521CD641B60035968E /* BindImage.mm in Sources */,

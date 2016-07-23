@@ -5,6 +5,7 @@
 #import "MrubyViewController.h"
 
 #import "FCFileManager.h"
+#import "mrb_image.h"
 #import "mrb_misc.h"
 #import "mruby.h"
 #import "mruby/array.h"
@@ -23,6 +24,7 @@ MrubyViewController *globalMrubyViewController;
     UITextView* _textView;
     BOOL _isCanceled;
     NSMutableArray* _receivePicked;
+    QBImagePickerController* _imagePicker;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -47,6 +49,11 @@ MrubyViewController *globalMrubyViewController;
     _textView.font = [UIFont fontWithName:@"Courier" size:12];
     _textView.text = @"";
     [self.view addSubview:_textView];
+
+    // ImagePicker
+    _imagePicker = [QBImagePickerController new];
+    [_imagePicker setDelegate:self];
+    _imagePicker.showsNumberOfSelectedAssets = YES;
 
     // Run script
     [self runMrb];
@@ -76,16 +83,17 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     mrb->code_fetch_hook = mrb_hook;
 
     // Bind
+    mrb_rubypico_image_init(mrb);
     mrb_rubypico_misc_init(mrb);
 
     // Load builtin library
-    // {
-    //     NSString* path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"builtin.rb"];
-    //     char* scriptPath = (char *)[path UTF8String];
-    //     FILE *fd = fopen(scriptPath, "r");
-    //     mrb_load_file(mrb, fd);
-    //     fclose(fd);
-    // }
+    {
+        NSString* path = [FCFileManager pathForMainBundleDirectoryWithPath:@"__builtin__.rb"];
+        char* scriptPath = (char *)[path UTF8String];
+        FILE *fd = fopen(scriptPath, "r");
+        mrb_load_file(mrb, fd);
+        fclose(fd);
+    }
  
     // Set LOAD_PATH($:)
     {
@@ -132,8 +140,27 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     });
 }
 
+- (void)appendAttributedString:(NSAttributedString*)attrStr {
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+    [attributedString appendAttributedString: _textView.attributedText];
+    [attributedString appendAttributedString: attrStr];
+    _textView.attributedText = attributedString;
+}
+
 - (void)printstr:(NSString*)str {
-    [_textView setText:[_textView.text stringByAppendingString:str]];
+    [self appendAttributedString:[[NSAttributedString alloc] initWithString:str]];
+}
+
+- (void)printimage:(UIImage*)image {
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    attachment.image = image;
+    const float MARGIN = 10.0f;
+    const float WIDTH = [_textView bounds].size.width - MARGIN;
+    if (image.size.width > WIDTH) {
+        attachment.bounds = CGRectMake(0.0f, 0.0f, WIDTH, image.size.height / image.size.width * WIDTH);
+    }
+
+    [self appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
 }
 
 - (BOOL)isCanceled {
@@ -165,8 +192,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    @synchronized (self)
-    {
+    @synchronized (self) {
         _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
 
         if (buttonIndex == alertView.cancelButtonIndex) {
@@ -179,11 +205,48 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (NSMutableArray*) receivePicked {
-    @synchronized (self)
-    {
+    @synchronized (self) {
         NSMutableArray* array = _receivePicked;
         _receivePicked = NULL;
         return array;
+    }
+}
+
+- (void) startPickFromLibrary:(int)num {
+    _receivePicked = NULL;
+    _imagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
+    _imagePicker.maximumNumberOfSelection = num;
+    [self presentViewController:_imagePicker animated:YES completion:nil];
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    @synchronized (self) {
+        _receivePicked = [[NSMutableArray alloc] initWithCapacity:[assets count]];
+
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.synchronous = YES;
+        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+        options.resizeMode = PHImageRequestOptionsResizeModeExact;
+
+        for (PHAsset* asset in assets) {
+            [[PHImageManager defaultManager] requestImageForAsset:asset
+                                                    targetSize:PHImageManagerMaximumSize
+                                                    contentMode:PHImageContentModeAspectFit
+                                                        options:options
+                                                    resultHandler:^(UIImage *result, NSDictionary *info) {
+                    if (result) {
+                        [_receivePicked addObject:result];
+                    }
+                }];
+        }
+
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)picker {
+    @synchronized (self) {
+        [self dismissViewControllerAnimated:YES completion:NULL];
     }
 }
 
