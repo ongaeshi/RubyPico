@@ -148,6 +148,11 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 - (void)printimage:(UIImage*)image {
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
     attachment.image = image;
+    const float MARGIN = 10.0f;
+    const float WIDTH = [_textView bounds].size.width - MARGIN;
+    if (image.size.width > WIDTH) {
+        attachment.bounds = CGRectMake(0.0f, 0.0f, WIDTH, image.size.height / image.size.width * WIDTH);
+    }
 
     [self appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
 }
