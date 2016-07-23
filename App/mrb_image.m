@@ -56,7 +56,7 @@ mrb_rubypico_image_load(mrb_state *mrb, mrb_value self)
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
     NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(http://|https://){1}[\\w\\.\\-/:]+"
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^https?://"
                                                                            options:0
                                                                              error:&error];
     NSTextCheckingResult *match = [regex firstMatchInString:npath
