@@ -4,6 +4,7 @@
 
 #import "mrb_image.h"
 
+#import "MrubyViewController.h"
 #import "mruby.h"
 #import "mruby/array.h"
 #import "mruby/class.h"
@@ -60,35 +61,42 @@ mrb_rubypico_image_load(mrb_state *mrb, mrb_value self)
     return mrb_rubypico_image_to_mrb(mrb, image);
 }
 
-// static mrb_value
-// start_pick_from_library(mrb_state *mrb, mrb_value self)
-// {
-//     mrb_int num;
-//     mrb_get_args(mrb, "i", &num);
+static mrb_value
+mrb_rubypico_image_receive_picked(mrb_state *mrb, int num)
+{
+    @autoreleasepool {
+        while (YES) {
+            NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
 
-//     [globalMrubyViewController startPickFromLibrary:num];
-//     return mrb_nil_value();
-// }
+            if (nsarray) {
+                mrb_value array = mrb_ary_new(mrb);
 
-// static mrb_value
-// receive_picked(mrb_state *mrb, mrb_value self)
-// {
-//     @autoreleasepool {
-//         NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
+                for (UIImage* image in nsarray) {
+                    mrb_ary_push(mrb, array, mrb_rubypico_image_to_mrb(mrb, [image retain]));
+                }
 
-//         if (nsarray == NULL) {
-//             return mrb_rubypico_image_to_mrb(mrb, NULL);
-//         }
-        
-//         mrb_value array = mrb_ary_new(mrb);
-            
-//         for (UIImage* image in nsarray) {
-//             mrb_ary_push(mrb, array, mrb_rubypico_image_to_mrb(mrb, [image retain]));
-//         }
+                return num == 1 ? mrb_ary_ref(mrb, array, 0) : array;
+            }
 
-//         return array;
-//     }
-// }
+            [NSThread sleepForTimeInterval:0.1];
+        }
+    }
+
+    return mrb_nil_value();
+}
+
+static mrb_value
+mrb_rubypico_image_pick_from_library(mrb_state *mrb, mrb_value self)
+{
+    mrb_int num = 1;
+    mrb_get_args(mrb, "|i", &num);
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController startPickFromLibrary:num];
+    });
+
+    return mrb_rubypico_image_receive_picked(mrb, num);
+}
 
 static mrb_value
 mrb_rubypico_image_render(mrb_state *mrb, mrb_value self)
@@ -355,9 +363,8 @@ mrb_rubypico_image_init(mrb_state* mrb)
     struct RClass *cc = mrb_define_class(mrb, "Image", mrb->object_class);
 
     mrb_define_class_method(mrb , cc, "load",               mrb_rubypico_image_load,               MRB_ARGS_REQ(1));
-    // mrb_define_class_method(mrb , cc, "start_pick_from_library",  start_pick_from_library, MRB_ARGS_REQ(1));
-    // mrb_define_class_method(mrb , cc, "receive_picked",  receive_picked,        MRB_ARGS_NONE());
-    mrb_define_class_method(mrb , cc, "render",          mrb_rubypico_image_render,                MRB_ARGS_REQ(2));
+    mrb_define_class_method(mrb , cc, "pick_from_library",  mrb_rubypico_image_pick_from_library,  MRB_ARGS_OPT(1));
+    mrb_define_class_method(mrb , cc, "render",             mrb_rubypico_image_render,             MRB_ARGS_REQ(2));
 
     mrb_define_method(mrb, cc,        "width",              mrb_rubypico_image_width,              MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,        "height",             mrb_rubypico_image_height,             MRB_ARGS_NONE());

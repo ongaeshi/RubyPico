@@ -3,10 +3,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QBImagePickerController/QBImagePickerController.h>
 
 @interface MrubyViewController :
-    // UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
-    UIViewController<UINavigationControllerDelegate>
+    UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
 
 - (id)initWithScriptPath:(NSString*)scriptPath;
 - (void)printstr:(NSString*)str;
@@ -15,6 +15,7 @@
 - (void) startPopupInput:(NSString*)path;
 - (void) startPopupMsg:(NSString*)path;
 - (NSMutableArray*) receivePicked;
+- (void) startPickFromLibrary:(int)num;
 
 @end
 

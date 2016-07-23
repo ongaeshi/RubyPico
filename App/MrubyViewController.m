@@ -24,6 +24,7 @@ MrubyViewController *globalMrubyViewController;
     UITextView* _textView;
     BOOL _isCanceled;
     NSMutableArray* _receivePicked;
+    QBImagePickerController* _imagePicker;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -48,6 +49,11 @@ MrubyViewController *globalMrubyViewController;
     _textView.font = [UIFont fontWithName:@"Courier" size:12];
     _textView.text = @"";
     [self.view addSubview:_textView];
+
+    // ImagePicker
+    _imagePicker = [QBImagePickerController new];
+    [_imagePicker setDelegate:self];
+    _imagePicker.showsNumberOfSelectedAssets = YES;
 
     // Run script
     [self runMrb];
@@ -186,8 +192,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    @synchronized (self)
-    {
+    @synchronized (self) {
         _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
 
         if (buttonIndex == alertView.cancelButtonIndex) {
@@ -200,11 +205,48 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (NSMutableArray*) receivePicked {
-    @synchronized (self)
-    {
+    @synchronized (self) {
         NSMutableArray* array = _receivePicked;
         _receivePicked = NULL;
         return array;
+    }
+}
+
+- (void) startPickFromLibrary:(int)num {
+    _receivePicked = NULL;
+    _imagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
+    _imagePicker.maximumNumberOfSelection = num;
+    [self presentViewController:_imagePicker animated:YES completion:nil];
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController *)picker didFinishPickingAssets:(NSArray *)assets {
+    @synchronized (self) {
+        _receivePicked = [[NSMutableArray alloc] initWithCapacity:[assets count]];
+
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.synchronous = YES;
+        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+        options.resizeMode = PHImageRequestOptionsResizeModeExact;
+
+        for (PHAsset* asset in assets) {
+            [[PHImageManager defaultManager] requestImageForAsset:asset
+                                                    targetSize:PHImageManagerMaximumSize
+                                                    contentMode:PHImageContentModeAspectFit
+                                                        options:options
+                                                    resultHandler:^(UIImage *result, NSDictionary *info) {
+                    if (result) {
+                        [_receivePicked addObject:result];
+                    }
+                }];
+        }
+
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)picker {
+    @synchronized (self) {
+        [self dismissViewControllerAnimated:YES completion:NULL];
     }
 }
 
