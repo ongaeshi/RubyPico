@@ -52,11 +52,25 @@ mrb_rubypico_image_load(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
-
-    const char* path = mrb_string_value_ptr(mrb, str);
+    const char *path = mrb_string_value_ptr(mrb, str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
-    UIImage* image = [[UIImage imageNamed:npath] retain];
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(http://|https://){1}[\\w\\.\\-/:]+"
+                                                                           options:0
+                                                                             error:&error];
+    NSTextCheckingResult *match = [regex firstMatchInString:npath
+                                                options:0
+                                                  range:NSMakeRange(0, npath.length)];
+    UIImage* image;
+
+    if (!match) {
+        image = [[UIImage imageNamed:npath] retain];
+    } else {
+        NSURL *url = [NSURL URLWithString:npath];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        image = [[UIImage imageWithData:data] retain];
+    }
 
     return mrb_rubypico_image_to_mrb(mrb, image);
 }
