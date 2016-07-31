@@ -7,6 +7,13 @@
 #ifndef MRUBY_VALUE_H
 #define MRUBY_VALUE_H
 
+#include "mruby/common.h"
+
+/**
+ * MRuby Value definition functions and macros.
+ */
+MRB_BEGIN_DECL
+
 typedef uint32_t mrb_sym;
 typedef uint8_t mrb_bool;
 struct mrb_state;
@@ -34,25 +41,21 @@ struct mrb_state;
 
 #ifdef MRB_USE_FLOAT
   typedef float mrb_float;
-# define mrb_float_to_str(buf, i) sprintf(buf, "%.7e", i)
 # define str_to_mrb_float(buf) strtof(buf, NULL)
 #else
   typedef double mrb_float;
-# define mrb_float_to_str(buf, i) sprintf(buf, "%.16e", i)
 # define str_to_mrb_float(buf) strtod(buf, NULL)
 #endif
 
-#ifdef _MSC_VER
+#if defined _MSC_VER && _MSC_VER < 1900
 # ifndef __cplusplus
 #  define inline __inline
 # endif
-# if _MSC_VER < 1900
-#  include <stdarg.h>
+# include <stdarg.h>
 MRB_API int mrb_msvc_vsnprintf(char *s, size_t n, const char *format, va_list arg);
 MRB_API int mrb_msvc_snprintf(char *s, size_t n, const char *format, ...);
-#  define vsnprintf(s, n, format, arg) mrb_msvc_vsnprintf(s, n, format, arg)
-#  define snprintf(s, n, format, ...) mrb_msvc_snprintf(s, n, format, __VA_ARGS__)
-# endif
+# define vsnprintf(s, n, format, arg) mrb_msvc_vsnprintf(s, n, format, arg)
+# define snprintf(s, n, format, ...) mrb_msvc_snprintf(s, n, format, __VA_ARGS__)
 # if _MSC_VER < 1800
 #  include <float.h>
 #  define isfinite(n) _finite(n)
@@ -63,11 +66,7 @@ MRB_API int mrb_msvc_snprintf(char *s, size_t n, const char *format, ...);
 static const unsigned int IEEE754_INFINITY_BITS_SINGLE = 0x7F800000;
 #  define INFINITY (*(float *)&IEEE754_INFINITY_BITS_SINGLE)
 #  define NAN ((float)(INFINITY - INFINITY))
-# else
-#  include <inttypes.h>
 # endif
-#else
-# include <inttypes.h>
 #endif
 
 enum mrb_vtype {
@@ -99,6 +98,22 @@ enum mrb_vtype {
 
 #include "../mruby/object.h"
 
+#ifdef MRB_DOCUMENTATION_BLOCK
+
+/**
+ * @abstract
+ * MRuby value boxing.
+ *
+ * Actual implementation depends on configured boxing type.
+ *
+ * @see mruby/boxing_no.h Default boxing representation
+ * @see mruby/boxing_word.h Word representation
+ * @see mruby/boxing_nan.h Boxed double representation
+ */
+typedef void mrb_value;
+
+#endif
+
 #if defined(MRB_NAN_BOXING)
 #include "boxing_nan.h"
 #elif defined(MRB_WORD_BOXING)
@@ -129,8 +144,10 @@ enum mrb_vtype {
 #define mrb_test(o)   mrb_bool(o)
 MRB_API mrb_bool mrb_regexp_p(struct mrb_state*, mrb_value);
 
-static inline mrb_value
-mrb_float_value(struct mrb_state *mrb, mrb_float f)
+/*
+ * Returns a float in Ruby.
+ */
+MRB_INLINE mrb_value mrb_float_value(struct mrb_state *mrb, mrb_float f)
 {
   mrb_value v;
   (void) mrb;
@@ -147,8 +164,10 @@ mrb_cptr_value(struct mrb_state *mrb, void *p)
   return v;
 }
 
-static inline mrb_value
-mrb_fixnum_value(mrb_int i)
+/*
+ * Returns a fixnum in Ruby.
+ */
+MRB_INLINE mrb_value mrb_fixnum_value(mrb_int i)
 {
   mrb_value v;
   SET_INT_VALUE(v, i);
@@ -171,24 +190,34 @@ mrb_obj_value(void *p)
   return v;
 }
 
-static inline mrb_value
-mrb_nil_value(void)
+
+/*
+ * Get a nil mrb_value object.
+ *
+ * @return
+ *      nil mrb_value object reference.
+ */
+MRB_INLINE mrb_value mrb_nil_value(void)
 {
   mrb_value v;
   SET_NIL_VALUE(v);
   return v;
 }
 
-static inline mrb_value
-mrb_false_value(void)
+/*
+ * Returns false in Ruby.
+ */
+MRB_INLINE mrb_value mrb_false_value(void)
 {
   mrb_value v;
   SET_FALSE_VALUE(v);
   return v;
 }
 
-static inline mrb_value
-mrb_true_value(void)
+/*
+ * Returns true in Ruby.
+ */
+MRB_INLINE mrb_value mrb_true_value(void)
 {
   mrb_value v;
   SET_TRUE_VALUE(v);
@@ -233,5 +262,7 @@ mrb_ro_data_p(const char *p)
 #else
 # define mrb_ro_data_p(p) FALSE
 #endif
+
+MRB_END_DECL
 
 #endif  /* MRUBY_VALUE_H */

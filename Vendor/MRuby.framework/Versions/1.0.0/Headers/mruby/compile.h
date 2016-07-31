@@ -7,9 +7,12 @@
 #ifndef MRUBY_COMPILE_H
 #define MRUBY_COMPILE_H
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
+#include "mruby/common.h"
+
+/**
+ * MRuby Compiler
+ */
+MRB_BEGIN_DECL
 
 #include "../mruby.h"
 
@@ -55,8 +58,8 @@ enum mrb_lex_state_enum {
   EXPR_CMDARG,                /* newline significant, +/- is an operator. */
   EXPR_MID,                   /* newline significant, +/- is an operator. */
   EXPR_FNAME,                 /* ignore newline, no reserved words. */
-  EXPR_DOT,                   /* right after `.' or `::', no reserved words. */
-  EXPR_CLASS,                 /* immediate after `class', no here document. */
+  EXPR_DOT,                   /* right after '.' or '::', no reserved words. */
+  EXPR_CLASS,                 /* immediate after 'class', no here document. */
   EXPR_VALUE,                 /* alike EXPR_BEG but label is disallowed. */
   EXPR_MAX_STATE
 };
@@ -109,7 +112,7 @@ struct mrb_parser_state {
   struct mrb_pool *pool;
   mrb_ast_node *cells;
   const char *s, *send;
-#ifdef ENABLE_STDIO
+#ifndef MRB_DISABLE_STDIO
   FILE *f;
 #endif
   mrbc_context *cxt;
@@ -164,7 +167,7 @@ MRB_API void mrb_parser_set_filename(struct mrb_parser_state*, char const*);
 MRB_API char const* mrb_parser_get_filename(struct mrb_parser_state*, uint16_t idx);
 
 /* utility functions */
-#ifdef ENABLE_STDIO
+#ifndef MRB_DISABLE_STDIO
 MRB_API struct mrb_parser_state* mrb_parse_file(mrb_state*,FILE*,mrbc_context*);
 #endif
 MRB_API struct mrb_parser_state* mrb_parse_string(mrb_state*,const char*,mrbc_context*);
@@ -172,19 +175,16 @@ MRB_API struct mrb_parser_state* mrb_parse_nstring(mrb_state*,const char*,int,mr
 MRB_API struct RProc* mrb_generate_code(mrb_state*, struct mrb_parser_state*);
 
 /* program load functions */
-#ifdef ENABLE_STDIO
+#ifndef MRB_DISABLE_STDIO
 MRB_API mrb_value mrb_load_file(mrb_state*,FILE*);
+MRB_API mrb_value mrb_load_file_cxt(mrb_state*,FILE*, mrbc_context *cxt);
 #endif
 MRB_API mrb_value mrb_load_string(mrb_state *mrb, const char *s);
 MRB_API mrb_value mrb_load_nstring(mrb_state *mrb, const char *s, int len);
-#ifdef ENABLE_STDIO
-MRB_API mrb_value mrb_load_file_cxt(mrb_state*,FILE*, mrbc_context *cxt);
-#endif
 MRB_API mrb_value mrb_load_string_cxt(mrb_state *mrb, const char *s, mrbc_context *cxt);
 MRB_API mrb_value mrb_load_nstring_cxt(mrb_state *mrb, const char *s, int len, mrbc_context *cxt);
 
-#if defined(__cplusplus)
-}  /* extern "C" { */
-#endif
+/** @} */
+MRB_END_DECL
 
 #endif /* MRUBY_COMPILE_H */
