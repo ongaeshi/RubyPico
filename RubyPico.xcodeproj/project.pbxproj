@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
+		5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5271AE781D5C45BC000D50A4 /* image_util.rb */; };
 		52731C661B371FC500E2CC2A /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52731C601B371FC500E2CC2A /* sample.jpg */; };
 		52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C611B371FC500E2CC2A /* tabbar_files.png */; };
 		52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C621B371FC500E2CC2A /* tabbar_samples.png */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
+		5271AE781D5C45BC000D50A4 /* image_util.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = image_util.rb; sourceTree = "<group>"; };
 		52731C601B371FC500E2CC2A /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		52731C611B371FC500E2CC2A /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		52731C621B371FC500E2CC2A /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				52FD353B1D41262C009C8E5B /* __builtin__.rb */,
+				5271AE781D5C45BC000D50A4 /* image_util.rb */,
 				52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */,
 				52731C6C1B37224300E2CC2A /* sample */,
 				52731C5F1B371FC500E2CC2A /* images */,
@@ -299,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */,
 				52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */,
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
 				52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */,
