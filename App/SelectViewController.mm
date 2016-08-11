@@ -2,7 +2,7 @@
 
 #import "EditViewController.h"
 #import "FCFileManager.h"
-#import "ScriptController.h"
+#import "MrubyViewController.h"
 
 @interface SelectViewController ()
 
@@ -114,7 +114,7 @@
     // }
 
     {
-        UIViewController* viewController = [ScriptController NewWithScriptName:path];
+        UIViewController* viewController = [[MrubyViewController alloc] initWithScriptPath:path];
         viewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:viewController animated:YES];
     }
