@@ -7,7 +7,15 @@ class Image
   end
 
   def aspect_ratio
-    width / height
+    width.to_f / height
+  end
+
+  def fitw(height)
+    aspect_ratio * height
+  end
+
+  def fith(width)
+    (1.0 / aspect_ratio) * width
   end
 end
 

@@ -1,12 +1,12 @@
 module ImageUtil
   def self.vertical(imgs, base_index = 0)
     width = imgs[base_index].width
-    height = imgs.reduce(base_index) { |a, e| a += fith(e, width) }
+    height = imgs.reduce(base_index) { |a, e| a += e.fith(width) }
 
     Image.render(width, height) do
       y = 0
       imgs.each_with_index do |img, i|
-        h = fith(img, width)
+        h = img.fith(width)
         img.draw(0, y, width, h)
         y += h
       end
@@ -15,12 +15,12 @@ module ImageUtil
 
   def self.horizontal(imgs, base_index = 0)
     height = imgs[base_index].height
-    width  = imgs.reduce(base_index) { |a, e| a += fitw(e, height) }
+    width  = imgs.reduce(base_index) { |a, e| a += e.fitw(height) }
 
     Image.render(width, height) do
       x = 0
       imgs.each_with_index do |img, i|
-        w = fitw(img, height)
+        w = img.fitw(height)
         img.draw(x, 0, w, height)
         x += w
       end
@@ -47,14 +47,6 @@ module ImageUtil
   end
 
   private
-
-  def self.fitw(img, height)
-    (img.width.to_f / img.height) * height
-  end
-
-  def self.fith(img, width)
-     (img.height.to_f / img.width) * width
-  end
 
   def self.grid_size(num)
     # Math.sqrt
