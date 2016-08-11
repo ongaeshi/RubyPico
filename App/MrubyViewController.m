@@ -135,6 +135,8 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
         mrb_gc_arena_restore(_mrb, arena);
 
+        mrb_close(_mrb);
+
         _mrb = NULL;
         // NSLog(@"Finish mruby");
     });
