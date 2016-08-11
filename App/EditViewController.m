@@ -12,8 +12,6 @@
 #import "HelpViewController.h"
 #import "MrubyViewController.h"
 #import "RubyHighlightingTextStorage.h"
-#import "ScriptController.h"
-#import "ChatViewController.h"
 #import "ICTextView.h"
 
 const int INDENT_WIDTH = 2;
@@ -156,11 +154,7 @@ const int PREV_LINE_MAX = 240;
     // Save file (For iOS <= 6.1)
     [self saveFileIfTouched];
 
-#if 1
     UIViewController* viewController = [[MrubyViewController alloc] initWithScriptPath:mFileName];
-#else
-    UIViewController* viewController = [ScriptController NewWithScriptName:mFileName];
-#endif
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		522216E41CF19FF800E22B05 /* chat in Resources */ = {isa = PBXBuildFile; fileRef = 522216E31CF19FF800E22B05 /* chat */; };
-		522216E61CF1A00D00E22B05 /* chat_maker.rb in Resources */ = {isa = PBXBuildFile; fileRef = 522216E51CF1A00D00E22B05 /* chat_maker.rb */; };
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
-		52731C651B371FC500E2CC2A /* builtin.rb in Resources */ = {isa = PBXBuildFile; fileRef = 52731C5E1B371FC500E2CC2A /* builtin.rb */; };
+		5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5271AE781D5C45BC000D50A4 /* image_util.rb */; };
 		52731C661B371FC500E2CC2A /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52731C601B371FC500E2CC2A /* sample.jpg */; };
 		52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C611B371FC500E2CC2A /* tabbar_files.png */; };
 		52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C621B371FC500E2CC2A /* tabbar_samples.png */; };
@@ -20,19 +18,15 @@
 		5285E9641C3B61A70090C383 /* MRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5285E9631C3B61A70090C383 /* MRuby.framework */; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
 		52BF5C511CD641B60035968E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C391CD641B50035968E /* AppDelegate.m */; };
-		52BF5C521CD641B60035968E /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C3B1CD641B50035968E /* BindImage.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		52BF5C531CD641B60035968E /* BindPopup.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C3D1CD641B50035968E /* BindPopup.mm */; };
-		52BF5C541CD641B60035968E /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C3F1CD641B50035968E /* ChatViewController.m */; };
-		52BF5C551CD641B60035968E /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C411CD641B50035968E /* EditViewController.mm */; };
-		52BF5C561CD641B60035968E /* FileViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C431CD641B50035968E /* FileViewController.mm */; };
-		52BF5C571CD641B60035968E /* HelpViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C451CD641B50035968E /* HelpViewController.mm */; };
+		52BF5C551CD641B60035968E /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C411CD641B50035968E /* EditViewController.m */; };
+		52BF5C561CD641B60035968E /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C431CD641B50035968E /* FileViewController.m */; };
+		52BF5C571CD641B60035968E /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C451CD641B50035968E /* HelpViewController.m */; };
 		52BF5C581CD641B60035968E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52BF5C461CD641B50035968E /* Images.xcassets */; };
 		52BF5C591CD641B60035968E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52BF5C471CD641B60035968E /* Info.plist */; };
 		52BF5C5A1CD641B60035968E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C481CD641B60035968E /* main.m */; };
 		52BF5C5B1CD641B60035968E /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4A1CD641B60035968E /* RubyHighlightingTextStorage.m */; };
-		52BF5C5C1CD641B60035968E /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4C1CD641B60035968E /* SampleViewController.mm */; };
-		52BF5C5D1CD641B60035968E /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4E1CD641B60035968E /* ScriptController.mm */; };
-		52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C501CD641B60035968E /* SelectViewController.mm */; };
+		52BF5C5C1CD641B60035968E /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C4C1CD641B60035968E /* SampleViewController.m */; };
+		52BF5C5E1CD641B60035968E /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C501CD641B60035968E /* SelectViewController.m */; };
 		52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018571C94075E0046CCF8 /* chat_ruby.png */; };
 		52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */ = {isa = PBXBuildFile; fileRef = 52C018581C94075E0046CCF8 /* chat_you.png */; };
 		52FD35381D3E918C009C8E5B /* mrb_image.m in Sources */ = {isa = PBXBuildFile; fileRef = 52FD35371D3E918C009C8E5B /* mrb_image.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -51,10 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		522216E31CF19FF800E22B05 /* chat */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chat; sourceTree = "<group>"; };
-		522216E51CF1A00D00E22B05 /* chat_maker.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = chat_maker.rb; sourceTree = "<group>"; };
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
-		52731C5E1B371FC500E2CC2A /* builtin.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = builtin.rb; sourceTree = "<group>"; };
+		5271AE781D5C45BC000D50A4 /* image_util.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = image_util.rb; sourceTree = "<group>"; };
 		52731C601B371FC500E2CC2A /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		52731C611B371FC500E2CC2A /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		52731C621B371FC500E2CC2A /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
@@ -70,29 +62,21 @@
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
 		52BF5C381CD641B50035968E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52BF5C391CD641B50035968E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		52BF5C3A1CD641B50035968E /* BindImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindImage.hpp; sourceTree = "<group>"; };
-		52BF5C3B1CD641B50035968E /* BindImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindImage.mm; sourceTree = "<group>"; };
-		52BF5C3C1CD641B50035968E /* BindPopup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindPopup.hpp; sourceTree = "<group>"; };
-		52BF5C3D1CD641B50035968E /* BindPopup.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindPopup.mm; sourceTree = "<group>"; };
-		52BF5C3E1CD641B50035968E /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		52BF5C3F1CD641B50035968E /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		52BF5C401CD641B50035968E /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
-		52BF5C411CD641B50035968E /* EditViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
+		52BF5C411CD641B50035968E /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		52BF5C421CD641B50035968E /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
-		52BF5C431CD641B50035968E /* FileViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileViewController.mm; sourceTree = "<group>"; };
+		52BF5C431CD641B50035968E /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		52BF5C441CD641B50035968E /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
-		52BF5C451CD641B50035968E /* HelpViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HelpViewController.mm; sourceTree = "<group>"; };
+		52BF5C451CD641B50035968E /* HelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
 		52BF5C461CD641B50035968E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		52BF5C471CD641B60035968E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52BF5C481CD641B60035968E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52BF5C491CD641B60035968E /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
 		52BF5C4A1CD641B60035968E /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
 		52BF5C4B1CD641B60035968E /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
-		52BF5C4C1CD641B60035968E /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
-		52BF5C4D1CD641B60035968E /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
-		52BF5C4E1CD641B60035968E /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
+		52BF5C4C1CD641B60035968E /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 		52BF5C4F1CD641B60035968E /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
-		52BF5C501CD641B60035968E /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
+		52BF5C501CD641B60035968E /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		52C018571C94075E0046CCF8 /* chat_ruby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ruby.png; sourceTree = "<group>"; };
 		52C018581C94075E0046CCF8 /* chat_you.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_you.png; sourceTree = "<group>"; };
 		52FD35361D3E918C009C8E5B /* mrb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mrb_image.h; sourceTree = "<group>"; };
@@ -136,11 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				52FD353B1D41262C009C8E5B /* __builtin__.rb */,
+				5271AE781D5C45BC000D50A4 /* image_util.rb */,
 				52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */,
-				522216E31CF19FF800E22B05 /* chat */,
 				52731C6C1B37224300E2CC2A /* sample */,
-				52731C5E1B371FC500E2CC2A /* builtin.rb */,
-				522216E51CF1A00D00E22B05 /* chat_maker.rb */,
 				52731C5F1B371FC500E2CC2A /* images */,
 			);
 			path = resources;
@@ -208,29 +190,21 @@
 				5280A9F51D1691D0008D638A /* MrubyViewController.m */,
 				52BF5C381CD641B50035968E /* AppDelegate.h */,
 				52BF5C391CD641B50035968E /* AppDelegate.m */,
-				52BF5C3A1CD641B50035968E /* BindImage.hpp */,
-				52BF5C3B1CD641B50035968E /* BindImage.mm */,
-				52BF5C3C1CD641B50035968E /* BindPopup.hpp */,
-				52BF5C3D1CD641B50035968E /* BindPopup.mm */,
-				52BF5C3E1CD641B50035968E /* ChatViewController.h */,
-				52BF5C3F1CD641B50035968E /* ChatViewController.m */,
 				52BF5C401CD641B50035968E /* EditViewController.h */,
-				52BF5C411CD641B50035968E /* EditViewController.mm */,
+				52BF5C411CD641B50035968E /* EditViewController.m */,
 				52BF5C421CD641B50035968E /* FileViewController.h */,
-				52BF5C431CD641B50035968E /* FileViewController.mm */,
+				52BF5C431CD641B50035968E /* FileViewController.m */,
 				52BF5C441CD641B50035968E /* HelpViewController.h */,
-				52BF5C451CD641B50035968E /* HelpViewController.mm */,
+				52BF5C451CD641B50035968E /* HelpViewController.m */,
 				52BF5C461CD641B50035968E /* Images.xcassets */,
 				52BF5C471CD641B60035968E /* Info.plist */,
 				52BF5C481CD641B60035968E /* main.m */,
 				52BF5C491CD641B60035968E /* RubyHighlightingTextStorage.h */,
 				52BF5C4A1CD641B60035968E /* RubyHighlightingTextStorage.m */,
 				52BF5C4B1CD641B60035968E /* SampleViewController.h */,
-				52BF5C4C1CD641B60035968E /* SampleViewController.mm */,
-				52BF5C4D1CD641B60035968E /* ScriptController.h */,
-				52BF5C4E1CD641B60035968E /* ScriptController.mm */,
+				52BF5C4C1CD641B60035968E /* SampleViewController.m */,
 				52BF5C4F1CD641B60035968E /* SelectViewController.h */,
-				52BF5C501CD641B60035968E /* SelectViewController.mm */,
+				52BF5C501CD641B60035968E /* SelectViewController.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -328,18 +302,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */,
 				52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */,
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
 				52C018591C94075E0046CCF8 /* chat_ruby.png in Resources */,
 				52BF5C581CD641B60035968E /* Images.xcassets in Resources */,
-				522216E41CF19FF800E22B05 /* chat in Resources */,
 				52731C681B371FC500E2CC2A /* tabbar_samples.png in Resources */,
 				52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */,
 				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
 				52BF5C591CD641B60035968E /* Info.plist in Resources */,
-				52731C651B371FC500E2CC2A /* builtin.rb in Resources */,
 				52FD353C1D41262C009C8E5B /* __builtin__.rb in Resources */,
-				522216E61CF1A00D00E22B05 /* chat_maker.rb in Resources */,
 				52731C661B371FC500E2CC2A /* sample.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,20 +378,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52BF5C571CD641B60035968E /* HelpViewController.mm in Sources */,
-				52BF5C5C1CD641B60035968E /* SampleViewController.mm in Sources */,
+				52BF5C571CD641B60035968E /* HelpViewController.m in Sources */,
+				52BF5C5C1CD641B60035968E /* SampleViewController.m in Sources */,
 				5280A9F61D1691D0008D638A /* MrubyViewController.m in Sources */,
-				52BF5C531CD641B60035968E /* BindPopup.mm in Sources */,
-				52BF5C5E1CD641B60035968E /* SelectViewController.mm in Sources */,
-				52BF5C5D1CD641B60035968E /* ScriptController.mm in Sources */,
-				52BF5C561CD641B60035968E /* FileViewController.mm in Sources */,
+				52BF5C5E1CD641B60035968E /* SelectViewController.m in Sources */,
+				52BF5C561CD641B60035968E /* FileViewController.m in Sources */,
 				52BF5C5A1CD641B60035968E /* main.m in Sources */,
 				52BF5C5B1CD641B60035968E /* RubyHighlightingTextStorage.m in Sources */,
 				52FD35381D3E918C009C8E5B /* mrb_image.m in Sources */,
 				52BF5C511CD641B60035968E /* AppDelegate.m in Sources */,
-				52BF5C551CD641B60035968E /* EditViewController.mm in Sources */,
-				52BF5C521CD641B60035968E /* BindImage.mm in Sources */,
-				52BF5C541CD641B60035968E /* ChatViewController.m in Sources */,
+				52BF5C551CD641B60035968E /* EditViewController.m in Sources */,
 				5280A9F91D16C66A008D638A /* mrb_misc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
