@@ -55,6 +55,14 @@ MrubyViewController *globalMrubyViewController;
     [_imagePicker setDelegate:self];
     _imagePicker.showsNumberOfSelectedAssets = YES;
 
+    // Title
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor clearColor];
+    [button setTitle:[_scriptPath lastPathComponent] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
+    self.navigationItem.titleView = button;
+
     // Run script
     [self runMrb];
 }
