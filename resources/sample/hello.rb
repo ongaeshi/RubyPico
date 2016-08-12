@@ -1,8 +1,8 @@
 # # hello
 #
 # ## Description
-# Hello World!
+# Hello World
 
-Popup.msg("Hi!")
-puts "Hello, RubyPico"
+puts "Hello, RubyPico!"
 puts "http://rubypico.ongaeshi.me"
+puts Image.load("chat_ruby.png")
