@@ -16,6 +16,14 @@ puts logo
 puts "overray"
 overrayed_image = Image.render(image.width, image.height) do
   image.draw(0, 0, image.width, image.height)
-  logo.gray.opacity(0.5).draw(0, 0, logo.width, logo.height)
+
+  w = image.width / 8
+  h = logo.fith(w)
+
+  img = logo.sepia
+  img.draw(image.width - w,
+           image.height - h,
+           w,
+           h)
 end
 puts overrayed_image
