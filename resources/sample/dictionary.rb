@@ -1,10 +1,12 @@
-# Please return the text or image in the "def main"
+# # dictionary
+#
+# ## Description
+# Consult a dictionary
 
-def main
-  word = Popup.input("Word?")
+def dictionary(word)
   word = URI.encode_www_form_component(word)
   
-  puts <<EOS
+  <<EOS
 Longman
 http://www.ldoceonline.com/search/?q=#{word}
 
@@ -28,3 +30,6 @@ end
 def wikipedia(word, country = 'en')
   "http://#{country}.wikipedia.org/wiki/#{word}"
 end
+
+word = Popup.input("Word?")
+puts dictionary(word)

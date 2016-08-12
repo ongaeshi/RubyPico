@@ -1,6 +1,7 @@
-# Please return the text or image in the "def main"
+# # input
+#
+# ## Description
+# Input and output
 
-def main
-  name = Popup.input "What your name?"
-  puts "Hello! #{name}."
-end
+name = Popup.input "What your name?"
+puts "Hello! #{name}."
