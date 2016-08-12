@@ -1,4 +1,7 @@
 class Image
+  alias_method :w, :width
+  alias_method :h, :height
+
   def square(x_offset = 0, y_offset = 0)
     l = width > height ? height : width
     cx = width / 2

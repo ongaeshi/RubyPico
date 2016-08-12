@@ -14,15 +14,15 @@ logo = Image.load(URL)
 puts logo
 
 puts "overray"
-overrayed_image = Image.render(image.width, image.height) do
-  image.draw(0, 0, image.width, image.height)
+overrayed_image = Image.render(image.w, image.h) do
+  image.draw(0, 0, image.w, image.h)
 
-  w = image.width / 8
+  w = image.w / 8
   h = logo.fith(w)
 
   img = logo.sepia
-  img.draw(image.width - w,
-           image.height - h,
+  img.draw(image.w - w,
+           image.h - h,
            w,
            h)
 end
