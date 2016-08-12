@@ -1,19 +1,28 @@
 # HISTORY - RubyPico
 
-### 0.7.1 - 2015-06-07
+### 0.8 - 2016-08-12
+
+- main is unnecessary
+  - As write more like Ruby
+- Image can be `puts`
+  - See sample/image.rb
+- Update mruby 1.2.0
+- Update Podfile in order to conform to CocoaPods 1.0 syntax
+
+### 0.7.1 - 2016-06-07
 
 - Fix scroll bug of termination
 - Add "rubypico://a_script" to URL Scheme
 - Add chat/tenki
 
-### 0.7 - 2015-05-27
+### 0.7 - 2016-05-27
 
 - require
 - $:(LOAD_PATH), $0(PROGRAM_NAME)
 - Add sample/chat
 - Fix scroll bug of editor
 
-### 0.6 - 2015-04-30
+### 0.6 - 2016-04-30
 
 - Support Regexp
 - Add Chat#timer event
@@ -21,7 +30,7 @@
 - Add sample/hatena_bookmark_bot
 - Remove sample number prefix
 
-### 0.5 - 2015-03-24
+### 0.5 - 2016-03-24
 
 - Script
   - Create chat bot
@@ -33,7 +42,7 @@
   - New Icon, LaunchImage
   - Automate the icon update
 
-### 0.4 - 2015-02-14
+### 0.4 - 2016-02-14
 
 - Script
   - Enable p, puts
@@ -56,7 +65,7 @@ end
 - Editor
   - Change the script name
 
-## 0.3 - 2015-01-15
+## 0.3 - 2016-01-15
 
 - Script
   - Use MRuby.framework
