@@ -1,6 +1,11 @@
-# Please return the text or image in the "def main"
+# # input
+#
+# ## Description
+# Input and output
 
-def main
-  name = Popup.input "What your name?"
-  puts "Hello! #{name}."
-end
+name = Popup.input "What your name?"
+puts "Hello! #{name}."
+
+year = Popup.input "Your birth year?"
+age = Time.now.year - year.to_i
+puts "You are a #{age} year old."

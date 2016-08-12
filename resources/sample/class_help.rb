@@ -1,10 +1,10 @@
-# # 09_class_help
+# # class_help
 #
 # ## Description
 # Display class list or methods
 
 def main
-  name = Popup.input("Class name?(e.g. Array)\nCancel: Display list")
+  name = Popup.input("Class name?(e.g. Array)\nCancel: Display class")
   
   if name
     puts Module.const_get(name).info
@@ -61,3 +61,5 @@ def methods_str(a, header = "")
     "  #{header}#{e}"
   end.join("\n")
 end
+
+main

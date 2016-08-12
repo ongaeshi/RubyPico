@@ -1,7 +1,8 @@
-# Please return the text or image in the "def main"
+# # hello
+#
+# ## Description
+# Hello World!
 
-def main
-  Popup.msg("Hi!")
-  puts "Hello, PictRuby"
-  puts "http://pictruby.ongaeshi.me"
-end
+Popup.msg("Hi!")
+puts "Hello, RubyPico"
+puts "http://rubypico.ongaeshi.me"
