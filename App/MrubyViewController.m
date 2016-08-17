@@ -361,4 +361,21 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     }
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+	if (![textField.text isEqualToString:@""])
+	{
+        NSLog(@"input: %@", textField.text);
+        textField.text = @"";
+	}
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+	return YES;
+}
+
 @end
