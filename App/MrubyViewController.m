@@ -349,15 +349,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 	[UIView commitAnimations];
 }
 
-- (void)startInput {
-    _receivePicked = NULL;
-
-    [self hiddenInputField:NO];
-}
-
 - (void)hiddenInputField:(BOOL)hidden {
-    _inputField.hidden = hidden;
-
     if (hidden) {
         _textView.frame = self.view.bounds;
     } else {
@@ -365,25 +357,35 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
         frame.size.height -= INPUT_FIELD_HEIGHT + 10;
         _textView.frame = frame;
     }
+
+    _inputField.hidden = hidden;
+}
+
+- (void)startInput {
+    _receivePicked = NULL;
+    [self hiddenInputField:NO];
+    [_inputField becomeFirstResponder];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     @synchronized (self) {
-        if (![textField.text isEqualToString:@""])
-        {
+        if (![textField.text isEqualToString:@""]) {
             _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
             [_receivePicked addObject:textField.text];
+
+            textField.text = @"";
+            [self hiddenInputField:YES];
         }
     }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
-	return YES;
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-	return YES;
+    return YES;
 }
 
 @end
