@@ -213,7 +213,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     return _isCanceled;
 }
 
-- (void) startPopupInput:(NSString*)path {
+- (void)startPopupInput:(NSString*)path {
     _receivePicked = NULL;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
@@ -226,7 +226,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     [alert show];
 }
 
-- (void) startPopupMsg:(NSString*)path {
+- (void)startPopupMsg:(NSString*)path {
     _receivePicked = NULL;
 
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
@@ -250,7 +250,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     }
 }
 
-- (NSMutableArray*) receivePicked {
+- (NSMutableArray*)receivePicked {
     @synchronized (self) {
         NSMutableArray* array = _receivePicked;
         _receivePicked = NULL;
@@ -258,7 +258,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     }
 }
 
-- (void) startPickFromLibrary:(int)num {
+- (void)startPickFromLibrary:(int)num {
     _receivePicked = NULL;
     _imagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
     _imagePicker.maximumNumberOfSelection = num;
@@ -349,7 +349,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 	[UIView commitAnimations];
 }
 
-- (void) hiddenInputField:(BOOL)hidden {
+- (void)hiddenInputField:(BOOL)hidden {
     _inputField.hidden = hidden;
 
     if (hidden) {

@@ -12,11 +12,11 @@
 - (void)printstr:(NSString*)str;
 - (void)printimage:(UIImage*)image;
 - (BOOL)isCanceled;
-- (void) startPopupInput:(NSString*)path;
-- (void) startPopupMsg:(NSString*)path;
+- (void)startPopupInput:(NSString*)path;
+- (void)startPopupMsg:(NSString*)path;
 - (NSMutableArray*) receivePicked;
-- (void) startPickFromLibrary:(int)num;
-- (void) hiddenInputField:(BOOL)isHidden;
+- (void)startPickFromLibrary:(int)num;
+- (void)hiddenInputField:(BOOL)isHidden;
 
 @end
 
