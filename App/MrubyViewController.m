@@ -368,19 +368,19 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    @synchronized (self) {
-        if (![textField.text isEqualToString:@""]) {
-            _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
-            [_receivePicked addObject:textField.text];
-
-            textField.text = @"";
-            [self hiddenInputField:YES];
-        }
-    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    @synchronized (self) {
+        _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+        [_receivePicked addObject:textField.text];
+
+        textField.text = @"";
+
+        [self hiddenInputField:YES];
+        [textField resignFirstResponder];
+    }
+
     return YES;
 }
 
