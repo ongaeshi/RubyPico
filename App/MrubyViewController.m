@@ -85,9 +85,6 @@ MrubyViewController *globalMrubyViewController;
     _inputField.placeholder = @"Enter...";
     _inputField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     _inputField.delegate = self;
-    CGRect frame = self.view.bounds;
-    frame.size.height -= INPUT_FIELD_HEIGHT + 10;
-    _textView.frame = frame;
     [self.view addSubview:_inputField];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,6 +96,9 @@ MrubyViewController *globalMrubyViewController;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+
+    [self hiddenInputField:YES];
+
     // Run script
     [self runMrb];
 }
@@ -301,8 +301,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 	return [UIScreen mainScreen].applicationFrame;
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{	
+- (void)keyboardWillShow:(NSNotification *)notification {	
 	CGRect frame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
 	UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
@@ -336,8 +335,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 	[UIView commitAnimations];
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
 	CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
 	UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
 	
@@ -349,6 +347,18 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 	self.view.frame = [self onscreenFrame];	
 	
 	[UIView commitAnimations];
+}
+
+- (void) hiddenInputField:(BOOL)hidden {
+    _inputField.hidden = hidden;
+
+    if (hidden) {
+        _textView.frame = self.view.bounds;
+    } else {
+        CGRect frame = self.view.bounds;
+        frame.size.height -= INPUT_FIELD_HEIGHT + 10;
+        _textView.frame = frame;
+    }
 }
 
 @end
