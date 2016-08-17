@@ -349,6 +349,12 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 	[UIView commitAnimations];
 }
 
+- (void)startInput {
+    _receivePicked = NULL;
+
+    [self hiddenInputField:NO];
+}
+
 - (void)hiddenInputField:(BOOL)hidden {
     _inputField.hidden = hidden;
 
@@ -362,11 +368,13 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-	if (![textField.text isEqualToString:@""])
-	{
-        NSLog(@"input: %@", textField.text);
-        textField.text = @"";
-	}
+    @synchronized (self) {
+        if (![textField.text isEqualToString:@""])
+        {
+            _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+            [_receivePicked addObject:textField.text];
+        }
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

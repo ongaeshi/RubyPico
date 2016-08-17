@@ -45,9 +45,35 @@ mrb_printstr(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_popup_receive_picked(mrb_state *mrb)
+{
+    while (YES) {
+        NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
+
+        if (nsarray) {
+            mrb_value array = mrb_ary_new(mrb);
+
+            for (NSString* e in nsarray) {
+                mrb_ary_push(mrb, array, mrb_str_new_cstr(mrb, [e UTF8String]));
+            }
+
+            return mrb_ary_ref(mrb, array, 0);
+        }
+
+        [NSThread sleepForTimeInterval:0.1];
+    }
+
+    return mrb_nil_value();
+}
+
+static mrb_value
 mrb_gets(mrb_state *mrb, mrb_value self)
 {
-    return mrb_nil_value();
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController startInput];
+    });
+
+    return mrb_popup_receive_picked(mrb);
 }
 
 static mrb_value
@@ -136,28 +162,6 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
     return mrb_str_new_cstr(mrb, [result UTF8String]);
-}
-
-static mrb_value
-mrb_popup_receive_picked(mrb_state *mrb)
-{
-    while (YES) {
-        NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
-
-        if (nsarray) {
-            mrb_value array = mrb_ary_new(mrb);
-
-            for (NSString* e in nsarray) {
-                mrb_ary_push(mrb, array, mrb_str_new_cstr(mrb, [e UTF8String]));
-            }
-
-            return mrb_ary_ref(mrb, array, 0);
-        }
-
-        [NSThread sleepForTimeInterval:0.1];
-    }
-
-    return mrb_nil_value();
 }
 
 static mrb_value

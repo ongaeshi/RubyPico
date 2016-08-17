@@ -16,7 +16,7 @@
 - (void)startPopupMsg:(NSString*)path;
 - (NSMutableArray*) receivePicked;
 - (void)startPickFromLibrary:(int)num;
-- (void)hiddenInputField:(BOOL)isHidden;
+- (void)startInput;
 
 @end
 
