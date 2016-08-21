@@ -12,6 +12,8 @@ loop do
   
   puts cmd
   
+  break if cmd == "exit"
+  
   begin
     puts "=> #{eval(cmd).inspect}"
   rescue Exception => e
