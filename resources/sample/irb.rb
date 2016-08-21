@@ -4,16 +4,19 @@
 # Interactive Ruby Shell (REPL).
 
 puts "irb - Interactive Ruby Shell"
+no = 0
 
 loop do
-  print "% "
+  print "irb:%03d> " % no
   cmd = gets
   
   puts cmd
   
   begin
-    p eval(cmd)
+    puts "=> #{eval(cmd).inspect}"
   rescue Exception => e
     puts e.message
   end
+  
+  no += 1
 end
