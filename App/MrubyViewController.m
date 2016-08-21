@@ -18,6 +18,8 @@
 
 MrubyViewController *globalMrubyViewController;
 
+#define INPUT_FIELD_HEIGHT 28
+
 @implementation MrubyViewController {
     NSString* _scriptPath;
     mrb_state* _mrb;
@@ -25,6 +27,8 @@ MrubyViewController *globalMrubyViewController;
     BOOL _isCanceled;
     NSMutableArray* _receivePicked;
     QBImagePickerController* _imagePicker;
+    UITextField* _inputField;
+    BOOL _observed;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -35,7 +39,8 @@ MrubyViewController *globalMrubyViewController;
     _scriptPath = scriptPath;
     _mrb = [self initMrb];
     _isCanceled = NO;
-
+    _observed = NO;
+    
     return self;
 }
 
@@ -48,6 +53,7 @@ MrubyViewController *globalMrubyViewController;
     _textView.dataDetectorTypes = UIDataDetectorTypeLink;
     _textView.font = [UIFont fontWithName:@"Courier" size:12];
     _textView.text = @"";
+	_textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_textView];
 
     // ImagePicker
@@ -63,8 +69,50 @@ MrubyViewController *globalMrubyViewController;
     button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
     self.navigationItem.titleView = button;
 
-    // Run script
-    [self runMrb];
+    // Input
+    _inputField = [[UITextField alloc] initWithFrame:CGRectMake(
+            5,
+            self.view.frame.size.height - INPUT_FIELD_HEIGHT - 5,
+            self.view.frame.size.width - 15,
+            INPUT_FIELD_HEIGHT
+            )];
+    _inputField.borderStyle = UITextBorderStyleRoundedRect;
+    _inputField.font = [UIFont fontWithName:@"Courier" size:12];
+    _inputField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _inputField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _inputField.returnKeyType = UIReturnKeyDone;
+    _inputField.enablesReturnKeyAutomatically = NO;
+    _inputField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _inputField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _inputField.placeholder = @"Enter...";
+    _inputField.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    _inputField.delegate = self;
+    [self.view addSubview:_inputField];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+        
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+
+    [self hiddenInputField:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!_observed) {
+        [self runMrb];
+        _observed = YES;
+    }
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -177,7 +225,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     return _isCanceled;
 }
 
-- (void) startPopupInput:(NSString*)path {
+- (void)startPopupInput:(NSString*)path {
     _receivePicked = NULL;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
@@ -190,7 +238,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     [alert show];
 }
 
-- (void) startPopupMsg:(NSString*)path {
+- (void)startPopupMsg:(NSString*)path {
     _receivePicked = NULL;
 
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@""
@@ -214,7 +262,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     }
 }
 
-- (NSMutableArray*) receivePicked {
+- (NSMutableArray*)receivePicked {
     @synchronized (self) {
         NSMutableArray* array = _receivePicked;
         _receivePicked = NULL;
@@ -222,7 +270,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     }
 }
 
-- (void) startPickFromLibrary:(int)num {
+- (void)startPickFromLibrary:(int)num {
     _receivePicked = NULL;
     _imagePicker.allowsMultipleSelection = (num > 1) ? YES : NO;
     _imagePicker.maximumNumberOfSelection = num;
@@ -258,6 +306,98 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     @synchronized (self) {
         [self dismissViewControllerAnimated:YES completion:NULL];
     }
+}
+
+- (CGRect)onscreenFrame
+{
+	return [UIScreen mainScreen].applicationFrame;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {	
+	CGRect frame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+	UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:duration];
+	[UIView setAnimationCurve:curve];
+	
+	CGRect bounds = [self onscreenFrame];
+	switch ([UIApplication sharedApplication].statusBarOrientation)
+    {
+		case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationUnknown:
+			bounds.size.height -= frame.size.height;
+			break;
+		case UIInterfaceOrientationPortraitUpsideDown:
+			bounds.origin.y += frame.size.height;
+			bounds.size.height -= frame.size.height;
+			break;
+		case UIInterfaceOrientationLandscapeLeft:
+			bounds.size.width -= frame.size.width;
+			break;
+		case UIInterfaceOrientationLandscapeRight:
+			bounds.origin.x += frame.size.width;
+			bounds.size.width -= frame.size.width;
+			break;
+	}
+	self.view.frame = bounds;
+	
+	[UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+	CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+	UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:duration];
+	[UIView setAnimationCurve:curve];
+	
+	self.view.frame = [self onscreenFrame];	
+	
+	[UIView commitAnimations];
+}
+
+- (void)hiddenInputField:(BOOL)hidden {
+    if (hidden) {
+        _textView.frame = self.view.bounds;
+    } else {
+        CGRect frame = self.view.bounds;
+        frame.size.height -= INPUT_FIELD_HEIGHT + 10;
+        _textView.frame = frame;
+    }
+
+    _inputField.hidden = hidden;
+}
+
+- (void)startInput {
+    _receivePicked = NULL;
+    [self hiddenInputField:NO];
+    [_inputField becomeFirstResponder];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    @synchronized (self) {
+        _receivePicked = [[NSMutableArray alloc] initWithCapacity:1];
+        [_receivePicked addObject:textField.text];
+
+        textField.text = @"";
+
+        [self hiddenInputField:YES];
+        [textField resignFirstResponder];
+    }
+
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    return YES;
 }
 
 @end

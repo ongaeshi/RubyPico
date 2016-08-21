@@ -45,6 +45,38 @@ mrb_printstr(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_popup_receive_picked(mrb_state *mrb)
+{
+    while (YES) {
+        NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
+
+        if (nsarray) {
+            mrb_value array = mrb_ary_new(mrb);
+
+            for (NSString* e in nsarray) {
+                mrb_ary_push(mrb, array, mrb_str_new_cstr(mrb, [e UTF8String]));
+            }
+
+            return mrb_ary_ref(mrb, array, 0);
+        }
+
+        [NSThread sleepForTimeInterval:0.1];
+    }
+
+    return mrb_nil_value();
+}
+
+static mrb_value
+mrb_gets(mrb_state *mrb, mrb_value self)
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController startInput];
+    });
+
+    return mrb_popup_receive_picked(mrb);
+}
+
+static mrb_value
 mrb_clipboard_get(mrb_state *mrb, mrb_value self)
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -133,28 +165,6 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
-mrb_popup_receive_picked(mrb_state *mrb)
-{
-    while (YES) {
-        NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
-
-        if (nsarray) {
-            mrb_value array = mrb_ary_new(mrb);
-
-            for (NSString* e in nsarray) {
-                mrb_ary_push(mrb, array, mrb_str_new_cstr(mrb, [e UTF8String]));
-            }
-
-            return mrb_ary_ref(mrb, array, 0);
-        }
-
-        [NSThread sleepForTimeInterval:0.1];
-    }
-
-    return mrb_nil_value();
-}
-
-static mrb_value
 mrb_popup_input(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
@@ -193,6 +203,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         struct RClass *krn = mrb->kernel_module;
 
         mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
+        mrb_define_method(mrb, krn, "gets", mrb_gets, MRB_ARGS_REQ(1));
     }
 
     {
