@@ -47,7 +47,7 @@ mrb_printstr(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_popup_receive_picked(mrb_state *mrb)
 {
-    while (YES) {
+    while (![globalMrubyViewController isCanceled]) {
         NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
 
         if (nsarray) {

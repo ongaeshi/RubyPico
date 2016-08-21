@@ -79,7 +79,7 @@ static mrb_value
 mrb_rubypico_image_receive_picked(mrb_state *mrb, int num)
 {
     @autoreleasepool {
-        while (YES) {
+        while (![globalMrubyViewController isCanceled]) {
             NSMutableArray* nsarray = [globalMrubyViewController receivePicked];
 
             if (nsarray) {
