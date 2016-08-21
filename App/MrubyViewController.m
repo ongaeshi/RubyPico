@@ -28,6 +28,7 @@ MrubyViewController *globalMrubyViewController;
     NSMutableArray* _receivePicked;
     QBImagePickerController* _imagePicker;
     UITextField* _inputField;
+    BOOL _observed;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -38,7 +39,8 @@ MrubyViewController *globalMrubyViewController;
     _scriptPath = scriptPath;
     _mrb = [self initMrb];
     _isCanceled = NO;
-
+    _observed = NO;
+    
     return self;
 }
 
@@ -98,9 +100,19 @@ MrubyViewController *globalMrubyViewController;
                                                object:nil];
 
     [self hiddenInputField:YES];
+}
 
-    // Run script
-    [self runMrb];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!_observed) {
+        [self runMrb];
+        _observed = YES;
+    }
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
