@@ -60,7 +60,8 @@ mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
                                                       attributes:@{}
             ];
 
-        return mrb_rubypico_attr_string_to_mrb(mrb, attr_str);
+        mrb_data_init(self, attr_str, &data_type);
+        return self;
     }
 }
 
