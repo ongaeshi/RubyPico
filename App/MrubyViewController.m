@@ -5,6 +5,7 @@
 #import "MrubyViewController.h"
 
 #import "FCFileManager.h"
+#import "mrb_attr_string.h"
 #import "mrb_image.h"
 #import "mrb_misc.h"
 #import "mruby.h"
@@ -141,6 +142,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     mrb->code_fetch_hook = mrb_hook;
 
     // Bind
+    mrb_rubypico_attr_string_init(mrb);
     mrb_rubypico_image_init(mrb);
     mrb_rubypico_misc_init(mrb);
 
