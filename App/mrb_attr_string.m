@@ -46,10 +46,30 @@ mrb_rubypico_attr_string_to_ptr(mrb_state* mrb, mrb_value value)
     return (__bridge NSMutableAttributedString*)(DATA_PTR(value));
 }
 
+static mrb_value
+mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
+{
+    @autoreleasepool {
+        mrb_value str;
+        mrb_get_args(mrb, "S", &str);
+        const char *cstr = mrb_string_value_ptr(mrb, str);
+        NSString *nstr = [[[NSString alloc] initWithUTF8String:cstr] autorelease];
+    
+        NSMutableAttributedString* attr_str = [[NSMutableAttributedString alloc]
+                                                  initWithString:nstr
+                                                      attributes:@{}
+            ];
+
+        return mrb_rubypico_attr_string_to_mrb(mrb, attr_str);
+    }
+}
+
 void
 mrb_rubypico_attr_string_init(mrb_state* mrb)
 {
     struct RClass *cc = mrb_define_class(mrb, "AttrString", mrb->object_class);
+
+    mrb_define_method(mrb , cc, "initialize", mrb_rubypico_attr_image_initialize, MRB_ARGS_OPT(2));
 }
 
 void
