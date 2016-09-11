@@ -60,7 +60,7 @@ module Kernel
     i = 0
     len = args.size
     while i < len
-      if args[i].is_a?(Image)
+      if args[i].is_a?(Image) || args[i].is_a?(AttrString)
         __printstr__ args[i]
       else
         __printstr__ args[i].to_s
@@ -78,7 +78,7 @@ module Kernel
     i = 0
     len = args.size
     while i < len
-      if args[i].is_a?(Image)
+      if args[i].is_a?(Image) || args[i].is_a?(AttrString)
         __printstr__ args[i] 
         __printstr__ "\n"
       else

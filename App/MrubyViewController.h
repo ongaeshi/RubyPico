@@ -10,6 +10,7 @@
 
 - (id)initWithScriptPath:(NSString*)scriptPath;
 - (void)printstr:(NSString*)str;
+- (void)printAttrString:(NSMutableAttributedString*)str;
 - (void)printimage:(UIImage*)image;
 - (BOOL)isCanceled;
 - (void)startPopupInput:(NSString*)path;

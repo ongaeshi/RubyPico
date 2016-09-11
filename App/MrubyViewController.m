@@ -211,6 +211,10 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     [self appendAttributedString:[[NSAttributedString alloc] initWithString:str]];
 }
 
+- (void)printAttrString:(NSMutableAttributedString*)str {
+    [self appendAttributedString:str];
+}
+
 - (void)printimage:(UIImage*)image {
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
     attachment.image = image;
