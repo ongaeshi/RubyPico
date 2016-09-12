@@ -53,6 +53,12 @@ static NSString* str2nstr(mrb_state* mrb, mrb_value value)
     return [[[NSString alloc] initWithUTF8String:cstr] autorelease];
 }
 
+static mrb_value hash_get(mrb_state* mrb, mrb_value hash, const char* sym)
+{
+    mrb_value key = mrb_symbol_value(mrb_intern_cstr(mrb, "link")); 
+    return mrb_hash_get(mrb, hash, key);
+}
+
 static mrb_value
 mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
 {
@@ -65,12 +71,19 @@ mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
         NSString *nstr = str2nstr(mrb, str);
         
         // opt
-        mrb_value link_value = mrb_hash_get(mrb, opt, mrb_symbol_value(mrb_intern_cstr(mrb, "link")));
-        NSString *url = str2nstr(mrb, link_value);
+        NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
+
+        // link
+        mrb_value link_value = hash_get(mrb, opt, "link");
+        if (!mrb_nil_p(link_value)) {
+            NSString *url = str2nstr(mrb, link_value);
+            [attributes setObject:url forKey:NSLinkAttributeName];
+        }
     
+        // result
         NSMutableAttributedString* attr_str = [[NSMutableAttributedString alloc]
                                                   initWithString:nstr
-                                                      attributes:@{NSLinkAttributeName: url}
+                                                      attributes:attributes
             ];
 
         mrb_data_init(self, attr_str, &data_type);
