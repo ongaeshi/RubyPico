@@ -9,6 +9,7 @@
 #import "mruby/array.h"
 #import "mruby/class.h"
 #import "mruby/data.h"
+#import "mruby/hash.h"
 #import "mruby/string.h"
 
 static NSMutableAttributedString*
@@ -50,14 +51,22 @@ static mrb_value
 mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
 {
     @autoreleasepool {
-        mrb_value str;
-        mrb_get_args(mrb, "S", &str);
+        mrb_value str, opt;
+        mrb_get_args(mrb, "|So", &str, &opt);
+        // TODO default value
+        
+        // str
         const char *cstr = mrb_string_value_ptr(mrb, str);
         NSString *nstr = [[[NSString alloc] initWithUTF8String:cstr] autorelease];
+        
+        // opt
+        mrb_value link_value = mrb_hash_get(mrb, opt, mrb_symbol_value(mrb_intern_cstr(mrb, "link")));
+        cstr = mrb_string_value_ptr(mrb, link_value);
+        NSString *url = [[[NSString alloc] initWithUTF8String:cstr] autorelease];
     
         NSMutableAttributedString* attr_str = [[NSMutableAttributedString alloc]
                                                   initWithString:nstr
-                                                      attributes:@{}
+                                                      attributes:@{NSLinkAttributeName: url}
             ];
 
         mrb_data_init(self, attr_str, &data_type);
