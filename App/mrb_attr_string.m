@@ -4,6 +4,7 @@
 
 #import "mrb_attr_string.h"
 
+#import "MrubyUtil.h"
 #import "MrubyViewController.h"
 #import "mruby.h"
 #import "mruby/array.h"
@@ -47,27 +48,6 @@ mrb_rubypico_attr_string_to_ptr(mrb_state* mrb, mrb_value value)
     return (__bridge NSMutableAttributedString*)(DATA_PTR(value));
 }
 
-
-@interface MrubyUtil : NSObject
-
-+ (NSString*) str2nstr:(mrb_state*)mrb value:(mrb_value)value;
-
-@end
-
-@implementation MrubyUtil {
-}
-
-+ (NSString*) str2nstr:(mrb_state*)mrb value:(mrb_value)value {
-    const char *cstr = mrb_string_value_ptr(mrb, value);
-    return [[NSString alloc] initWithUTF8String:cstr];
-}
-
-+ (mrb_value) hashGet:(mrb_state*)mrb hash:(mrb_value)hash key:(const char*)key {
-    mrb_value sym = mrb_symbol_value(mrb_intern_cstr(mrb, "link")); 
-    return mrb_hash_get(mrb, hash, sym);
-}
-
-@end
 
 static mrb_value
 mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
