@@ -47,6 +47,12 @@ mrb_rubypico_attr_string_to_ptr(mrb_state* mrb, mrb_value value)
     return (__bridge NSMutableAttributedString*)(DATA_PTR(value));
 }
 
+static NSString* str2nstr(mrb_state* mrb, mrb_value value)
+{
+    const char *cstr = mrb_string_value_ptr(mrb, value);
+    return [[[NSString alloc] initWithUTF8String:cstr] autorelease];
+}
+
 static mrb_value
 mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
 {
@@ -56,13 +62,11 @@ mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
         // TODO default value
         
         // str
-        const char *cstr = mrb_string_value_ptr(mrb, str);
-        NSString *nstr = [[[NSString alloc] initWithUTF8String:cstr] autorelease];
+        NSString *nstr = str2nstr(mrb, str);
         
         // opt
         mrb_value link_value = mrb_hash_get(mrb, opt, mrb_symbol_value(mrb_intern_cstr(mrb, "link")));
-        cstr = mrb_string_value_ptr(mrb, link_value);
-        NSString *url = [[[NSString alloc] initWithUTF8String:cstr] autorelease];
+        NSString *url = str2nstr(mrb, link_value);
     
         NSMutableAttributedString* attr_str = [[NSMutableAttributedString alloc]
                                                   initWithString:nstr
