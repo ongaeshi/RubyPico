@@ -28,7 +28,7 @@ mrb_rubypico_attr_string_free(mrb_state *mrb, void *p)
 static struct mrb_data_type data_type = { "rubypico_attr_string", mrb_rubypico_attr_string_free };
 
 mrb_value
-mrb_rubypico_attr_string_to_mrb(mrb_state* mrb, NSMutableAttributedString* ptr)
+mrb_rubypico_attr_string_to_mrb(mrb_state *mrb, NSMutableAttributedString *ptr)
 {
     if (ptr) {
         struct RData *data = mrb_data_object_alloc(mrb, mrb_class_get(mrb, "AttrString"), (__bridge void*)ptr, &data_type); //TODO inc?
@@ -39,7 +39,7 @@ mrb_rubypico_attr_string_to_mrb(mrb_state* mrb, NSMutableAttributedString* ptr)
 }
 
 NSMutableAttributedString*
-mrb_rubypico_attr_string_to_ptr(mrb_state* mrb, mrb_value value)
+mrb_rubypico_attr_string_to_ptr(mrb_state *mrb, mrb_value value)
 {
     if (!mrb_obj_is_instance_of(mrb, value, mrb_class_get(mrb, "AttrString"))) {
         mrb_raise(mrb, E_TYPE_ERROR, "wrong argument class");
@@ -60,7 +60,7 @@ mrb_rubypico_attr_string_initialize(mrb_state *mrb, mrb_value self)
         NSString *nstr = (parse_num >= 1) ? [[MrubyUtil str2nstr:mrb value:str] autorelease] : @"";
         
         // opt
-        NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
+        NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
         
         if (parse_num >= 2) {
             // link
@@ -73,7 +73,7 @@ mrb_rubypico_attr_string_initialize(mrb_state *mrb, mrb_value self)
 
     
         // result
-        NSMutableAttributedString* attr_str = [[NSMutableAttributedString alloc]
+        NSMutableAttributedString *attr_str = [[NSMutableAttributedString alloc]
                                                   initWithString:nstr
                                                       attributes:attributes
             ];
@@ -86,20 +86,30 @@ mrb_rubypico_attr_string_initialize(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_rubypico_attr_string_plus(mrb_state *mrb, mrb_value self)
 {
-    NSMutableAttributedString* self_str = mrb_rubypico_attr_string_to_ptr(mrb, self);
-    NSMutableAttributedString* lhs_str = [[NSMutableAttributedString alloc] initWithAttributedString:self_str];
+    NSMutableAttributedString *self_str = mrb_rubypico_attr_string_to_ptr(mrb, self);
+    NSMutableAttributedString *lhs_str = [[NSMutableAttributedString alloc] initWithAttributedString:self_str];
 
     mrb_value rhs;
     mrb_get_args(mrb, "o", &rhs);
 
-    NSMutableAttributedString* rhs_str = mrb_rubypico_attr_string_to_ptr(mrb, rhs);
-    [lhs_str appendAttributedString:rhs_str];
+    @autoreleasepool {
+        NSMutableAttributedString *rhs_str;
+
+        if (mrb_string_p(rhs)) {
+            NSString *nstr = [[MrubyUtil str2nstr:mrb value:rhs] autorelease];
+            rhs_str = [[[NSMutableAttributedString alloc] initWithString: nstr] autorelease];
+        } else {
+            rhs_str = mrb_rubypico_attr_string_to_ptr(mrb, rhs);
+        }
+
+        [lhs_str appendAttributedString:rhs_str];
+    }
     
     return mrb_rubypico_attr_string_to_mrb(mrb, lhs_str);
 }
 
 void
-mrb_rubypico_attr_string_init(mrb_state* mrb)
+mrb_rubypico_attr_string_init(mrb_state *mrb)
 {
     struct RClass *cc = mrb_define_class(mrb, "AttrString", mrb->object_class);
 
@@ -108,6 +118,6 @@ mrb_rubypico_attr_string_init(mrb_state* mrb)
 }
 
 void
-mrb_rubypico_attr_string_final(mrb_state* mrb)
+mrb_rubypico_attr_string_final(mrb_state *mrb)
 {
 }
