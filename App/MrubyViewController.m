@@ -5,6 +5,7 @@
 #import "MrubyViewController.h"
 
 #import "FCFileManager.h"
+#import "mrb_attr_string.h"
 #import "mrb_image.h"
 #import "mrb_misc.h"
 #import "mruby.h"
@@ -29,6 +30,7 @@ MrubyViewController *globalMrubyViewController;
     QBImagePickerController* _imagePicker;
     UITextField* _inputField;
     BOOL _observed;
+    NSMutableAttributedString* _text;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -40,7 +42,8 @@ MrubyViewController *globalMrubyViewController;
     _mrb = [self initMrb];
     _isCanceled = NO;
     _observed = NO;
-    
+    _text = [[NSMutableAttributedString alloc] init];
+
     return self;
 }
 
@@ -139,6 +142,7 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     mrb->code_fetch_hook = mrb_hook;
 
     // Bind
+    mrb_rubypico_attr_string_init(mrb);
     mrb_rubypico_image_init(mrb);
     mrb_rubypico_misc_init(mrb);
 
@@ -198,15 +202,17 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     });
 }
 
-- (void)appendAttributedString:(NSAttributedString*)attrStr {
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
-    [attributedString appendAttributedString: _textView.attributedText];
-    [attributedString appendAttributedString: attrStr];
-    _textView.attributedText = attributedString;
+- (void) appendAttributedString:(NSAttributedString*)attrStr {
+    [_text appendAttributedString: attrStr];
+    _textView.attributedText = _text;
 }
 
 - (void)printstr:(NSString*)str {
     [self appendAttributedString:[[NSAttributedString alloc] initWithString:str]];
+}
+
+- (void)printAttrString:(NSMutableAttributedString*)str {
+    [self appendAttributedString:str];
 }
 
 - (void)printimage:(UIImage*)image {

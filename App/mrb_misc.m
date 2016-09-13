@@ -5,6 +5,7 @@
 #import "mrb_misc.h"
 
 #import "MrubyViewController.h"
+#import "mrb_attr_string.h"
 #import "mrb_image.h"
 #import "mruby/array.h"
 #import "mruby/string.h"
@@ -23,6 +24,10 @@ printstr(mrb_state *mrb, mrb_value obj)
   } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "Image"))) {
     dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
         [globalMrubyViewController printimage:mrb_rubypico_image_to_ptr(mrb, obj)];
+    });
+  } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "AttrString"))) {
+    dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
+        [globalMrubyViewController printAttrString:mrb_rubypico_attr_string_to_ptr(mrb, obj)];
     });
   }
 }
