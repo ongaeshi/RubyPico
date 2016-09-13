@@ -54,21 +54,23 @@ mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
 {
     @autoreleasepool {
         mrb_value str, opt;
-        mrb_get_args(mrb, "|So", &str, &opt);
-        // TODO default value
+        mrb_int parse_num = mrb_get_args(mrb, "|So", &str, &opt);
         
         // str
-        NSString *nstr = [[MrubyUtil str2nstr:mrb value:str] autorelease];
+        NSString *nstr = (parse_num >= 1) ? [[MrubyUtil str2nstr:mrb value:str] autorelease] : @"";
         
         // opt
         NSMutableDictionary* attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
-
-        // link
-        mrb_value link_value = [MrubyUtil hashGet:mrb hash:opt key:"link"];
-        if (!mrb_nil_p(link_value)) {
-            NSString *url = [[MrubyUtil str2nstr:mrb value:link_value] autorelease];
-            [attributes setObject:url forKey:NSLinkAttributeName];
+        
+        if (parse_num >= 2) {
+            // link
+            mrb_value link_value = [MrubyUtil hashGet:mrb hash:opt key:"link"];
+            if (!mrb_nil_p(link_value)) {
+                NSString *url = [[MrubyUtil str2nstr:mrb value:link_value] autorelease];
+                [attributes setObject:url forKey:NSLinkAttributeName];
+            }
         }
+
     
         // result
         NSMutableAttributedString* attr_str = [[NSMutableAttributedString alloc]
