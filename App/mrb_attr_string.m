@@ -50,7 +50,7 @@ mrb_rubypico_attr_string_to_ptr(mrb_state* mrb, mrb_value value)
 
 
 static mrb_value
-mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
+mrb_rubypico_attr_string_initialize(mrb_state *mrb, mrb_value self)
 {
     @autoreleasepool {
         mrb_value str, opt;
@@ -83,12 +83,28 @@ mrb_rubypico_attr_image_initialize(mrb_state *mrb, mrb_value self)
     }
 }
 
+static mrb_value
+mrb_rubypico_attr_string_plus(mrb_state *mrb, mrb_value self)
+{
+    NSMutableAttributedString* self_str = mrb_rubypico_attr_string_to_ptr(mrb, self);
+    NSMutableAttributedString* lhs_str = [[NSMutableAttributedString alloc] initWithAttributedString:self_str];
+
+    mrb_value rhs;
+    mrb_get_args(mrb, "o", &rhs);
+
+    NSMutableAttributedString* rhs_str = mrb_rubypico_attr_string_to_ptr(mrb, rhs);
+    [lhs_str appendAttributedString:rhs_str];
+    
+    return mrb_rubypico_attr_string_to_mrb(mrb, lhs_str);
+}
+
 void
 mrb_rubypico_attr_string_init(mrb_state* mrb)
 {
     struct RClass *cc = mrb_define_class(mrb, "AttrString", mrb->object_class);
 
-    mrb_define_method(mrb , cc, "initialize", mrb_rubypico_attr_image_initialize, MRB_ARGS_OPT(2));
+    mrb_define_method(mrb , cc, "initialize", mrb_rubypico_attr_string_initialize, MRB_ARGS_OPT(2));
+    mrb_define_method(mrb , cc, "+"         , mrb_rubypico_attr_string_plus      , MRB_ARGS_REQ(1));
 }
 
 void
