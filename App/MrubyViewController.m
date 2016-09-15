@@ -58,6 +58,7 @@ MrubyViewController *globalMrubyViewController;
     _textView.text = @"";
 	_textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_textView];
+    _textView.delegate = self;
 
     // ImagePicker
     _imagePicker = [QBImagePickerController new];
@@ -404,6 +405,11 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    NSLog(@"%@", URL.absoluteString);
+    return NO;
 }
 
 @end

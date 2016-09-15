@@ -6,7 +6,7 @@
 #import <QBImagePickerController/QBImagePickerController.h>
 
 @interface MrubyViewController :
-    UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
+    UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate, UITextViewDelegate>
 
 - (id)initWithScriptPath:(NSString*)scriptPath;
 - (void)printstr:(NSString*)str;
