@@ -5,6 +5,7 @@
 #import "MrubyViewController.h"
 
 #import "FCFileManager.h"
+#import "MrubyUtil.h"
 #import "mrb_attr_string.h"
 #import "mrb_image.h"
 #import "mrb_misc.h"
@@ -421,7 +422,8 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     if (_mrb) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            mrb_funcall(_mrb, mrb_obj_value(_mrb->kernel_module), "click_link", 0);
+            mrb_value url = [MrubyUtil nstr2str:_mrb value:URL.absoluteString];
+            mrb_funcall(_mrb, mrb_obj_value(_mrb->kernel_module), "click_link", 1, url);
         });
     }
     return YES;
