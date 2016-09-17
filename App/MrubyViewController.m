@@ -422,8 +422,9 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     if (_mrb) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            mrb_value cc = mrb_obj_value(mrb_class_get(_mrb, "TextView"));
             mrb_value url = [MrubyUtil nstr2str:_mrb value:URL.absoluteString];
-            mrb_funcall(_mrb, mrb_obj_value(_mrb->kernel_module), "click_link", 1, url);
+            mrb_funcall(_mrb, cc, "call", 1, url);
         });
     }
     return YES;
