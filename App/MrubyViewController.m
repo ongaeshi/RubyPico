@@ -420,9 +420,11 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
     if (_mrb) {
-        NSLog(@"%@", URL.absoluteString);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            mrb_funcall(_mrb, mrb_obj_value(_mrb->kernel_module), "click_link", 0);
+        });
     }
-    return NO;
+    return YES;
 }
 
 @end
