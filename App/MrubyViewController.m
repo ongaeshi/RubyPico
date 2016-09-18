@@ -398,6 +398,11 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     [_inputField becomeFirstResponder];
 }
 
+- (void)clear {
+    [[_text mutableString] setString:@""];
+    _textView.attributedText = _text;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 }
 

@@ -82,6 +82,16 @@ mrb_gets(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_clear(mrb_state *mrb, mrb_value self)
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController clear];
+    });
+    
+    return mrb_nil_value();
+}
+
+static mrb_value
 mrb_clipboard_get(mrb_state *mrb, mrb_value self)
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -209,6 +219,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
 
         mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "gets", mrb_gets, MRB_ARGS_REQ(1));
+        mrb_define_method(mrb, krn, "clear", mrb_clear, MRB_ARGS_NONE());
     }
 
     {

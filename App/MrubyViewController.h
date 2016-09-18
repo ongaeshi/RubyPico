@@ -18,6 +18,7 @@
 - (NSMutableArray*) receivePicked;
 - (void)startPickFromLibrary:(int)num;
 - (void)startInput;
+- (void)clear;
 
 @end
 
