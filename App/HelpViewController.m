@@ -16,6 +16,7 @@
     CGRect rect = self.view.bounds;
     UITextView* textView = [[UITextView alloc]initWithFrame:rect];
     textView.editable = NO;
+    textView.dataDetectorTypes = UIDataDetectorTypeLink;
     //DIFF textView.textAlignment = UITextAlignmentLeft;
     textView.font = [MrubyUtil font];
     //textView.backgroundColor = [UIColor whiteColor];
@@ -75,8 +76,8 @@
         "\n"
         "\n"
         "--- \n"
-        "mruby-logo\n"
-        "https://github.com/h2so5/mruby-logo\n"
+        "LICENSE\n"
+        "https://github.com/ongaeshi/RubyPico/blob/master/LICENSE.md\n"
         ;
 
     [self.view addSubview:textView];
