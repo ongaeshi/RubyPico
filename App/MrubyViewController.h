@@ -6,7 +6,7 @@
 #import <QBImagePickerController/QBImagePickerController.h>
 
 @interface MrubyViewController :
-    UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate>
+    UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate, UITextViewDelegate>
 
 - (id)initWithScriptPath:(NSString*)scriptPath;
 - (void)printstr:(NSString*)str;
@@ -18,6 +18,7 @@
 - (NSMutableArray*) receivePicked;
 - (void)startPickFromLibrary:(int)num;
 - (void)startInput;
+- (void)clear;
 
 @end
 

@@ -82,6 +82,16 @@ mrb_gets(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_clear(mrb_state *mrb, mrb_value self)
+{
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController clear];
+    });
+    
+    return mrb_nil_value();
+}
+
+static mrb_value
 mrb_clipboard_get(mrb_state *mrb, mrb_value self)
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -237,6 +247,12 @@ mrb_rubypico_misc_init(mrb_state* mrb)
 
         mrb_define_class_method(mrb , cc, "input", mrb_popup_input, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "msg"  , mrb_popup_msg  , MRB_ARGS_REQ(1));
+    }
+
+    {
+        struct RClass *cc = mrb_define_class(mrb, "TextView", mrb->object_class);
+
+        mrb_define_class_method(mrb, cc, "clear", mrb_clear, MRB_ARGS_NONE());
     }
 
 }
