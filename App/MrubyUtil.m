@@ -28,4 +28,7 @@
     return mrb_hash_get(mrb, hash, sym);
 }
 
++ (UIFont*) font {
+    return [UIFont fontWithName:@"Courier" size:12];
+}
 @end

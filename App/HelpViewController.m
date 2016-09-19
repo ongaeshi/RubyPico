@@ -1,5 +1,7 @@
 #import "HelpViewController.h"
 
+#import "MrubyUtil.h"
+
 @interface HelpViewController ()
 
 @end
@@ -15,7 +17,7 @@
     UITextView* textView = [[UITextView alloc]initWithFrame:rect];
     textView.editable = NO;
     //DIFF textView.textAlignment = UITextAlignmentLeft;
-    textView.font = [UIFont fontWithName:@"Courier" size:12];
+    textView.font = [MrubyUtil font];
     //textView.backgroundColor = [UIColor whiteColor];
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
