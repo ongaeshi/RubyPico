@@ -1,5 +1,22 @@
 # HISTORY - RubyPico
 
+### 0.9 - 2016-09-22
+
+- gets
+  - Function to input from keyboard
+- AttrString
+  - Create link string
+- TextView.clear
+  - Clear text field
+- TextView.click_link
+  - Callback a clicked link
+- Add sample code
+  - irb.rb
+    - Use gets
+  - click_link.rb
+    - Use AttrString, TextView.click_link, TextView.clear
+- Use monospace font
+    
 ### 0.8 - 2016-08-12
 
 - main is unnecessary
