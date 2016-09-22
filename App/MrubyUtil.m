@@ -29,6 +29,7 @@
 }
 
 + (UIFont*) font {
-    return [UIFont fontWithName:@"Courier" size:12];
+    // return [UIFont fontWithName:@"Courier" size:12];
+    return [UIFont fontWithName:@"SourceHanCodeJP-Regular" size:12];
 }
 @end

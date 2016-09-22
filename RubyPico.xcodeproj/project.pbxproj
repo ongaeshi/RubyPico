@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
+		523FDB9D1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 523FDB9C1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf */; };
 		5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5271AE781D5C45BC000D50A4 /* image_util.rb */; };
 		52731C661B371FC500E2CC2A /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52731C601B371FC500E2CC2A /* sample.jpg */; };
 		52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52731C611B371FC500E2CC2A /* tabbar_files.png */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
+		523FDB9C1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanCodeJP-Regular.otf"; sourceTree = "<group>"; };
 		5271AE781D5C45BC000D50A4 /* image_util.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = image_util.rb; sourceTree = "<group>"; };
 		52731C601B371FC500E2CC2A /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		52731C611B371FC500E2CC2A /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		52731C5D1B371FC500E2CC2A /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				523FDB9C1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf */,
 				52FD353B1D41262C009C8E5B /* __builtin__.rb */,
 				5271AE781D5C45BC000D50A4 /* image_util.rb */,
 				52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */,
@@ -322,6 +325,7 @@
 				52731C671B371FC500E2CC2A /* tabbar_files.png in Resources */,
 				52BF5C591CD641B60035968E /* Info.plist in Resources */,
 				52FD353C1D41262C009C8E5B /* __builtin__.rb in Resources */,
+				523FDB9D1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf in Resources */,
 				52731C661B371FC500E2CC2A /* sample.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
