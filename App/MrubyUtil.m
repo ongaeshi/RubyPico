@@ -28,4 +28,19 @@
     return mrb_hash_get(mrb, hash, sym);
 }
 
++ (BOOL) ja {
+    @autoreleasepool {
+        NSArray *languages = [NSLocale preferredLanguages];
+        NSString *lang = [[languages objectAtIndex:0] substringToIndex:2];
+        return [lang isEqualToString:@"ja"];
+    }
+}
+
++ (UIFont*) font {
+    if ([MrubyUtil ja]) {
+        return [UIFont fontWithName:@"SourceHanCodeJP-Regular" size:12];
+    } else {
+        return [UIFont fontWithName:@"Courier" size:12];
+    }
+}
 @end

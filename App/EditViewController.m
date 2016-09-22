@@ -11,6 +11,7 @@
 #import "FCFileManager.h"
 #import "HelpViewController.h"
 #import "MrubyViewController.h"
+#import "MrubyUtil.h"
 #import "RubyHighlightingTextStorage.h"
 #import "ICTextView.h"
 
@@ -93,7 +94,7 @@ const int PREV_LINE_MAX = 240;
     mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     mTextView.editable = mEditable;
     //DIFF mTextView.textAlignment = UITextAlignmentLeft;
-    mTextView.font = [UIFont fontWithName:@"Courier" size:12];
+    mTextView.font = [MrubyUtil font];
     //mTextView.backgroundColor = [UIColor whiteColor];
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;

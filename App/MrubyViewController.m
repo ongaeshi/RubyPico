@@ -57,7 +57,7 @@ MrubyViewController *globalMrubyViewController;
     _textView = [[UITextView alloc] initWithFrame:self.view.bounds];
     _textView.editable = NO;
     _textView.dataDetectorTypes = UIDataDetectorTypeLink;
-    _textView.font = [UIFont fontWithName:@"Courier" size:12];
+    _textView.font = [MrubyUtil font];
     _textView.text = @"";
 	_textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_textView];
@@ -84,7 +84,7 @@ MrubyViewController *globalMrubyViewController;
             INPUT_FIELD_HEIGHT
             )];
     _inputField.borderStyle = UITextBorderStyleRoundedRect;
-    _inputField.font = [UIFont fontWithName:@"Courier" size:12];
+    _inputField.font = [MrubyUtil font];
     _inputField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     _inputField.autocorrectionType = UITextAutocorrectionTypeNo;
     _inputField.returnKeyType = UIReturnKeyDone;
