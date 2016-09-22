@@ -61,7 +61,7 @@ mrb_rubypico_attr_string_initialize(mrb_state *mrb, mrb_value self)
         
         // opt
         NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithObjectsAndKeys: nil];
-        
+
         if (parse_num >= 2) {
             // link
             mrb_value link_value = [MrubyUtil hashGet:mrb hash:opt key:"link"];
@@ -69,9 +69,11 @@ mrb_rubypico_attr_string_initialize(mrb_state *mrb, mrb_value self)
                 NSString *url = [[MrubyUtil str2nstr:mrb value:link_value] autorelease];
                 [attributes setObject:url forKey:NSLinkAttributeName];
             }
-        }
+        }    
 
-    
+        // default font
+        [attributes setObject:[MrubyUtil font] forKey:NSFontAttributeName];
+
         // result
         NSMutableAttributedString *attr_str = [[NSMutableAttributedString alloc]
                                                   initWithString:nstr
@@ -97,7 +99,10 @@ mrb_rubypico_attr_string_plus(mrb_state *mrb, mrb_value self)
 
         if (mrb_string_p(rhs)) {
             NSString *nstr = [[MrubyUtil str2nstr:mrb value:rhs] autorelease];
-            rhs_str = [[[NSMutableAttributedString alloc] initWithString: nstr] autorelease];
+            rhs_str = [[[NSMutableAttributedString alloc]
+                           initWithString: nstr
+                               attributes:@{NSFontAttributeName:[MrubyUtil font]}]
+                          autorelease];
         } else {
             rhs_str = mrb_rubypico_attr_string_to_ptr(mrb, rhs);
         }
