@@ -11,6 +11,7 @@
 + (mrb_value) nstr2str:(mrb_state*)mrb value:(NSString*)value;
 + (mrb_value) hashGet:(mrb_state*)mrb hash:(mrb_value)hash key:(const char*)key;
 + (UIFont*) font;
++ (BOOL) ja;
 
 @end
 
