@@ -221,7 +221,9 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 }
 
 - (void)printstr:(NSString*)str {
-    [self appendAttributedString:[[NSAttributedString alloc] initWithString:str]];
+    [self appendAttributedString:[[NSAttributedString alloc]
+                                     initWithString: str
+                                         attributes:@{NSFontAttributeName:[MrubyUtil font]}]];
 }
 
 - (void)printAttrString:(NSMutableAttributedString*)str {
