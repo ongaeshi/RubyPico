@@ -13,7 +13,7 @@ lang: ja
 
 ## マニュアルの読み方
 1. このページをブラウザで開く(すでに開いているはず)
-2. RubyPicoを[ダウンロード](download.md)して起動
+2. RubyPicoを[ダウンロード](../../download.md)して起動
 3. [20分ではじめるRuby](https://www.ruby-lang.org/ja/documentation/quickstart/)をブラウザで開く 
 
 あとはホームボタンをダブルクリックしてアプリとブラウザを切り替えながら進めていきましょう。プログラムの入力が大変なときはコピーアンドペーストを使うとよいです。
