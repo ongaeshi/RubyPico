@@ -11,28 +11,25 @@ lang: ja
 
 <a href="https://geo.itunes.apple.com/us/app/rubypico/id1042498865?mt=8" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:165px;height:40px;"></a>
 
-- タスクの自動化
 - アプリケーションの起動
-- チャットボット
+- タスクの自動化
 - Web API
 - 数値計算
 - 画像フィルタ
 
 ```ruby
-class Chat
-  def initialize
-    @num = 0
-  end
+APP = "http://maps.apple.com/"
+# APP = "comgooglemaps://"
 
-  def welcome
-    "Hello, world!"
-  end
+start = Popup.input("開始位置を入力")
+dest = Popup.input("目的地を入力")
 
-  def call(input)
-    @num += 1
-    "#{@num}: #{input}"
-  end
-end
+query = URI.encode_www_form(
+    saddr: start,
+    daddr: dest
+    )
+
+Browser.open "#{APP}?#{query}"
 ```
 
 さっそく[ダウンロード](./download.html)してみましょう！または[ドキュメント](./doc)をどうぞ。
