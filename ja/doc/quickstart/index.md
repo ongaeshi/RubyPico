@@ -43,6 +43,70 @@ irb(main):009:0> Math.sqrt(@a+@b)
 ```
 
 ## 2
+[2ページ目](https://www.ruby-lang.org/ja/documentation/quickstart/2/)を進めるための補足です。
+
+### 複数行にまたがるプログラムが入力できない
+代わりにセミコロン(`;`)でつないで複数行入力してください。
+
+```ruby
+irb(main):010:0> def hi; puts "Hello World!"; end
+=> :hi
+```
+
+完結していないプログラムを入力しようとするとエラーになってしまいます。
+
+```ruby
+irb(main):010:0> def hi
+line 1: syntax error, unexpected $end, expecting ';' or '\n'
+```
+
+### 簡潔で繰り返せるメソッド
+`hi`の再定義もセミコロンでつないでください。
+
+```ruby
+irb(main):015:0> def hi(name); puts "Hello #{name}!"; end
+=> :hi
+```
+
+### Stringに穴を開ける
+おなじく1行にまとめて入力します。
+
+```ruby
+irb(main):019:0> def hi(name = "World"); puts "Hello #{name.capitalize}!"; end
+=> :hi
+```
+
+### 挨拶人(Greeter)への進化
+
+さすがに長くなってきたのでこれはファイルに作成してからロードするという作戦でいきます。
+
+1. "Back"ボタンを押してirbを終了します
+2. 続けて"Back"ボタンを2回押して"Sample"画面に戻ります
+3. 下の"File"タブを押してファイル選択画面に移動します
+4. 右上の"+"ボタンを押します
+5. 作成するファイル名を聞かれるので`greeter`と入力して"OK"を押します
+6. `greeter.rb`の編集画面に移動するので以下のプログラムを入力します
+
+```ruby
+class Greeter
+  def initialize(name = "World")
+    @name = name
+  end
+  def say_hi
+    puts "Hi #{@name}!"
+  end
+  def say_bye
+    puts "Bye #{@name}, come back soon."
+  end
+end
+```
+
+もう一度irbを起動して、さきほど作成した`greeter.rb`を読み込みます。
+
+```ruby
+irb(main):024:0> load "./greeter.rb"
+=> :say_bye
+```
 
 ## 3
 
