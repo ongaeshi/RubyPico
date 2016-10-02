@@ -1,6 +1,6 @@
 ---
 layout: layout
-title: Ruby Programming Environment in iOS
+title: RubyPico - Ruby Programming Environment in iOS
 lang: ja
 ---
 # RubyPico
