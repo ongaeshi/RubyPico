@@ -1,9 +1,9 @@
 ---
 layout: layout
-title: 20分ではじめるRuby
+title: 20分ではじめるRubyPico
 lang: ja
 ---
-# 20分ではじめるRuby
+# 20分ではじめるRubyPico
 
 はじめにRubyの基本的な書き方を20分で学べるチュートリアルをやってみましょう。
 
