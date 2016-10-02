@@ -9,16 +9,22 @@ lang: ja
 
 [20分ではじめるRuby](https://www.ruby-lang.org/ja/documentation/quickstart/)
 
-上のページはRubyPicoのお父さんにあたるPC版のRuby(CRubyと言われたりします)で実際に使われているチュートリアルです。RubyPicoでも上のチュートリアルで使われているプログラムを動かすことができます。つまりこのチュートリアルをRubyPicoを使って完了させれば本物のRubyだって書けるようになるはずです！(いいすぎ？)
+上のページはRubyPicoのお父さんにあたるPC版のRuby(CRubyと言われたりします)で実際に使われているチュートリアルです。RubyPicoでも同じようにプログラムを動かすことができます。つまりこのチュートリアルをRubyPicoを使って完了させれば本物のRubyだって書けるようになるはずです！(いいすぎ？)
 
 ## マニュアルの読み方
 1. このページをブラウザで開く(すでに開いているはず)
-2. RubyPicoを[ダウンロード](../../download.md)して起動
-3. [20分ではじめるRuby](https://www.ruby-lang.org/ja/documentation/quickstart/)をブラウザで開く 
+2. RubyPicoを[ダウンロード](../../download.html)して起動
+3. [20分ではじめるRuby](https://www.ruby-lang.org/ja/documentation/quickstart/)をブラウザで開く(新規タブで開くのがおすすめ)
 
 あとはホームボタンをダブルクリックしてアプリとブラウザを切り替えながら進めていきましょう。プログラムの入力が大変なときはコピーアンドペーストを使うとよいです。
 
-マニュアルとアプリを同時に見ながら進めたい人はもう一台スマホやタブレットを(お父さんお母さんや学校や図書館などの公共施設から借りたり)用意してそちらのブラウザで開きましょう。もしくはプリントアウトがおすすめです。
+マニュアルとアプリを同時に見ながら進めたい人はもう一台スマホやタブレットを(家族や学校や図書館などの公共施設から借りたり)用意してそちらのブラウザで開きましょう。もしくはプリントアウトがおすすめです。
+
+## 目次
+- [1ページ目](#section-2)
+- [2ページ目](#section-3)
+- [3ページ目](#section-6)
+- [4ページ目](#section-8)
 
 ## 1
 [1ページ目](https://www.ruby-lang.org/ja/documentation/quickstart/)を進めるための補足です。
@@ -109,5 +115,80 @@ irb(main):024:0> load "./greeter.rb"
 ```
 
 ## 3
+[3ページ目](https://www.ruby-lang.org/ja/documentation/quickstart/3/)を進めるための補足です。
+
+変数に格納するときは先頭に`@`を付けます。
+
+```ruby
+irb(main):035:0> @greeter = Greeter.new("Pat")
+=> #<Greeter:0x16cac @name="Pat">
+irb(main):036:0> @greeter.say_hi
+Hi Pat!
+=> nil
+irb(main):037:0> @greeter.say_bye
+Bye Pat, come back soon.
+=> nil
+```
+
+```ruby
+irb(main):038:0> @greeter.@name
+SyntaxError: (irb):38: syntax error, unexpected tIVAR, expecting '('
+```
+
+### Objectの殻の中
+
+```ruby
+irb(main):041:0> @greeter.respond_to?("name")
+=> false
+irb(main):042:0> @greeter.respond_to?("say_hi")
+=> true
+irb(main):043:0> @greeter.respond_to?("to_s")
+=> true
+```
+
+### クラスの変更 - まだ間に合います
+
+セミコロンで1行につなげて入力します。
+
+```ruby
+irb:010> class Greeter; attr_accessor :name; end
+=> nil
+```
+
+変数に格納するときは先頭に`@`を付けます。
+
+```ruby
+irb(main):047:0> @greeter = Greeter.new("Andy")
+=> #<Greeter:0x3c9b0 @name="Andy">
+irb(main):048:0> @greeter.respond_to?("name")
+=> true
+irb(main):049:0> @greeter.respond_to?("name=")
+=> true
+irb(main):050:0> @greeter.say_hi
+Hi Andy!
+=> nil
+irb(main):051:0> @greeter.name="Betty"
+=> "Betty"
+irb(main):052:0> @greeter
+=> #<Greeter:0x3c9b0 @name="Betty">
+irb(main):053:0> @greeter.name
+=> "Betty"
+irb(main):054:0> @greeter.say_hi
+Hi Betty!
+=> nil
+```
+
+### 何にでも挨拶してくれる、MegaGreeterは無視しない！
+
+ファイルを作成してそのまま実行します(irbを経由しません)。
+
+- `greeter.rb`を作ったときと同じように`ri20min.rb`を作成します
+- エディタ画面右上の"Run"ボタンを押すと書いたスクリプトをそのまま実行してくれます
+- 先頭の`#!/usr/bin/env ruby`はCRuby用のものなのでRubyPicoでは不要です
+  - あってもただのコメントとして処理されるので大丈夫です
 
 ## 4
+[4ページ目](https://www.ruby-lang.org/ja/documentation/quickstart/4/)を進めるための補足です。
+
+特にありません。
+
