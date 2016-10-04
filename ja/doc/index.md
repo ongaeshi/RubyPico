@@ -9,7 +9,7 @@ lang: ja
 
 ## 入門
 
-- [20分ではじめるRuby](./quickstart)
+- [20分ではじめるRubyPico](./quickstart)
 - [スマホではじめるRubyプログラミング](./sumaho_de_ruby)
 
 ## リファレンス
