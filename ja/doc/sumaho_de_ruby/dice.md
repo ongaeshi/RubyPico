@@ -1,6 +1,6 @@
 ---
 layout: layout
-title: 多面サイコロ
+title: 多面サイコロ - スマホではじめるRubyプログラミング
 lang: ja
 ---
 # 多面サイコロ
