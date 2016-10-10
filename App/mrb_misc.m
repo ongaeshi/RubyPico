@@ -12,24 +12,26 @@
 #import <Foundation/Foundation.h>
 
 static void
+printstr_in(mrb_state *mrb, mrb_value obj)
+{
+    if (mrb_string_p(obj)) {
+        const char* cstr = mrb_string_value_ptr(mrb, obj);
+        NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+        // NSLog(@"%@", nstr);
+        [globalMrubyViewController printstr:nstr];
+    } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "Image"))) {
+        [globalMrubyViewController printimage:mrb_rubypico_image_to_ptr(mrb, obj)];
+    } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "AttrString"))) {
+        [globalMrubyViewController printAttrString:mrb_rubypico_attr_string_to_ptr(mrb, obj)];
+    }
+}
+
+static void
 printstr(mrb_state *mrb, mrb_value obj)
 {
-  if (mrb_string_p(obj)) {
-    const char* cstr = mrb_string_value_ptr(mrb, obj);
-    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
-    // NSLog(@"%@", nstr);
-    dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
-        [globalMrubyViewController printstr:nstr];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        printstr_in(mrb, obj);
     });
-  } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "Image"))) {
-    dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
-        [globalMrubyViewController printimage:mrb_rubypico_image_to_ptr(mrb, obj)];
-    });
-  } else if (mrb_obj_is_instance_of(mrb, obj, mrb_class_get(mrb, "AttrString"))) {
-    dispatch_sync(dispatch_get_main_queue(), ^{ // Should use dispatch_async?
-        [globalMrubyViewController printAttrString:mrb_rubypico_attr_string_to_ptr(mrb, obj)];
-    });
-  }
 }
 
 void rubypico_misc_p(mrb_state *mrb, mrb_value obj)
