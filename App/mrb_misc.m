@@ -52,6 +52,24 @@ mrb_printstr(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_clearprint(mrb_state *mrb, mrb_value self)
+{
+    mrb_value *vals;
+    mrb_int len;
+    mrb_get_args(mrb, "*", &vals, &len);
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [globalMrubyViewController clear];
+
+        for (int i = 0; i < len; ++i) {
+            printstr_in(mrb, vals[i]);
+        }
+    });
+    
+    return mrb_nil_value();
+}
+
+static mrb_value
 mrb_popup_receive_picked(mrb_state *mrb)
 {
     while (![globalMrubyViewController isCanceled]) {
@@ -231,6 +249,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         struct RClass *krn = mrb->kernel_module;
 
         mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
+        mrb_define_method(mrb, krn, "clearprint", mrb_clearprint, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "gets", mrb_gets, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "sleep", mrb_sleep, MRB_ARGS_OPT(1));
     }
