@@ -95,6 +95,19 @@ mrb_sleep(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_dispatch_sync_main(mrb_state *mrb, mrb_value self)
+{
+    mrb_value block;
+    mrb_get_args(mrb, "&", &block);
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        mrb_yield_argv(mrb, block, 0, NULL);
+    });
+
+    return mrb_nil_value();
+}
+
+static mrb_value
 mrb_clear(mrb_state *mrb, mrb_value self)
 {
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -233,6 +246,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_method(mrb, krn, "__printstr__", mrb_printstr, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "gets", mrb_gets, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "sleep", mrb_sleep, MRB_ARGS_OPT(1));
+        mrb_define_method(mrb, krn, "dispatch_sync_main", mrb_dispatch_sync_main, MRB_ARGS_REQ(1));
     }
 
     {
