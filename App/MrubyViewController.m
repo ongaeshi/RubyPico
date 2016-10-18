@@ -188,7 +188,13 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
             mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
 
             // Change current directory
-            chdir(dirname(scriptPath));
+            const char* scriptDir = dirname(scriptPath);
+            if (scriptDir == NULL ||
+                strcmp(scriptDir, [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"] UTF8String]) == 0) {
+                chdir([[FCFileManager pathForDocumentsDirectory] UTF8String]);
+            } else {
+                chdir(scriptDir);
+            }
 
             // Run Top Level
             mrb_load_file_cxt(_mrb, fd, cxt);
