@@ -4,6 +4,7 @@
 
 #import "MrubyViewController.h"
 
+#import <libgen.h>
 #import "FCFileManager.h"
 #import "MrubyUtil.h"
 #import "mrb_attr_string.h"
@@ -185,6 +186,9 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
             const char* fileName = [[[[NSString alloc] initWithUTF8String:scriptPath] lastPathComponent] UTF8String];
             mrbc_filename(_mrb, cxt, fileName);
             mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
+
+            // Change current directory
+            chdir(dirname(scriptPath));
 
             // Run Top Level
             mrb_load_file_cxt(_mrb, fd, cxt);
