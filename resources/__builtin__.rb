@@ -91,6 +91,14 @@ module Kernel
     __printstr__ "\n" if len == 0
     nil
   end
+  
+  def prompt(msg = nil)
+    puts msg if msg
+    print "% "
+    input = gets
+    puts input
+    input
+  end
 end
 
 class TextView
