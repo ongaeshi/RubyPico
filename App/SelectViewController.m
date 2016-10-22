@@ -4,11 +4,12 @@
 #import "FCFileManager.h"
 #import "MrubyViewController.h"
 
-@interface SelectViewController ()
-
-@end
-
-@implementation SelectViewController
+@implementation SelectViewController {
+    NSMutableArray* mDataSource;
+    NSString* mFileDirectory;
+    NSString* mTitle;
+    BOOL mEditable;
+}
 
 - (id)init
 {
@@ -77,6 +78,21 @@
 
     UIAlertView* alert = [[UIAlertView alloc] init];
     alert.title = @"New File";
+    //alert.message = @"Enter file name.";
+    alert.delegate = self;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+- (void)tapDirecotryButton
+{
+    [self.tableView setEditing:NO animated:NO];
+
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = @"New Directory";
     //alert.message = @"Enter file name.";
     alert.delegate = self;
     [alert addButtonWithTitle:@"Cancel"];
