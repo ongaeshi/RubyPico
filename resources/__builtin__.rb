@@ -92,9 +92,8 @@ module Kernel
     nil
   end
   
-  def prompt(msg = nil)
-    puts msg if msg
-    print "% "
+  def prompt(header = "%")
+    print header + " "
     input = gets
     puts input
     input
