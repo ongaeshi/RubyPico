@@ -43,13 +43,13 @@
         UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                    target:self
                                                                                    action:@selector(tapAddButton)];
-        self.navigationItem.rightBarButtonItem = addButton;
 
         // Trash button
         UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                      target:self
                                                                                      action:@selector(tapTrashButton)];
-        self.navigationItem.leftBarButtonItem = trashButton;
+
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, trashButton, nil];
         
     } else {
         self.navigationItem.rightBarButtonItem = NULL;
