@@ -44,12 +44,22 @@
                                                                                    target:self
                                                                                    action:@selector(tapAddButton)];
 
-        // Trash button
+        // Direcotry button
+        UIBarButtonItem* direcotryButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                                                                            target:self
+                                                                                            action:@selector(tapDirecotryButton)];
+
+        // Edit button
+        UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                            target:self
+                                                                                            action:@selector(tapEditButton)];
+
+        // Trash button (Integrate to a edit button later)
         UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                      target:self
                                                                                      action:@selector(tapTrashButton)];
 
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, trashButton, nil];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, editButton, trashButton, nil];
         
     } else {
         self.navigationItem.rightBarButtonItem = NULL;
