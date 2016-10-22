@@ -200,7 +200,36 @@
 }
 
 - (void)newDirectory:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"newDirectory");
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+
+        // Create path
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:text];
+
+        // Alert if path already exists
+        if ([FCFileManager existsItemAtPath:path]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Already exists";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Create a new directory
+        [FCFileManager createDirectoriesForPath:path];
+
+        // Update data source
+        _dataSource = [self updateDataSourceFromFiles];
+
+        // Insert table view
+        NSUInteger newIndex[] = {0, 0}; // section, row
+        NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
+                              withRowAnimation:UITableViewRowAnimationTop];
+
+        // Reload all
+        // [self.tableView reloadData];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
