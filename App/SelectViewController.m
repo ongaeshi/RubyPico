@@ -5,10 +5,10 @@
 #import "MrubyViewController.h"
 
 @implementation SelectViewController {
-    NSMutableArray* mDataSource;
-    NSString* mFileDirectory;
-    NSString* mTitle;
-    BOOL mEditable;
+    NSMutableArray* _dataSource;
+    NSString* _fileDirectory;
+    NSString* _title;
+    BOOL _editable;
 }
 
 - (id)init
@@ -20,9 +20,9 @@
 - (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable
 {
     self = [super init];
-    mFileDirectory = directory;
-    mTitle = title;
-    mEditable = editable;
+    _fileDirectory = directory;
+    _title = title;
+    _editable = editable;
     return self;
 }
 
@@ -36,10 +36,10 @@
     [super viewWillAppear:animated];
 
     // Title
-    self.navigationItem.title = mTitle;
+    self.navigationItem.title = _title;
 
     // BarButton
-    if (mEditable) {
+    if (_editable) {
         // Add Button
         UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                    target:self
@@ -68,7 +68,7 @@
     }
 
     // TableView
-    mDataSource = [self updateDataSourceFromFiles];
+    _dataSource = [self updateDataSourceFromFiles];
     [self.tableView reloadData];
 }
 
@@ -122,11 +122,11 @@
     [self.navigationController popToRootViewControllerAnimated:NO];
     
     // File exist?
-    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
+    NSString* path = [_fileDirectory stringByAppendingPathComponent:name];
 
     if (![FCFileManager existsItemAtPath:path]) {
         // Retry adding ".rb" extention
-        path = [mFileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
+        path = [_fileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
         
         if (![FCFileManager existsItemAtPath:path]) {
             return;
@@ -134,7 +134,7 @@
     }
 
     // {
-    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
     //     viewController.hidesBottomBarWhenPushed = YES;
     //     [self.navigationController pushViewController:viewController animated:YES];
     // }
@@ -164,7 +164,7 @@
         }
 
         // Create path
-        NSString* path = [mFileDirectory stringByAppendingPathComponent:text];
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:text];
 
         // Alert if file already exists
         if ([FCFileManager existsItemAtPath:path]) {
@@ -183,7 +183,7 @@
             ];
 
         // Update data source
-        mDataSource = [self updateDataSourceFromFiles];
+        _dataSource = [self updateDataSourceFromFiles];
 
         // Insert table view
         NSUInteger newIndex[] = {0, 0}; // section, row
@@ -198,7 +198,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [mDataSource count];
+    return [_dataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,21 +210,21 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    cell.textLabel.text = [mDataSource objectAtIndex:indexPath.row];
+    cell.textLabel.text = [_dataSource objectAtIndex:indexPath.row];
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-    NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
+    NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+    NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
     UIViewController* viewController;
 
     if ([FCFileManager isDirectoryItemAtPath: path]) {
         viewController = [[SelectViewController alloc] initWithFileDirectory:path title:tableCellName edit:true];
     } else {
-        viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+        viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
         viewController.hidesBottomBarWhenPushed = YES;
     }
 
@@ -235,12 +235,12 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // File
-        NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-        NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
+        NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
         [FCFileManager removeItemAtPath:path];
 
         // Data Source
-        [mDataSource removeObjectAtIndex:indexPath.row];
+        [_dataSource removeObjectAtIndex:indexPath.row];
 
         // Table Row
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
@@ -254,7 +254,7 @@
     NSError *error = nil;
 
     // Collect files
-    NSArray* files = [FCFileManager listItemsInDirectoryAtPath:mFileDirectory deep:NO];
+    NSArray* files = [FCFileManager listItemsInDirectoryAtPath:_fileDirectory deep:NO];
 
     // Create array adding ModDate
     NSMutableArray* filesAndModDates = [NSMutableArray arrayWithCapacity:[files count]];
