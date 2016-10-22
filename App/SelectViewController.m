@@ -11,14 +11,12 @@
     BOOL _editable;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     return self;
 }
 
-- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable
-{
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable {
     self = [super init];
     _fileDirectory = directory;
     _title = title;
@@ -26,13 +24,11 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     // Title
@@ -72,8 +68,7 @@
     [self.tableView reloadData];
 }
 
-- (void)tapAddButton
-{
+- (void)tapAddButton {
     [self.tableView setEditing:NO animated:NO];
 
     UIAlertView* alert = [[UIAlertView alloc] init];
@@ -87,8 +82,7 @@
     [alert show];
 }
 
-- (void)tapDirecotryButton
-{
+- (void)tapDirecotryButton {
     [self.tableView setEditing:NO animated:NO];
 
     UIAlertView* alert = [[UIAlertView alloc] init];
@@ -102,8 +96,7 @@
     [alert show];
 }
 
-- (void)tapTrashButton
-{
+- (void)tapTrashButton {
     if (!self.tableView.editing) {
         [self.tableView setEditing:YES animated:YES];
     } else {
@@ -111,14 +104,12 @@
     }
 }
 
-- (NSString*)normalizeScriptName:(NSString*)name
-{
+- (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
 }
 
-- (void)runWithScriptName:(NSString*)name
-{
+- (void)runWithScriptName:(NSString*)name {
     [self.navigationController popToRootViewControllerAnimated:NO];
     
     // File exist?
@@ -146,8 +137,7 @@
     }
 }
 
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
 
@@ -196,13 +186,11 @@
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_dataSource count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
@@ -215,8 +203,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
     NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
     UIViewController* viewController;
@@ -231,8 +218,7 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // File
         NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
@@ -249,8 +235,7 @@
     }
 }
 
-- (NSMutableArray *) updateDataSourceFromFiles
-{
+- (NSMutableArray *) updateDataSourceFromFiles {
     NSError *error = nil;
 
     // Collect files
