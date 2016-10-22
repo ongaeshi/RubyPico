@@ -193,14 +193,16 @@
 {
     NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
     NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
+    UIViewController* viewController;
 
     if ([FCFileManager isDirectoryItemAtPath: path]) {
-        NSLog(@"direcotry: %@", path);
+        viewController = [[SelectViewController alloc] initWithFileDirectory:path title:tableCellName edit:true];
     } else {
-        EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+        viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
         viewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:viewController animated:YES];
     }
+
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
