@@ -9,6 +9,7 @@
     NSString* _fileDirectory;
     NSString* _title;
     BOOL _editable;
+    BOOL _isNewDirecotry;
 }
 
 - (id)init {
@@ -70,6 +71,8 @@
 
 - (void)tapAddButton {
     [self.tableView setEditing:NO animated:NO];
+    
+    _isNewDirecotry = NO;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
     alert.title = @"New File";
@@ -84,6 +87,8 @@
 
 - (void)tapDirecotryButton {
     [self.tableView setEditing:NO animated:NO];
+
+    _isNewDirecotry = YES;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
     alert.title = @"New Directory";
@@ -138,6 +143,14 @@
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (_isNewDirecotry) {
+        [self newDirectory:alertView clickedButtonAtIndex:buttonIndex];
+    } else {
+        [self newFile:alertView clickedButtonAtIndex:buttonIndex];
+    }
+}
+
+- (void)newFile:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
 
@@ -184,6 +197,10 @@
         // Reload all
         // [self.tableView reloadData];
     }
+}
+
+- (void)newDirectory:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"newDirectory");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
