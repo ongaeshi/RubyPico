@@ -101,6 +101,14 @@
     [alert show];
 }
 
+- (void)tapEditButton {
+    if (self.navigationController.toolbarHidden) {
+        self.navigationController.toolbarHidden = NO;
+    } else {
+        self.navigationController.toolbarHidden = YES;
+    }
+}
+
 - (void)tapTrashButton {
     if (!self.tableView.editing) {
         [self.tableView setEditing:YES animated:YES];
