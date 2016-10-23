@@ -4,52 +4,60 @@
 #import "FCFileManager.h"
 #import "MrubyViewController.h"
 
-@interface SelectViewController ()
+@implementation SelectViewController {
+    NSMutableArray* _dataSource;
+    NSString* _fileDirectory;
+    NSString* _title;
+    BOOL _editable;
+    BOOL _isNewDirecotry;
+}
 
-@end
-
-@implementation SelectViewController
-
-- (id)init
-{
+- (id)init {
     self = [super init];
     return self;
 }
 
-- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable
-{
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable {
     self = [super init];
-    mFileDirectory = directory;
-    mTitle = title;
-    mEditable = editable;
+    _fileDirectory = directory;
+    _title = title;
+    _editable = editable;
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     // Title
-    self.navigationItem.title = mTitle;
+    self.navigationItem.title = _title;
 
     // BarButton
-    if (mEditable) {
+    if (_editable) {
         // Add Button
         UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                    target:self
                                                                                    action:@selector(tapAddButton)];
-        self.navigationItem.rightBarButtonItem = addButton;
 
-        // Trash button
+        // Direcotry button
+        UIBarButtonItem* direcotryButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                                                                            target:self
+                                                                                            action:@selector(tapDirecotryButton)];
+
+        // Edit button
+        UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                            target:self
+                                                                                            action:@selector(tapEditButton)];
+
+        // Trash button (Integrate to a edit button later)
         UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                      target:self
                                                                                      action:@selector(tapTrashButton)];
-        self.navigationItem.leftBarButtonItem = trashButton;
+
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, editButton, trashButton, nil];
         
     } else {
         self.navigationItem.rightBarButtonItem = NULL;
@@ -57,13 +65,14 @@
     }
 
     // TableView
-    mDataSource = [self updateDataSourceFromFiles];
+    _dataSource = [self updateDataSourceFromFiles];
     [self.tableView reloadData];
 }
 
-- (void)tapAddButton
-{
+- (void)tapAddButton {
     [self.tableView setEditing:NO animated:NO];
+    
+    _isNewDirecotry = NO;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
     alert.title = @"New File";
@@ -76,8 +85,23 @@
     [alert show];
 }
 
-- (void)tapTrashButton
-{
+- (void)tapDirecotryButton {
+    [self.tableView setEditing:NO animated:NO];
+
+    _isNewDirecotry = YES;
+
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = @"New Directory";
+    //alert.message = @"Enter file name.";
+    alert.delegate = self;
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.cancelButtonIndex = 0;
+    [alert show];
+}
+
+- (void)tapTrashButton {
     if (!self.tableView.editing) {
         [self.tableView setEditing:YES animated:YES];
     } else {
@@ -85,22 +109,20 @@
     }
 }
 
-- (NSString*)normalizeScriptName:(NSString*)name
-{
+- (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
 }
 
-- (void)runWithScriptName:(NSString*)name
-{
+- (void)runWithScriptName:(NSString*)name {
     [self.navigationController popToRootViewControllerAnimated:NO];
     
     // File exist?
-    NSString* path = [mFileDirectory stringByAppendingPathComponent:name];
+    NSString* path = [_fileDirectory stringByAppendingPathComponent:name];
 
     if (![FCFileManager existsItemAtPath:path]) {
         // Retry adding ".rb" extention
-        path = [mFileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
+        path = [_fileDirectory stringByAppendingPathComponent:[name stringByAppendingPathExtension:@"rb"]];
         
         if (![FCFileManager existsItemAtPath:path]) {
             return;
@@ -108,7 +130,7 @@
     }
 
     // {
-    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+    //     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
     //     viewController.hidesBottomBarWhenPushed = YES;
     //     [self.navigationController pushViewController:viewController animated:YES];
     // }
@@ -120,8 +142,15 @@
     }
 }
 
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (_isNewDirecotry) {
+        [self newDirectory:alertView clickedButtonAtIndex:buttonIndex];
+    } else {
+        [self newFile:alertView clickedButtonAtIndex:buttonIndex];
+    }
+}
+
+- (void)newFile:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
 
@@ -138,7 +167,7 @@
         }
 
         // Create path
-        NSString* path = [mFileDirectory stringByAppendingPathComponent:text];
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:text];
 
         // Alert if file already exists
         if ([FCFileManager existsItemAtPath:path]) {
@@ -157,7 +186,7 @@
             ];
 
         // Update data source
-        mDataSource = [self updateDataSourceFromFiles];
+        _dataSource = [self updateDataSourceFromFiles];
 
         // Insert table view
         NSUInteger newIndex[] = {0, 0}; // section, row
@@ -170,13 +199,44 @@
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [mDataSource count];
+- (void)newDirectory:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+
+        // Create path
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:text];
+
+        // Alert if path already exists
+        if ([FCFileManager existsItemAtPath:path]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Already exists";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Create a new directory
+        [FCFileManager createDirectoriesForPath:path];
+
+        // Update data source
+        _dataSource = [self updateDataSourceFromFiles];
+
+        // Insert table view
+        NSUInteger newIndex[] = {0, 0}; // section, row
+        NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
+                              withRowAnimation:UITableViewRowAnimationTop];
+
+        // Reload all
+        // [self.tableView reloadData];
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_dataSource count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
@@ -184,30 +244,35 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    cell.textLabel.text = [mDataSource objectAtIndex:indexPath.row];
+    cell.textLabel.text = [_dataSource objectAtIndex:indexPath.row];
 
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-    NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
-    EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
-    viewController.hidesBottomBarWhenPushed = YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+    NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+    UIViewController* viewController;
+
+    if ([FCFileManager isDirectoryItemAtPath: path]) {
+        viewController = [[SelectViewController alloc] initWithFileDirectory:path title:tableCellName edit:true];
+    } else {
+        viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // File
-        NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-        NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
+        NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
         [FCFileManager removeItemAtPath:path];
 
         // Data Source
-        [mDataSource removeObjectAtIndex:indexPath.row];
+        [_dataSource removeObjectAtIndex:indexPath.row];
 
         // Table Row
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
@@ -216,12 +281,11 @@
     }
 }
 
-- (NSMutableArray *) updateDataSourceFromFiles
-{
+- (NSMutableArray *) updateDataSourceFromFiles {
     NSError *error = nil;
 
     // Collect files
-    NSArray* files = [FCFileManager listFilesInDirectoryAtPath:mFileDirectory];
+    NSArray* files = [FCFileManager listItemsInDirectoryAtPath:_fileDirectory deep:NO];
 
     // Create array adding ModDate
     NSMutableArray* filesAndModDates = [NSMutableArray arrayWithCapacity:[files count]];
