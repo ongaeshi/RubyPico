@@ -277,6 +277,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.editing) {
+        return;
+    }
+
     NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
     NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
     UIViewController* viewController;
