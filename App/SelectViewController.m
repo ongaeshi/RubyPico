@@ -22,6 +22,7 @@
     _fileDirectory = directory;
     _title = title;
     _editable = editable;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     return self;
 }
 
@@ -109,21 +110,21 @@
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapDeleteButton)];
-
         UIBarButtonItem* moveButton = [[UIBarButtonItem alloc] initWithTitle:@"Move"
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapMoveButton)];
-
         UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithTitle:@"Rename"
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapRenameButton)];
-
         self.toolbarItems = @[deleteButton, moveButton, renameButton];
+
+        [self.tableView setEditing:YES animated:YES];
 
     } else {
         self.navigationController.toolbarHidden = YES;
+        [self.tableView setEditing:NO animated:YES];
     }
 }
 
