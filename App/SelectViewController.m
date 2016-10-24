@@ -53,12 +53,7 @@
                                                                                             target:self
                                                                                             action:@selector(tapEditButton)];
 
-        // Trash button (Integrate to a edit button later)
-        UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                     target:self
-                                                                                     action:@selector(tapTrashButton)];
-
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, editButton, trashButton, nil];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, editButton, nil];
         
     } else {
         self.navigationItem.rightBarButtonItem = NULL;
@@ -150,14 +145,6 @@
     }
 
     [self tapEditButton];
-}
-
-- (void)tapTrashButton {
-    if (!self.tableView.editing) {
-        [self.tableView setEditing:YES animated:YES];
-    } else {
-        [self.tableView setEditing:NO animated:YES];
-    }
 }
 
 - (NSString*)normalizeScriptName:(NSString*)name {
