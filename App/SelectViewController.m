@@ -128,6 +128,30 @@
     }
 }
 
+- (void)tapDeleteButton {
+    // TODO: Confirm using alert
+    NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
+                                    sortedArrayUsingSelector:@selector(compare:)]
+                                     reverseObjectEnumerator] allObjects];
+
+    for (NSIndexPath *indexPath in sortedIndexPaths) {
+        NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+
+        // Delete file
+        [FCFileManager removeItemAtPath:path];
+
+        // Data Source
+        [_dataSource removeObjectAtIndex:indexPath.row];
+
+        // Table Row
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
+    }
+
+    [self tapEditButton];
+}
+
 - (void)tapTrashButton {
     if (!self.tableView.editing) {
         [self.tableView setEditing:YES animated:YES];
