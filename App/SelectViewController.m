@@ -4,12 +4,18 @@
 #import "FCFileManager.h"
 #import "MrubyViewController.h"
 
+enum AlertKind {
+    NewFile,
+    NewDirectory,
+    Rename,
+};
+
 @implementation SelectViewController {
     NSMutableArray* _dataSource;
     NSString* _fileDirectory;
     NSString* _title;
     BOOL _editable;
-    BOOL _isNewDirecotry;
+    enum AlertKind _alertKind;
 }
 
 - (id)init {
@@ -65,13 +71,11 @@
     [self.tableView reloadData];
 }
 
-- (void)tapAddButton {
-    [self.tableView setEditing:NO animated:NO];
-    
-    _isNewDirecotry = NO;
+- (void)alert:(enum AlertKind)kind title:(NSString*)title {
+    _alertKind = kind;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
-    alert.title = @"New File";
+    alert.title = title;
     //alert.message = @"Enter file name.";
     alert.delegate = self;
     [alert addButtonWithTitle:@"Cancel"];
@@ -81,20 +85,14 @@
     [alert show];
 }
 
+- (void)tapAddButton {
+    [self.tableView setEditing:NO animated:NO];
+    [self alert:NewFile title:@"New File"];
+}
+
 - (void)tapDirecotryButton {
     [self.tableView setEditing:NO animated:NO];
-
-    _isNewDirecotry = YES;
-
-    UIAlertView* alert = [[UIAlertView alloc] init];
-    alert.title = @"New Directory";
-    //alert.message = @"Enter file name.";
-    alert.delegate = self;
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert addButtonWithTitle:@"OK"];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    alert.cancelButtonIndex = 0;
-    [alert show];
+    [self alert:NewDirectory title:@"New Directory"];
 }
 
 - (void)tapEditButton {
@@ -147,6 +145,11 @@
     [self tapEditButton];
 }
 
+- (void)tapRenameButton {
+    [self alert:Rename title:@"Rename File"];
+    [self tapEditButton];
+}
+
 - (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
@@ -181,10 +184,16 @@
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (_isNewDirecotry) {
-        [self newDirectory:alertView clickedButtonAtIndex:buttonIndex];
-    } else {
-        [self newFile:alertView clickedButtonAtIndex:buttonIndex];
+    switch (_alertKind) {
+        case NewFile:
+            [self newFile:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case NewDirectory:
+            [self newDirectory:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case Rename:
+            [self rename:alertView clickedButtonAtIndex:buttonIndex];
+            break;
     }
 }
 
@@ -267,6 +276,11 @@
 
         // Reload all
         // [self.tableView reloadData];
+    }
+}
+
+- (void)rename:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
     }
 }
 
