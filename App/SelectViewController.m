@@ -338,9 +338,35 @@ enum AlertKind {
 
 - (void)move:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
-        // Reload table
-        _dataSource = [self updateDataSourceFromFiles];
-        [self.tableView reloadData];
+        NSString *text = [[alertView textFieldAtIndex:0] text];
+        if ([text isEqualToString:@""]) {
+            return;
+        }
+        NSString *dstDir = [_fileDirectory stringByAppendingPathComponent:text];
+
+        // Exists directory?
+
+        NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
+                                          sortedArrayUsingSelector:@selector(compare:)]
+                                         reverseObjectEnumerator] allObjects];
+
+        // It was successful in all of the movement?
+
+        for (NSIndexPath *indexPath in sortedIndexPaths) {
+            NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
+            NSString *srcPath = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+            NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
+
+            // Move
+            BOOL ret = [FCFileManager moveItemAtPath:srcPath toPath:dstPath];
+
+            // Data Source
+            [_dataSource removeObjectAtIndex:indexPath.row];
+
+            // Table Row
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
 }
 
