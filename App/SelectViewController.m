@@ -345,12 +345,19 @@ enum AlertKind {
         NSString *dstDir = [_fileDirectory stringByAppendingPathComponent:text];
 
         // Exists directory?
+        if (![FCFileManager existsItemAtPath: dstDir]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Directory not found";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
 
         NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
                                           sortedArrayUsingSelector:@selector(compare:)]
                                          reverseObjectEnumerator] allObjects];
 
-        // It was successful in all of the movement?
+        // All files can be moved?
         for (NSIndexPath *indexPath in sortedIndexPaths) {
             NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
             NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
