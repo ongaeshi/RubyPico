@@ -71,7 +71,7 @@ enum AlertKind {
     [self.tableView reloadData];
 }
 
-- (void)alert:(enum AlertKind)kind title:(NSString*)title {
+- (void)alert:(enum AlertKind)kind title:(NSString*)title textField:(NSString*)textField {
     _alertKind = kind;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
@@ -82,17 +82,23 @@ enum AlertKind {
     [alert addButtonWithTitle:@"OK"];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     alert.cancelButtonIndex = 0;
+
+    if (textField) {
+        UITextField *tf = [alert textFieldAtIndex:0];
+        tf.text = textField;
+    }
+
     [alert show];
 }
 
 - (void)tapAddButton {
     [self.tableView setEditing:NO animated:NO];
-    [self alert:NewFile title:@"New File"];
+    [self alert:NewFile title:@"New File" textField:nil];
 }
 
 - (void)tapDirecotryButton {
     [self.tableView setEditing:NO animated:NO];
-    [self alert:NewDirectory title:@"New Directory"];
+    [self alert:NewDirectory title:@"New Directory" textField:nil];
 }
 
 - (void)tapEditButton {
@@ -146,8 +152,13 @@ enum AlertKind {
 }
 
 - (void)tapRenameButton {
-    [self alert:Rename title:@"Rename File"];
-    [self tapEditButton];
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    
+    if (indexPaths.count > 0) {
+        NSIndexPath *indexPath = indexPaths[0];
+        NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        [self alert:Rename title:@"Rename File" textField:tableCellName];
+    }
 }
 
 - (NSString*)normalizeScriptName:(NSString*)name {
@@ -282,6 +293,8 @@ enum AlertKind {
 - (void)rename:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
     }
+
+    [self tapEditButton];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
