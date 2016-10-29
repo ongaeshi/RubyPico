@@ -148,8 +148,6 @@ enum AlertKind {
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                               withRowAnimation:UITableViewRowAnimationFade];
     }
-
-    [self tapEditButton];
 }
 
 - (void)tapRenameButton {
@@ -321,8 +319,6 @@ enum AlertKind {
         _dataSource = [self updateDataSourceFromFiles];
         [self.tableView reloadData];
     }
-
-    [self tapEditButton];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
