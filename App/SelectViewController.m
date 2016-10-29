@@ -16,6 +16,7 @@ enum AlertKind {
     NSString* _title;
     BOOL _editable;
     enum AlertKind _alertKind;
+    NSString* _renameSrc;
 }
 
 - (id)init {
@@ -157,6 +158,9 @@ enum AlertKind {
     if (indexPaths.count > 0) {
         NSIndexPath *indexPath = indexPaths[0];
         NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+
+        _renameSrc = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+
         [self alert:Rename title:@"Rename File" textField:tableCellName];
     }
 }
@@ -292,6 +296,26 @@ enum AlertKind {
 
 - (void)rename:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+        if ([text isEqualToString:@""]) {
+            return;
+        }
+
+        // Create path
+        NSString* dir = [_renameSrc stringByDeletingLastPathComponent];
+        NSString* dstPath = [dir stringByAppendingPathComponent:text];
+
+        // Rename
+        BOOL ret = [FCFileManager moveItemAtPath:_renameSrc toPath:dstPath];
+
+        // Alert if file already exists
+        if (!ret) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = [NSString stringWithFormat:@"%@ already exists", text];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
     }
 
     [self tapEditButton];
