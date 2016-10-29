@@ -8,6 +8,7 @@ enum AlertKind {
     NewFile,
     NewDirectory,
     Rename,
+    Move,
 };
 
 @implementation SelectViewController {
@@ -170,6 +171,10 @@ enum AlertKind {
     }
 }
 
+- (void)tapMoveButton {
+    [self alert:Move title:@"Move to: (e.g. lib, ../)" textField:nil];
+}
+
 - (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
@@ -213,6 +218,9 @@ enum AlertKind {
             break;
         case Rename:
             [self rename:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case Move:
+            [self move:alertView clickedButtonAtIndex:buttonIndex];
             break;
     }
 }
@@ -322,6 +330,14 @@ enum AlertKind {
             return;
         }
 
+        // Reload table
+        _dataSource = [self updateDataSourceFromFiles];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)move:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
         // Reload table
         _dataSource = [self updateDataSourceFromFiles];
         [self.tableView reloadData];
