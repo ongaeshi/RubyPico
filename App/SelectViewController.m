@@ -316,6 +316,10 @@ enum AlertKind {
             [alert show];
             return;
         }
+
+        // Reload table
+        _dataSource = [self updateDataSourceFromFiles];
+        [self.tableView reloadData];
     }
 
     [self tapEditButton];
