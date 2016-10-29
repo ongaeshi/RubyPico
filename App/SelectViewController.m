@@ -8,6 +8,7 @@ enum AlertKind {
     NewFile,
     NewDirectory,
     Rename,
+    Move,
 };
 
 @implementation SelectViewController {
@@ -170,6 +171,14 @@ enum AlertKind {
     }
 }
 
+- (void)tapMoveButton {
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+
+    if (indexPaths.count > 0) {
+        [self alert:Move title:@"Move to: (e.g. lib, ../)" textField:nil];
+    }
+}
+
 - (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
@@ -213,6 +222,9 @@ enum AlertKind {
             break;
         case Rename:
             [self rename:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case Move:
+            [self move:alertView clickedButtonAtIndex:buttonIndex];
             break;
     }
 }
@@ -325,6 +337,60 @@ enum AlertKind {
         // Reload table
         _dataSource = [self updateDataSourceFromFiles];
         [self.tableView reloadData];
+    }
+}
+
+- (void)move:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString *text = [[alertView textFieldAtIndex:0] text];
+        if ([text isEqualToString:@""]) {
+            return;
+        }
+        NSString *dstDir = [_fileDirectory stringByAppendingPathComponent:text];
+
+        // Exists directory?
+        if (![FCFileManager existsItemAtPath: dstDir]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Directory not found";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
+                                          sortedArrayUsingSelector:@selector(compare:)]
+                                         reverseObjectEnumerator] allObjects];
+
+        // All files can be moved?
+        for (NSIndexPath *indexPath in sortedIndexPaths) {
+            NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
+            NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
+            
+            if ([FCFileManager existsItemAtPath: dstPath]) {
+                UIAlertView* alert = [[UIAlertView alloc] init];
+                alert.title = [tableCellName stringByAppendingString:@" already exists"];
+                [alert addButtonWithTitle:@"OK"];
+                [alert show];
+                return;
+            }
+        }
+
+        // Move files
+        for (NSIndexPath *indexPath in sortedIndexPaths) {
+            NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
+            NSString *srcPath = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+            NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
+
+            // Move
+            BOOL ret = [FCFileManager moveItemAtPath:srcPath toPath:dstPath];
+
+            // Data Source
+            [_dataSource removeObjectAtIndex:indexPath.row];
+
+            // Table Row
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
 }
 
