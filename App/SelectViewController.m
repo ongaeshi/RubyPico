@@ -172,7 +172,11 @@ enum AlertKind {
 }
 
 - (void)tapMoveButton {
-    [self alert:Move title:@"Move to: (e.g. lib, ../)" textField:nil];
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+
+    if (indexPaths.count > 0) {
+        [self alert:Move title:@"Move to: (e.g. lib, ../)" textField:nil];
+    }
 }
 
 - (NSString*)normalizeScriptName:(NSString*)name {
