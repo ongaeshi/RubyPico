@@ -57,9 +57,11 @@ enum AlertKind {
                                                                                             action:@selector(tapDirecotryButton)];
 
         // Edit button
-        _editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                    target:self
-                                                                    action:@selector(tapEditButton)];
+        _editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(tapEditButton)];
+        _editButton.possibleTitles = [NSSet setWithObjects:@"Edit", @"Done", nil];
 
         self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, _editButton, nil];
         
@@ -123,10 +125,12 @@ enum AlertKind {
 
         [self.tableView setEditing:YES animated:YES];
 
+        _editButton.title = @"Done";
         _editButton.style = UIBarButtonItemStyleDone;
     } else {
         self.navigationController.toolbarHidden = YES;
         [self.tableView setEditing:NO animated:YES];
+        _editButton.title = @"Edit";
         _editButton.style = UIBarButtonItemStylePlain;
     }
 }
