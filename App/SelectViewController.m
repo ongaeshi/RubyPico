@@ -351,7 +351,20 @@ enum AlertKind {
                                          reverseObjectEnumerator] allObjects];
 
         // It was successful in all of the movement?
+        for (NSIndexPath *indexPath in sortedIndexPaths) {
+            NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
+            NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
+            
+            if ([FCFileManager existsItemAtPath: dstPath]) {
+                UIAlertView* alert = [[UIAlertView alloc] init];
+                alert.title = [tableCellName stringByAppendingString:@" already exists"];
+                [alert addButtonWithTitle:@"OK"];
+                [alert show];
+                return;
+            }
+        }
 
+        // Move files
         for (NSIndexPath *indexPath in sortedIndexPaths) {
             NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
             NSString *srcPath = [_fileDirectory stringByAppendingPathComponent:tableCellName];
