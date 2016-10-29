@@ -4,12 +4,20 @@
 #import "FCFileManager.h"
 #import "MrubyViewController.h"
 
+enum AlertKind {
+    NewFile,
+    NewDirectory,
+    Rename,
+};
+
 @implementation SelectViewController {
     NSMutableArray* _dataSource;
     NSString* _fileDirectory;
     NSString* _title;
     BOOL _editable;
-    BOOL _isNewDirecotry;
+    UIBarButtonItem* _editButton;
+    enum AlertKind _alertKind;
+    NSString* _renameSrc;
 }
 
 - (id)init {
@@ -22,6 +30,7 @@
     _fileDirectory = directory;
     _title = title;
     _editable = editable;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     return self;
 }
 
@@ -48,16 +57,13 @@
                                                                                             action:@selector(tapDirecotryButton)];
 
         // Edit button
-        UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                            target:self
-                                                                                            action:@selector(tapEditButton)];
+        _editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(tapEditButton)];
+        _editButton.possibleTitles = [NSSet setWithObjects:@"Edit", @"Done", nil];
 
-        // Trash button (Integrate to a edit button later)
-        UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                     target:self
-                                                                                     action:@selector(tapTrashButton)];
-
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, editButton, trashButton, nil];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, _editButton, nil];
         
     } else {
         self.navigationItem.rightBarButtonItem = NULL;
@@ -69,43 +75,98 @@
     [self.tableView reloadData];
 }
 
-- (void)tapAddButton {
-    [self.tableView setEditing:NO animated:NO];
-    
-    _isNewDirecotry = NO;
+- (void)alert:(enum AlertKind)kind title:(NSString*)title textField:(NSString*)textField {
+    _alertKind = kind;
 
     UIAlertView* alert = [[UIAlertView alloc] init];
-    alert.title = @"New File";
+    alert.title = title;
     //alert.message = @"Enter file name.";
     alert.delegate = self;
     [alert addButtonWithTitle:@"Cancel"];
     [alert addButtonWithTitle:@"OK"];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     alert.cancelButtonIndex = 0;
+
+    if (textField) {
+        UITextField *tf = [alert textFieldAtIndex:0];
+        tf.text = textField;
+    }
+
     [alert show];
+}
+
+- (void)tapAddButton {
+    [self.tableView setEditing:NO animated:NO];
+    [self alert:NewFile title:@"New File" textField:nil];
 }
 
 - (void)tapDirecotryButton {
     [self.tableView setEditing:NO animated:NO];
-
-    _isNewDirecotry = YES;
-
-    UIAlertView* alert = [[UIAlertView alloc] init];
-    alert.title = @"New Directory";
-    //alert.message = @"Enter file name.";
-    alert.delegate = self;
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert addButtonWithTitle:@"OK"];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    alert.cancelButtonIndex = 0;
-    [alert show];
+    [self alert:NewDirectory title:@"New Directory" textField:nil];
 }
 
-- (void)tapTrashButton {
-    if (!self.tableView.editing) {
+- (void)tapEditButton {
+    if (self.navigationController.toolbarHidden) {
+        self.navigationController.toolbarHidden = NO;
+
+        UIBarButtonItem* deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapDeleteButton)];
+        UIBarButtonItem* moveButton = [[UIBarButtonItem alloc] initWithTitle:@"Move"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapMoveButton)];
+        UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithTitle:@"Rename"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapRenameButton)];
+        self.toolbarItems = @[deleteButton, moveButton, renameButton];
+
         [self.tableView setEditing:YES animated:YES];
+
+        _editButton.title = @"Done";
+        _editButton.style = UIBarButtonItemStyleDone;
     } else {
+        self.navigationController.toolbarHidden = YES;
         [self.tableView setEditing:NO animated:YES];
+        _editButton.title = @"Edit";
+        _editButton.style = UIBarButtonItemStylePlain;
+    }
+}
+
+- (void)tapDeleteButton {
+    // TODO: Confirm using alert
+    NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
+                                    sortedArrayUsingSelector:@selector(compare:)]
+                                     reverseObjectEnumerator] allObjects];
+
+    for (NSIndexPath *indexPath in sortedIndexPaths) {
+        NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+
+        // Delete file
+        [FCFileManager removeItemAtPath:path];
+
+        // Data Source
+        [_dataSource removeObjectAtIndex:indexPath.row];
+
+        // Table Row
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)tapRenameButton {
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    
+    if (indexPaths.count > 0) {
+        NSIndexPath *indexPath = indexPaths[0];
+        NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+
+        _renameSrc = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+
+        [self alert:Rename title:@"Rename File" textField:tableCellName];
     }
 }
 
@@ -143,10 +204,16 @@
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (_isNewDirecotry) {
-        [self newDirectory:alertView clickedButtonAtIndex:buttonIndex];
-    } else {
-        [self newFile:alertView clickedButtonAtIndex:buttonIndex];
+    switch (_alertKind) {
+        case NewFile:
+            [self newFile:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case NewDirectory:
+            [self newDirectory:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case Rename:
+            [self rename:alertView clickedButtonAtIndex:buttonIndex];
+            break;
     }
 }
 
@@ -232,6 +299,35 @@
     }
 }
 
+- (void)rename:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+        if ([text isEqualToString:@""]) {
+            return;
+        }
+
+        // Create path
+        NSString* dir = [_renameSrc stringByDeletingLastPathComponent];
+        NSString* dstPath = [dir stringByAppendingPathComponent:text];
+
+        // Rename
+        BOOL ret = [FCFileManager moveItemAtPath:_renameSrc toPath:dstPath];
+
+        // Alert if file already exists
+        if (!ret) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = [NSString stringWithFormat:@"%@ already exists", text];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Reload table
+        _dataSource = [self updateDataSourceFromFiles];
+        [self.tableView reloadData];
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_dataSource count];
 }
@@ -250,6 +346,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.editing) {
+        return;
+    }
+
     NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
     NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
     UIViewController* viewController;
