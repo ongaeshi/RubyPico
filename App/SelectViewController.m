@@ -15,6 +15,7 @@ enum AlertKind {
     NSString* _fileDirectory;
     NSString* _title;
     BOOL _editable;
+    UIBarButtonItem* _editButton;
     enum AlertKind _alertKind;
     NSString* _renameSrc;
 }
@@ -56,11 +57,11 @@ enum AlertKind {
                                                                                             action:@selector(tapDirecotryButton)];
 
         // Edit button
-        UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                            target:self
-                                                                                            action:@selector(tapEditButton)];
+        _editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                    target:self
+                                                                    action:@selector(tapEditButton)];
 
-        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, editButton, nil];
+        self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, direcotryButton, _editButton, nil];
         
     } else {
         self.navigationItem.rightBarButtonItem = NULL;
@@ -122,9 +123,11 @@ enum AlertKind {
 
         [self.tableView setEditing:YES animated:YES];
 
+        _editButton.style = UIBarButtonItemStyleDone;
     } else {
         self.navigationController.toolbarHidden = YES;
         [self.tableView setEditing:NO animated:YES];
+        _editButton.style = UIBarButtonItemStylePlain;
     }
 }
 
