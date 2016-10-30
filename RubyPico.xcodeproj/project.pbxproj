@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5210B3B91DC5E0B400214C09 /* directory.png in Resources */ = {isa = PBXBuildFile; fileRef = 5210B3B71DC5E0B400214C09 /* directory.png */; };
+		5210B3BA1DC5E0B400214C09 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 5210B3B81DC5E0B400214C09 /* file.png */; };
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
 		523FDB9D1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 523FDB9C1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf */; };
 		5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5271AE781D5C45BC000D50A4 /* image_util.rb */; };
@@ -48,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5210B3B71DC5E0B400214C09 /* directory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directory.png; sourceTree = "<group>"; };
+		5210B3B81DC5E0B400214C09 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
 		523FDB9C1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanCodeJP-Regular.otf"; sourceTree = "<group>"; };
 		5271AE781D5C45BC000D50A4 /* image_util.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = image_util.rb; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		52731C5F1B371FC500E2CC2A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				5210B3B71DC5E0B400214C09 /* directory.png */,
+				5210B3B81DC5E0B400214C09 /* file.png */,
 				52C018571C94075E0046CCF8 /* chat_ruby.png */,
 				52C018581C94075E0046CCF8 /* chat_you.png */,
 				52731C601B371FC500E2CC2A /* sample.jpg */,
@@ -315,6 +321,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5210B3B91DC5E0B400214C09 /* directory.png in Resources */,
 				5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */,
 				52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */,
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
@@ -327,6 +334,7 @@
 				52FD353C1D41262C009C8E5B /* __builtin__.rb in Resources */,
 				523FDB9D1D937A8E00F36138 /* SourceHanCodeJP-Regular.otf in Resources */,
 				52731C661B371FC500E2CC2A /* sample.jpg in Resources */,
+				5210B3BA1DC5E0B400214C09 /* file.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

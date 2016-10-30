@@ -412,6 +412,11 @@ enum AlertKind {
     NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
     if ([FCFileManager isDirectoryItemAtPath: path]) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.imageView.image = [UIImage imageNamed:@"directory.png"];
+        cell.imageView.highlightedImage = [UIImage imageNamed:@"directory.png"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"file.png"];
+        cell.imageView.highlightedImage = [UIImage imageNamed:@"file.png"];
     }
 
     return cell;
