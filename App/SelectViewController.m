@@ -137,7 +137,21 @@ enum AlertKind {
 }
 
 - (void)tapDeleteButton {
-    // TODO: Confirm using alert
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.delegate = self;
+    // actionSheet.title = @"Are you sure?";
+    [actionSheet addButtonWithTitle:@"Delete"];
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    actionSheet.cancelButtonIndex = 1;
+    actionSheet.destructiveButtonIndex = 0;
+    [actionSheet showInView:self.view.window];
+}
+
+- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != 0) {
+        return;
+    }
+
     NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
                                     sortedArrayUsingSelector:@selector(compare:)]
                                      reverseObjectEnumerator] allObjects];
