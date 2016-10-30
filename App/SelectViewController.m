@@ -406,7 +406,18 @@ enum AlertKind {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    cell.textLabel.text = [_dataSource objectAtIndex:indexPath.row];
+    NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+    cell.textLabel.text = tableCellName;
+
+    NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+    if ([FCFileManager isDirectoryItemAtPath: path]) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.imageView.image = [UIImage imageNamed:@"directory.png"];
+        cell.imageView.highlightedImage = [UIImage imageNamed:@"directory.png"];
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"file.png"];
+        cell.imageView.highlightedImage = [UIImage imageNamed:@"file.png"];
+    }
 
     return cell;
 }
