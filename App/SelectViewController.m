@@ -406,7 +406,13 @@ enum AlertKind {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    cell.textLabel.text = [_dataSource objectAtIndex:indexPath.row];
+    NSString* tableCellName = [_dataSource objectAtIndex:indexPath.row];
+    cell.textLabel.text = tableCellName;
+
+    NSString* path = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+    if ([FCFileManager isDirectoryItemAtPath: path]) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
 
     return cell;
 }
