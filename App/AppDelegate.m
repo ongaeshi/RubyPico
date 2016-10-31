@@ -39,7 +39,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    [mFileViewController runWithScriptName:[url host]];
+    [mFileViewController runWithScriptName:[[url host] stringByAppendingPathComponent:[url path]]];
     return YES;
 }
 
