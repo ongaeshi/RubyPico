@@ -497,6 +497,7 @@ enum AlertKind {
     NSArray* sortedFiles = [filesAndModDates sortedArrayUsingComparator:
                             ^(id path1, id path2)
                             {
+                                // "ModDate" or "Name"
                                 NSComparisonResult comp = [[path1 objectForKey:@"ModDate"] compare:
                                                            [path2 objectForKey:@"ModDate"]];
 
@@ -512,7 +513,7 @@ enum AlertKind {
                             }];
 
     // Map file
-    NSMutableArray* array = [[NSMutableArray alloc]initWithObjects: nil];
+    NSMutableArray* array = [[NSMutableArray alloc] initWithObjects: nil];
 
     for (NSDictionary* dict in sortedFiles) {
         [array addObject:[[dict objectForKey:@"Path"] lastPathComponent]];
