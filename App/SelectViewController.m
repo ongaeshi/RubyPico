@@ -44,7 +44,7 @@ enum SortKind {
     _title = title;
     _editable = editable;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
-    _sortKind = SortByDate;
+    _sortKind = SortByName;
     return self;
 }
 
@@ -186,12 +186,12 @@ enum SortKind {
 - (void)sortAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     switch (buttonIndex) {
         case 0:
-            _sortKind = SortByDate;
+            _sortKind = SortByName;
             _dataSource = [self updateDataSourceFromFiles];
             [self.tableView reloadData];
             break;
         case 1:
-            _sortKind = SortByName;
+            _sortKind = SortByDate;
             _dataSource = [self updateDataSourceFromFiles];
             [self.tableView reloadData];
             break;
@@ -243,8 +243,8 @@ enum SortKind {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.delegate = self;
     actionSheet.title = @"Sort order?";
-    [actionSheet addButtonWithTitle:@"Date"];
     [actionSheet addButtonWithTitle:@"Name"];
+    [actionSheet addButtonWithTitle:@"Date"];
     [actionSheet addButtonWithTitle:@"Cancel"];
     actionSheet.cancelButtonIndex = 2;
 
