@@ -122,7 +122,11 @@ enum AlertKind {
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapRenameButton)];
-        self.toolbarItems = @[deleteButton, moveButton, renameButton];
+        UIBarButtonItem* sortButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapSortButton)];
+        self.toolbarItems = @[deleteButton, moveButton, renameButton, sortButton];
 
         [self.tableView setEditing:YES animated:YES];
 
@@ -183,6 +187,9 @@ enum AlertKind {
 
         [self alert:Rename title:@"Rename File" textField:tableCellName];
     }
+}
+
+- (void)tapSortButton {
 }
 
 - (void)tapMoveButton {
