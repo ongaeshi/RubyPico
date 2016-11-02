@@ -487,6 +487,7 @@ enum SortKind {
         cell.imageView.image = [UIImage imageNamed:@"directory.png"];
         cell.imageView.highlightedImage = [UIImage imageNamed:@"directory.png"];
     } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.imageView.image = [UIImage imageNamed:@"file.png"];
         cell.imageView.highlightedImage = [UIImage imageNamed:@"file.png"];
     }
