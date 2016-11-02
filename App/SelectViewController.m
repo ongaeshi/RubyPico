@@ -11,6 +11,16 @@ enum AlertKind {
     Move,
 };
 
+enum ActionKind {
+    Delete,
+    Sort,
+};
+
+enum SortKind {
+    SortByDate,
+    SortByName,
+};
+
 @implementation SelectViewController {
     NSMutableArray* _dataSource;
     NSString* _fileDirectory;
@@ -19,6 +29,8 @@ enum AlertKind {
     UIBarButtonItem* _editButton;
     enum AlertKind _alertKind;
     NSString* _renameSrc;
+    enum ActionKind _actionKind;
+    enum SortKind _sortKind;
 }
 
 - (id)init {
@@ -32,6 +44,7 @@ enum AlertKind {
     _title = title;
     _editable = editable;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    _sortKind = SortByDate;
     return self;
 }
 
@@ -122,7 +135,11 @@ enum AlertKind {
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapRenameButton)];
-        self.toolbarItems = @[deleteButton, moveButton, renameButton];
+        UIBarButtonItem* sortButton = [[UIBarButtonItem alloc] initWithTitle:@"Sort"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapSortButton)];
+        self.toolbarItems = @[deleteButton, moveButton, renameButton, sortButton];
 
         [self.tableView setEditing:YES animated:YES];
 
@@ -137,6 +154,8 @@ enum AlertKind {
 }
 
 - (void)tapDeleteButton {
+    _actionKind = Delete;
+
     UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.delegate = self;
     // actionSheet.title = @"Are you sure?";
@@ -148,6 +167,34 @@ enum AlertKind {
 }
 
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (_actionKind) {
+        case Delete:
+            [self deleteAction:actionSheet clickedButtonAtIndex:buttonIndex];
+            break;
+        case Sort:
+            [self sortAction:actionSheet clickedButtonAtIndex:buttonIndex];
+            break;
+    }
+
+}
+
+- (void)sortAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            _sortKind = SortByDate;
+            _dataSource = [self updateDataSourceFromFiles];
+            [self.tableView reloadData];
+            break;
+        case 1:
+            _sortKind = SortByName;
+            _dataSource = [self updateDataSourceFromFiles];
+            [self.tableView reloadData];
+            break;
+    }
+
+}
+
+- (void)deleteAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != 0) {
         return;
     }
@@ -183,6 +230,20 @@ enum AlertKind {
 
         [self alert:Rename title:@"Rename File" textField:tableCellName];
     }
+}
+
+- (void)tapSortButton {
+    _actionKind = Sort;
+
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.delegate = self;
+    actionSheet.title = @"Sort order?";
+    [actionSheet addButtonWithTitle:@"Date"];
+    [actionSheet addButtonWithTitle:@"Name"];
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    actionSheet.cancelButtonIndex = 2;
+
+    [actionSheet showInView:self.view.window];
 }
 
 - (void)tapMoveButton {
@@ -429,6 +490,7 @@ enum AlertKind {
         cell.imageView.image = [UIImage imageNamed:@"directory.png"];
         cell.imageView.highlightedImage = [UIImage imageNamed:@"directory.png"];
     } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.imageView.image = [UIImage imageNamed:@"file.png"];
         cell.imageView.highlightedImage = [UIImage imageNamed:@"file.png"];
     }
@@ -497,8 +559,11 @@ enum AlertKind {
     NSArray* sortedFiles = [filesAndModDates sortedArrayUsingComparator:
                             ^(id path1, id path2)
                             {
-                                NSComparisonResult comp = [[path1 objectForKey:@"ModDate"] compare:
-                                                           [path2 objectForKey:@"ModDate"]];
+                                // "ModDate" or "Name"
+                                NSString *sortKey = (_sortKind == SortByDate) ? @"ModDate" : @"Name";
+
+                                NSComparisonResult comp = [[path1 objectForKey:sortKey] compare:
+                                                           [path2 objectForKey:sortKey]];
 
                                 // Invert ordering
                                 if (comp == NSOrderedDescending) {
@@ -512,7 +577,7 @@ enum AlertKind {
                             }];
 
     // Map file
-    NSMutableArray* array = [[NSMutableArray alloc]initWithObjects: nil];
+    NSMutableArray* array = [[NSMutableArray alloc] initWithObjects: nil];
 
     for (NSDictionary* dict in sortedFiles) {
         [array addObject:[[dict objectForKey:@"Path"] lastPathComponent]];
