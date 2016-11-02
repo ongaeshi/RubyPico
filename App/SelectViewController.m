@@ -16,6 +16,11 @@ enum ActionKind {
     Sort,
 };
 
+enum SortKind {
+    SortByDate,
+    SortByName,
+};
+
 @implementation SelectViewController {
     NSMutableArray* _dataSource;
     NSString* _fileDirectory;
@@ -25,6 +30,7 @@ enum ActionKind {
     enum AlertKind _alertKind;
     NSString* _renameSrc;
     enum ActionKind _actionKind;
+    enum SortKind _sortKind;
 }
 
 - (id)init {
@@ -38,6 +44,7 @@ enum ActionKind {
     _title = title;
     _editable = editable;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    _sortKind = SortByDate;
     return self;
 }
 
@@ -168,10 +175,23 @@ enum ActionKind {
             [self sortAction:actionSheet clickedButtonAtIndex:buttonIndex];
             break;
     }
+
 }
 
 - (void)sortAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"sort");
+    switch (buttonIndex) {
+        case 0:
+            _sortKind = SortByDate;
+            _dataSource = [self updateDataSourceFromFiles];
+            [self.tableView reloadData];
+            break;
+        case 1:
+            _sortKind = SortByName;
+            _dataSource = [self updateDataSourceFromFiles];
+            [self.tableView reloadData];
+            break;
+    }
+
 }
 
 - (void)deleteAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -536,8 +556,10 @@ enum ActionKind {
                             ^(id path1, id path2)
                             {
                                 // "ModDate" or "Name"
-                                NSComparisonResult comp = [[path1 objectForKey:@"ModDate"] compare:
-                                                           [path2 objectForKey:@"ModDate"]];
+                                NSString *sortKey = (_sortKind == SortByDate) ? @"ModDate" : @"Name";
+
+                                NSComparisonResult comp = [[path1 objectForKey:sortKey] compare:
+                                                           [path2 objectForKey:sortKey]];
 
                                 // Invert ordering
                                 if (comp == NSOrderedDescending) {
