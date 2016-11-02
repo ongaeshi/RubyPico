@@ -240,6 +240,9 @@ enum SortKind {
     actionSheet.title = @"Sort order?";
     [actionSheet addButtonWithTitle:@"Date"];
     [actionSheet addButtonWithTitle:@"Name"];
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    actionSheet.cancelButtonIndex = 2;
+
     [actionSheet showInView:self.view.window];
 }
 
