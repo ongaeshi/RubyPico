@@ -11,6 +11,11 @@ enum AlertKind {
     Move,
 };
 
+enum ActionKind {
+    Delete,
+    Sort,
+};
+
 @implementation SelectViewController {
     NSMutableArray* _dataSource;
     NSString* _fileDirectory;
@@ -19,6 +24,7 @@ enum AlertKind {
     UIBarButtonItem* _editButton;
     enum AlertKind _alertKind;
     NSString* _renameSrc;
+    enum ActionKind _actionKind;
 }
 
 - (id)init {
@@ -141,6 +147,8 @@ enum AlertKind {
 }
 
 - (void)tapDeleteButton {
+    _actionKind = Delete;
+
     UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.delegate = self;
     // actionSheet.title = @"Are you sure?";
@@ -152,6 +160,21 @@ enum AlertKind {
 }
 
 - (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (_actionKind) {
+        case Delete:
+            [self deleteAction:actionSheet clickedButtonAtIndex:buttonIndex];
+            break;
+        case Sort:
+            [self sortAction:actionSheet clickedButtonAtIndex:buttonIndex];
+            break;
+    }
+}
+
+- (void)sortAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"sort");
+}
+
+- (void)deleteAction:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != 0) {
         return;
     }
@@ -190,6 +213,14 @@ enum AlertKind {
 }
 
 - (void)tapSortButton {
+    _actionKind = Sort;
+
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+    actionSheet.delegate = self;
+    actionSheet.title = @"Sort order?";
+    [actionSheet addButtonWithTitle:@"Date"];
+    [actionSheet addButtonWithTitle:@"Name"];
+    [actionSheet showInView:self.view.window];
 }
 
 - (void)tapMoveButton {
