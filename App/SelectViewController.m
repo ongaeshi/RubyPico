@@ -154,6 +154,11 @@ enum SortKind {
 }
 
 - (void)tapDeleteButton {
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+    if (indexPaths.count == 0) {
+        return;
+    }
+
     _actionKind = Delete;
 
     UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
