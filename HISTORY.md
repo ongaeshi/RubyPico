@@ -1,5 +1,24 @@
 # HISTORY - RubyPico
 
+### 0.9.1 - 2016-11-03
+
+- Improve File Manager
+  - Add Edit button
+  - Show/Create directory
+  - Delete
+  - Move
+  - Rename
+  - Sort Order
+- Add library
+  - File
+  - Dir
+  - Kernel#prompt
+  - Kernel#sleep
+  - Kernel#clearprint
+  - Method
+- Change icon
+- Enable URL of "rubypico://dir/path"
+
 ### 0.9 - 2016-09-22
 
 - gets
