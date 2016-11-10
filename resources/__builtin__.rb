@@ -48,6 +48,10 @@ module Browser
   def self.json(url)
     JSON::parse(get(url))
   end
+
+  def self.encode(str)
+    URI.encode_www_form_component(str)
+  end
 end
 
 module Kernel
