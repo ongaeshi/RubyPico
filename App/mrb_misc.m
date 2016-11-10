@@ -211,6 +211,39 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_browser_post(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char *cstr = mrb_string_value_ptr(mrb, str);
+    NSString *nstr = [[NSString alloc] initWithUTF8String:cstr];
+
+    NSURL *url = [NSURL URLWithString:nstr];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = @"POST";
+
+    NSString *body = 
+        @"{\n"
+        @"  \"description\": \"the description for this gist\",\n"
+        @"  \"public\": true,\n"
+        @"  \"files\": {\n"
+        @"    \"file1.txt\": {\n"
+        @"      \"content\": \"String file contents\"\n"
+        @"    }\n"
+        @"  }\n"
+        @"}\n"
+        ;
+    request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    return mrb_str_new_cstr(mrb, [result UTF8String]);
+}
+
+static mrb_value
 mrb_popup_input(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
@@ -273,6 +306,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "post", mrb_browser_post, MRB_ARGS_REQ(1));
     }
 
     {
