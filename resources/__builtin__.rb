@@ -96,7 +96,7 @@ module Kernel
     nil
   end
   
-  def prompt(header = "%")
+  def prompt(header = "$")
     print header + " "
     input = gets
     puts input
