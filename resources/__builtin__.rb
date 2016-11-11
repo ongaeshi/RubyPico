@@ -54,10 +54,10 @@ module Browser
   end
   
   def self.post(url, arg1, arg2 = nil)
-    unless arg2
-      post_in(url, arg1, arg2)
+    if arg2.nil?
+      post_in(url, nil, arg1)
     else
-      post_in(url, nil, arg2)
+      post_in(url, arg1, arg2)
     end
   end
 end

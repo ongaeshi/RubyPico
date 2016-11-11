@@ -4,6 +4,7 @@
 
 #import "mrb_misc.h"
 
+#import "MrubyUtil.h"
 #import "MrubyViewController.h"
 #import "mrb_attr_string.h"
 #import "mrb_image.h"
@@ -213,28 +214,13 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_browser_post_in(mrb_state *mrb, mrb_value self)
 {
-    mrb_value str;
-    mrb_get_args(mrb, "S", &str);
+    mrb_value url, header, body;
+    mrb_get_args(mrb, "SoS", &url, &header, &body);
 
-    const char *cstr = mrb_string_value_ptr(mrb, str);
-    NSString *nstr = [[NSString alloc] initWithUTF8String:cstr];
-
-    NSURL *url = [NSURL URLWithString:nstr];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSURL *nsurl = [NSURL URLWithString:[MrubyUtil str2nstr:mrb value:url]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:nsurl];
     request.HTTPMethod = @"POST";
-
-    NSString *body = 
-        @"{\n"
-        @"  \"description\": \"the description for this gist\",\n"
-        @"  \"public\": true,\n"
-        @"  \"files\": {\n"
-        @"    \"file1.txt\": {\n"
-        @"      \"content\": \"String file contents\"\n"
-        @"    }\n"
-        @"  }\n"
-        @"}\n"
-        ;
-    request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [[MrubyUtil str2nstr:mrb value:body] dataUsingEncoding:NSUTF8StringEncoding];
 
     NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 
@@ -306,7 +292,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
-        mrb_define_class_method(mrb , cc, "post_in", mrb_browser_post_in, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "post_in", mrb_browser_post_in, MRB_ARGS_REQ(3));
     }
 
     {
