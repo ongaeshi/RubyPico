@@ -211,7 +211,7 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
-mrb_browser_post(mrb_state *mrb, mrb_value self)
+mrb_browser_post_in(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
@@ -306,7 +306,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
-        mrb_define_class_method(mrb , cc, "post", mrb_browser_post, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "post_in", mrb_browser_post_in, MRB_ARGS_REQ(1));
     }
 
     {

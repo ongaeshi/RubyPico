@@ -52,6 +52,14 @@ module Browser
   def self.encode(str)
     URI.encode_www_form_component(str)
   end
+  
+  def self.post(url, arg1, arg2 = nil)
+    unless arg2
+      post_in(url, arg1, arg2)
+    else
+      post_in(url, nil, arg2)
+    end
+  end
 end
 
 module Kernel
