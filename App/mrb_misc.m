@@ -9,6 +9,7 @@
 #import "mrb_attr_string.h"
 #import "mrb_image.h"
 #import "mruby/array.h"
+#import "mruby/hash.h"
 #import "mruby/string.h"
 #import <Foundation/Foundation.h>
 
@@ -223,7 +224,13 @@ mrb_browser_post_in(mrb_state *mrb, mrb_value self)
 
     // header
     if (!mrb_nil_p(header)) {
-        mrb_p(mrb, header);
+        mrb_value keys = mrb_hash_keys(mrb, header);
+        for (int i = 0; i < RARRAY_LEN(keys); ++i) {
+            mrb_value key = RARRAY_PTR(keys)[i];
+            mrb_value value = mrb_hash_get(mrb, header, key);
+            [request addValue: [MrubyUtil str2nstr:mrb value:value]
+                     forHTTPHeaderField:[MrubyUtil str2nstr:mrb value:key]];
+        }
     }
 
     // body
