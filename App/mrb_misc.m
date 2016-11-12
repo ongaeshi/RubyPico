@@ -4,10 +4,12 @@
 
 #import "mrb_misc.h"
 
+#import "MrubyUtil.h"
 #import "MrubyViewController.h"
 #import "mrb_attr_string.h"
 #import "mrb_image.h"
 #import "mruby/array.h"
+#import "mruby/hash.h"
 #import "mruby/string.h"
 #import <Foundation/Foundation.h>
 
@@ -211,6 +213,35 @@ mrb_browser_get(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_browser_post_in(mrb_state *mrb, mrb_value self)
+{
+    mrb_value url, header, body;
+    mrb_get_args(mrb, "SoS", &url, &header, &body);
+
+    NSURL *nsurl = [NSURL URLWithString:[MrubyUtil str2nstr:mrb value:url]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:nsurl];
+    request.HTTPMethod = @"POST";
+
+    // header
+    if (!mrb_nil_p(header)) {
+        mrb_value keys = mrb_hash_keys(mrb, header);
+        for (int i = 0; i < RARRAY_LEN(keys); ++i) {
+            mrb_value key = RARRAY_PTR(keys)[i];
+            mrb_value value = mrb_hash_get(mrb, header, key);
+            [request addValue: [MrubyUtil str2nstr:mrb value:value]
+                     forHTTPHeaderField:[MrubyUtil str2nstr:mrb value:key]];
+        }
+    }
+
+    // body
+    request.HTTPBody = [[MrubyUtil str2nstr:mrb value:body] dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return mrb_str_new_cstr(mrb, [result UTF8String]);
+}
+
+static mrb_value
 mrb_popup_input(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
@@ -273,6 +304,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "post_in", mrb_browser_post_in, MRB_ARGS_REQ(3));
     }
 
     {

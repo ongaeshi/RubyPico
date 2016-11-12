@@ -52,6 +52,16 @@ module Browser
   def self.encode(str)
     URI.encode_www_form_component(str)
   end
+  
+  def self.post(url, opts)
+    if opts[:json]
+      post_in(url, opts[:header], JSON.stringify(opts[:json]))
+    elsif opts[:body].is_a? Hash
+      post_in(url, opts[:header], URI.encode_www_form(opts[:body]))
+    else
+      post_in(url, nil, opts[:body])
+    end
+  end
 end
 
 module Kernel
