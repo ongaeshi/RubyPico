@@ -53,11 +53,13 @@ module Browser
     URI.encode_www_form_component(str)
   end
   
-  def self.post(url, arg1, arg2 = nil)
-    if arg2.nil?
-      post_in(url, nil, arg1)
+  def self.post(url, opts)
+    if opts[:json]
+      post_in(url, nil, JSON.stringify(opts[:json]))
+    elsif opts[:body].is_a? Hash
+      post_in(url, nil, URI.encode_www_form(opts[:body]))
     else
-      post_in(url, arg1, arg2)
+      post_in(url, nil, opts[:body])
     end
   end
 end
