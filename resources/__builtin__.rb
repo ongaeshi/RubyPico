@@ -55,9 +55,9 @@ module Browser
   
   def self.post(url, opts)
     if opts[:json]
-      post_in(url, nil, JSON.stringify(opts[:json]))
+      post_in(url, opts[:header], JSON.stringify(opts[:json]))
     elsif opts[:body].is_a? Hash
-      post_in(url, nil, URI.encode_www_form(opts[:body]))
+      post_in(url, opts[:header], URI.encode_www_form(opts[:body]))
     else
       post_in(url, nil, opts[:body])
     end

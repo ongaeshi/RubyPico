@@ -220,12 +220,17 @@ mrb_browser_post_in(mrb_state *mrb, mrb_value self)
     NSURL *nsurl = [NSURL URLWithString:[MrubyUtil str2nstr:mrb value:url]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:nsurl];
     request.HTTPMethod = @"POST";
+
+    // header
+    if (!mrb_nil_p(header)) {
+        mrb_p(mrb, header);
+    }
+
+    // body
     request.HTTPBody = [[MrubyUtil str2nstr:mrb value:body] dataUsingEncoding:NSUTF8StringEncoding];
 
     NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
     return mrb_str_new_cstr(mrb, [result UTF8String]);
 }
 
