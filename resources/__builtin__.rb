@@ -117,7 +117,11 @@ module Kernel
     candidates.each_with_index do |e, index|
       print "#{index+1}: " if opts[:with_no]
       print AttrString.new(e, link: "#{index}")
-      print "\n"
+      if opts[:combine]
+        print ", " if candidates.length-1 != index
+      else
+        print "\n"
+      end
     end
 
     loop do
