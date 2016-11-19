@@ -113,33 +113,3 @@ module Kernel
     input
   end
 end
-
-class TextView
-  def self.call(url)
-    instance.call_in(url)
-  end
-
-  def self.click_link(&block)
-    instance.click_link_in(&block)
-  end
-  
-  def self.instance
-    @singleton ||= TextView.new
-  end
-
-  #---
-
-  def initialize
-    @blocks = []
-  end
-
-  def click_link_in(&block)
-    @blocks << block
-  end
-
-  def call_in(url)
-    @blocks.each do |e|
-      e.call(url)
-    end
-  end
-end
