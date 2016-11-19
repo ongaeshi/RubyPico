@@ -10,7 +10,13 @@
 
 - (id)init
 {
-    self = [super initWithFileDirectory: [FCFileManager pathForDocumentsDirectory]
+    NSString *appDir = [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:@".app"];
+
+    if (![FCFileManager existsItemAtPath:appDir]) {
+        [FCFileManager createDirectoriesForPath:appDir];
+    }
+
+    self = [super initWithFileDirectory: appDir
                                   title: @"App"
                                    edit: false
         ];
