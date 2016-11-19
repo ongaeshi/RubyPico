@@ -299,6 +299,8 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_method(mrb, krn, "clearprint", mrb_clearprint, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "gets", mrb_gets, MRB_ARGS_REQ(1));
         mrb_define_method(mrb, krn, "sleep", mrb_sleep, MRB_ARGS_OPT(1));
+        mrb_define_method(mrb, krn, "clear", mrb_clear, MRB_ARGS_NONE());
+        mrb_define_method(mrb, krn, "clicked_link", mrb_clicked_link, MRB_ARGS_NONE());
     }
 
     {
@@ -329,14 +331,6 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         mrb_define_class_method(mrb , cc, "input", mrb_popup_input, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "msg"  , mrb_popup_msg  , MRB_ARGS_REQ(1));
     }
-
-    {
-        struct RClass *cc = mrb_define_class(mrb, "TextView", mrb->object_class);
-
-        mrb_define_class_method(mrb, cc, "clear", mrb_clear, MRB_ARGS_NONE());
-        mrb_define_class_method(mrb, cc, "clicked_link", mrb_clicked_link, MRB_ARGS_NONE());
-    }
-
 }
 
 void
