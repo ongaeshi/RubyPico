@@ -112,4 +112,17 @@ module Kernel
     puts input
     input
   end
+
+  def choise(candidates)
+    candidates.each_with_index do |e, index|
+      print AttrString.new(e, link: "#{index}") +
+            "\n"
+    end
+
+    loop do
+      no = clicked_link
+      return no.to_i if no
+      sleep 0.1
+    end
+  end
 end
