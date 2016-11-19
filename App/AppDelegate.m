@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "FileViewController.h"
+#import "AppViewController.h"
 #import "SampleViewController.h"
 
 @implementation AppDelegate {
@@ -20,12 +21,17 @@
     _fileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
     UINavigationController *tab1 = [[UINavigationController alloc] initWithRootViewController:_fileViewController];
 
-    UIViewController* view2 = [[SampleViewController alloc] init];
-    UIImage* icon2 = [UIImage imageNamed:@"tabbar_samples.png"];
-    view2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sample" image:icon2 tag:0];
+    UIViewController* view2 = [[AppViewController alloc] init];
+    UIImage* icon2 = [UIImage imageNamed:@"tabbar_app.png"];
+    view2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"App" image:icon2 tag:0];
     UINavigationController *tab2 = [[UINavigationController alloc] initWithRootViewController:view2];
 
-    NSArray* tabs = [NSArray arrayWithObjects:tab1, tab2, nil];
+    UIViewController* view3 = [[SampleViewController alloc] init];
+    UIImage* icon3 = [UIImage imageNamed:@"tabbar_samples.png"];
+    view3.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sample" image:icon3 tag:0];
+    UINavigationController *tab3 = [[UINavigationController alloc] initWithRootViewController:view3];
+
+    NSArray* tabs = [NSArray arrayWithObjects:tab1, tab2, tab3, nil];
     [_tabBarController setViewControllers:tabs animated:NO];
 
     [self.window addSubview:_tabBarController.view];
