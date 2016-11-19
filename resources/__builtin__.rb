@@ -113,10 +113,11 @@ module Kernel
     input
   end
 
-  def choise(candidates)
+  def choise(candidates, opts = {})
     candidates.each_with_index do |e, index|
-      print AttrString.new(e, link: "#{index}") +
-            "\n"
+      print "#{index+1}: " if opts[:with_no]
+      print AttrString.new(e, link: "#{index}")
+      print "\n"
     end
 
     loop do
