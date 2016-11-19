@@ -121,7 +121,7 @@ module Kernel
 
     loop do
       no = clicked_link
-      return no.to_i if no
+      return candidates[no.to_i] if no
       sleep 0.1
     end
   end
