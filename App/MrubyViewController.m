@@ -28,12 +28,12 @@ MrubyViewController *globalMrubyViewController;
     mrb_state* _mrb;
     UITextView* _textView;
     BOOL _isCanceled;
-    BOOL _isFinish;
     NSMutableArray* _receivePicked;
     QBImagePickerController* _imagePicker;
     UITextField* _inputField;
     BOOL _observed;
     NSMutableAttributedString* _text;
+    NSString* _clickedLink;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -44,9 +44,9 @@ MrubyViewController *globalMrubyViewController;
     _scriptPath = scriptPath;
     _mrb = [self initMrb];
     _isCanceled = NO;
-    _isFinish = NO;
     _observed = NO;
     _text = [[NSMutableAttributedString alloc] init];
+    _clickedLink = NULL;
 
     return self;
 }
@@ -125,12 +125,7 @@ MrubyViewController *globalMrubyViewController;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (![parent isEqual:self.parentViewController]) {
-        if (_isFinish) {
-            [self finishMruby];
-        } else {
-            // NSLog(@"Start cancel");
-            _isCanceled = YES;
-        }
+        _isCanceled = YES;
     }
 }
 
@@ -211,18 +206,9 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
 
         mrb_gc_arena_restore(_mrb, arena);
 
-        if (!_isCanceled) {
-            _isFinish = YES;
-        } else {
-            [self finishMruby];
-        }
+        mrb_close(_mrb);
+        _mrb = NULL;
     });
-}
-
-- (void) finishMruby {
-    mrb_close(_mrb);
-    _mrb = NULL;
-    // NSLog(@"Finish mruby");
 }
 
 - (void) appendAttributedString:(NSAttributedString*)attrStr {
@@ -436,19 +422,17 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     return YES;
 }
 
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
-    if (_mrb) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Call function
-            mrb_value cc = mrb_obj_value(mrb_class_get(_mrb, "TextView"));
-            mrb_value url = [MrubyUtil nstr2str:_mrb value:URL.absoluteString];
-            mrb_funcall(_mrb, cc, "call", 1, url);
+- (NSString*)getClickedLink {
+    @synchronized (self) {
+        NSString *str = _clickedLink;
+        _clickedLink = NULL;
+        return str;
+    }
+}
 
-            // Error handling
-            if (_mrb->exc) {
-                rubypico_misc_p(_mrb, mrb_obj_value(_mrb->exc));
-            }
-        });
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    @synchronized (self) {
+        _clickedLink = URL.absoluteString;
     }
     return YES;
 }

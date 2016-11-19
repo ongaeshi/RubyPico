@@ -112,34 +112,22 @@ module Kernel
     puts input
     input
   end
-end
 
-class TextView
-  def self.call(url)
-    instance.call_in(url)
-  end
+  def choise(candidates, opts = {})
+    candidates.each_with_index do |e, index|
+      print "#{index+1}: " if opts[:with_no]
+      print AttrString.new(e, link: "#{index}")
+      if opts[:combine]
+        print ", " if candidates.length-1 != index
+      else
+        print "\n"
+      end
+    end
 
-  def self.click_link(&block)
-    instance.click_link_in(&block)
-  end
-  
-  def self.instance
-    @singleton ||= TextView.new
-  end
-
-  #---
-
-  def initialize
-    @blocks = []
-  end
-
-  def click_link_in(&block)
-    @blocks << block
-  end
-
-  def call_in(url)
-    @blocks.each do |e|
-      e.call(url)
+    loop do
+      no = clicked_link
+      return candidates[no.to_i] if no
+      sleep 0.1
     end
   end
 end
