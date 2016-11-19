@@ -125,6 +125,22 @@ mrb_clear(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_clicked_link(mrb_state *mrb, mrb_value self)
+{
+    __block NSString *str;
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        str = [globalMrubyViewController getClickedLink];
+    });
+
+    if (str) {
+        return mrb_str_new_cstr(mrb, [str UTF8String]);
+    } else {
+        return mrb_nil_value();
+    }
+}
+
+static mrb_value
 mrb_clipboard_get(mrb_state *mrb, mrb_value self)
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -318,6 +334,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
         struct RClass *cc = mrb_define_class(mrb, "TextView", mrb->object_class);
 
         mrb_define_class_method(mrb, cc, "clear", mrb_clear, MRB_ARGS_NONE());
+        mrb_define_class_method(mrb, cc, "clicked_link", mrb_clicked_link, MRB_ARGS_NONE());
     }
 
 }
