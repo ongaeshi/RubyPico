@@ -6,12 +6,11 @@
 
 @implementation SampleViewController
 
-- (id)init
-{
+- (id)init {
     self = [super initWithFileDirectory: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"]
                                   title: @"Sample"
-                                   edit: false
-        ];
+                                   edit: NO
+                              directRun: NO];
     return self;
 }
 

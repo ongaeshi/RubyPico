@@ -22,7 +22,8 @@
 
     self = [super initWithFileDirectory: _appDir
                                   title: @"App"
-                                   edit: false];
+                                   edit: NO
+                               directRun: YES];
     return self;
 }
 
