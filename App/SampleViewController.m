@@ -9,8 +9,7 @@
 - (id)init {
     self = [super initWithFileDirectory: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"]
                                   title: @"Sample"
-                                   edit: NO
-                              directRun: NO];
+                                   edit: NO];
     return self;
 }
 

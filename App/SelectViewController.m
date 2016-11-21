@@ -39,6 +39,13 @@ enum SortKind {
     return self;
 }
 
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable {
+    return [self initWithFileDirectory:directory
+                                 title:title
+                                  edit:editable
+                             directRun:NO];
+}
+
 - (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable directRun:(BOOL)isDirecRun {
     self = [super init];
     _fileDirectory = directory;
@@ -517,8 +524,7 @@ enum SortKind {
     if ([FCFileManager isDirectoryItemAtPath: path]) {
         viewController = [[SelectViewController alloc] initWithFileDirectory:path
                                                                        title:tableCellName
-                                                                        edit:YES
-                                                                   directRun:NO];
+                                                                        edit:YES];
     } else {
         if (_isDirectRun) {
             viewController = [[MrubyViewController alloc] initWithScriptPath:path];

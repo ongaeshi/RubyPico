@@ -11,8 +11,7 @@
 - (id)init {
     self = [super initWithFileDirectory: [FCFileManager pathForDocumentsDirectory]
                                   title: @"File"
-                                   edit: YES
-                               directRun: NO];
+                                   edit: YES];
     return self;
 }
 
