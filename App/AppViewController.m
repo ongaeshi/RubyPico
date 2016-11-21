@@ -14,19 +14,10 @@
     _appDir = [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:@".app"];
 
     if (![FCFileManager existsItemAtPath:_appDir]) {
-        // Create directories
         [FCFileManager createDirectoriesForPath:_appDir];
 
-        NSString *sampleDir = [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:@".sample"];
-        [FCFileManager createDirectoriesForPath:sampleDir];
-
-        // Copy sample to Documents/.sample
-        NSString *resourceSampleDir = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"];
-        [FCFileManager copyItemAtPath:[resourceSampleDir stringByAppendingPathComponent:@"irb.rb"]
-                               toPath:[sampleDir stringByAppendingPathComponent:@"irb.rb"]];
-
-        // Link default tools
-        [self createLinkAtPath:[sampleDir stringByAppendingPathComponent:@"irb.rb"]];
+        // Add sample app
+        [self createApp:[_appDir stringByAppendingPathComponent:@"irb"] requirePath:@"sample/irb"];
     }
 
     self = [super initWithFileDirectory: _appDir
@@ -35,13 +26,9 @@
     return self;
 }
 
-- (void)createLinkAtPath:(NSString*)destPath {
-    NSString *name = [[destPath lastPathComponent] stringByDeletingPathExtension];
-    NSString *path = [_appDir stringByAppendingPathComponent:name];
-
-    [[NSFileManager defaultManager] createSymbolicLinkAtPath:path
-                                         withDestinationPath:destPath
-                                                       error:nil];
+- (void)createApp:(NSString*)path requirePath:(NSString*)requirePath {
+    [FCFileManager createFileAtPath:path
+                        withContent:[NSString stringWithFormat:@"require \"%@\"\n", requirePath]];
 }
 
 @end
