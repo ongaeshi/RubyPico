@@ -516,6 +516,7 @@ enum SortKind {
         viewController = [[SelectViewController alloc] initWithFileDirectory:path title:tableCellName edit:true];
     } else {
         viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
+        // viewController = [[MrubyViewController alloc] initWithScriptPath:path];
         viewController.hidesBottomBarWhenPushed = YES;
     }
 

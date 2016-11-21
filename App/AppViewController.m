@@ -7,17 +7,25 @@
 @end
 
 @implementation AppViewController {
-    NSString* _appDir;
+    NSString *_appDir;
 }
 
 - (id)init {
     _appDir = [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:@".app"];
 
     if (![FCFileManager existsItemAtPath:_appDir]) {
+        // Create directories
         [FCFileManager createDirectoriesForPath:_appDir];
-        
+
+        NSString *sampleDir = [[FCFileManager pathForDocumentsDirectory] stringByAppendingPathComponent:@".sample"];
+        [FCFileManager createDirectoriesForPath:sampleDir];
+
+        // Copy sample to Documents/.sample
+        NSString *resourceSampleDir = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"];
+        [FCFileManager copyItemAtPath:[resourceSampleDir stringByAppendingPathComponent:@"irb.rb"]
+                               toPath:[sampleDir stringByAppendingPathComponent:@"irb.rb"]];
+
         // Link default tools
-        NSString *sampleDir = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"];
         [self createLinkAtPath:[sampleDir stringByAppendingPathComponent:@"irb.rb"]];
     }
 
