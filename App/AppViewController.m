@@ -20,10 +20,11 @@
         [self createApp:[_appDir stringByAppendingPathComponent:@"irb"] requirePath:@"sample/irb"];
     }
 
-    self = [super initWithFileDirectory: _appDir
-                                  title: @"App"
-                                   edit: NO
-                               directRun: YES];
+    self = [super initWithFileDirectory:_appDir
+                                  title:@"App"
+                                   edit:NO
+                              directRun:YES
+                                 runDir:[FCFileManager pathForDocumentsDirectory]];
     return self;
 }
 
