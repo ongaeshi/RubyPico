@@ -9,6 +9,7 @@ enum AlertKind {
     NewDirectory,
     Rename,
     Move,
+    Copy,
 };
 
 enum ActionKind {
@@ -144,6 +145,10 @@ enum SortKind {
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapMoveButton)];
+        UIBarButtonItem* copyButton = [[UIBarButtonItem alloc] initWithTitle:@"Copy"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapCopyButton)];
         UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithTitle:@"Rename"
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
@@ -152,7 +157,7 @@ enum SortKind {
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapSortButton)];
-        self.toolbarItems = @[deleteButton, moveButton, renameButton, sortButton];
+        self.toolbarItems = @[deleteButton, moveButton, copyButton, renameButton, sortButton];
 
         [self.tableView setEditing:YES animated:YES];
 
@@ -272,6 +277,14 @@ enum SortKind {
     }
 }
 
+- (void)tapCopyButton {
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+
+    if (indexPaths.count > 0) {
+        [self alert:Copy title:@"Copy to: (e.g. lib, ../)" textField:nil];
+    }
+}
+
 - (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
@@ -318,6 +331,9 @@ enum SortKind {
             break;
         case Move:
             [self move:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case Copy:
+            [self copy:alertView clickedButtonAtIndex:buttonIndex];
             break;
     }
 }
@@ -485,6 +501,9 @@ enum SortKind {
                                   withRowAnimation:UITableViewRowAnimationFade];
         }
     }
+}
+
+- (void)copy:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
