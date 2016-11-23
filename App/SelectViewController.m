@@ -539,10 +539,10 @@ enum SortKind {
         }
 
         // Copy
-        BOOL ret = [FCFileManager copyItemAtPath:srcPath toPath:dstPath];
+        [FCFileManager copyItemAtPath:srcPath toPath:dstPath];
 
         // Add a table cell if same directory
-        if ([dstDir isEqualToString:@"."] || [dstDir isEqualToString:@"./"]) {
+        if ([text isEqualToString:@"."] || [text isEqualToString:@"./"]) {
             // Update data source
             _dataSource = [self updateDataSourceFromFiles];
 
