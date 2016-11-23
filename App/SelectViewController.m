@@ -9,6 +9,7 @@ enum AlertKind {
     NewDirectory,
     Rename,
     Move,
+    Copy,
 };
 
 enum ActionKind {
@@ -144,6 +145,10 @@ enum SortKind {
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapMoveButton)];
+        UIBarButtonItem* copyButton = [[UIBarButtonItem alloc] initWithTitle:@"Copy"
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self
+                                                                        action:@selector(tapCopyButton)];
         UIBarButtonItem* renameButton = [[UIBarButtonItem alloc] initWithTitle:@"Rename"
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
@@ -152,7 +157,7 @@ enum SortKind {
                                                                          style:UIBarButtonItemStyleBordered
                                                                         target:self
                                                                         action:@selector(tapSortButton)];
-        self.toolbarItems = @[deleteButton, moveButton, renameButton, sortButton];
+        self.toolbarItems = @[deleteButton, moveButton, copyButton, renameButton, sortButton];
 
         [self.tableView setEditing:YES animated:YES];
 
@@ -272,6 +277,14 @@ enum SortKind {
     }
 }
 
+- (void)tapCopyButton {
+    NSArray *indexPaths = [self.tableView indexPathsForSelectedRows];
+
+    if (indexPaths.count > 0) {
+        [self alert:Copy title:@"Copy to: (e.g. lib, ../)" textField:nil];
+    }
+}
+
 - (NSString*)normalizeScriptName:(NSString*)name {
     // Remove a extension and Add the ".rb" extension.
     return [[name stringByDeletingPathExtension] stringByAppendingPathExtension:@"rb"];
@@ -318,6 +331,9 @@ enum SortKind {
             break;
         case Move:
             [self move:alertView clickedButtonAtIndex:buttonIndex];
+            break;
+        case Copy:
+            [self copy:alertView clickedButtonAtIndex:buttonIndex];
             break;
     }
 }
@@ -483,6 +499,58 @@ enum SortKind {
             // Table Row
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                   withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }
+}
+
+- (void)copy:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        return;
+    }
+
+    NSString *text = [[alertView textFieldAtIndex:0] text];
+    if ([text isEqualToString:@""]) {
+        return;
+    }
+    NSString *dstDir = [_fileDirectory stringByAppendingPathComponent:text];
+
+    // Exists directory?
+    if (![FCFileManager existsItemAtPath: dstDir]) {
+        UIAlertView* alert = [[UIAlertView alloc] init];
+        alert.title = @"Directory not found";
+        [alert addButtonWithTitle:@"OK"];
+        [alert show];
+        return;
+    }
+
+    NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
+                                          sortedArrayUsingSelector:@selector(compare:)]
+                                     reverseObjectEnumerator] allObjects];
+
+    // Copy files
+    for (NSIndexPath *indexPath in sortedIndexPaths) {
+        NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        NSString *srcPath = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+        NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
+
+        // Rename if already exists
+        while ([FCFileManager existsItemAtPath: dstPath]) {
+            dstPath = [NSString stringWithFormat:@"%@ copy", dstPath];
+        }
+
+        // Copy
+        [FCFileManager copyItemAtPath:srcPath toPath:dstPath];
+
+        // Add a table cell if same directory
+        if ([text isEqualToString:@"."] || [text isEqualToString:@"./"]) {
+            // Update data source
+            _dataSource = [self updateDataSourceFromFiles];
+
+            // Insert table view
+            NSUInteger newIndex[] = {0, indexPath.row + 1}; // section, row
+            NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
+                                  withRowAnimation:UITableViewRowAnimationTop];
         }
     }
 }
