@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520EAB781DE0443E00993BF0 /* tabbar_app.png in Resources */ = {isa = PBXBuildFile; fileRef = 520EAB771DE0443E00993BF0 /* tabbar_app.png */; };
+		520EAB7B1DE04D9E00993BF0 /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520EAB7A1DE04D9E00993BF0 /* AppViewController.m */; };
 		5210B3B91DC5E0B400214C09 /* directory.png in Resources */ = {isa = PBXBuildFile; fileRef = 5210B3B71DC5E0B400214C09 /* directory.png */; };
 		5210B3BA1DC5E0B400214C09 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 5210B3B81DC5E0B400214C09 /* file.png */; };
 		52355C6F1BCC00AE00BE8331 /* QBImagePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */; };
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		520EAB771DE0443E00993BF0 /* tabbar_app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_app.png; sourceTree = "<group>"; };
+		520EAB791DE04D9E00993BF0 /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
+		520EAB7A1DE04D9E00993BF0 /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
 		5210B3B71DC5E0B400214C09 /* directory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directory.png; sourceTree = "<group>"; };
 		5210B3B81DC5E0B400214C09 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		52355C6E1BCC00AE00BE8331 /* QBImagePicker.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = QBImagePicker.storyboard; path = ../Pods/QBImagePickerController/QBImagePicker/QBImagePicker.storyboard; sourceTree = "<group>"; };
@@ -144,6 +149,7 @@
 		52731C5F1B371FC500E2CC2A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				520EAB771DE0443E00993BF0 /* tabbar_app.png */,
 				5210B3B71DC5E0B400214C09 /* directory.png */,
 				5210B3B81DC5E0B400214C09 /* file.png */,
 				52C018571C94075E0046CCF8 /* chat_ruby.png */,
@@ -205,6 +211,8 @@
 				5280A9F81D16C66A008D638A /* mrb_misc.m */,
 				52903ABC1D870C2900540A20 /* MrubyUtil.h */,
 				52903ABD1D870C2900540A20 /* MrubyUtil.m */,
+				520EAB791DE04D9E00993BF0 /* AppViewController.h */,
+				520EAB7A1DE04D9E00993BF0 /* AppViewController.m */,
 				5280A9F41D1691D0008D638A /* MrubyViewController.h */,
 				5280A9F51D1691D0008D638A /* MrubyViewController.m */,
 				52BF5C381CD641B50035968E /* AppDelegate.h */,
@@ -322,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5210B3B91DC5E0B400214C09 /* directory.png in Resources */,
+				520EAB781DE0443E00993BF0 /* tabbar_app.png in Resources */,
 				5271AE791D5C45BC000D50A4 /* image_util.rb in Resources */,
 				52C0185A1C94075E0046CCF8 /* chat_you.png in Resources */,
 				52731C6D1B37224300E2CC2A /* sample in Resources */,
@@ -404,6 +413,7 @@
 				52903ABB1D85CE9E00540A20 /* mrb_attr_string.m in Sources */,
 				52BF5C5C1CD641B60035968E /* SampleViewController.m in Sources */,
 				5280A9F61D1691D0008D638A /* MrubyViewController.m in Sources */,
+				520EAB7B1DE04D9E00993BF0 /* AppViewController.m in Sources */,
 				52BF5C5E1CD641B60035968E /* SelectViewController.m in Sources */,
 				52BF5C561CD641B60035968E /* FileViewController.m in Sources */,
 				52BF5C5A1CD641B60035968E /* main.m in Sources */,

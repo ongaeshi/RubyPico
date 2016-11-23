@@ -8,12 +8,10 @@
 
 @implementation FileViewController
 
-- (id)init
-{
+- (id)init {
     self = [super initWithFileDirectory: [FCFileManager pathForDocumentsDirectory]
                                   title: @"File"
-                                   edit: true
-        ];
+                                   edit: YES];
     return self;
 }
 

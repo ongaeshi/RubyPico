@@ -26,6 +26,8 @@ enum SortKind {
     NSString* _fileDirectory;
     NSString* _title;
     BOOL _editable;
+    BOOL _isDirectRun;
+    NSString *_runDir;
     UIBarButtonItem* _editButton;
     enum AlertKind _alertKind;
     NSString* _renameSrc;
@@ -39,10 +41,21 @@ enum SortKind {
 }
 
 - (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable {
+    return [self initWithFileDirectory:directory
+                                 title:title
+                                  edit:editable
+                             directRun:NO
+                                runDir:nil];
+}
+
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable directRun:(BOOL)isDirecRun runDir:(NSString*)runDir {
     self = [super init];
     _fileDirectory = directory;
     _title = title;
     _editable = editable;
+    _isDirectRun = isDirecRun;
+    _runDir = runDir;
+    NSAssert(_runDir == nil || _isDirectRun, @"Support runDir with only isDirecRun");
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     _sortKind = SortByDate;
     return self;
@@ -513,9 +526,16 @@ enum SortKind {
     UIViewController* viewController;
 
     if ([FCFileManager isDirectoryItemAtPath: path]) {
-        viewController = [[SelectViewController alloc] initWithFileDirectory:path title:tableCellName edit:true];
+        viewController = [[SelectViewController alloc] initWithFileDirectory:path
+                                                                       title:tableCellName
+                                                                        edit:YES];
     } else {
-        viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
+        if (_isDirectRun) {
+            viewController = [[MrubyViewController alloc] initWithScriptPath:path
+                                                                      runDir:_runDir];
+        } else {
+            viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
+        }
         viewController.hidesBottomBarWhenPushed = YES;
     }
 
