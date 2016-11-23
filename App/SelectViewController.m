@@ -504,6 +504,40 @@ enum SortKind {
 }
 
 - (void)copy:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        return;
+    }
+
+    NSString *text = [[alertView textFieldAtIndex:0] text];
+    if ([text isEqualToString:@""]) {
+        return;
+    }
+    NSString *dstDir = [_fileDirectory stringByAppendingPathComponent:text];
+
+    // Exists directory?
+    if (![FCFileManager existsItemAtPath: dstDir]) {
+        UIAlertView* alert = [[UIAlertView alloc] init];
+        alert.title = @"Directory not found";
+        [alert addButtonWithTitle:@"OK"];
+        [alert show];
+        return;
+    }
+
+    NSArray *sortedIndexPaths = [[[[self.tableView indexPathsForSelectedRows]
+                                          sortedArrayUsingSelector:@selector(compare:)]
+                                     reverseObjectEnumerator] allObjects];
+
+    // Copy files
+    for (NSIndexPath *indexPath in sortedIndexPaths) {
+        NSString *tableCellName = [_dataSource objectAtIndex:indexPath.row];
+        NSString *srcPath = [_fileDirectory stringByAppendingPathComponent:tableCellName];
+        NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
+
+        // TODO: Rename if already exists
+
+        // Copy
+        BOOL ret = [FCFileManager copyItemAtPath:srcPath toPath:dstPath];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
