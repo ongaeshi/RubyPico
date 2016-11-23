@@ -540,6 +540,18 @@ enum SortKind {
 
         // Copy
         BOOL ret = [FCFileManager copyItemAtPath:srcPath toPath:dstPath];
+
+        // Add a table cell if same directory
+        if ([dstDir isEqualToString:@"."] || [dstDir isEqualToString:@"./"]) {
+            // Update data source
+            _dataSource = [self updateDataSourceFromFiles];
+
+            // Insert table view
+            NSUInteger newIndex[] = {0, indexPath.row + 1}; // section, row
+            NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
+                                  withRowAnimation:UITableViewRowAnimationTop];
+        }
     }
 }
 
