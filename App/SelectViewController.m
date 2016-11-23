@@ -55,7 +55,7 @@ enum SortKind {
     _editable = editable;
     _isDirectRun = isDirecRun;
     _runDir = runDir;
-    NSAssert(_runDir && _isDirectRun, @"Support runDir with only isDirecRun");
+    NSAssert(_runDir == nil || _isDirectRun, @"Support runDir with only isDirecRun");
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     _sortKind = SortByDate;
     return self;
