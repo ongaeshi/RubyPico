@@ -533,7 +533,10 @@ enum SortKind {
         NSString *srcPath = [_fileDirectory stringByAppendingPathComponent:tableCellName];
         NSString *dstPath = [dstDir stringByAppendingPathComponent:tableCellName];
 
-        // TODO: Rename if already exists
+        // Rename if already exists
+        while ([FCFileManager existsItemAtPath: dstPath]) {
+            dstPath = [NSString stringWithFormat:@"%@ copy", dstPath];
+        }
 
         // Copy
         BOOL ret = [FCFileManager copyItemAtPath:srcPath toPath:dstPath];
