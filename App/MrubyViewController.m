@@ -25,6 +25,7 @@ MrubyViewController *globalMrubyViewController;
 
 @implementation MrubyViewController {
     NSString* _scriptPath;
+    NSString* _runDir;
     mrb_state* _mrb;
     UITextView* _textView;
     BOOL _isCanceled;
@@ -37,11 +38,16 @@ MrubyViewController *globalMrubyViewController;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
+    return [self initWithScriptPath:scriptPath runDir:nil];
+}
+
+- (id)initWithScriptPath:(NSString*)scriptPath runDir:(NSString*)runDir {
     self = [super init];
 
     globalMrubyViewController = self;
 
     _scriptPath = scriptPath;
+    _runDir = runDir;
     _mrb = [self initMrb];
     _isCanceled = NO;
     _observed = NO;
@@ -183,12 +189,17 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
             mrb_gv_set(_mrb, mrb_intern(_mrb, "$0", 2), mrb_str_new_cstr(_mrb, fileName));
 
             // Change current directory
-            const char* scriptDir = dirname(scriptPath);
-            if (scriptDir == NULL ||
-                strcmp(scriptDir, [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"] UTF8String]) == 0) {
-                chdir([[FCFileManager pathForDocumentsDirectory] UTF8String]);
+            if (_runDir) {
+                chdir([_runDir UTF8String]);
             } else {
-                chdir(scriptDir);
+                const char* scriptDir = dirname(scriptPath);
+
+                if (scriptDir == NULL ||
+                    strcmp(scriptDir, [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample"] UTF8String]) == 0) {
+                    chdir([[FCFileManager pathForDocumentsDirectory] UTF8String]);
+                } else {
+                    chdir(scriptDir);
+                }
             }
 
             // Run Top Level

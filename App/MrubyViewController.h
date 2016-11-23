@@ -9,6 +9,7 @@
     UIViewController<UINavigationControllerDelegate, QBImagePickerControllerDelegate, UITextViewDelegate>
 
 - (id)initWithScriptPath:(NSString*)scriptPath;
+- (id)initWithScriptPath:(NSString*)scriptPath runDir:(NSString*)runDir;
 - (void)printstr:(NSString*)str;
 - (void)printAttrString:(NSMutableAttributedString*)str;
 - (void)printimage:(UIImage*)image;

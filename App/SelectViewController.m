@@ -27,6 +27,7 @@ enum SortKind {
     NSString* _title;
     BOOL _editable;
     BOOL _isDirectRun;
+    NSString *_runDir;
     UIBarButtonItem* _editButton;
     enum AlertKind _alertKind;
     NSString* _renameSrc;
@@ -43,15 +44,18 @@ enum SortKind {
     return [self initWithFileDirectory:directory
                                  title:title
                                   edit:editable
-                             directRun:NO];
+                             directRun:NO
+                                runDir:nil];
 }
 
-- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable directRun:(BOOL)isDirecRun {
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable directRun:(BOOL)isDirecRun runDir:(NSString*)runDir {
     self = [super init];
     _fileDirectory = directory;
     _title = title;
     _editable = editable;
     _isDirectRun = isDirecRun;
+    _runDir = runDir;
+    NSAssert(_runDir && _isDirectRun, @"Support runDir with only isDirecRun");
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     _sortKind = SortByDate;
     return self;
@@ -527,7 +531,8 @@ enum SortKind {
                                                                         edit:YES];
     } else {
         if (_isDirectRun) {
-            viewController = [[MrubyViewController alloc] initWithScriptPath:path];
+            viewController = [[MrubyViewController alloc] initWithScriptPath:path
+                                                                      runDir:_runDir];
         } else {
             viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
         }
