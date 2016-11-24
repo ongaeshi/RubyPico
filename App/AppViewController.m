@@ -18,6 +18,7 @@
 
         // Add sample app
         [self createApp:[_appDir stringByAppendingPathComponent:@"irb"] requirePath:@"sample/irb"];
+        [self createApp:[_appDir stringByAppendingPathComponent:@"lineno"] requirePath:@"sample/lineno"];
     }
 
     self = [super initWithFileDirectory:_appDir
