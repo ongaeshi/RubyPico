@@ -1,5 +1,17 @@
 # HISTORY - RubyPico
 
+### 0.9.2 - 2016-11-24
+
+- Add app tab
+  - Register your application
+  - Add sample/irb
+  - Add sample/lineno
+- Add Copy button
+- Add library
+  - Browser.post
+  - Kernel#clicked_link
+  - Kernel#choise
+
 ### 0.9.1 - 2016-11-03
 
 - Improve File Manager
