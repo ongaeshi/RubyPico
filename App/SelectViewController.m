@@ -368,9 +368,10 @@ enum SortKind {
 
         // Create a new file
         [FCFileManager createFileAtPath:path
-                            withContent:@"puts \"Hello, RubyPico!\"\n"
-                                         "puts \"http://rubypico.ongaeshi.me\"\n"
-                                         "puts Image.load(\"chat_ruby.png\")\n"
+                            withContent:@""
+                            // withContent:@"puts \"Hello, RubyPico!\"\n"
+                            //              "puts \"http://rubypico.ongaeshi.me\"\n"
+                            //              "puts Image.load(\"chat_ruby.png\")\n"
             ];
 
         // Update data source
