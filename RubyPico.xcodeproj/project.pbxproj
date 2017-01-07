@@ -24,6 +24,7 @@
 		52903ABB1D85CE9E00540A20 /* mrb_attr_string.m in Sources */ = {isa = PBXBuildFile; fileRef = 52903ABA1D85CE9E00540A20 /* mrb_attr_string.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		52903ABE1D870C2900540A20 /* MrubyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 52903ABD1D870C2900540A20 /* MrubyUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5294CC251B3469C10044D56D /* PictRubyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294CC241B3469C10044D56D /* PictRubyTests.m */; };
+		52B2E8D71E20AF6A0026D9DB /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B2E8D61E20AF6A0026D9DB /* ImageViewController.m */; };
 		52BF5C511CD641B60035968E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C391CD641B50035968E /* AppDelegate.m */; };
 		52BF5C551CD641B60035968E /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C411CD641B50035968E /* EditViewController.m */; };
 		52BF5C561CD641B60035968E /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BF5C431CD641B50035968E /* FileViewController.m */; };
@@ -77,6 +78,8 @@
 		5294CC1E1B3469C10044D56D /* RubyPico.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RubyPico.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5294CC231B3469C10044D56D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5294CC241B3469C10044D56D /* PictRubyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictRubyTests.m; sourceTree = "<group>"; };
+		52B2E8D51E20AF6A0026D9DB /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		52B2E8D61E20AF6A0026D9DB /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		52BF5C381CD641B50035968E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		52BF5C391CD641B50035968E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		52BF5C401CD641B50035968E /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				5280A9F81D16C66A008D638A /* mrb_misc.m */,
 				52903ABC1D870C2900540A20 /* MrubyUtil.h */,
 				52903ABD1D870C2900540A20 /* MrubyUtil.m */,
+				52B2E8D51E20AF6A0026D9DB /* ImageViewController.h */,
+				52B2E8D61E20AF6A0026D9DB /* ImageViewController.m */,
 				520EAB791DE04D9E00993BF0 /* AppViewController.h */,
 				520EAB7A1DE04D9E00993BF0 /* AppViewController.m */,
 				5280A9F41D1691D0008D638A /* MrubyViewController.h */,
@@ -409,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B2E8D71E20AF6A0026D9DB /* ImageViewController.m in Sources */,
 				52BF5C571CD641B60035968E /* HelpViewController.m in Sources */,
 				52903ABB1D85CE9E00540A20 /* mrb_attr_string.m in Sources */,
 				52BF5C5C1CD641B60035968E /* SampleViewController.m in Sources */,

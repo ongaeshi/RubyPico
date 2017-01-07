@@ -4,6 +4,7 @@
 
 #import "mrb_image.h"
 
+#import "MrubyUtil.h"
 #import "MrubyViewController.h"
 #import "mruby.h"
 #import "mruby/array.h"
@@ -65,7 +66,11 @@ mrb_rubypico_image_load(mrb_state *mrb, mrb_value self)
     UIImage* image;
 
     if (!match) {
-        image = [[UIImage imageNamed:npath] retain];
+        image = [[UIImage imageWithContentsOfFile:npath] retain];
+
+        if (!image) {
+            image = [[UIImage imageNamed:npath] retain];
+        }
     } else {
         NSURL *url = [NSURL URLWithString:npath];
         NSData *data = [NSData dataWithContentsOfURL:url];
@@ -360,6 +365,20 @@ mrb_rubypico_image_save(mrb_state *mrb, mrb_value self)
 }
 
 static mrb_value
+mrb_rubypico_image_save_to(mrb_state *mrb, mrb_value self)
+{
+    UIImage* image = mrb_rubypico_image_to_obj(self);
+
+    mrb_value path;
+    mrb_get_args(mrb, "S", &path);
+    NSString *npath = [[MrubyUtil str2nstr:mrb value:path] autorelease];
+
+    [image saveToPath:npath];
+
+    return self;
+}
+
+static mrb_value
 mrb_rubypico_image_draw(mrb_state *mrb, mrb_value self)
 {
     UIImage* image = mrb_rubypico_image_to_obj(self);
@@ -403,7 +422,8 @@ mrb_rubypico_image_init(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "reflection",        mrb_rubypico_image_reflection,         MRB_ARGS_REQ(2));
 
     mrb_define_method(mrb, cc,        "save",              mrb_rubypico_image_save,               MRB_ARGS_NONE());
-        
+    mrb_define_method(mrb, cc,        "save_to",           mrb_rubypico_image_save_to,            MRB_ARGS_REQ(1));
+
     mrb_define_method(mrb, cc,        "draw",               mrb_rubypico_image_draw,               MRB_ARGS_REQ(4));
 }
 
