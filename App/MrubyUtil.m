@@ -24,7 +24,7 @@
 }
 
 + (mrb_value) hashGet:(mrb_state*)mrb hash:(mrb_value)hash key:(const char*)key {
-    mrb_value sym = mrb_symbol_value(mrb_intern_cstr(mrb, "link")); 
+    mrb_value sym = mrb_symbol_value(mrb_intern_cstr(mrb, key)); 
     return mrb_hash_get(mrb, hash, sym);
 }
 

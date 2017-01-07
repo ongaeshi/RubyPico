@@ -131,3 +131,13 @@ module Kernel
     end
   end
 end
+
+class Dir
+  def self.home
+    File.expand_path("~")
+  end
+
+  def self.documents
+    File.join(home, "Documents")
+  end
+end

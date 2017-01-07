@@ -213,18 +213,31 @@ mrb_browser_open_q(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_browser_get(mrb_state *mrb, mrb_value self)
 {
-    mrb_value str;
-    mrb_get_args(mrb, "S", &str);
+    mrb_value url;
+    mrb_value opt = mrb_nil_value();
+    mrb_get_args(mrb, "S|o", &url, &opt);
+   
+    mrb_value header = mrb_nil_value();
+    if (mrb_hash_p(opt)) {
+        header = [MrubyUtil hashGet:mrb hash:opt key:"header"];
+    }
 
-    const char* cstr = mrb_string_value_ptr(mrb, str);
-    NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
+    NSURL *nsurl = [NSURL URLWithString:[MrubyUtil str2nstr:mrb value:url]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:nsurl];
 
-    NSURL* url = [NSURL URLWithString:nstr];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    // header
+    if (!mrb_nil_p(header)) {
+        mrb_value keys = mrb_hash_keys(mrb, header);
+        for (int i = 0; i < RARRAY_LEN(keys); ++i) {
+            mrb_value key = RARRAY_PTR(keys)[i];
+            mrb_value value = mrb_hash_get(mrb, header, key);
+            [request addValue: [MrubyUtil str2nstr:mrb value:value]
+                     forHTTPHeaderField:[MrubyUtil str2nstr:mrb value:key]];
+        }
+    }
+
     NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
     return mrb_str_new_cstr(mrb, [result UTF8String]);
 }
 
@@ -321,7 +334,7 @@ mrb_rubypico_misc_init(mrb_state* mrb)
 
         mrb_define_class_method(mrb , cc, "open", mrb_browser_open, MRB_ARGS_REQ(1));
         mrb_define_class_method(mrb , cc, "open?", mrb_browser_open_q, MRB_ARGS_REQ(1));
-        mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_REQ(1));
+        mrb_define_class_method(mrb , cc, "get", mrb_browser_get, MRB_ARGS_ARG(1,1));
         mrb_define_class_method(mrb , cc, "post_in", mrb_browser_post_in, MRB_ARGS_REQ(3));
     }
 
