@@ -13,18 +13,23 @@ def reload
   puts "----"
 end
 
-TextView.click_link do |url|
+# ---
+reload
+
+loop do
+  url = clicked_link
+
+  next if url.nil?
+
   case url
   when "clear"
-    TextView.clear
+    clear
     reload
   else
     puts url
   end
-end
 
-TextView.click_link do |url|
   puts "Hi!, #{url}" if url == "bar"
-end
 
-reload
+  sleep 0.1
+end
