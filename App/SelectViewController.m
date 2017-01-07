@@ -2,6 +2,7 @@
 
 #import "EditViewController.h"
 #import "FCFileManager.h"
+#import "ImageViewController.h"
 #import "MrubyViewController.h"
 
 enum AlertKind {
@@ -603,7 +604,15 @@ enum SortKind {
             viewController = [[MrubyViewController alloc] initWithScriptPath:path
                                                                       runDir:_runDir];
         } else {
-            viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
+            NSString *suffix = [path pathExtension];
+
+            if ([suffix isEqualToString:@"jpg"] ||
+                [suffix isEqualToString:@"png"] ||
+                [suffix isEqualToString:@"gif"]) {
+                viewController = [[ImageViewController alloc] initWithFileName:path];
+            } else {
+                viewController = [[EditViewController alloc] initWithFileName:path edit:_editable];
+            }
         }
         viewController.hidesBottomBarWhenPushed = YES;
     }
