@@ -1,5 +1,16 @@
 # HISTORY - RubyPico
 
+### 0.9.3 - 2017-01-08
+
+- Add library
+  - Dir.home, Dir.documents
+  - Browser.get(url, header: xxx)
+    - Enable header param
+  - Image.load loads local file
+  - Image.save_to(path)
+  - Base64.encode, decode
+- Fix sample/click_link
+
 ### 0.9.2 - 2016-11-24
 
 - Add app tab
