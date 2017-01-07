@@ -65,7 +65,11 @@ mrb_rubypico_image_load(mrb_state *mrb, mrb_value self)
     UIImage* image;
 
     if (!match) {
-        image = [[UIImage imageNamed:npath] retain];
+        image = [[UIImage imageWithContentsOfFile:npath] retain];
+
+        if (!image) {
+            image = [[UIImage imageNamed:npath] retain];
+        }
     } else {
         NSURL *url = [NSURL URLWithString:npath];
         NSData *data = [NSData dataWithContentsOfURL:url];
