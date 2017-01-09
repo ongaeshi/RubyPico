@@ -5,42 +5,38 @@ lang: en
 ---
 # RubyPico
 
+Ruby Programming Environment in iOS. 
+
 ![rubypico_icon](/images/rubypico_icon.png)
-
-Ruby Programming Environment in iOS. File Viewer, Editor and Execution Environment included.
-
-- Automate the task
-- Launch application
-- Web API
-- Calculation
-- Image filter
-- URL Scheme (rubypico://a_script_name)
-
-## Installation
+![rubypico_ss](/images/rubypico_ss.png)
 
 <a href="https://geo.itunes.apple.com/us/app/rubypico/id1042498865?mt=8" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:165px;height:40px;"></a>
 
-Sample code is [here](https://github.com/ongaeshi/RubyPicoGems).
+- Integrated development environment
+  - Includes file viewer, editor, execution environment. You can develop and learn Ruby program with only smartphone.
+- Operate iOS from Ruby
+  - Read and write camera roll images, start other applications, etc.
+- Standard library
+  - Math, File, IO, Image filter, JSON and base64 are bundled.
+- Web API
+   - GET, POST method can be sent with header information.
+- Bluetooth keyboard
+   - You can also enter code directly using the physical keyboard.
 
-## Screenshot
+## Installation
+<a href="https://geo.itunes.apple.com/us/app/rubypico/id1042498865?mt=8" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:165px;height:40px;"></a>
 
-### File Select
-![rubypico_01](/images/rubypico_ss_01.jpg)
+You can download from AppStore.
 
-### Editor
-![rubypico_02](/images/rubypico_ss_02.jpg)
+## Library
+- [RubyPicoGems](https://github.com/ongaeshi/RubyPicoGems)
 
-### Popup
-![rubypico_03](/images/rubypico_ss_03.jpg)
+## Manual
+- [mruby API docs](http://mruby.org/docs/api)
 
-### Output text
-![rubypico_04](/images/rubypico_ss_04.jpg)
-
-### Output image
-![rubypico_05](/images/rubypico_ss_05.jpg)
-
-## Link
-
-- [GitHub](https://github.com/ongaeshi/RubyPico)
-- [Gems](https://github.com/ongaeshi/RubyPicoGems)
+## Resource
+- [開発ブログ](http://ongaeshi.hatenablog.com/archive/category/rubypico)
+- [Twitter](https://twitter.com/ongaeshi)
+- [ongaeshi/RubyPico](https://github.com/ongaeshi/RubyPico)
+- [ongaeshi/ios-ruby-embedded](https://github.com/ongaeshi/ios-ruby-embedded)
 

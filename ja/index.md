@@ -8,7 +8,7 @@ lang: ja
 小さな端末でも楽しくプログラミングできるRuby開発環境です。
 
 ![rubypico_icon](/images/rubypico_icon.png)
-![rubypico_03](/images/rubypico_ss.png)
+![rubypico_ss](/images/rubypico_ss.png)
 
 <a href="https://geo.itunes.apple.com/us/app/rubypico/id1042498865?mt=8" style="display:inline-block;overflow:hidden;background:url(http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg) no-repeat;width:165px;height:40px;"></a>
 
@@ -17,10 +17,10 @@ lang: ja
 - iOSをRubyから操作
   - カメラロール画像の読み書き、他のアプリを起動などができます。
 - 標準ライブラリ
-  - 数値計算、ファイルの読み書き、画像フィルタ、json、base64エンコーディングなど豊富なライブラリが同梱されています。
+  - 数値計算、ファイルの読み書き、画像フィルタ、JSON、base64エンコーディングなど豊富なライブラリが同梱されています。
 - Web API
   - GET, POST メソッドをヘッダ情報付きで送信することができます。
-- Bluethoothキーボード
+- Bluetoothキーボード
   - 物理キーボードを使ってコードを直接入力することもできます。
 
 ## インストール
@@ -41,7 +41,7 @@ AppStoreからダウンロードできます。
 ## マニュアル
 - [オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル (Ruby 1.9.3)](http://docs.ruby-lang.org/ja/1.9.3/doc/index.html)
   - CRubyのものですが基本的な使い方は同じです
-- [API docs](http://mruby.org/docs/api)
+- [mruby API docs](http://mruby.org/docs/api)
   - 自動生成されたmruby本体付属のマニュアル
 
 ## リソース
