@@ -1,5 +1,9 @@
 # HISTORY - RubyPico
 
+### 0.9.4 - 2017-01-11
+
+- Fix bug
+
 ### 0.9.3 - 2017-01-08
 
 - Add library
