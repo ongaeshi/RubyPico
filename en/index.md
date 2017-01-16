@@ -29,7 +29,7 @@ Ruby Programming Environment in iOS.
 You can download from AppStore.
 
 ## Library
-- [RubyPicoGems](https://github.com/ongaeshi/RubyPicoGems)
+- [RubyPicoGems](https://github.com/rubypico/RubyPicoGems)
 
 ## Manual
 - [mruby API docs](http://mruby.org/docs/api)

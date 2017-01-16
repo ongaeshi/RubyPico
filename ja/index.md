@@ -29,7 +29,7 @@ lang: ja
 AppStoreからダウンロードできます。
 
 ## ライブラリ
-- [RubyPicoGems](https://github.com/ongaeshi/RubyPicoGems)
+- [RubyPicoGems](https://github.com/rubypico/RubyPicoGems)
   - 他の人が書いた便利なプログラムを探す
 
 ## ドキュメント
