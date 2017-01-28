@@ -41,7 +41,7 @@ class SimpleHttpServer
   end
 
   def debug msg
-    p msg if @config[:debug]
+    puts msg if @config[:debug]
   end
 
 
@@ -97,7 +97,7 @@ class SimpleHttpServer
           end
         end
       ensure
-        debug "close: #{@r.inspect}"
+        debug @r.inspect
         conn.close
       end
     end
