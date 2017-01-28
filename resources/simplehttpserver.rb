@@ -41,7 +41,6 @@ class SimpleHttpServer
   end
 
   def debug msg
-    p "foo"
     p msg if @config[:debug]
   end
 
@@ -53,14 +52,21 @@ class SimpleHttpServer
       begin
         conn = @nonblock ? @server.accept_nonblock : @server.accept
       rescue
-        return
+        retry
       end
 
       # send response to client
       begin
         data = ''
         while true
-          buf = conn.recv RECV_BUF
+          while true
+            begin
+              buf = conn.recv RECV_BUF
+              break
+            rescue
+              retry
+            end
+          end
           data << buf
           break if buf.size != RECV_BUF
         end
