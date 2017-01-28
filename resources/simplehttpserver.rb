@@ -29,7 +29,7 @@ class SimpleHttpServer
     @config = config
     @host = config[:server_ip]
     @port = config[:port]
-    @nonblock = config[:nonblock]
+    @block = config[:block]
     @server = nil
     @httpinit = nil
     @locconf = {}
@@ -50,7 +50,7 @@ class SimpleHttpServer
     while true
       conn = nil
       begin
-        conn = @nonblock ? @server.accept_nonblock : @server.accept
+        conn = @block ? @server.accept : @server.accept_nonblock
       rescue
         retry
       end
