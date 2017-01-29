@@ -173,6 +173,19 @@ class SimpleHttpServer
     end
     response
   end
+
+  def url
+    "http://#{ipaddress}:#{@port}"
+  end
+
+  # http://qiita.com/saltheads/items/cc49fcf2af37cb277c4f
+  def ipaddress
+    udp = UDPSocket.new
+    udp.connect("128.0.0.0", 7)
+    adrs = Socket.unpack_sockaddr_in(udp.getsockname)[1]
+    udp.close
+    adrs
+  end
 end
 
 class String
