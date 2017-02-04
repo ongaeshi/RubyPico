@@ -1,5 +1,11 @@
 # HISTORY - RubyPico
 
+### 0.9.5 - 2017-02-04
+
+- Add library
+  - require 'simplehttpserver'
+- Add sample/file_server.rb
+
 ### 0.9.4 - 2017-01-11
 
 - Fix bug
