@@ -156,11 +156,11 @@ class SimpleHttpServer
     "#{tp[0]}, #{tp[2]} #{tp[1]} #{tp[5]} #{tp[3]} GMT"
   end
 
-  def file_response r, filename, content_type = "text/html"
+  def file_response r, filename, content_type = "text/html; charset=utf-8"
     response = ""
     begin
       fp = File.open filename
-      set_response_headers "Content-Type" => "#{content_type}; charset=utf-8"
+      set_response_headers "Content-Type" => "#{content_type};"
       # TODO: Add last-modified header, need File.mtime but not implemented
       @response_body = fp.read
       response = create_response
