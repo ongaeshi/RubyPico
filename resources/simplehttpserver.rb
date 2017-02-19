@@ -67,6 +67,7 @@ class SimpleHttpServer
                 buf = conn.recv_nonblock RECV_BUF
                 break
               rescue
+                sleep 0.01
                 retry
               end
             end
