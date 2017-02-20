@@ -86,7 +86,7 @@ class SimpleHttpServer
 
         unless key.nil?
           response = @locconf[key].call @r
-          conn.send response, 0
+          send conn, response
         else
           # default response when can't found location config
           if @r.method == "GET"
@@ -100,6 +100,19 @@ class SimpleHttpServer
       ensure
         debug @r.inspect
         conn.close
+      end
+    end
+  end
+
+  def send(conn, response)
+    if @block
+      conn.send response, 0
+    else
+      begin
+        conn._setnonblock(false)
+        conn.send response, 0
+      ensure
+        conn._setnonblock(@block)
       end
     end
   end
