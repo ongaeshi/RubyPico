@@ -52,6 +52,7 @@ class SimpleHttpServer
       begin
         conn = @block ? @server.accept : @server.accept_nonblock
       rescue
+        sleep 0.01
         retry
       end
 
