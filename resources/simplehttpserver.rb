@@ -50,7 +50,7 @@ class SimpleHttpServer
     while true
       conn = nil
       begin
-        conn = @server.accept
+        conn = @block ? @server.accept : @server.accept_nonblock
       rescue
         retry
       end
@@ -59,17 +59,12 @@ class SimpleHttpServer
       begin
         data = ''
         while true
-          if @block
-            buf = conn.recv RECV_BUF
-          else
-            while true
-              begin
-                buf = conn.recv_nonblock RECV_BUF
-                break
-              rescue
-                sleep 0.01
-                retry
-              end
+          while true
+            begin
+              buf = conn.recv RECV_BUF
+              break
+            rescue
+              retry
             end
           end
           data << buf
