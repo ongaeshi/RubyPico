@@ -52,6 +52,7 @@ class SimpleHttpServer
       begin
         conn = @block ? @server.accept : @server.accept_nonblock
       rescue
+        sleep 0.01
         retry
       end
 
@@ -85,7 +86,7 @@ class SimpleHttpServer
 
         unless key.nil?
           response = @locconf[key].call @r
-          conn.send response, 0
+          send conn, response
         else
           # default response when can't found location config
           if @r.method == "GET"
@@ -99,6 +100,19 @@ class SimpleHttpServer
       ensure
         debug @r.inspect
         conn.close
+      end
+    end
+  end
+
+  def send(conn, response)
+    if @block
+      conn.send response, 0
+    else
+      begin
+        conn._setnonblock(false)
+        conn.send response, 0
+      ensure
+        conn._setnonblock(@block)
       end
     end
   end
@@ -152,11 +166,11 @@ class SimpleHttpServer
     "#{tp[0]}, #{tp[2]} #{tp[1]} #{tp[5]} #{tp[3]} GMT"
   end
 
-  def file_response r, filename, content_type = "text/html"
+  def file_response r, filename, content_type = "text/html; charset=utf-8"
     response = ""
     begin
       fp = File.open filename
-      set_response_headers "Content-Type" => "#{content_type}; charset=utf-8"
+      set_response_headers "Content-Type" => "#{content_type};"
       # TODO: Add last-modified header, need File.mtime but not implemented
       @response_body = fp.read
       response = create_response
