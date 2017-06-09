@@ -1,5 +1,10 @@
 # HISTORY - RubyPico
 
+### 0.9.6 - 2017-06-10
+
+- Re-enable Image.pick_from_library
+  - Need NSPhotoLibraryUsageDescription from iOS10.
+
 ### 0.9.5 - 2017-02-04
 
 - Add library
