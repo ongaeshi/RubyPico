@@ -191,7 +191,13 @@ mrb_browser_open(mrb_state *mrb, mrb_value self)
 
     NSURL *url = [NSURL URLWithString:nstr];
     [[UIApplication sharedApplication] openURL:url];
-    
+
+    [NSThread sleepForTimeInterval:3.0];
+
+    while ([globalMrubyViewController isBackground]) {
+        [NSThread sleepForTimeInterval:0.1];
+    }
+
     return str;
 }
 
