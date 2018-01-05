@@ -15,7 +15,7 @@
 }
 
 + (NSString*) str2nstr:(mrb_state*)mrb value:(mrb_value)value {
-    const char *cstr = mrb_string_value_ptr(mrb, value);
+    const char *cstr = mrb_string_value_cstr(mrb, &value);
     return [[NSString alloc] initWithUTF8String:cstr];
 }
 
