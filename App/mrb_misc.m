@@ -190,12 +190,14 @@ mrb_browser_open(mrb_state *mrb, mrb_value self)
     NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
 
     NSURL *url = [NSURL URLWithString:nstr];
-    [[UIApplication sharedApplication] openURL:url];
+    BOOL isSuccess = [[UIApplication sharedApplication] openURL:url];
 
-    [globalMrubyViewController setBackground];
+    if (isSuccess) {
+        [globalMrubyViewController setBackground];
 
-    while ([globalMrubyViewController isBackground]) {
-        [NSThread sleepForTimeInterval:0.1];
+        while ([globalMrubyViewController isBackground]) {
+            [NSThread sleepForTimeInterval:0.1];
+        }
     }
 
     return str;
