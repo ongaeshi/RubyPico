@@ -7,10 +7,14 @@
 #ifndef MRUBY_RE_H
 #define MRUBY_RE_H
 
-MRB_BEGIN_DECL
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define REGEXP_CLASS          "Regexp"
 
-MRB_END_DECL
+#ifdef __cplusplus
+}
+#endif
 
 #endif  /* RE_H */

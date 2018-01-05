@@ -7,8 +7,8 @@
 #ifndef MRUBY_IREP_H
 #define MRUBY_IREP_H
 
-#include "common.h"
-#include <mruby/compile.h>
+#include "mruby/common.h"
+#include "../mruby/compile.h"
 
 /**
  * Compiled mruby scripts.
@@ -39,7 +39,6 @@ typedef struct mrb_irep {
 
   struct mrb_locals *lv;
   /* debug info */
-  mrb_bool own_filename;
   const char *filename;
   uint16_t *lines;
   struct mrb_irep_debug_info* debug_info;
