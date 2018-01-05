@@ -7,7 +7,7 @@
 #ifndef MRUBY_NUMERIC_H
 #define MRUBY_NUMERIC_H
 
-#include "mruby/common.h"
+#include "common.h"
 
 /**
  * Numeric class and it's sub-classes.
@@ -20,6 +20,12 @@ MRB_BEGIN_DECL
 #define NEGFIXABLE(f) ((f) >= MRB_INT_MIN)
 #define FIXABLE(f) (POSFIXABLE(f) && NEGFIXABLE(f))
 
+#ifdef MRB_INT64
+#define FIXABLE_FLOAT(f) FIXABLE((mrb_int)(f))
+#else
+#define FIXABLE_FLOAT(f) FIXABLE(f)
+#endif
+
 MRB_API mrb_value mrb_flo_to_fixnum(mrb_state *mrb, mrb_value val);
 MRB_API mrb_value mrb_fixnum_to_str(mrb_state *mrb, mrb_value x, int base);
 /* ArgumentError if format string doesn't match /%(\.[0-9]+)?[aAeEfFgG]/ */
@@ -31,52 +37,64 @@ mrb_value mrb_fixnum_minus(mrb_state *mrb, mrb_value x, mrb_value y);
 mrb_value mrb_fixnum_mul(mrb_state *mrb, mrb_value x, mrb_value y);
 mrb_value mrb_num_div(mrb_state *mrb, mrb_value x, mrb_value y);
 
-#define MRB_UINT_MAKE2(n) uint ## n ## _t
-#define MRB_UINT_MAKE(n) MRB_UINT_MAKE2(n)
-#define mrb_uint MRB_UINT_MAKE(MRB_INT_BIT)
+#ifndef __has_builtin
+  #define __has_builtin(x) 0
+#endif
 
-#define MRB_INT_OVERFLOW_MASK ((mrb_uint)1 << (MRB_INT_BIT - 1 - MRB_FIXNUM_SHIFT))
+#if (defined(__GNUC__) && __GNUC__ >= 5) ||   \
+    (__has_builtin(__builtin_add_overflow) && \
+     __has_builtin(__builtin_sub_overflow) && \
+     __has_builtin(__builtin_mul_overflow))
+# define MRB_HAVE_TYPE_GENERIC_CHECKED_ARITHMETIC_BUILTINS
+#endif
 
-/* Idea from Potion: https://github.com/perl11/potion (MIT) */
-#if (defined(__clang__) && ((__clang_major__ > 3) || (__clang_major__ == 3 && __clang_minor__ >= 4))) \
-    || (defined(__GNUC__) && __GNUC__ >= 5)
+/*
+// Clang 3.8 and 3.9 have problem compiling mruby in 32-bit mode, when MRB_INT64 is set
+// because of missing __mulodi4 and similar functions in its runtime. We need to use custom
+// implementation for them.
+*/
+#ifdef MRB_HAVE_TYPE_GENERIC_CHECKED_ARITHMETIC_BUILTINS
+#if defined(__clang__) && (__clang_major__ == 3) && (__clang_minor__ >= 8) && \
+    defined(MRB_32BIT) && defined(MRB_INT64)
+#undef MRB_HAVE_TYPE_GENERIC_CHECKED_ARITHMETIC_BUILTINS
+#endif
+#endif
+
+#ifdef MRB_HAVE_TYPE_GENERIC_CHECKED_ARITHMETIC_BUILTINS
+
+#ifndef MRB_WORD_BOXING
+# define WBCHK(x) 0
+#else
+# define WBCHK(x) !FIXABLE(x)
+#endif
 
 static inline mrb_bool
 mrb_int_add_overflow(mrb_int augend, mrb_int addend, mrb_int *sum)
 {
-  mrb_bool of;
-
-#ifdef MRB_INT64
-  long long val;
-  of = __builtin_saddll_overflow(augend, addend, &val) ||
-#else
-  int val;
-  of = __builtin_sadd_overflow(augend, addend, &val) ||
-#endif
-  (val > MRB_INT_MAX) || (val < MRB_INT_MIN);
-
-  *sum = (mrb_int) val;
-  return of;
+  return __builtin_add_overflow(augend, addend, sum) || WBCHK(*sum);
 }
 
 static inline mrb_bool
 mrb_int_sub_overflow(mrb_int minuend, mrb_int subtrahend, mrb_int *difference)
 {
-  mrb_bool of;
-
-#ifdef MRB_INT64
-  long long val;
-  of = __builtin_ssubll_overflow(minuend, subtrahend, &val) ||
-#else
-  int val;
-  of = __builtin_ssub_overflow(minuend, subtrahend, &val) ||
-#endif
-  (val > MRB_INT_MAX) || (val < MRB_INT_MIN);
-
-  *difference = (mrb_int) val;
-  return of;
+  return __builtin_sub_overflow(minuend, subtrahend, difference) || WBCHK(*difference);
 }
+
+static inline mrb_bool
+mrb_int_mul_overflow(mrb_int multiplier, mrb_int multiplicand, mrb_int *product)
+{
+  return __builtin_mul_overflow(multiplier, multiplicand, product) || WBCHK(*product);
+}
+
+#undef WBCHK
+
 #else
+
+#define MRB_UINT_MAKE2(n) uint ## n ## _t
+#define MRB_UINT_MAKE(n) MRB_UINT_MAKE2(n)
+#define mrb_uint MRB_UINT_MAKE(MRB_INT_BIT)
+
+#define MRB_INT_OVERFLOW_MASK ((mrb_uint)1 << (MRB_INT_BIT - 1 - MRB_FIXNUM_SHIFT))
 
 static inline mrb_bool
 mrb_int_add_overflow(mrb_int augend, mrb_int addend, mrb_int *sum)
@@ -98,12 +116,41 @@ mrb_int_sub_overflow(mrb_int minuend, mrb_int subtrahend, mrb_int *difference)
   return !!(((x ^ z) & (~y ^ z)) & MRB_INT_OVERFLOW_MASK);
 }
 
+static inline mrb_bool
+mrb_int_mul_overflow(mrb_int multiplier, mrb_int multiplicand, mrb_int *product)
+{
+#if MRB_INT_BIT == 32
+  int64_t n = (int64_t)multiplier * multiplicand;
+  *product = (mrb_int)n;
+  return !FIXABLE(n);
+#else
+  if (multiplier > 0) {
+    if (multiplicand > 0) {
+      if (multiplier > MRB_INT_MAX / multiplicand) return TRUE;
+    }
+    else {
+      if (multiplicand < MRB_INT_MAX / multiplier) return TRUE;
+    }
+  }
+  else {
+    if (multiplicand > 0) {
+      if (multiplier < MRB_INT_MAX / multiplicand) return TRUE;
+    }
+    else {
+      if (multiplier != 0 && multiplicand < MRB_INT_MAX / multiplier) return TRUE;
+    }
+  }
+  *product = multiplier * multiplicand;
+  return FALSE;
 #endif
+}
 
 #undef MRB_INT_OVERFLOW_MASK
 #undef mrb_uint
 #undef MRB_UINT_MAKE
 #undef MRB_UINT_MAKE2
+
+#endif
 
 MRB_END_DECL
 

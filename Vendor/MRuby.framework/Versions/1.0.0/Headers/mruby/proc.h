@@ -7,8 +7,8 @@
 #ifndef MRUBY_PROC_H
 #define MRUBY_PROC_H
 
-#include "mruby/common.h"
-#include "../mruby/irep.h"
+#include "common.h"
+#include <../mruby/irep.h>
 
 /**
  * Proc class
@@ -18,14 +18,19 @@ MRB_BEGIN_DECL
 struct REnv {
   MRB_OBJECT_HEADER;
   mrb_value *stack;
-  mrb_sym mid;
   ptrdiff_t cioff;
+  union {
+    mrb_sym mid;
+    struct mrb_context *c;
+  } cxt;
 };
 
 #define MRB_SET_ENV_STACK_LEN(e,len) (e)->flags = (unsigned int)(len)
 #define MRB_ENV_STACK_LEN(e) ((mrb_int)(e)->flags)
 #define MRB_ENV_UNSHARE_STACK(e) ((e)->cioff = -1)
 #define MRB_ENV_STACK_SHARED_P(e) ((e)->cioff >= 0)
+
+MRB_API void mrb_env_unshare(mrb_state*, struct REnv*);
 
 struct RProc {
   MRB_OBJECT_HEADER;
@@ -50,6 +55,8 @@ struct RProc {
 #define MRB_PROC_CFUNC_P(p) (((p)->flags & MRB_PROC_CFUNC) != 0)
 #define MRB_PROC_STRICT 256
 #define MRB_PROC_STRICT_P(p) (((p)->flags & MRB_PROC_STRICT) != 0)
+#define MRB_PROC_ORPHAN 512
+#define MRB_PROC_ORPHAN_P(p) (((p)->flags & MRB_PROC_ORPHAN) != 0)
 
 #define mrb_proc_ptr(v)    ((struct RProc*)(mrb_ptr(v)))
 
@@ -68,7 +75,7 @@ MRB_API mrb_value mrb_proc_cfunc_env_get(mrb_state*, mrb_int);
 /* old name */
 #define mrb_cfunc_env_get(mrb, idx) mrb_proc_cfunc_env_get(mrb, idx)
 
-#include "../mruby/khash.h"
+#include <../mruby/khash.h>
 KHASH_DECLARE(mt, mrb_sym, struct RProc*, TRUE)
 
 MRB_END_DECL
