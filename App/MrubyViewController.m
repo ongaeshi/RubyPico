@@ -467,6 +467,11 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
     return _isBackground;
 }
 
+- (void)setBackground
+{
+    _isBackground = YES;
+}
+
 - (void)applicationDidEnterBackground
 {
     _isBackground = YES;
