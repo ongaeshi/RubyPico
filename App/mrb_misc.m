@@ -17,7 +17,7 @@ static void
 printstr_in(mrb_state *mrb, mrb_value obj)
 {
     if (mrb_string_p(obj)) {
-        const char* cstr = mrb_string_value_ptr(mrb, obj);
+        const char* cstr = mrb_string_value_cstr(mrb, &obj);
         NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
         // NSLog(@"%@", nstr);
         [globalMrubyViewController printstr:nstr];
@@ -155,7 +155,7 @@ mrb_clipboard_set(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    const char* path = mrb_string_value_ptr(mrb, str);
+    const char* path = mrb_string_value_cstr(mrb, &str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
@@ -170,7 +170,7 @@ mrb_uri_encode_www_form_component(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    const char* cstr = mrb_string_value_ptr(mrb, str);
+    const char* cstr = mrb_string_value_cstr(mrb, &str);
     NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
 
     NSString* encodeString = [nstr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
@@ -186,12 +186,20 @@ mrb_browser_open(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    const char* cstr = mrb_string_value_ptr(mrb, str);
+    const char* cstr = mrb_string_value_cstr(mrb, &str);
     NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
 
     NSURL *url = [NSURL URLWithString:nstr];
-    [[UIApplication sharedApplication] openURL:url];
-    
+    BOOL isSuccess = [[UIApplication sharedApplication] openURL:url];
+
+    if (isSuccess) {
+        [globalMrubyViewController setBackground];
+
+        while ([globalMrubyViewController isBackground]) {
+            [NSThread sleepForTimeInterval:0.1];
+        }
+    }
+
     return str;
 }
 
@@ -201,7 +209,7 @@ mrb_browser_open_q(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    const char* cstr = mrb_string_value_ptr(mrb, str);
+    const char* cstr = mrb_string_value_cstr(mrb, &str);
     NSString* nstr = [[NSString alloc] initWithUTF8String:cstr];
 
     NSURL *url = [NSURL URLWithString:nstr];
@@ -276,7 +284,7 @@ mrb_popup_input(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    const char* path = mrb_string_value_ptr(mrb, str);
+    const char* path = mrb_string_value_cstr(mrb, &str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -292,7 +300,7 @@ mrb_popup_msg(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    const char* path = mrb_string_value_ptr(mrb, str);
+    const char* path = mrb_string_value_cstr(mrb, &str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
     dispatch_sync(dispatch_get_main_queue(), ^{

@@ -21,6 +21,8 @@
 - (void)startInput;
 - (void)clear;
 - (NSString*)getClickedLink;
+- (BOOL)isBackground;
+- (void)setBackground;
 
 @end
 

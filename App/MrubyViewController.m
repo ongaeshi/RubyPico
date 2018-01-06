@@ -35,6 +35,7 @@ MrubyViewController *globalMrubyViewController;
     BOOL _observed;
     NSMutableAttributedString* _text;
     NSString* _clickedLink;
+    BOOL _isBackground;
 }
 
 - (id)initWithScriptPath:(NSString*)scriptPath {
@@ -53,6 +54,7 @@ MrubyViewController *globalMrubyViewController;
     _observed = NO;
     _text = [[NSMutableAttributedString alloc] init];
     _clickedLink = NULL;
+    _isBackground = NO;
 
     return self;
 }
@@ -118,6 +120,18 @@ MrubyViewController *globalMrubyViewController;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    NSNotificationCenter *ns = [NSNotificationCenter defaultCenter];
+
+    [ns addObserver:self
+           selector:@selector(applicationDidEnterBackground)
+               name:UIApplicationDidEnterBackgroundNotification
+             object:nil];
+
+    [ns addObserver:self
+           selector:@selector(applicationDidBecomeActive)
+               name:UIApplicationDidBecomeActiveNotification
+             object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -446,6 +460,26 @@ mrb_hook(struct mrb_state* mrb, struct mrb_irep *irep, mrb_code *pc, mrb_value *
         _clickedLink = URL.absoluteString;
     }
     return YES;
+}
+
+- (BOOL)isBackground
+{
+    return _isBackground;
+}
+
+- (void)setBackground
+{
+    _isBackground = YES;
+}
+
+- (void)applicationDidEnterBackground
+{
+    _isBackground = YES;
+}
+
+- (void)applicationDidBecomeActive
+{
+    _isBackground = NO;
 }
 
 @end

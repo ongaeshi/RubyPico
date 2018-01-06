@@ -53,7 +53,7 @@ mrb_rubypico_image_load(mrb_state *mrb, mrb_value self)
 {
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
-    const char *path = mrb_string_value_ptr(mrb, str);
+    const char *path = mrb_string_value_cstr(mrb, &str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
 
     NSError *error = nil;
