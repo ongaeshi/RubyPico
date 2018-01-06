@@ -1,5 +1,17 @@
 # HISTORY - RubyPico
 
+### 0.9.7 - 2018-01-06
+
+- Multi open
+  - Enable `URLS.each {|e| Browser.open e }`
+- mruby 1.3
+  - Safe navigation operator (&.)
+  - Array#dig, Hash#dig
+  - Object#freeze
+  - Kernel#caller
+- Fix string bug
+  - Use mrb_string_value_cstr() instead of mrb_string_value_ptr()
+
 ### 0.9.6 - 2017-06-10
 
 - Re-enable Image.pick_from_library
